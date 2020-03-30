@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>linux/tech.linux.2019120801 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="目录   linux 学习总结(三)：centOS 7 中防火墙配置 查看防火墙信息 systemctl 命令 firewall-cmd 命令 开启端口       linux 学习总结(三)：centOS 7 中防火墙配置kungge post 2019-12-08 20:15:50    查看防火墙信息查看防火墙状态： 12[root@localhost bin]# firewall-cmd">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux&#x2F;tech.linux.2019120801">
+<meta property="og:url" content="http://yoursite.com/2020/03/30/linux/tech.linux.2019120801/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="目录   linux 学习总结(三)：centOS 7 中防火墙配置 查看防火墙信息 systemctl 命令 firewall-cmd 命令 开启端口       linux 学习总结(三)：centOS 7 中防火墙配置kungge post 2019-12-08 20:15:50    查看防火墙信息查看防火墙状态： 12[root@localhost bin]# firewall-cmd">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-30T12:27:10.500Z">
+<meta property="article:modified_time" content="2019-12-08T13:34:56.599Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-linux/tech.linux.2019120801" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/30/linux/tech.linux.2019120801/" class="article-date">
+  <time datetime="2020-03-30T12:27:10.500Z" itemprop="datePublished">2020-03-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      linux/tech.linux.2019120801
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><!-- MarkdownTOC -->
+
+<ul>
+<li>linux 学习总结(三)：centOS 7 中防火墙配置<ul>
+<li>查看防火墙信息</li>
+<li>systemctl 命令</li>
+<li>firewall-cmd 命令</li>
+<li>开启端口</li>
+</ul>
+</li>
+</ul>
+<!-- /MarkdownTOC -->
+
+
+<h2 id="linux-学习总结-三-：centOS-7-中防火墙配置"><a href="#linux-学习总结-三-：centOS-7-中防火墙配置" class="headerlink" title="linux 学习总结(三)：centOS 7 中防火墙配置"></a>linux 学习总结(三)：centOS 7 中防火墙配置</h2><div><i>kungge post 2019-12-08 20:15:50</i></div>
+
+<br>
+
+<h3 id="查看防火墙信息"><a href="#查看防火墙信息" class="headerlink" title="查看防火墙信息"></a>查看防火墙信息</h3><p>查看防火墙状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># firewall-cmd --state</span></span><br><span class="line">running</span><br></pre></td></tr></table></figure>
+
+<p>查看防火墙策略：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># firewall-cmd --list-all</span></span><br><span class="line">public (active)</span><br><span class="line">  target: default</span><br><span class="line">  icmp-block-inversion: no</span><br><span class="line">  interfaces: ens33</span><br><span class="line">  sources: </span><br><span class="line">  services: dhcpv6-client ssh</span><br><span class="line">  ports: </span><br><span class="line">  protocols: </span><br><span class="line">  masquerade: no</span><br><span class="line">  forward-ports: </span><br><span class="line">  sourceports: </span><br><span class="line">  icmp-blocks: </span><br><span class="line">  rich rules:</span><br></pre></td></tr></table></figure>
+
+<p>上面只显示配置文件【/etc/firewalld/zones/public.xml】中的防火墙策略，此配置文件内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># cat /etc/firewalld/zones/public.xml</span></span><br><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span>?&gt;</span><br><span class="line">&lt;zone&gt;</span><br><span class="line">  &lt;short&gt;Public&lt;/short&gt;</span><br><span class="line">  &lt;description&gt;For use <span class="keyword">in</span> public areas. You <span class="keyword">do</span> not trust the other computers on networks to not harm your computer. Only selected incoming connections are accepted.&lt;/description&gt;</span><br><span class="line">  &lt;service name=<span class="string">"dhcpv6-client"</span>/&gt;</span><br><span class="line">  &lt;service name=<span class="string">"ssh"</span>/&gt;</span><br><span class="line">&lt;/zone&gt;</span><br></pre></td></tr></table></figure>
+
+<p>查看所有的防火墙策略：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># firewall-cmd --list-all-zones</span></span><br><span class="line">work</span><br><span class="line">  target: default</span><br><span class="line">  icmp-block-inversion: no</span><br><span class="line">  interfaces: </span><br><span class="line">  sources: </span><br><span class="line">  services: dhcpv6-client ssh</span><br><span class="line">  ports: </span><br><span class="line">  protocols: </span><br><span class="line">  masquerade: no</span><br><span class="line">  forward-ports: </span><br><span class="line">  sourceports: </span><br><span class="line">  icmp-blocks: </span><br><span class="line">  rich rules: </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">drop</span><br><span class="line">  target: DROP</span><br><span class="line">  icmp-block-inversion: no</span><br><span class="line">  interfaces: </span><br><span class="line">  sources: </span><br><span class="line">  services: </span><br><span class="line">  ports: </span><br><span class="line">  protocols: </span><br><span class="line">  masquerade: no</span><br><span class="line">  forward-ports: </span><br><span class="line">  sourceports: </span><br><span class="line">  icmp-blocks: </span><br><span class="line">  rich rules: </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">internal</span><br><span class="line">  target: default</span><br><span class="line">  icmp-block-inversion: no</span><br><span class="line">  interfaces: </span><br><span class="line">  sources: </span><br><span class="line">  services: dhcpv6-client mdns samba-client ssh</span><br><span class="line">  ports: </span><br><span class="line">  protocols: </span><br><span class="line">  masquerade: no</span><br><span class="line">  forward-ports: </span><br><span class="line">  sourceports: </span><br><span class="line">  icmp-blocks: </span><br><span class="line">  rich rules: </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">external</span><br><span class="line">  target: default</span><br><span class="line">  icmp-block-inversion: no</span><br><span class="line">  interfaces: </span><br><span class="line">  sources: </span><br><span class="line">  services: ssh</span><br><span class="line">  ports: </span><br><span class="line">  protocols: </span><br><span class="line">  masquerade: yes</span><br><span class="line">  forward-ports: </span><br><span class="line">  sourceports: </span><br><span class="line">  icmp-blocks: </span><br><span class="line">  rich rules: </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">trusted</span><br><span class="line">  target: ACCEPT</span><br><span class="line">  icmp-block-inversion: no</span><br><span class="line">  interfaces: </span><br><span class="line">  sources: </span><br><span class="line">  services: </span><br><span class="line">  ports: </span><br><span class="line">  protocols: </span><br><span class="line">  masquerade: no</span><br><span class="line">  forward-ports: </span><br><span class="line">  sourceports: </span><br><span class="line">  icmp-blocks: </span><br><span class="line">  rich rules: </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">home</span><br><span class="line">  target: default</span><br><span class="line">  icmp-block-inversion: no</span><br><span class="line">  interfaces: </span><br><span class="line">  sources: </span><br><span class="line">  services: dhcpv6-client mdns samba-client ssh</span><br><span class="line">  ports: </span><br><span class="line">  protocols: </span><br><span class="line">  masquerade: no</span><br><span class="line">  forward-ports: </span><br><span class="line">  sourceports: </span><br><span class="line">  icmp-blocks: </span><br><span class="line">  rich rules: </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">dmz</span><br><span class="line">  target: default</span><br><span class="line">  icmp-block-inversion: no</span><br><span class="line">  interfaces: </span><br><span class="line">  sources: </span><br><span class="line">  services: ssh</span><br><span class="line">  ports: </span><br><span class="line">  protocols: </span><br><span class="line">  masquerade: no</span><br><span class="line">  forward-ports: </span><br><span class="line">  sourceports: </span><br><span class="line">  icmp-blocks: </span><br><span class="line">  rich rules: </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public (active)</span><br><span class="line">  target: default</span><br><span class="line">  icmp-block-inversion: no</span><br><span class="line">  interfaces: ens33</span><br><span class="line">  sources: </span><br><span class="line">  services: dhcpv6-client ssh</span><br><span class="line">  ports: </span><br><span class="line">  protocols: </span><br><span class="line">  masquerade: no</span><br><span class="line">  forward-ports: </span><br><span class="line">  sourceports: </span><br><span class="line">  icmp-blocks: </span><br><span class="line">  rich rules: </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">block</span><br><span class="line">  target: %%REJECT%%</span><br><span class="line">  icmp-block-inversion: no</span><br><span class="line">  interfaces: </span><br><span class="line">  sources: </span><br><span class="line">  services: </span><br><span class="line">  ports: </span><br><span class="line">  protocols: </span><br><span class="line">  masquerade: no</span><br><span class="line">  forward-ports: </span><br><span class="line">  sourceports: </span><br><span class="line">  icmp-blocks: </span><br><span class="line">  rich rules:</span><br></pre></td></tr></table></figure>
+
+<p>上面显示的是目录【/etc/firewalld/zones/】下所有的策略。</p>
+<p>重新加载配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># firewall-cmd --reload</span></span><br><span class="line">success</span><br></pre></td></tr></table></figure>
+
+<h3 id="systemctl-命令"><a href="#systemctl-命令" class="headerlink" title="systemctl 命令"></a>systemctl 命令</h3><p>systemctl 是 centOS 7 的服务管理工具中主要的工具，它融合之前 service 和 chkconfig 的功能于一体。</p>
+<p>启动服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># systemctl start firewalld</span></span><br></pre></td></tr></table></figure>
+
+<p>关闭服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># systemctl stop firewalld.service</span></span><br></pre></td></tr></table></figure>
+
+<p>重启服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># systemctl restart firewalld.service</span></span><br></pre></td></tr></table></figure>
+
+<p>显示服务状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># systemctl status firewalld.service</span></span><br><span class="line">● firewalld.service - firewalld - dynamic firewall daemon</span><br><span class="line">   Loaded: loaded (/usr/lib/systemd/system/firewalld.service; disabled; vendor preset: enabled)</span><br><span class="line">   Active: inactive (dead)</span><br><span class="line">     Docs: man:firewalld(1)</span><br><span class="line"></span><br><span class="line">Dec 08 04:42:30 localhost.localdomain firewalld[33677]: WARNING: COMMAND_FAILED: <span class="string">'/usr/sbin/iptables -w2 -w --table filter --delete FO...ailed:</span></span><br><span class="line"><span class="string">Dec 08 04:42:30 localhost.localdomain firewalld[33677]: WARNING: COMMAND_FAILED: '</span>/usr/sbin/iptables -w2 -w --table filter --delete FO...ailed:</span><br><span class="line">Dec 08 04:42:30 localhost.localdomain firewalld[33677]: WARNING: COMMAND_FAILED: <span class="string">'/usr/sbin/iptables -w2 -w --table filter --delete FO...ailed:</span></span><br><span class="line"><span class="string">Dec 08 04:42:30 localhost.localdomain firewalld[33677]: WARNING: COMMAND_FAILED: '</span>/usr/sbin/iptables -w2 -w --table filter --delete IN...ailed:</span><br><span class="line">Dec 08 04:42:30 localhost.localdomain firewalld[33677]: WARNING: COMMAND_FAILED: <span class="string">'/usr/sbin/iptables -w2 -w --table filter --delete IN...ailed:</span></span><br><span class="line"><span class="string">Dec 08 04:42:30 localhost.localdomain firewalld[33677]: WARNING: COMMAND_FAILED: '</span>/usr/sbin/iptables -w2 -w --table filter --delete OU...ailed:</span><br><span class="line">Dec 08 04:42:30 localhost.localdomain firewalld[33677]: WARNING: COMMAND_FAILED: <span class="string">'/usr/sbin/iptables -w2 -w --table filter --delete IN...ailed:</span></span><br><span class="line"><span class="string">Dec 08 04:42:30 localhost.localdomain firewalld[33677]: WARNING: COMMAND_FAILED: '</span>/usr/sbin/iptables -w2 -w --table filter --delete IN...ailed:</span><br><span class="line">Dec 08 04:46:40 localhost.localdomain systemd[1]: Stopping firewalld - dynamic firewall daemon...</span><br><span class="line">Dec 08 04:46:41 localhost.localdomain systemd[1]: Stopped firewalld - dynamic firewall daemon.</span><br><span class="line">Hint: Some lines were ellipsized, use -l to show <span class="keyword">in</span> full.</span><br></pre></td></tr></table></figure>
+
+<p>开机时启用服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># systemctl enable firewalld.service</span></span><br><span class="line">Created symlink from /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service to /usr/lib/systemd/system/firewalld.service.</span><br><span class="line">Created symlink from /etc/systemd/system/basic.target.wants/firewalld.service to /usr/lib/systemd/system/firewalld.service.</span><br></pre></td></tr></table></figure>
+
+<p>开机时禁用服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># systemctl disable firewalld.service</span></span><br><span class="line">Removed symlink /etc/systemd/system/basic.target.wants/firewalld.service.</span><br><span class="line">Removed symlink /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service</span><br></pre></td></tr></table></figure>
+
+<p>查看服务是否开机启动：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># systemctl is-enabled firewalld.service</span></span><br><span class="line">disabled</span><br></pre></td></tr></table></figure>
+
+<p>查看已启动的服务列表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># systemctl list-unit-files | grep enabled</span></span><br><span class="line">cups.path                                   enabled </span><br><span class="line">abrt-ccpp.service                           enabled </span><br><span class="line">abrt-oops.service                           enabled </span><br><span class="line">abrt-vmcore.service                         enabled </span><br><span class="line">abrt-xorg.service                           enabled </span><br><span class="line">abrtd.service                               enabled </span><br><span class="line">accounts-daemon.service                     enabled </span><br><span class="line">atd.service                                 enabled </span><br><span class="line">auditd.service                              enabled </span><br><span class="line">autovt@.service                             enabled </span><br><span class="line">avahi-daemon.service                        enabled </span><br><span class="line">bluetooth.service                           enabled </span><br><span class="line">chronyd.service                             enabled </span><br><span class="line">crond.service                               enabled </span><br><span class="line">cups.service                                enabled </span><br><span class="line">dbus-org.bluez.service                      enabled </span><br><span class="line">dbus-org.freedesktop.Avahi.service          enabled </span><br><span class="line">dbus-org.freedesktop.ModemManager1.service  enabled </span><br><span class="line">dbus-org.freedesktop.NetworkManager.service enabled </span><br><span class="line">dbus-org.freedesktop.nm-dispatcher.service  enabled </span><br><span class="line">display-manager.service                     enabled </span><br><span class="line">dmraid-activation.service                   enabled </span><br><span class="line">gdm.service                                 enabled </span><br><span class="line">getty@.service                              enabled </span><br><span class="line">irqbalance.service                          enabled </span><br><span class="line">iscsi.service                               enabled </span><br><span class="line">kdump.service                               enabled </span><br><span class="line">ksm.service                                 enabled </span><br><span class="line">ksmtuned.service                            enabled </span><br><span class="line">libstoragemgmt.service                      enabled </span><br><span class="line">libvirtd.service                            enabled </span><br><span class="line">lvm2-monitor.service                        enabled </span><br><span class="line">mdmonitor.service                           enabled </span><br><span class="line">microcode.service                           enabled </span><br><span class="line">ModemManager.service                        enabled </span><br><span class="line">multipathd.service                          enabled </span><br><span class="line">NetworkManager-dispatcher.service           enabled </span><br><span class="line">NetworkManager.service                      enabled </span><br><span class="line">postfix.service                             enabled </span><br><span class="line">qemu-guest-agent.service                    enabled </span><br><span class="line">rngd.service                                enabled </span><br><span class="line">rsyslog.service                             enabled </span><br><span class="line">rtkit-daemon.service                        enabled </span><br><span class="line">smartd.service                              enabled </span><br><span class="line">spice-vdagentd.service                      enabled </span><br><span class="line">sshd.service                                enabled </span><br><span class="line">sysstat.service                             enabled </span><br><span class="line">systemd-readahead-collect.service           enabled </span><br><span class="line">systemd-readahead-drop.service              enabled </span><br><span class="line">systemd-readahead-replay.service            enabled </span><br><span class="line">tuned.service                               enabled </span><br><span class="line">vmtoolsd.service                            enabled </span><br><span class="line">avahi-daemon.socket                         enabled </span><br><span class="line">cups.socket                                 enabled </span><br><span class="line">dm-event.socket                             enabled </span><br><span class="line">iscsid.socket                               enabled </span><br><span class="line">iscsiuio.socket                             enabled </span><br><span class="line">lvm2-lvmetad.socket                         enabled </span><br><span class="line">lvm2-lvmpolld.socket                        enabled </span><br><span class="line">rpcbind.socket                              enabled </span><br><span class="line">virtlockd.socket                            enabled </span><br><span class="line">virtlogd.socket                             enabled </span><br><span class="line">default.target                              enabled </span><br><span class="line">graphical.target                            enabled </span><br><span class="line">nfs-client.target                           enabled </span><br><span class="line">remote-fs.target                            enabled </span><br><span class="line">runlevel5.target                            enabled</span><br></pre></td></tr></table></figure>
+
+<p>查看启动失败的服务列表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># systemctl --failed</span></span><br><span class="line">  UNIT          LOAD   ACTIVE SUB    DESCRIPTION</span><br><span class="line">● kdump.service loaded failed failed Crash recovery kernel arming</span><br><span class="line"></span><br><span class="line">LOAD   = Reflects whether the unit definition was properly loaded.</span><br><span class="line">ACTIVE = The high-level unit activation state, i.e. generalization of SUB.</span><br><span class="line">SUB    = The low-level unit activation state, values depend on unit <span class="built_in">type</span>.</span><br><span class="line"></span><br><span class="line">1 loaded units listed. Pass --all to see loaded but inactive units, too.</span><br><span class="line">To show all installed unit files use <span class="string">'systemctl list-unit-files'</span>.</span><br></pre></td></tr></table></figure>
+
+<h3 id="firewall-cmd-命令"><a href="#firewall-cmd-命令" class="headerlink" title="firewall-cmd 命令"></a>firewall-cmd 命令</h3><p>查看帮助：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># firewall-cmd --help</span></span><br></pre></td></tr></table></figure>
+
+<p>查看版本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># firewall-cmd --version</span></span><br><span class="line">FirewallD is not running</span><br></pre></td></tr></table></figure>
+
+<p>打开一下，再查看版本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># systemctl start firewalld</span></span><br><span class="line">[root@localhost bin]<span class="comment"># firewall-cmd --version</span></span><br><span class="line">0.4.3.2</span><br></pre></td></tr></table></figure>
+
+<p>显示状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># firewall-cmd --state</span></span><br><span class="line">running</span><br></pre></td></tr></table></figure>
+
+<p>查看所有打开的端口：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># firewall-cmd --zone=public --list-ports</span></span><br><span class="line"></span><br><span class="line">[root@localhost bin]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p>是空，一个端口都没打开。</p>
+<p>查看区域信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># firewall-cmd --get-active-zones</span></span><br><span class="line">public</span><br><span class="line">  interfaces: ens33</span><br></pre></td></tr></table></figure>
+
+<p>查看指定的接口所属区域：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># firewall-cmd --get-zone-of-interface=eht0</span></span><br><span class="line">no zone</span><br></pre></td></tr></table></figure>
+
+<p>拒绝所有包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># firewall-cmd --panic-on</span></span><br><span class="line"></span><br><span class="line">信号灯超时时间已到</span><br></pre></td></tr></table></figure>
+
+<p>应该是这个命令让连接的虚拟机中的 centOS 断开了。</p>
+<p>查看是否拒绝：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># firewall-cmd --query-panic</span></span><br><span class="line">FirewallD is not running</span><br></pre></td></tr></table></figure>
+
+<p>取消拒绝状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># firewall-cmd --panic-off</span></span><br><span class="line">FirewallD is not running</span><br></pre></td></tr></table></figure>
+
+<p>提示【FirewallD is not running】，打开再执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># systemctl start firewalld</span></span><br><span class="line">[root@localhost ~]<span class="comment"># firewall-cmd --panic-off</span></span><br><span class="line">Warning: NOT_ENABLED: panic mode is not enabled</span><br><span class="line">success</span><br></pre></td></tr></table></figure>
+
+<p>更新防火墙规则(重新加载配置文件)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># firewall-cmd --reload</span></span><br><span class="line">success</span><br></pre></td></tr></table></figure>
+
+<h3 id="开启端口"><a href="#开启端口" class="headerlink" title="开启端口"></a>开启端口</h3><p>以端口80为例，添加一个端口：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># firewall-cmd --zone=public --add-port=80/tcp --permanent</span></span><br><span class="line">success</span><br></pre></td></tr></table></figure>
+
+<p>permanent 参数表示永久生效，如果不加则重启就失效。</p>
+<p>重新加载：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># firewall-cmd --reload</span></span><br><span class="line">success</span><br></pre></td></tr></table></figure>
+
+<p>查看：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># firewall-cmd --zone=public --query-port=80/tcp</span></span><br><span class="line">yes</span><br></pre></td></tr></table></figure>
+
+<p>删除：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># firewall-cmd --zone=public --remove-port=80/tcp --permanent</span></span><br><span class="line">success</span><br><span class="line">[root@localhost ~]<span class="comment"># firewall-cmd --reload</span></span><br><span class="line">success</span><br><span class="line">[root@localhost ~]<span class="comment"># firewall-cmd --zone=public --query-port=80/tcp</span></span><br><span class="line">no</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/30/linux/tech.linux.2019120801/" data-id="ck8egk6v7000388sveq85eohv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/03/30/linux/tech.linux/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          linux/tech.linux
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/03/30/linux/tech.linux.2019120202/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">linux/tech.linux.2019120202</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/03/30/nuget.2020032201/">nuget.2020032201</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/30/linux/tech.linux/">linux/tech.linux</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/30/linux/tech.linux.2019120801/">linux/tech.linux.2019120801</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/30/linux/tech.linux.2019120202/">linux/tech.linux.2019120202</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/30/linux/tech.linux.2019120201/">linux/tech.linux.2019120201</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
