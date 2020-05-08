@@ -20,33 +20,60 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="生活是一门艺术,更是一门技术">
-<meta property="og:type" content="website">
-<meta property="og:title" content="坤哥博客小站">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="目录      一、Hexo 站点配置文件 1.1 使用主题 NexT 1.2 网站信息配置 1.3 写作   二、NexT 主题基本配置 2.1 Schemes 配置 2.2 菜单配置 2.3 侧栏配置 2.4 友情链接配置 2.5 站点建立时间配置   三、页面添加 3.1 分类页面添加 3.2 标签页面添加 3.4 404页面添加 3.5 关于我页面添加   P、常见问题 P1 网站中文乱码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo 实战（二）：Hexo 基本设置">
+<meta property="og:url" content="http://yoursite.com/2020/03/30/hexo.2020032901/index.html">
 <meta property="og:site_name" content="坤哥博客小站">
-<meta property="og:description" content="生活是一门艺术,更是一门技术">
+<meta property="og:description" content="目录      一、Hexo 站点配置文件 1.1 使用主题 NexT 1.2 网站信息配置 1.3 写作   二、NexT 主题基本配置 2.1 Schemes 配置 2.2 菜单配置 2.3 侧栏配置 2.4 友情链接配置 2.5 站点建立时间配置   三、页面添加 3.1 分类页面添加 3.2 标签页面添加 3.4 404页面添加 3.5 关于我页面添加   P、常见问题 P1 网站中文乱码">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-30_222440.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-31_230431.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-31_231603.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-31_231301.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-31_232035.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-31_231917.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-30_225028.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-30_225430.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-30_225933.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-30_230927.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-30_232856.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-30_234930.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-30_235238.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-31_000948.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-31_001050.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-06_234730.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-31_000106.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-31_000437.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-06_235434.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-07_001454.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-30_212732.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-30_213309.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-30_221710.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-30_223727.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-30_224656.png">
+<meta property="article:published_time" content="2020-03-30T12:39:51.000Z">
+<meta property="article:modified_time" content="2020-05-06T16:15:05.587Z">
 <meta property="article:author" content="wankun">
-<meta property="article:tag" content="坤哥博客小站">
-<meta property="article:tag" content="坤哥博客网">
-<meta property="article:tag" content="坤哥博客技术网">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="Hexo 基本设置">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-30_222440.png">
 
-<link rel="canonical" href="http://yoursite.com/">
+<link rel="canonical" href="http://yoursite.com/2020/03/30/hexo.2020032901/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>坤哥博客小站</title>
+  <title>Hexo 实战（二）：Hexo 基本设置 | 坤哥博客小站</title>
   
 
 
@@ -175,568 +202,11 @@
         <div class="content-wrap">
           
 
-          <div class="content index">
+          <div class="content post">
             
 
   <div class="posts-expand">
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/06/nas.2020050509/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活是一门艺术,更是一门技术">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="坤哥博客小站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/06/nas.2020050509/" class="post-title-link" itemprop="url">nas 折腾笔记（十一）：群晖系统的使用之 Frp 内网穿透</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-05-06 00:02:19 / 修改时间：23:15:43" itemprop="dateCreated datePublished" datetime="2020-05-06T00:02:19+08:00">2020-05-06</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/nas/" itemprop="url" rel="index"><span itemprop="name">nas</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
       
-          <p>服务端部署参考我的另一篇文章：<a href="frp.2020032301.md">frp 内网穿透实战（一）：远程桌面连接 windows</a></p>
-<p>使用命令 <code>wget http://kungge.com/assist/frp_0.31.2_linux_amd64.tar.gz</code> 下载 frp 包，然后将包移动至目录【/usr/local/】下，进入该目录解压，进入解压的目录：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">root@Synology:~<span class="comment"># mv -f frp_0.31.2_linux_amd64.tar.gz /usr/local/</span></span><br><span class="line">root@Synology:~<span class="comment"># cd /usr/local/</span></span><br><span class="line">root@Synology:/usr/<span class="built_in">local</span><span class="comment"># ls</span></span><br><span class="line">bin  etc  frp_0.31.2_linux_amd64.tar.gz  lib  libexec  node  packages  share  SynologyApplicationService  transmission  zerotier</span><br><span class="line">root@Synology:/usr/<span class="built_in">local</span><span class="comment"># tar -zxvf frp_0.31.2_linux_amd64.tar.gz </span></span><br><span class="line">frp_0.31.2_linux_amd64/</span><br><span class="line">frp_0.31.2_linux_amd64/frps_full.ini</span><br><span class="line">frp_0.31.2_linux_amd64/frps.ini</span><br><span class="line">frp_0.31.2_linux_amd64/frpc</span><br><span class="line">frp_0.31.2_linux_amd64/frpc_full.ini</span><br><span class="line">frp_0.31.2_linux_amd64/frps</span><br><span class="line">frp_0.31.2_linux_amd64/LICENSE</span><br><span class="line">frp_0.31.2_linux_amd64/frpc.ini</span><br><span class="line">frp_0.31.2_linux_amd64/systemd/</span><br><span class="line">frp_0.31.2_linux_amd64/systemd/frpc@.service</span><br><span class="line">frp_0.31.2_linux_amd64/systemd/frpc.service</span><br><span class="line">frp_0.31.2_linux_amd64/systemd/frps.service</span><br><span class="line">frp_0.31.2_linux_amd64/systemd/frps@.service</span><br><span class="line">root@Synology:/usr/<span class="built_in">local</span><span class="comment"># cd frp_0.31.2_linux_amd64</span></span><br></pre></td></tr></table></figure>
-
-<p>使用命令 <code>vi frpc.ini</code> 修改客户端配置文件，修改内容如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">server_addr = 111.X.69.34</span><br><span class="line">server_port = 7000</span><br><span class="line"></span><br><span class="line">[ssh]</span><br><span class="line"><span class="built_in">type</span> = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 22</span><br><span class="line">remote_port = 5022</span><br><span class="line"></span><br><span class="line">[web1]</span><br><span class="line"><span class="built_in">type</span> = tcp</span><br><span class="line">local_port = 5000</span><br><span class="line">remote_port = 5000</span><br><span class="line">custom_domains = localhost</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>111.X.69.34 是服务器的公网IP</li>
-<li>ssh 配的是远程可以通过 ssh 连接工具连接到群晖SSh。</li>
-<li>web1 配的是远程访问群晖DSM系统。</li>
-</ul>
-<p>保存，然后后台启动：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@Synology:/usr/<span class="built_in">local</span>/frp_0.31.2_linux_amd64<span class="comment"># nohup ./frpc -c ./frpc.ini &amp;</span></span><br><span class="line">[1] 20768</span><br><span class="line">root@Synology:/usr/<span class="built_in">local</span>/frp_0.31.2_linux_amd64<span class="comment"># nohup: ignoring input and appending output to ‘nohup.out’</span></span><br></pre></td></tr></table></figure>
-
-<p>查看启动日志：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root@Synology:/usr/<span class="built_in">local</span>/frp_0.31.2_linux_amd64<span class="comment"># cat nohup.out</span></span><br><span class="line">2020/05/06 00:19:23 [I] [service.go:250] [b0c859e1dc5b7a1f] login to server success, get run id [b0c859e1dc5b7a1f], server udp port [0]</span><br><span class="line">2020/05/06 00:19:23 [I] [proxy_manager.go:144] [b0c859e1dc5b7a1f] proxy added: [ssh web1]</span><br><span class="line">2020/05/06 00:19:23 [I] [control.go:164] [b0c859e1dc5b7a1f] [ssh] start proxy success</span><br><span class="line">2020/05/06 00:19:23 [I] [control.go:164] [b0c859e1dc5b7a1f] [web1] start proxy success</span><br></pre></td></tr></table></figure>
-
-<p>启动成功了。</p>
-<p>服务器防火墙开放5000和5022端口。</p>
-<p>直接在远程访问：http://公网IP:5000，如本次将域名【vrgamehome.com】解析到公网IP，因此使用【<a href="http://vrgamehome:5000】访问：">http://vrgamehome:5000】访问：</a></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-06_002512.png" alt="20200506005501"></p>
-<p>使用 frp 内网传透完成。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/05/nas.2020050508/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活是一门艺术,更是一门技术">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="坤哥博客小站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/05/nas.2020050508/" class="post-title-link" itemprop="url">标题</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-05 23:12:59" itemprop="dateCreated datePublished" datetime="2020-05-05T23:12:59+08:00">2020-05-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-06 23:15:36" itemprop="dateModified" datetime="2020-05-06T23:15:36+08:00">2020-05-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/nas/" itemprop="url" rel="index"><span itemprop="name">nas</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><strong>目录</strong></p>
-<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
-
-<!-- code_chunk_output -->
-
-<ul>
-<li><a href="#套件安装">套件安装</a></li>
-<li><a href="#windows-客户端">windows 客户端</a></li>
-<li><a href="#iphone-客户端">iPhone 客户端</a></li>
-</ul>
-<!-- /code_chunk_output -->
-
-
-<h2 id="套件安装"><a href="#套件安装" class="headerlink" title="套件安装"></a>套件安装</h2><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_224248.png" alt="20200505231348"></p>
-<h2 id="windows-客户端"><a href="#windows-客户端" class="headerlink" title="windows 客户端"></a>windows 客户端</h2><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_231409.png" alt="20200505231443"></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_231228.png" alt="20200505231500"></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_232235.png" alt="20200505232207"></p>
-<h2 id="iPhone-客户端"><a href="#iPhone-客户端" class="headerlink" title="iPhone 客户端"></a>iPhone 客户端</h2><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_231753.png" alt="20200505231802"></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_231642.png" alt="20200505231816"></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_231653.png" alt="20200505231832"></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_231705.png" alt="20200505231842"></p>
-<p>手机端上传：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_231939.png" alt="20200505231948"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/05/nas.2020050507/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活是一门艺术,更是一门技术">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="坤哥博客小站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/05/nas.2020050507/" class="post-title-link" itemprop="url">nas 折腾笔记（九）： 群晖系统的使用之 Monments</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-05 22:12:32" itemprop="dateCreated datePublished" datetime="2020-05-05T22:12:32+08:00">2020-05-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-06 23:16:17" itemprop="dateModified" datetime="2020-05-06T23:16:17+08:00">2020-05-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/nas/" itemprop="url" rel="index"><span itemprop="name">nas</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><strong>目录</strong></p>
-<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
-
-<!-- code_chunk_output -->
-
-<ul>
-<li><a href="#安装">安装</a></li>
-<li><a href="#手机端登录">手机端登录</a></li>
-<li><a href="#电脑端使用">电脑端使用</a></li>
-<li><a href="#异常问题">异常问题</a></li>
-</ul>
-<!-- /code_chunk_output -->
-
-
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221026.png" alt="20200505221320"></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221136.png" alt="20200505221331"></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221455.png" alt="20200505221506"></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221529.png" alt="20200505221542"></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_222217.png" alt="20200505222249"></p>
-<p>安装完成，主页：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_222524.png" alt="20200505222540"></p>
-<h2 id="手机端登录"><a href="#手机端登录" class="headerlink" title="手机端登录"></a>手机端登录</h2><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_222627.png" alt="20200505222635"></p>
-<p>开启照片备份：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_222821.png" alt="20200505222844"></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_222831.png" alt="20200505222856"></p>
-<h2 id="电脑端使用"><a href="#电脑端使用" class="headerlink" title="电脑端使用"></a>电脑端使用</h2><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_224032.png" alt="20200505224042"></p>
-<h2 id="异常问题"><a href="#异常问题" class="headerlink" title="异常问题"></a>异常问题</h2><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221900.png" alt="20200505221907"><br><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221926.png" alt="20200505221931"><br><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221949.png" alt="20200505221958"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/05/nas.2020050506/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活是一门艺术,更是一门技术">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="坤哥博客小站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/05/nas.2020050506/" class="post-title-link" itemprop="url">nas 折腾笔记（八）： 群晖系统的使用之 Video Station</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-05 21:45:25" itemprop="dateCreated datePublished" datetime="2020-05-05T21:45:25+08:00">2020-05-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-06 23:17:16" itemprop="dateModified" datetime="2020-05-06T23:17:16+08:00">2020-05-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/nas/" itemprop="url" rel="index"><span itemprop="name">nas</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><strong>目录</strong></p>
-<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
-
-<!-- code_chunk_output -->
-
-<ul>
-<li><a href="#播放失败">播放失败</a></li>
-<li><a href="#关于洗白问题">关于洗白问题</a></li>
-</ul>
-<!-- /code_chunk_output -->
-
-
-<h2 id="播放失败"><a href="#播放失败" class="headerlink" title="播放失败"></a>播放失败</h2><p>一直在转：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_214629.png" alt="20200505214648"></p>
-<p>应该是转码的问题，网上搜了下：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_214744.png" alt="20200505214758"></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_214825.png" alt="20200505214833"></p>
-<p>一直显示有转码任务：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_215052.png" alt="20200505215112"></p>
-<p>后面上传了一批电影，打开【蜘蛛侠：英雄归来HD高清中英双字.mkv】，可以正常观看：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_233744.png" alt="20200505233822"></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-06_001016.png" alt="20200506001033"></p>
-<h2 id="关于洗白问题"><a href="#关于洗白问题" class="headerlink" title="关于洗白问题"></a>关于洗白问题</h2><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_215327.png" alt="20200505215345"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/05/nas.2020050505/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活是一门艺术,更是一门技术">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="坤哥博客小站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/05/nas.2020050505/" class="post-title-link" itemprop="url">nas 折腾笔记（七）： 群晖系统的使用之 Zerotier 实现内网穿透</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-05 16:21:15" itemprop="dateCreated datePublished" datetime="2020-05-05T16:21:15+08:00">2020-05-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-06 23:17:04" itemprop="dateModified" datetime="2020-05-06T23:17:04+08:00">2020-05-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/nas/" itemprop="url" rel="index"><span itemprop="name">nas</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><strong>目录</strong></p>
-<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
-
-<!-- code_chunk_output -->
-
-<ul>
-<li><a href="#内网穿透原理">内网穿透原理</a></li>
-<li><a href="#注册登录-zerotier">注册登录 zerotier</a></li>
-<li><a href="#创建网络">创建网络</a></li>
-<li><a href="#安装群晖版客户端">安装群晖版客户端</a></li>
-<li><a href="#群晖版客户端连接-zerotier-网络">群晖版客户端连接 zerotier 网络</a></li>
-<li><a href="#安装-windows-版客户端并连接-zerotier-网络">安装 windows 版客户端并连接 zerotier 网络</a></li>
-<li><a href="#测试连接">测试连接</a></li>
-</ul>
-<!-- /code_chunk_output -->
-
-<br>
-
-<p>前面讲到路由器端口转发，但是需要公网IP，如果没有公网IP的话可以考虑内网穿透。</p>
-<h2 id="内网穿透原理"><a href="#内网穿透原理" class="headerlink" title="内网穿透原理"></a>内网穿透原理</h2><p>百度百科的解释：内网穿透，也即 NAT 穿透，进行 NAT 穿透是为了使具有某一个特定源 IP 地址和源端口号的数据包不被 NAT 设备屏蔽而正确路由到内网主机。</p>
-<p>简单点说就是让外部能访问某局域网内没有公网IP的计算机。</p>
-<p>ngrok和frp 反向代理型。<br>zerotier 点对点的型。</p>
-<h2 id="注册登录-zerotier"><a href="#注册登录-zerotier" class="headerlink" title="注册登录 zerotier"></a>注册登录 zerotier</h2><p>点击登录：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_163302.png" alt="20200505163620"></p>
-<p>点击注册：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_163345.png" alt="20200505163716"></p>
-<p>输入基本信息：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_163420.png" alt="20200505163753"></p>
-<p>登录邮箱验证：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_163446.png" alt="20200505163817"></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_163530.png" alt="20200505163840"></p>
-<p>注册成功后账户信息：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_163927.png" alt="20200505163955"></p>
-<p>API Access Tokens 是开发者使用的，这里暂不使用，其它信息也不用改。</p>
-<h2 id="创建网络"><a href="#创建网络" class="headerlink" title="创建网络"></a>创建网络</h2><p>点击 Networks 菜单，然后 Create a Network 则会创建一个网络：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_164241.png" alt="20200505164400"></p>
-<p>点击 ID 进入详情，可以看到IP网段：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_164606.png" alt="20200505164622"></p>
-<p>可以看到当前没有设备连接：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_164650.png" alt="20200505164737"></p>
-<h2 id="安装群晖版客户端"><a href="#安装群晖版客户端" class="headerlink" title="安装群晖版客户端"></a>安装群晖版客户端</h2><p>点击 the download page 进入下载页面：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_164858.png" alt="20200505164937"></p>
-<p>下载页面展示了下载连接，支持很多设备。下载群晖版：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_165730.png" alt="20200505170946"></p>
-<p>点击进入可下载的列表：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_165757.png" alt="20200505171010"></p>
-<p>选择需要下载的版本，如果是白群晖可根据 cpu 型号来选，进入群晖官方网站查看配置列表，网页地址【<a href="https://www.synology.com/zh-cn/knowledgebase/DSM/tutorial/Compatibility_Peripherals/What_kind_of_CPU_does_my_NAS_have】：" target="_blank" rel="noopener">https://www.synology.com/zh-cn/knowledgebase/DSM/tutorial/Compatibility_Peripherals/What_kind_of_CPU_does_my_NAS_have】：</a></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_170218.png" alt="20200505170224"></p>
-<p>比如使用的设备是【DS918+】：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_170411.png" alt="20200505170429"></p>
-<p>进入 intel 官网【<a href="https://ark.intel.com/content/www/cn/zh/ark.html#@Processors】查看这个型号cpu信息获取" target="_blank" rel="noopener">https://ark.intel.com/content/www/cn/zh/ark.html#@Processors】查看这个型号cpu信息获取</a> cpu 代号，搜索【j3455】：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_180744.png" alt="20200505180831"></p>
-<p>搜索到的结果：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_170627.png" alt="20200505170659"></p>
-<p>得到的是 Apoll Lake，对应找到 zerotier 版软件：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_170854.png" alt="20200505170910"></p>
-<p>如果是黑群晖则需要根据引导模拟的cpu来对应版本，进入信息中心可查找到：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_171344.png" alt="20200505171423"></p>
-<p>进入套件中心，选择手动安装：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_171709.png" alt="20200505171940"></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_171818.png" alt="20200505171957"></p>
-<p>选择安装的位置：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_171830.png" alt="20200505172020"></p>
-<p>下一步，应用：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_171837.png" alt="20200505172041"></p>
-<h2 id="群晖版客户端连接-zerotier-网络"><a href="#群晖版客户端连接-zerotier-网络" class="headerlink" title="群晖版客户端连接 zerotier 网络"></a>群晖版客户端连接 zerotier 网络</h2><p>打开 zerotier 将网络ID输入连接：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_172352.png" alt="20200505173020"></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_172416.png" alt="20200505173030"></p>
-<p>等待连接：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_172426.png" alt="20200505173054"></p>
-<p>连接失败了：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_172504.png" alt="20200505173115"></p>
-<p>为什么连接失败了，因为 zerotier 后台需要允许连接，勾选：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_172651.png" alt="20200505173204"></p>
-<p>连接成功：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_172937.png" alt="20200505173220"></p>
-<p>进入网络可以看到新增了一个局域网连接：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_173347.png" alt="20200505173514"></p>
-<h2 id="安装-windows-版客户端并连接-zerotier-网络"><a href="#安装-windows-版客户端并连接-zerotier-网络" class="headerlink" title="安装 windows 版客户端并连接 zerotier 网络"></a>安装 windows 版客户端并连接 zerotier 网络</h2><p>windows 版在另外一个云服务器上安装。</p>
-<p>下载 windows 版：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_165036.png" alt="20200505165233"></p>
-<p>安装：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_165331.png" alt="20200505165444"></p>
-<p>运行，先点击 NodID 登录，然后 Join Network：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_173910.png" alt="20200505174831"></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_174025.png" alt="20200505174847"></p>
-<p>加入网络，然后会弹出一个网络发现，确定：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_174036.png" alt="20200505174918"></p>
-<p>查看网络连接，多了一个虚拟网络：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_180348.png" alt="20200505180430"></p>
-<p>查看连接信息：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_174734.png" alt="20200505174950"></p>
-<p>未连接成功，还需要勾选下：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_175044.png" alt="20200505175109"></p>
-<p>再次查看，已经连接成功：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_175134.png" alt="20200505175150"></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_175319.png" alt="20200505175328"></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_181107.png" alt="20200505181118"></p>
-<h2 id="测试连接"><a href="#测试连接" class="headerlink" title="测试连接"></a>测试连接</h2><p>在 windows 上 ping nas 虚拟网络地址测试连通性，发现很不稳定：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Administrator&gt;ping 172.30.235.184</span><br><span class="line"></span><br><span class="line">正在 Ping 172.30.235.184 具有 32 字节的数据:</span><br><span class="line">请求超时。</span><br><span class="line">请求超时。</span><br><span class="line">请求超时。</span><br><span class="line">来自 172.30.235.184 的回复: 字节&#x3D;32 时间&#x3D;554ms TTL&#x3D;64</span><br><span class="line"></span><br><span class="line">172.30.235.184 的 Ping 统计信息:</span><br><span class="line">    数据包: 已发送 &#x3D; 4，已接收 &#x3D; 1，丢失 &#x3D; 3 (75% 丢失)，</span><br><span class="line">往返行程的估计时间(以毫秒为单位):</span><br><span class="line">    最短 &#x3D; 554ms，最长 &#x3D; 554ms，平均 &#x3D; 554ms</span><br></pre></td></tr></table></figure>
-
-<p>在 windows 上访问群晖系统失败。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -752,10 +222,9 @@
       <meta itemprop="name" content="坤哥博客小站">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/30/hexo.2020032901/" class="post-title-link" itemprop="url">Hexo 实战（二）：Hexo 基本设置</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          Hexo 实战（二）：Hexo 基本设置
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -794,7 +263,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><strong>目录</strong></p>
+        <p><strong>目录</strong></p>
 <!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
 
 <!-- code_chunk_output -->
@@ -1044,185 +513,40 @@
 <p>在华为云的 windows 服务器上记事本也设置了自动换行，这是怎么回事？</p>
 <p>不做深究，强烈建议使用第三方编辑器编写即可，如 vs code、sublime等。</p>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/tags/hexo/" rel="tag"># hexo</a>
+              <a href="/tags/Hexo-%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/" rel="tag"># Hexo 基本设置</a>
+          </div>
 
         
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/29/Hello-by-hexo-new-command/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活是一门艺术,更是一门技术">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="坤哥博客小站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/29/Hello-by-hexo-new-command/" class="post-title-link" itemprop="url">Hello by hexo new command</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-29 01:09:05" itemprop="dateCreated datePublished" datetime="2020-03-29T01:09:05+08:00">2020-03-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-31 23:10:05" itemprop="dateModified" datetime="2020-03-31T23:10:05+08:00">2020-03-31</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%B1%BB%E5%88%AB1/" itemprop="url" rel="index"><span itemprop="name">类别1</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%B1%BB%E5%88%AB2/" itemprop="url" rel="index"><span itemprop="name">类别2</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%B1%BB%E5%88%AB2/%E7%B1%BB%E5%88%AB2-1/" itemprop="url" rel="index"><span itemprop="name">类别2-1</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%B1%BB%E5%88%AB2/%E7%B1%BB%E5%88%AB2-2/" itemprop="url" rel="index"><span itemprop="name">类别2-2</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%B1%BB%E5%88%AB3/" itemprop="url" rel="index"><span itemprop="name">类别3</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>这里是文章内容。。。</p>
-<p>草稿<br>刚刚提到了 Hexo 的一种特殊布局：draft，这种布局在建立时会被保存到 source/_drafts 文件夹，您可通过 publish 命令将草稿移动到 source/_posts 文件夹，该命令的使用方式与 new 十分类似，您也可在命令中指定 layout 来指定布局。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
         
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/29/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活是一门艺术,更是一门技术">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="坤哥博客小站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/29/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-29 00:51:27" itemprop="dateCreated datePublished" datetime="2020-03-29T00:51:27+08:00">2020-03-29</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/29/Hello-by-hexo-new-command/" rel="prev" title="Hello by hexo new command">
+      <i class="fa fa-chevron-left"></i> Hello by hexo new command
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/05/nas.2020050505/" rel="next" title="nas 折腾笔记（七）： 群晖系统的使用之 Zerotier 实现内网穿透">
+      nas 折腾笔记（七）： 群晖系统的使用之 Zerotier 实现内网穿透 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
   
 
   </div>
-
-  
-
 
 
           </div>
@@ -1273,6 +597,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Hexo-站点配置文件"><span class="nav-number">1.</span> <span class="nav-text">一、Hexo 站点配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-使用主题-NexT"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 使用主题 NexT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-网站信息配置"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 网站信息配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-写作"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 写作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、NexT-主题基本配置"><span class="nav-number">2.</span> <span class="nav-text">二、NexT 主题基本配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Schemes-配置"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 Schemes 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-菜单配置"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 菜单配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-侧栏配置"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 侧栏配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-友情链接配置"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 友情链接配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-站点建立时间配置"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 站点建立时间配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、页面添加"><span class="nav-number">3.</span> <span class="nav-text">三、页面添加</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-分类页面添加"><span class="nav-number">3.0.1.</span> <span class="nav-text">3.1 分类页面添加</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-标签页面添加"><span class="nav-number">3.0.2.</span> <span class="nav-text">3.2 标签页面添加</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-404页面添加"><span class="nav-number">3.0.3.</span> <span class="nav-text">3.4 404页面添加</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-关于我页面添加"><span class="nav-number">3.0.4.</span> <span class="nav-text">3.5 关于我页面添加</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P、常见问题"><span class="nav-number">4.</span> <span class="nav-text">P、常见问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#P1-网站中文乱码"><span class="nav-number">4.1.</span> <span class="nav-text">P1 网站中文乱码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#P2-yml-可读性差"><span class="nav-number">4.2.</span> <span class="nav-text">P2 .yml 可读性差</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
