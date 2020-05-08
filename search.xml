@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Hello by hexo new command</title>
+    <url>/2020/03/29/Hello-by-hexo-new-command/</url>
+    <content><![CDATA[<p>这里是文章内容。。。</p>
+<p>草稿<br>刚刚提到了 Hexo 的一种特殊布局：draft，这种布局在建立时会被保存到 source/_drafts 文件夹，您可通过 publish 命令将草稿移动到 source/_posts 文件夹，该命令的使用方式与 new 十分类似，您也可在命令中指定 layout 来指定布局。</p>
+]]></content>
+      <categories>
+        <category>类别1</category>
+        <category>类别2</category>
+        <category>类别2-1</category>
+        <category>类别2-2</category>
+        <category>类别3</category>
+      </categories>
+      <tags>
+        <tag>标签1</tag>
+        <tag>标签2</tag>
+        <tag>标签3</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/03/29/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Hexo 实战（二）：Hexo 基本设置</title>
+    <url>/2020/03/30/hexo.2020032901/</url>
+    <content><![CDATA[<p><strong>目录</strong></p>
+<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
+
+<!-- code_chunk_output -->
+
+<ul>
+<li><a href="#一-hexo-站点配置文件">一、Hexo 站点配置文件</a><ul>
+<li><a href="#11-使用主题-next">1.1 使用主题 NexT</a></li>
+<li><a href="#12-网站信息配置">1.2 网站信息配置</a></li>
+<li><a href="#13-写作">1.3 写作</a></li>
+</ul>
+</li>
+<li><a href="#二-next-主题基本配置">二、NexT 主题基本配置</a><ul>
+<li><a href="#21-schemes-配置">2.1 Schemes 配置</a></li>
+<li><a href="#22-菜单配置">2.2 菜单配置</a></li>
+<li><a href="#23-侧栏配置">2.3 侧栏配置</a></li>
+<li><a href="#24-友情链接配置">2.4 友情链接配置</a></li>
+<li><a href="#25-站点建立时间配置">2.5 站点建立时间配置</a></li>
+</ul>
+</li>
+<li><a href="#三-页面添加">三、页面添加</a><ul>
+<li><a href="#31-分类页面添加">3.1 分类页面添加</a></li>
+<li><a href="#32-标签页面添加">3.2 标签页面添加</a></li>
+<li><a href="#34-404页面添加">3.4 404页面添加</a></li>
+<li><a href="#35-关于我页面添加">3.5 关于我页面添加</a></li>
+</ul>
+</li>
+<li><a href="#p-常见问题">P、常见问题</a><ul>
+<li><a href="#p1-网站中文乱码">P1 网站中文乱码</a></li>
+<li><a href="#p2-yml-可读性差">P2 .yml 可读性差</a></li>
+</ul>
+</li>
+</ul>
+<!-- /code_chunk_output -->
+
+<a id="more"></a>
+
+<h2 id="一、Hexo-站点配置文件"><a href="#一、Hexo-站点配置文件" class="headerlink" title="一、Hexo 站点配置文件"></a>一、Hexo 站点配置文件</h2><p>官方关于配置的文档：<a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/configuration</a></p>
+<p>网站的配置信息在文件 _config.yml 中，完整的初始配置信息（除了修改 Deployment）如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Hexo Configuration</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/configuration.html</span></span><br><span class="line"><span class="comment">## Source: https://github.com/hexojs/hexo/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Site</span></span><br><span class="line">title: Hexo</span><br><span class="line">subtitle: <span class="string">''</span></span><br><span class="line">description: <span class="string">''</span></span><br><span class="line">keywords:</span><br><span class="line">author: John Doe</span><br><span class="line">language: en</span><br><span class="line">timezone: <span class="string">''</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># URL</span></span><br><span class="line"><span class="comment">## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'</span></span><br><span class="line">url: http://yoursite.com</span><br><span class="line">root: /</span><br><span class="line">permalink: :year/:month/:day/:title/</span><br><span class="line">permalink_defaults:</span><br><span class="line">pretty_urls:</span><br><span class="line">  trailing_index: <span class="literal">true</span> <span class="comment"># Set to false to remove trailing 'index.html' from permalinks</span></span><br><span class="line">  trailing_html: <span class="literal">true</span> <span class="comment"># Set to false to remove trailing '.html' from permalinks</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Directory</span></span><br><span class="line">source_dir: <span class="built_in">source</span></span><br><span class="line">public_dir: public</span><br><span class="line">tag_dir: tags</span><br><span class="line">archive_dir: archives</span><br><span class="line">category_dir: categories</span><br><span class="line">code_dir: downloads/code</span><br><span class="line">i18n_dir: :lang</span><br><span class="line">skip_render:</span><br><span class="line"></span><br><span class="line"><span class="comment"># Writing</span></span><br><span class="line">new_post_name: :title.md <span class="comment"># File name of new posts</span></span><br><span class="line">default_layout: post</span><br><span class="line">titlecase: <span class="literal">false</span> <span class="comment"># Transform title into titlecase</span></span><br><span class="line">external_link:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span> <span class="comment"># Open external links in new tab</span></span><br><span class="line">  field: site <span class="comment"># Apply to the whole site</span></span><br><span class="line">  exclude: <span class="string">''</span></span><br><span class="line">filename_case: 0</span><br><span class="line">render_drafts: <span class="literal">false</span></span><br><span class="line">post_asset_folder: <span class="literal">false</span></span><br><span class="line">relative_link: <span class="literal">false</span></span><br><span class="line">future: <span class="literal">true</span></span><br><span class="line">highlight:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  line_number: <span class="literal">true</span></span><br><span class="line">  auto_detect: <span class="literal">false</span></span><br><span class="line">  tab_replace: <span class="string">''</span></span><br><span class="line">  wrap: <span class="literal">true</span></span><br><span class="line">  hljs: <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Home page setting</span></span><br><span class="line"><span class="comment"># path: Root path for your blogs index page. (default = '')</span></span><br><span class="line"><span class="comment"># per_page: Posts displayed per page. (0 = disable pagination)</span></span><br><span class="line"><span class="comment"># order_by: Posts order. (Order by date descending by default)</span></span><br><span class="line">index_generator:</span><br><span class="line">  path: <span class="string">''</span></span><br><span class="line">  per_page: 10</span><br><span class="line">  order_by: -date</span><br><span class="line"></span><br><span class="line"><span class="comment"># Category &amp; Tag</span></span><br><span class="line">default_category: uncategorized</span><br><span class="line">category_map:</span><br><span class="line">tag_map:</span><br><span class="line"></span><br><span class="line"><span class="comment"># Metadata elements</span></span><br><span class="line"><span class="comment">## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta</span></span><br><span class="line">meta_generator: <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Date / Time format</span></span><br><span class="line"><span class="comment">## Hexo uses Moment.js to parse and display date</span></span><br><span class="line"><span class="comment">## You can customize the date format as defined in</span></span><br><span class="line"><span class="comment">## http://momentjs.com/docs/#/displaying/format/</span></span><br><span class="line">date_format: YYYY-MM-DD</span><br><span class="line">time_format: HH:mm:ss</span><br><span class="line"><span class="comment">## Use post's date for updated date unless set in front-matter</span></span><br><span class="line">use_date_for_updated: <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Pagination</span></span><br><span class="line"><span class="comment">## Set per_page to 0 to disable pagination</span></span><br><span class="line">per_page: 10</span><br><span class="line">pagination_dir: page</span><br><span class="line"></span><br><span class="line"><span class="comment"># Include / Exclude file(s)</span></span><br><span class="line"><span class="comment">## include:/exclude: options only apply to the 'source/' folder</span></span><br><span class="line">include:</span><br><span class="line">exclude:</span><br><span class="line">ignore:</span><br><span class="line"></span><br><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"><span class="comment">## Plugins: https://hexo.io/plugins/</span></span><br><span class="line"><span class="comment">## Themes: https://hexo.io/themes/</span></span><br><span class="line">theme: landscape</span><br><span class="line"></span><br><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://github.com/kungge/kungge.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<p>主要分成如下：</p>
+<ul>
+<li>Site：网站</li>
+<li>URL：网址</li>
+<li>Directory：目录</li>
+<li>Writing：文章写作</li>
+<li>Category &amp; Tag：分类和标签</li>
+<li>Date / Time format：日期 / 时间格式</li>
+<li>Pagination：分页</li>
+<li>Include / Exclude file(s)：包括或不包括目录和文件</li>
+<li>Extensions：扩展</li>
+</ul>
+<h3 id="1-1-使用主题-NexT"><a href="#1-1-使用主题-NexT" class="headerlink" title="1.1 使用主题 NexT"></a>1.1 使用主题 NexT</h3><p>默认的主题是 landscape，而 NexT 主题很多人选择，简洁好看，接下来会在该主题基础上进行设置。</p>
+<p>NexT 主题源码地址：<a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">https://github.com/theme-next/hexo-theme-next</a></p>
+<p>下载 release 版：<a href="https://github.com/theme-next/hexo-theme-next/releases" target="_blank" rel="noopener">https://github.com/theme-next/hexo-theme-next/releases</a></p>
+<p>将下载的压缩包解压到 <code>themes/</code> 目录下，将_config.yml 中 theme 修改为 :</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Extensions</span></span><br><span class="line">theme: next</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-网站信息配置"><a href="#1-2-网站信息配置" class="headerlink" title="1.2 网站信息配置"></a>1.2 网站信息配置</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line">title: 坤哥博客小站</span><br><span class="line">subtitle: 热爱生活,热爱技术,听听故事</span><br><span class="line">description: 生活是一门艺术,更是一门技术</span><br><span class="line">keywords: 坤哥博客小站,坤哥博客网,坤哥博客技术网</span><br><span class="line">author: wankun</span><br><span class="line">language: zh-CN</span><br><span class="line">timezone: Asia/Shanghai</span><br></pre></td></tr></table></figure>
+
+<p>渲染效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-30_222440.png" alt="2225"></p>
+<h3 id="1-3-写作"><a href="#1-3-写作" class="headerlink" title="1.3 写作"></a>1.3 写作</h3><p>上一篇文章讲过通过命令 <code>hexo new [layout] &lt;title&gt;</code> 可以新建一篇文章，layout 表示布局，Hexo 有三种默认布局：post、page 和 draft，不指定布局则会使用默认布局，默认布局配置使用 <code>default_layout: post</code> 设置，不同的布局会存储在不同的目录中，前面使用命令 hexo new “Hello by hexo newcommand” 新增文件【Hello-by-hexo-new-command.md】存储在目录【source/_posts】中，如果是 draft 则是【source/_drafts】，page 则是【source】。</p>
+<p>【Hello-by-hexo-new-command.md】文件内容为空，但是有“头”信息：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: Hello by hexo new command</span><br><span class="line">date: 2020-03-29 01:09:05</span><br><span class="line">tags:</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>渲染效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-31_230431.png" alt="2313"></p>
+<p>这里的“头”信息叫 Front-matter，是文件最上方以 — 分隔的区域，用于指定个别文件的变量，以下是预先定义的参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>layout</td>
+<td>布局</td>
+<td>不指定则使用默认_config.yml中配置的</td>
+</tr>
+<tr>
+<td>title</td>
+<td>标题</td>
+<td>文章的文件名</td>
+</tr>
+<tr>
+<td>date</td>
+<td>建立日期</td>
+<td>文件建立日期</td>
+</tr>
+<tr>
+<td>updated</td>
+<td>更新日期</td>
+<td>文件更新日期</td>
+</tr>
+<tr>
+<td>comments</td>
+<td>开启文章的评论功能</td>
+<td>true</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>标签（不适用于分页）</td>
+<td></td>
+</tr>
+<tr>
+<td>categories</td>
+<td>分类（不适用于分页）</td>
+<td></td>
+</tr>
+<tr>
+<td>permalink</td>
+<td>覆盖文章网址</td>
+<td></td>
+</tr>
+<tr>
+<td>keywords</td>
+<td>仅用于 meta 标签和 Open Graph 的关键词（不推荐使用）</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>修改该文件内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: Hello by hexo new command</span><br><span class="line">date: 2020-03-29 01:09:05</span><br><span class="line">updated: 2020-03-31 23:10:05</span><br><span class="line">tags: </span><br><span class="line">- 标签1</span><br><span class="line">- 标签2</span><br><span class="line">- 标签3</span><br><span class="line">categories: </span><br><span class="line">- 类别1</span><br><span class="line">- [类别2, 类别2-1]</span><br><span class="line">- [类别2, 类别2-2]</span><br><span class="line">- [类别3]</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">这里是文章内容。。。</span><br></pre></td></tr></table></figure>
+
+<p><em>注：在hexo中类别有父子之分，<code>[类别2, 类别2-1]</code> 表示 <code>类别2-1</code> 是 <code>类别2</code> 的子类别。</em></p>
+<p>生成静态文件时，发现不光生成了文件本身，还生成了类别和标签页面：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-31_231603.png" alt="2316"></p>
+<p>渲染结果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-31_231301.png" alt="2314"></p>
+<p>进入类别页面：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-31_232035.png" alt="2320"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-31_231917.png" alt="2319"></p>
+<p>文件名称使用 <code>new_post_name: :title.md # File name of new posts</code> 来配置，默认使用 <code>:title.md</code> 表示使用文章标题名来命名，可使用加入时间信息来命名方便文章管理：</p>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>:title</td>
+<td>标题（小写，空格将会被替换为短杠）</td>
+</tr>
+<tr>
+<td>:year</td>
+<td>建立的年份，比如， 2015</td>
+</tr>
+<tr>
+<td>:month</td>
+<td>建立的月份（有前导零），比如， 04</td>
+</tr>
+<tr>
+<td>:i_month</td>
+<td>建立的月份（无前导零），比如， 4</td>
+</tr>
+<tr>
+<td>:day</td>
+<td>建立的日期（有前导零），比如， 07</td>
+</tr>
+<tr>
+<td>:i_day</td>
+<td>建立的日期（无前导零），比如， 7</td>
+</tr>
+</tbody></table>
+<h2 id="二、NexT-主题基本配置"><a href="#二、NexT-主题基本配置" class="headerlink" title="二、NexT 主题基本配置"></a>二、NexT 主题基本配置</h2><h3 id="2-1-Schemes-配置"><a href="#2-1-Schemes-配置" class="headerlink" title="2.1 Schemes 配置"></a>2.1 Schemes 配置</h3><p>scheme 默认是 Muse：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-30_225028.png" alt="2250"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Schemes</span><br><span class="line">scheme: Muse</span><br><span class="line"># scheme: Mist</span><br><span class="line"># scheme: Pisces</span><br><span class="line">#scheme: Gemini</span><br></pre></td></tr></table></figure>
+
+<p>Pisces 效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-30_225430.png" alt="2254"></p>
+<p>Mist 效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-30_225933.png" alt="2259"></p>
+<h3 id="2-2-菜单配置"><a href="#2-2-菜单配置" class="headerlink" title="2.2 菜单配置"></a>2.2 菜单配置</h3><p>默认的菜单配置：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Usage: `Key: /link/ || icon`</span></span><br><span class="line"><span class="comment"># Key is the name of menu item. If the translation for this item is available, the translated text will be loaded, otherwise the Key name will be used. Key is case-senstive.</span></span><br><span class="line"><span class="comment"># Value before `||` delimiter is the target link, value after `||` delimiter is the name of Font Awesome icon.</span></span><br><span class="line"><span class="comment"># When running the site in a subdirectory (e.g. yoursite.com/blog), remove the leading slash from link value (/archives -&gt; archives).</span></span><br><span class="line"><span class="comment"># External url should start with http:// or https://</span></span><br><span class="line">menu:</span><br><span class="line">  home: / || home</span><br><span class="line">  <span class="comment">#about: /about/ || user</span></span><br><span class="line">  <span class="comment">#tags: /tags/ || tags</span></span><br><span class="line">  <span class="comment">#categories: /categories/ || th</span></span><br><span class="line">  archives: /archives/ || archive</span><br><span class="line">  <span class="comment">#schedule: /schedule/ || calendar</span></span><br><span class="line">  <span class="comment">#sitemap: /sitemap.xml || sitemap</span></span><br><span class="line">  <span class="comment">#commonweal: /404/ || heartbeat</span></span><br></pre></td></tr></table></figure>
+
+<p><code>||</code> 前面的是超链接，后面的是图标，修改如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: / || home</span><br><span class="line">  about: /about/ || user</span><br><span class="line">  tags: /tags/ || tags</span><br><span class="line">  categories: /categories/ || th</span><br><span class="line">  archives: /archives/ || archive</span><br><span class="line">  schedule: /schedule/ || calendar</span><br><span class="line">  sitemap: /sitemap.xml || sitemap</span><br><span class="line">  commonweal: /404/ || heartbeat</span><br></pre></td></tr></table></figure>
+
+<p>渲染效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-30_230927.png" alt="2309"></p>
+<p>配置的是英文，为啥会显示成对应中文？</p>
+<p>其实这是有语言配置文件决定的，配置什么语言就用目录 【languages/】下【语言.yml】文件，如本次配置的是【language: zh-CN】，使用的文件就是【zh-CN.yml】。</p>
+<h3 id="2-3-侧栏配置"><a href="#2-3-侧栏配置" class="headerlink" title="2.3 侧栏配置"></a>2.3 侧栏配置</h3><p>侧栏默认配置如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># ---------------------------------------------------------------</span></span><br><span class="line"><span class="comment"># Sidebar Settings</span></span><br><span class="line"><span class="comment"># See: https://theme-next.org/docs/theme-settings/sidebar</span></span><br><span class="line"><span class="comment"># ---------------------------------------------------------------</span></span><br><span class="line"></span><br><span class="line">sidebar:</span><br><span class="line">  <span class="comment"># Sidebar Position.</span></span><br><span class="line">  position: left</span><br><span class="line">  <span class="comment">#position: right</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Manual define the sidebar width. If commented, will be default for:</span></span><br><span class="line">  <span class="comment"># Muse | Mist: 320</span></span><br><span class="line">  <span class="comment"># Pisces | Gemini: 240</span></span><br><span class="line">  <span class="comment">#width: 300</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Sidebar Display (only for Muse | Mist), available values:</span></span><br><span class="line">  <span class="comment">#  - post    expand on posts automatically. Default.</span></span><br><span class="line">  <span class="comment">#  - always  expand for all pages automatically.</span></span><br><span class="line">  <span class="comment">#  - hide    expand only when click on the sidebar toggle icon.</span></span><br><span class="line">  <span class="comment">#  - remove  totally remove sidebar including sidebar toggle.</span></span><br><span class="line">  display: post</span><br><span class="line"></span><br><span class="line">  <span class="comment"># Sidebar padding in pixels.</span></span><br><span class="line">  padding: 18</span><br><span class="line">  <span class="comment"># Sidebar offset from top menubar in pixels (only for Pisces | Gemini).</span></span><br><span class="line">  offset: 12</span><br><span class="line">  <span class="comment"># Enable sidebar on narrow view (only for Muse | Mist).</span></span><br><span class="line">  onmobile: <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Sidebar Avatar</span></span><br><span class="line">avatar:</span><br><span class="line">  <span class="comment"># Replace the default image and set the url here.</span></span><br><span class="line">  url: <span class="comment">#/images/avatar.gif</span></span><br><span class="line">  <span class="comment"># If true, the avatar will be dispalyed in circle.</span></span><br><span class="line">  rounded: <span class="literal">false</span></span><br><span class="line">  <span class="comment"># If true, the avatar will be rotated with the cursor.</span></span><br><span class="line">  rotated: <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Posts / Categories / Tags in sidebar.</span></span><br><span class="line">site_state: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>渲染效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-30_232856.png" alt="2329"></p>
+<ul>
+<li>Sidebar Position 用来配置侧栏的位置</li>
+<li>Sidebar Display 用来配置侧栏的显示时机</li>
+<li>Sidebar Avatar 用来配置侧栏头像</li>
+</ul>
+<h3 id="2-4-友情链接配置"><a href="#2-4-友情链接配置" class="headerlink" title="2.4 友情链接配置"></a>2.4 友情链接配置</h3><p>默认：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Social Links</span></span><br><span class="line"><span class="comment"># Usage: `Key: permalink || icon`</span></span><br><span class="line"><span class="comment"># Key is the link label showing to end users.</span></span><br><span class="line"><span class="comment"># Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.</span></span><br><span class="line">social:</span><br><span class="line">  <span class="comment">#GitHub: https://github.com/yourname || github</span></span><br><span class="line">  <span class="comment">#E-Mail: mailto:yourname@gmail.com || envelope</span></span><br><span class="line">  <span class="comment">#Weibo: https://weibo.com/yourname || weibo</span></span><br><span class="line">  <span class="comment">#Google: https://plus.google.com/yourname || google</span></span><br><span class="line">  <span class="comment">#Twitter: https://twitter.com/yourname || twitter</span></span><br><span class="line">  <span class="comment">#FB Page: https://www.facebook.com/yourname || facebook</span></span><br><span class="line">  <span class="comment">#StackOverflow: https://stackoverflow.com/yourname || stack-overflow</span></span><br><span class="line">  <span class="comment">#YouTube: https://youtube.com/yourname || youtube</span></span><br><span class="line">  <span class="comment">#Instagram: https://instagram.com/yourname || instagram</span></span><br><span class="line">  <span class="comment">#Skype: skype:yourname?call|chat || skype</span></span><br><span class="line"></span><br><span class="line">social_icons:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  icons_only: <span class="literal">false</span></span><br><span class="line">  transition: <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p>把注释去掉，看看效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-30_234930.png" alt="2349"></p>
+<h3 id="2-5-站点建立时间配置"><a href="#2-5-站点建立时间配置" class="headerlink" title="2.5 站点建立时间配置"></a>2.5 站点建立时间配置</h3><p>默认没有 since 字段，但是底部显示的是：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-30_235238.png" alt="2352"></p>
+<p>新增：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># i add</span></span><br><span class="line">since: 2019</span><br></pre></td></tr></table></figure>
+
+<p>经测试发现没有奏效，TODO。。。</p>
+<h2 id="三、页面添加"><a href="#三、页面添加" class="headerlink" title="三、页面添加"></a>三、页面添加</h2><h4 id="3-1-分类页面添加"><a href="#3-1-分类页面添加" class="headerlink" title="3.1 分类页面添加"></a>3.1 分类页面添加</h4><p>使用命令 <code>hexo new page categories</code> 新增一个 categories 文件夹：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-31_000948.png" alt="0009"></p>
+<p>里面默认会添加一个 index.md 文件，默认展示：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-31_001050.png" alt="0010"></p>
+<p>修改 index.md：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 网站分类</span><br><span class="line">date: 2020-03-30 23:55:32</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>如果文章指定 categories 参数则会在这里展示出来，显示效果范例：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-06_234730.png" alt="20200506234740"></p>
+<h4 id="3-2-标签页面添加"><a href="#3-2-标签页面添加" class="headerlink" title="3.2 标签页面添加"></a>3.2 标签页面添加</h4><p>标签页面添加和类别类似，使用命令 <code>hexo new page tags</code> 新增一个 tags 文件夹：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-31_000106.png" alt="0001"></p>
+<p>默认内容：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line">date: 2020-03-30 23:59:32</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>展示效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-31_000437.png" alt="0004"></p>
+<p>修改 index.md 文件如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 网站标签</span><br><span class="line">date: 2020-03-30 23:59:32</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>显示效果范例：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-06_235434.png" alt="20200506235250"></p>
+<h4 id="3-4-404页面添加"><a href="#3-4-404页面添加" class="headerlink" title="3.4 404页面添加"></a>3.4 404页面添加</h4><h4 id="3-5-关于我页面添加"><a href="#3-5-关于我页面添加" class="headerlink" title="3.5 关于我页面添加"></a>3.5 关于我页面添加</h4><p>使用命令 <code>hexo new page about</code> 生成文件夹，修改 index.html 内容：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 关于本站</span><br><span class="line">date: 2020-05-07 00:11:24</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">本站是坤哥网的精选文章，均属原创，欢迎转载！转载时请保留原文链接！</span><br></pre></td></tr></table></figure>
+
+<p>显示效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-07_001454.png" alt="20200507001504"></p>
+<h2 id="P、常见问题"><a href="#P、常见问题" class="headerlink" title="P、常见问题"></a>P、常见问题</h2><h3 id="P1-网站中文乱码"><a href="#P1-网站中文乱码" class="headerlink" title="P1 网站中文乱码"></a>P1 网站中文乱码</h3><p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-30_212732.png" alt="2127"></p>
+<p>为什么会出现乱码？</p>
+<p>先查看网站用的主题，在 <code># Extensions</code> 一栏，如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Extensions</span><br><span class="line">## Plugins: https:&#x2F;&#x2F;hexo.io&#x2F;plugins&#x2F;</span><br><span class="line">## Themes: https:&#x2F;&#x2F;hexo.io&#x2F;themes&#x2F;</span><br><span class="line">theme: landscape</span><br></pre></td></tr></table></figure>
+
+<p>用的主题是 landscape，然后再主题的目录下找到语言配置文件：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-30_213309.png" alt="2133"></p>
+<p>那么在 <code># Site</code> 一栏中语言配置 <code>language:</code> 也要在使用的主题语言配置中。</p>
+<p>如上中文应使用 <code>zh-CN</code>，设置 <code>language: zh-CN</code>。</p>
+<p>如果还不行，那可能是配置文件【_config.yml】本身的编码格式，另存为 UTF-8 格式：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-30_221710.png" alt="2217"></p>
+<h3 id="P2-yml-可读性差"><a href="#P2-yml-可读性差" class="headerlink" title="P2 .yml 可读性差"></a>P2 .yml 可读性差</h3><p>在华为云的 windows 服务器上用记事本打开成这样：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-30_223727.png" alt="2237"></p>
+<p>可读性太差。</p>
+<p>而在本机的 windows 打开却是正常的：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-30_224656.png" alt="2247"></p>
+<p>在华为云的 windows 服务器上记事本也设置了自动换行，这是怎么回事？</p>
+<p>不做深究，强烈建议使用第三方编辑器编写即可，如 vs code、sublime等。</p>
+]]></content>
+      <categories>
+        <category>开源博客</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>Hexo 基本设置</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>nas 折腾笔记（七）： 群晖系统的使用之 Zerotier 实现内网穿透</title>
+    <url>/2020/05/05/nas.2020050505/</url>
+    <content><![CDATA[<p><strong>目录</strong></p>
+<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
+
+<!-- code_chunk_output -->
+
+<ul>
+<li><a href="#内网穿透原理">内网穿透原理</a></li>
+<li><a href="#注册登录-zerotier">注册登录 zerotier</a></li>
+<li><a href="#创建网络">创建网络</a></li>
+<li><a href="#安装群晖版客户端">安装群晖版客户端</a></li>
+<li><a href="#群晖版客户端连接-zerotier-网络">群晖版客户端连接 zerotier 网络</a></li>
+<li><a href="#安装-windows-版客户端并连接-zerotier-网络">安装 windows 版客户端并连接 zerotier 网络</a></li>
+<li><a href="#测试连接">测试连接</a></li>
+</ul>
+<!-- /code_chunk_output -->
+
+<br>
+
+<p>前面讲到路由器端口转发，但是需要公网IP，如果没有公网IP的话可以考虑内网穿透。</p>
+<h2 id="内网穿透原理"><a href="#内网穿透原理" class="headerlink" title="内网穿透原理"></a>内网穿透原理</h2><p>百度百科的解释：内网穿透，也即 NAT 穿透，进行 NAT 穿透是为了使具有某一个特定源 IP 地址和源端口号的数据包不被 NAT 设备屏蔽而正确路由到内网主机。</p>
+<p>简单点说就是让外部能访问某局域网内没有公网IP的计算机。</p>
+<p>ngrok和frp 反向代理型。<br>zerotier 点对点的型。</p>
+<h2 id="注册登录-zerotier"><a href="#注册登录-zerotier" class="headerlink" title="注册登录 zerotier"></a>注册登录 zerotier</h2><p>点击登录：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_163302.png" alt="20200505163620"></p>
+<p>点击注册：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_163345.png" alt="20200505163716"></p>
+<p>输入基本信息：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_163420.png" alt="20200505163753"></p>
+<p>登录邮箱验证：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_163446.png" alt="20200505163817"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_163530.png" alt="20200505163840"></p>
+<p>注册成功后账户信息：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_163927.png" alt="20200505163955"></p>
+<p>API Access Tokens 是开发者使用的，这里暂不使用，其它信息也不用改。</p>
+<h2 id="创建网络"><a href="#创建网络" class="headerlink" title="创建网络"></a>创建网络</h2><p>点击 Networks 菜单，然后 Create a Network 则会创建一个网络：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_164241.png" alt="20200505164400"></p>
+<p>点击 ID 进入详情，可以看到IP网段：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_164606.png" alt="20200505164622"></p>
+<p>可以看到当前没有设备连接：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_164650.png" alt="20200505164737"></p>
+<h2 id="安装群晖版客户端"><a href="#安装群晖版客户端" class="headerlink" title="安装群晖版客户端"></a>安装群晖版客户端</h2><p>点击 the download page 进入下载页面：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_164858.png" alt="20200505164937"></p>
+<p>下载页面展示了下载连接，支持很多设备。下载群晖版：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_165730.png" alt="20200505170946"></p>
+<p>点击进入可下载的列表：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_165757.png" alt="20200505171010"></p>
+<p>选择需要下载的版本，如果是白群晖可根据 cpu 型号来选，进入群晖官方网站查看配置列表，网页地址【<a href="https://www.synology.com/zh-cn/knowledgebase/DSM/tutorial/Compatibility_Peripherals/What_kind_of_CPU_does_my_NAS_have】：" target="_blank" rel="noopener">https://www.synology.com/zh-cn/knowledgebase/DSM/tutorial/Compatibility_Peripherals/What_kind_of_CPU_does_my_NAS_have】：</a></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_170218.png" alt="20200505170224"></p>
+<p>比如使用的设备是【DS918+】：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_170411.png" alt="20200505170429"></p>
+<p>进入 intel 官网【<a href="https://ark.intel.com/content/www/cn/zh/ark.html#@Processors】查看这个型号cpu信息获取" target="_blank" rel="noopener">https://ark.intel.com/content/www/cn/zh/ark.html#@Processors】查看这个型号cpu信息获取</a> cpu 代号，搜索【j3455】：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_180744.png" alt="20200505180831"></p>
+<p>搜索到的结果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_170627.png" alt="20200505170659"></p>
+<p>得到的是 Apoll Lake，对应找到 zerotier 版软件：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_170854.png" alt="20200505170910"></p>
+<p>如果是黑群晖则需要根据引导模拟的cpu来对应版本，进入信息中心可查找到：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_171344.png" alt="20200505171423"></p>
+<p>进入套件中心，选择手动安装：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_171709.png" alt="20200505171940"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_171818.png" alt="20200505171957"></p>
+<p>选择安装的位置：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_171830.png" alt="20200505172020"></p>
+<p>下一步，应用：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_171837.png" alt="20200505172041"></p>
+<h2 id="群晖版客户端连接-zerotier-网络"><a href="#群晖版客户端连接-zerotier-网络" class="headerlink" title="群晖版客户端连接 zerotier 网络"></a>群晖版客户端连接 zerotier 网络</h2><p>打开 zerotier 将网络ID输入连接：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_172352.png" alt="20200505173020"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_172416.png" alt="20200505173030"></p>
+<p>等待连接：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_172426.png" alt="20200505173054"></p>
+<p>连接失败了：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_172504.png" alt="20200505173115"></p>
+<p>为什么连接失败了，因为 zerotier 后台需要允许连接，勾选：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_172651.png" alt="20200505173204"></p>
+<p>连接成功：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_172937.png" alt="20200505173220"></p>
+<p>进入网络可以看到新增了一个局域网连接：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_173347.png" alt="20200505173514"></p>
+<h2 id="安装-windows-版客户端并连接-zerotier-网络"><a href="#安装-windows-版客户端并连接-zerotier-网络" class="headerlink" title="安装 windows 版客户端并连接 zerotier 网络"></a>安装 windows 版客户端并连接 zerotier 网络</h2><p>windows 版在另外一个云服务器上安装。</p>
+<p>下载 windows 版：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_165036.png" alt="20200505165233"></p>
+<p>安装：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_165331.png" alt="20200505165444"></p>
+<p>运行，先点击 NodID 登录，然后 Join Network：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_173910.png" alt="20200505174831"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_174025.png" alt="20200505174847"></p>
+<p>加入网络，然后会弹出一个网络发现，确定：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_174036.png" alt="20200505174918"></p>
+<p>查看网络连接，多了一个虚拟网络：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_180348.png" alt="20200505180430"></p>
+<p>查看连接信息：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_174734.png" alt="20200505174950"></p>
+<p>未连接成功，还需要勾选下：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_175044.png" alt="20200505175109"></p>
+<p>再次查看，已经连接成功：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_175134.png" alt="20200505175150"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_175319.png" alt="20200505175328"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_181107.png" alt="20200505181118"></p>
+<h2 id="测试连接"><a href="#测试连接" class="headerlink" title="测试连接"></a>测试连接</h2><p>在 windows 上 ping nas 虚拟网络地址测试连通性，发现很不稳定：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C:\Users\Administrator&gt;ping 172.30.235.184</span><br><span class="line"></span><br><span class="line">正在 Ping 172.30.235.184 具有 32 字节的数据:</span><br><span class="line">请求超时。</span><br><span class="line">请求超时。</span><br><span class="line">请求超时。</span><br><span class="line">来自 172.30.235.184 的回复: 字节&#x3D;32 时间&#x3D;554ms TTL&#x3D;64</span><br><span class="line"></span><br><span class="line">172.30.235.184 的 Ping 统计信息:</span><br><span class="line">    数据包: 已发送 &#x3D; 4，已接收 &#x3D; 1，丢失 &#x3D; 3 (75% 丢失)，</span><br><span class="line">往返行程的估计时间(以毫秒为单位):</span><br><span class="line">    最短 &#x3D; 554ms，最长 &#x3D; 554ms，平均 &#x3D; 554ms</span><br></pre></td></tr></table></figure>
+
+<p>在 windows 上访问群晖系统失败。</p>
+]]></content>
+      <categories>
+        <category>nas</category>
+      </categories>
+      <tags>
+        <tag>群晖</tag>
+        <tag>dsm</tag>
+        <tag>端口转发</tag>
+        <tag>内网穿透</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>nas 折腾笔记（八）： 群晖系统的使用之 Video Station</title>
+    <url>/2020/05/05/nas.2020050506/</url>
+    <content><![CDATA[<p><strong>目录</strong></p>
+<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
+
+<!-- code_chunk_output -->
+
+<ul>
+<li><a href="#播放失败">播放失败</a></li>
+<li><a href="#关于洗白问题">关于洗白问题</a></li>
+</ul>
+<!-- /code_chunk_output -->
+
+
+<h2 id="播放失败"><a href="#播放失败" class="headerlink" title="播放失败"></a>播放失败</h2><p>一直在转：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_214629.png" alt="20200505214648"></p>
+<p>应该是转码的问题，网上搜了下：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_214744.png" alt="20200505214758"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_214825.png" alt="20200505214833"></p>
+<p>一直显示有转码任务：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_215052.png" alt="20200505215112"></p>
+<p>后面上传了一批电影，打开【蜘蛛侠：英雄归来HD高清中英双字.mkv】，可以正常观看：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_233744.png" alt="20200505233822"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-06_001016.png" alt="20200506001033"></p>
+<h2 id="关于洗白问题"><a href="#关于洗白问题" class="headerlink" title="关于洗白问题"></a>关于洗白问题</h2><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_215327.png" alt="20200505215345"></p>
+]]></content>
+      <categories>
+        <category>nas</category>
+      </categories>
+      <tags>
+        <tag>群晖</tag>
+        <tag>dsm</tag>
+        <tag>套件</tag>
+        <tag>Video Station</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>nas 折腾笔记（九）： 群晖系统的使用之 Monments</title>
+    <url>/2020/05/05/nas.2020050507/</url>
+    <content><![CDATA[<p><strong>目录</strong></p>
+<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
+
+<!-- code_chunk_output -->
+
+<ul>
+<li><a href="#安装">安装</a></li>
+<li><a href="#手机端登录">手机端登录</a></li>
+<li><a href="#电脑端使用">电脑端使用</a></li>
+<li><a href="#异常问题">异常问题</a></li>
+</ul>
+<!-- /code_chunk_output -->
+
+
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221026.png" alt="20200505221320"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221136.png" alt="20200505221331"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221455.png" alt="20200505221506"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221529.png" alt="20200505221542"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_222217.png" alt="20200505222249"></p>
+<p>安装完成，主页：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_222524.png" alt="20200505222540"></p>
+<h2 id="手机端登录"><a href="#手机端登录" class="headerlink" title="手机端登录"></a>手机端登录</h2><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_222627.png" alt="20200505222635"></p>
+<p>开启照片备份：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_222821.png" alt="20200505222844"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_222831.png" alt="20200505222856"></p>
+<h2 id="电脑端使用"><a href="#电脑端使用" class="headerlink" title="电脑端使用"></a>电脑端使用</h2><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_224032.png" alt="20200505224042"></p>
+<h2 id="异常问题"><a href="#异常问题" class="headerlink" title="异常问题"></a>异常问题</h2><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221900.png" alt="20200505221907"><br><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221926.png" alt="20200505221931"><br><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221949.png" alt="20200505221958"></p>
+]]></content>
+      <categories>
+        <category>nas</category>
+      </categories>
+      <tags>
+        <tag>群晖</tag>
+        <tag>dsm</tag>
+        <tag>套件</tag>
+        <tag>Monments</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>标题</title>
+    <url>/2020/05/05/nas.2020050508/</url>
+    <content><![CDATA[<p><strong>目录</strong></p>
+<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
+
+<!-- code_chunk_output -->
+
+<ul>
+<li><a href="#套件安装">套件安装</a></li>
+<li><a href="#windows-客户端">windows 客户端</a></li>
+<li><a href="#iphone-客户端">iPhone 客户端</a></li>
+</ul>
+<!-- /code_chunk_output -->
+
+
+<h2 id="套件安装"><a href="#套件安装" class="headerlink" title="套件安装"></a>套件安装</h2><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_224248.png" alt="20200505231348"></p>
+<h2 id="windows-客户端"><a href="#windows-客户端" class="headerlink" title="windows 客户端"></a>windows 客户端</h2><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_231409.png" alt="20200505231443"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_231228.png" alt="20200505231500"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_232235.png" alt="20200505232207"></p>
+<h2 id="iPhone-客户端"><a href="#iPhone-客户端" class="headerlink" title="iPhone 客户端"></a>iPhone 客户端</h2><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_231753.png" alt="20200505231802"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_231642.png" alt="20200505231816"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_231653.png" alt="20200505231832"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_231705.png" alt="20200505231842"></p>
+<p>手机端上传：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_231939.png" alt="20200505231948"></p>
+]]></content>
+      <categories>
+        <category>nas</category>
+      </categories>
+      <tags>
+        <tag>群晖</tag>
+        <tag>dsm</tag>
+        <tag>套件</tag>
+        <tag>Drive</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>nas 折腾笔记（十一）：群晖系统的使用之 Frp 内网穿透</title>
+    <url>/2020/05/06/nas.2020050509/</url>
+    <content><![CDATA[<p>服务端部署参考我的另一篇文章：<a href="frp.2020032301.md">frp 内网穿透实战（一）：远程桌面连接 windows</a></p>
+<p>使用命令 <code>wget http://kungge.com/assist/frp_0.31.2_linux_amd64.tar.gz</code> 下载 frp 包，然后将包移动至目录【/usr/local/】下，进入该目录解压，进入解压的目录：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@Synology:~<span class="comment"># mv -f frp_0.31.2_linux_amd64.tar.gz /usr/local/</span></span><br><span class="line">root@Synology:~<span class="comment"># cd /usr/local/</span></span><br><span class="line">root@Synology:/usr/<span class="built_in">local</span><span class="comment"># ls</span></span><br><span class="line">bin  etc  frp_0.31.2_linux_amd64.tar.gz  lib  libexec  node  packages  share  SynologyApplicationService  transmission  zerotier</span><br><span class="line">root@Synology:/usr/<span class="built_in">local</span><span class="comment"># tar -zxvf frp_0.31.2_linux_amd64.tar.gz </span></span><br><span class="line">frp_0.31.2_linux_amd64/</span><br><span class="line">frp_0.31.2_linux_amd64/frps_full.ini</span><br><span class="line">frp_0.31.2_linux_amd64/frps.ini</span><br><span class="line">frp_0.31.2_linux_amd64/frpc</span><br><span class="line">frp_0.31.2_linux_amd64/frpc_full.ini</span><br><span class="line">frp_0.31.2_linux_amd64/frps</span><br><span class="line">frp_0.31.2_linux_amd64/LICENSE</span><br><span class="line">frp_0.31.2_linux_amd64/frpc.ini</span><br><span class="line">frp_0.31.2_linux_amd64/systemd/</span><br><span class="line">frp_0.31.2_linux_amd64/systemd/frpc@.service</span><br><span class="line">frp_0.31.2_linux_amd64/systemd/frpc.service</span><br><span class="line">frp_0.31.2_linux_amd64/systemd/frps.service</span><br><span class="line">frp_0.31.2_linux_amd64/systemd/frps@.service</span><br><span class="line">root@Synology:/usr/<span class="built_in">local</span><span class="comment"># cd frp_0.31.2_linux_amd64</span></span><br></pre></td></tr></table></figure>
+
+<p>使用命令 <code>vi frpc.ini</code> 修改客户端配置文件，修改内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">server_addr = 111.X.69.34</span><br><span class="line">server_port = 7000</span><br><span class="line"></span><br><span class="line">[ssh]</span><br><span class="line"><span class="built_in">type</span> = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 22</span><br><span class="line">remote_port = 5022</span><br><span class="line"></span><br><span class="line">[web1]</span><br><span class="line"><span class="built_in">type</span> = tcp</span><br><span class="line">local_port = 5000</span><br><span class="line">remote_port = 5000</span><br><span class="line">custom_domains = localhost</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>111.X.69.34 是服务器的公网IP</li>
+<li>ssh 配的是远程可以通过 ssh 连接工具连接到群晖SSh。</li>
+<li>web1 配的是远程访问群晖DSM系统。</li>
+</ul>
+<p>保存，然后后台启动：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@Synology:/usr/<span class="built_in">local</span>/frp_0.31.2_linux_amd64<span class="comment"># nohup ./frpc -c ./frpc.ini &amp;</span></span><br><span class="line">[1] 20768</span><br><span class="line">root@Synology:/usr/<span class="built_in">local</span>/frp_0.31.2_linux_amd64<span class="comment"># nohup: ignoring input and appending output to ‘nohup.out’</span></span><br></pre></td></tr></table></figure>
+
+<p>查看启动日志：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@Synology:/usr/<span class="built_in">local</span>/frp_0.31.2_linux_amd64<span class="comment"># cat nohup.out</span></span><br><span class="line">2020/05/06 00:19:23 [I] [service.go:250] [b0c859e1dc5b7a1f] login to server success, get run id [b0c859e1dc5b7a1f], server udp port [0]</span><br><span class="line">2020/05/06 00:19:23 [I] [proxy_manager.go:144] [b0c859e1dc5b7a1f] proxy added: [ssh web1]</span><br><span class="line">2020/05/06 00:19:23 [I] [control.go:164] [b0c859e1dc5b7a1f] [ssh] start proxy success</span><br><span class="line">2020/05/06 00:19:23 [I] [control.go:164] [b0c859e1dc5b7a1f] [web1] start proxy success</span><br></pre></td></tr></table></figure>
+
+<p>启动成功了。</p>
+<p>服务器防火墙开放5000和5022端口。</p>
+<p>直接在远程访问：http://公网IP:5000，如本次将域名【vrgamehome.com】解析到公网IP，因此使用【<a href="http://vrgamehome:5000】访问：">http://vrgamehome:5000】访问：</a></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-06_002512.png" alt="20200506005501"></p>
+<p>使用 frp 内网传透完成。</p>
+]]></content>
+      <categories>
+        <category>nas</category>
+      </categories>
+      <tags>
+        <tag>群晖</tag>
+        <tag>dsm</tag>
+        <tag>内网穿透</tag>
+        <tag>套件</tag>
+        <tag>frp</tag>
+      </tags>
+  </entry>
+</search>
