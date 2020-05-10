@@ -2,58 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.kungge.com/p/frp-remote-desk/</loc>
+    
+    <lastmod>2020-05-10T16:37:05.079Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.kungge.com/p/nas-network-frp/</loc>
     
-    <lastmod>2020-05-10T11:14:53.287Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.kungge.com/p/hello-world/</loc>
-    
-    <lastmod>2020-05-10T10:34:20.262Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.kungge.com/p/hexo-base/</loc>
-    
-    <lastmod>2020-05-10T10:34:17.997Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.kungge.com/p/nas-network/</loc>
-    
-    <lastmod>2020-05-10T10:34:07.246Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.kungge.com/p/nas-video-station/</loc>
-    
-    <lastmod>2020-05-10T10:34:01.429Z</lastmod>
+    <lastmod>2020-05-10T16:36:37.006Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.kungge.com/p/nas-monments/</loc>
     
-    <lastmod>2020-05-10T10:33:54.923Z</lastmod>
+    <lastmod>2020-05-10T16:36:18.174Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.kungge.com/p/vbs-ir-0058/</loc>
+    <loc>http://blog.kungge.com/p/nas-video-station/</loc>
     
-    <lastmod>2020-05-10T10:33:45.213Z</lastmod>
+    <lastmod>2020-05-10T16:36:09.424Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.kungge.com/p/frp-remote-desk/</loc>
+    <loc>http://blog.kungge.com/p/nas-network/</loc>
     
-    <lastmod>2020-05-10T10:32:11.360Z</lastmod>
+    <lastmod>2020-05-10T16:35:55.289Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.kungge.com/p/hexo-base/</loc>
+    
+    <lastmod>2020-05-10T16:35:43.493Z</lastmod>
     
   </url>
   

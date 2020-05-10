@@ -1,215 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>VBS-IR-0058_云信放款前置流程接入文件流程</title>
-    <url>/p/vbs-ir-0058/</url>
-    <content><![CDATA[<h2 id="一、需求说明"><a href="#一、需求说明" class="headerlink" title="一、需求说明"></a>一、需求说明</h2><table>
-<thead>
-<tr>
-<th>标题</th>
-<th>云信放款前置流程接入文件流程</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>重要性</td>
-<td>重要</td>
-</tr>
-<tr>
-<td>改动程序名称</td>
-<td>外贸影像件上传</td>
-</tr>
-<tr>
-<td>改动程序代码地址</td>
-<td>1. 云信盖章程序：YnxtThirdEstampConsole：<a href="https://10.10.250.74/svn/Loan/trunk/VBS_Service/盖章服务/盖章服务/Cn.Vcredit.YnxtThirdEstampConsole" target="_blank" rel="noopener">https://10.10.250.74/svn/Loan/trunk/VBS_Service/盖章服务/盖章服务/Cn.Vcredit.YnxtThirdEstampConsole</a> <br> 2. 云信windows服务程序：<a href="https://10.10.250.74/svn/Loan/trunk/VBS_Service/Cn.Vcredit.Ytrust.API/YtrustService" target="_blank" rel="noopener">https://10.10.250.74/svn/Loan/trunk/VBS_Service/Cn.Vcredit.Ytrust.API/YtrustService</a></td>
-</tr>
-<tr>
-<td>目标产品范围</td>
-<td>卡卡和豆豆</td>
-</tr>
-<tr>
-<td>影响程序范围</td>
-<td>云信盖章程序和云信windows服务程序</td>
-</tr>
-<tr>
-<td>提出人</td>
-<td>万坤</td>
-</tr>
-<tr>
-<td>原因</td>
-<td>现有资方相关文件都已接入文件流程，云信放款前置流程有关文件的操作分布在两个独立的程序上不利于统一管理</td>
-</tr>
-<tr>
-<td>期望结果</td>
-<td>云信放款前置流程有关文件的现有业务逻辑：<br><br> 1. 云信流程初始化时会先推送身份证到云信，代码位于云信windows服务程序（YtrustService）。<br> 2. 云信流程状态为待上传状态时会取出满足条件的合同相关文件推送到云信，代码位于云信盖章程序（YnxtThirdEstampConsole）。 <br> 3. 云信流程状态为待获取合同状态时会从云信获取合同相关文件存储到我方ftp上，代码位于云信盖章程序（YnxtThirdEstampConsole）。<br>  4. 云信订单长时间未改变状态会邮件报警，主要包括2个：长时间停留在待合同上传状态和长时间停留在待获取合同状态，代码位于云信盖章程序（YnxtThirdEstampConsole）。<br><br>期望结果：<br> 1. 将第1、2、3分别改成文件流程中的3个步骤（新增ecm上传和下载处理逻辑），第4个不属于文件流程范围，暂时不接入。<br> 2. 与云信对接涉及加密传输，由于涉及到内容比较繁琐，直接将其放到文件处理程序会增加复杂度，将其封装成一个接口供文件处理程序调用。</td>
-</tr>
-<tr>
-<td>内容</td>
-<td>接入文件流程</td>
-</tr>
-<tr>
-<td>预计工时</td>
-<td>4d</td>
-</tr>
-</tbody></table>
-<p>需求名称： VBS-IR-0058_云信放款前置流程接入文件流程</p>
-<h2 id="二、测试说明"><a href="#二、测试说明" class="headerlink" title="二、测试说明"></a>二、测试说明</h2><ul>
-<li>云信放款前置流程关于文件的总共有3个节点：推送身份证到云信、推送合同相关文件到云信进行盖章、从云信方拉取盖章好的合同文件</li>
-<li>推送身份证到云信：该节点会初始化云信流程，如果云信流程表【lending.YtrustFlow】无记录则会新增，程序会处理该表无记录或状态为10的订单，完成后如果运行正常云信流程表【lending.YtrustFlow】状态为20，如果不正常则该表无记录或状态为10</li>
-<li>推送合同相关文件到云信进行盖章：该节点是【推送身份证到云信】完成后由云信windows服务创建借款人任务完成后才会执行，推送的文件配置在文件流程数据库中</li>
-<li>从云信方拉取盖章好的合同文件：该节点是在【推送合同相关文件到云信进行盖章】执行完成后由云信windows服务创建合同任务完成后才会执行，下载的文件配置在文件流程数据库中</li>
-<li>从外贸文件测试情况来看，为了让测试更加顺利，在附录中提供了一些sql来辅助测试，仅供参考，实际以脚本配置的文件流程具体逻辑为准，测试也可以编写自己的sql</li>
-</ul>
-<h3 id="2-1-测试准备"><a href="#2-1-测试准备" class="headerlink" title="2.1 测试准备"></a>2.1 测试准备</h3><ol>
-<li>运行脚本，初始化云信文件流程</li>
-<li>部署云信接口</li>
-<li>部署云信 windows 服务</li>
-<li>部署文件处理程序，配置云信接口地址</li>
-</ol>
-<h3 id="2-2-测试用例-身份证上传"><a href="#2-2-测试用例-身份证上传" class="headerlink" title="2.2 测试用例-身份证上传"></a>2.2 测试用例-身份证上传</h3><p>准备数据，可造数据，也可修改历史订单数据。</p>
-<p>运行文件处理程序，日志范例如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2020-05-09 15:30:23,797 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :开启任务...</span><br><span class="line">2020-05-09 15:30:24,882 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :启动【YNXTIdUpload】任务...</span><br><span class="line">2020-05-09 15:30:43,128 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :TMP ftp 下载【DOCUMENTKIND&#x2F;SHENFENZHENGZHENGMIAN】【DOCUMENTKIND&#x2F;SHENFENZHENGZHENGMIAN&#x2F;2023&#x2F;06&#x2F;202306030945482827身份证正面.jpg】完成</span><br><span class="line">2020-05-09 15:30:43,137 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :TMP ftp 下载【DOCUMENTKIND&#x2F;SHENFENZHENGFANMIAN】【DOCUMENTKIND&#x2F;SHENFENZHENGFANMIAN&#x2F;2023&#x2F;06&#x2F;202306030945487257身份证反面.jpg】完成</span><br><span class="line">2020-05-09 15:30:43,140 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :生成【17803509】接口参数完成</span><br><span class="line">2020-05-09 15:30:49,327 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :调用http:&#x2F;&#x2F;localhost:63974&#x2F;api&#x2F;Ytrust&#x2F;Loan&#x2F;IdUpload，结束:2020-05-09 03:30:49入参：&#123;&quot;Bid&quot;:17803509,&quot;IdenNo&quot;:&quot;43112219790101137X&quot;,&quot;Photos&quot;:[&#123;&quot;Kind&quot;:&quot;A&quot;,&quot;Path&quot;:null,&quot;IdenNo&quot;:null,&quot;Size&quot;:0,&quot;Content&quot;:&quot;Length:9938&quot;&#125;,&#123;&quot;Kind&quot;:&quot;B&quot;,&quot;Path&quot;:null,&quot;IdenNo&quot;:null,&quot;Size&quot;:0,&quot;Content&quot;:&quot;Length:9938&quot;&#125;]&#125;， 结果:&#123;&quot;Status&quot;:1,&quot;Content&quot;:&quot;8c3c12bc53aa4178bbb19e2b1a5b6942&quot;,&quot;Message&quot;:&quot;请求成功&quot;&#125;</span><br><span class="line">2020-05-09 15:31:10,432 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :共查询到 1 条记录，成功处理 1条。</span><br><span class="line">2020-05-09 15:31:10,435 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :结束【YNXTIdUpload】任务。</span><br></pre></td></tr></table></figure>
-
-<p>数据推送到云信方，其接口返回 UniqueId，更新到云信流程表【lending.YtrustFlow】中，此时表状态为20，表【lending.VFPProcess】状态为10。</p>
-<h3 id="2-3-测试用例-合同上传"><a href="#2-3-测试用例-合同上传" class="headerlink" title="2.3  测试用例-合同上传"></a>2.3  测试用例-合同上传</h3><p>可让部署的云信windows服务完成创建借款人任务，完成后云信流程表【lending.YtrustFlow】表状态为40。</p>
-<p>造数据让订单数据满足脚本配置里的条件。</p>
-<p>运行文件处理程序，日志范例：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2020-05-09 16:18:47,536 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :开启任务...</span><br><span class="line">2020-05-09 16:18:52,027 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :启动【YNXTYnxtUpload】任务...</span><br><span class="line">2020-05-09 16:19:02,472 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :TMP ftp 下载【DOCUMENTKIND&#x2F;KAKADAI&#x2F;YNXT_PH892&#x2F;DKHT】【DOCUMENTKIND&#x2F;KAKADAI&#x2F;YNXT_PH892&#x2F;DKHT&#x2F;2020&#x2F;01&#x2F;20200109120439611f67ceb3-b72f-49e5-8b75-14a4cf4b6d63贷款合同.pdf】完成</span><br><span class="line">2020-05-09 16:19:02,483 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :TMP ftp 下载【DOCUMENTKIND&#x2F;KAKADAI&#x2F;YNXT_PH892&#x2F;GRZXXXCXJBSSQS】【DOCUMENTKIND&#x2F;KAKADAI&#x2F;YNXT_PH892&#x2F;GRZXXXCXJBSSQS&#x2F;2020&#x2F;01&#x2F;2020010912094467b2378fef-5bed-4b14-80fa-3be5da7c16b5个人征信信息查询及报送授权书.pdf】完成</span><br><span class="line">2020-05-09 16:19:02,491 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :TMP ftp 下载【DOCUMENTKIND&#x2F;KAKADAI&#x2F;YNXT_PH892&#x2F;GRKHKKSQS_YX】【DOCUMENTKIND&#x2F;KAKADAI&#x2F;YNXT_PH892&#x2F;GRKHKKSQS_YX&#x2F;2020&#x2F;01&#x2F;2020010912095066a75fe800-48de-43e4-a26b-2ab2a541b2d3个人客户扣款授权书(云信).pdf】完成</span><br><span class="line">2020-05-09 16:19:05,772 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :生成【17803509】接口参数完成</span><br><span class="line">2020-05-09 16:19:13,804 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :调用http:&#x2F;&#x2F;yapi.vcredit.com.local&#x2F;mock&#x2F;15&#x2F;api&#x2F;Ytrust&#x2F;Loan&#x2F;FileUpload，结束:2020-05-09 04:19:13入参：&#123;&quot;Bid&quot;:17803509,&quot;FlowId&quot;:311419,&quot;UniqueId&quot;:&quot;8c3c12bc53aa4178bbb19e2b1a5b6942&quot;,&quot;IdenNo&quot;:&quot;43112219790101137X&quot;,&quot;LoanSide&quot;:null,&quot;ImageContent&quot;:[&#123;&quot;Content&quot;:&quot;Length:220170&quot;,&quot;Type&quot;:&quot;G&quot;&#125;,&#123;&quot;Content&quot;:&quot;Length:176122&quot;,&quot;Type&quot;:&quot;V&quot;&#125;,&#123;&quot;Content&quot;:&quot;Length:134438&quot;,&quot;Type&quot;:&quot;F&quot;&#125;]&#125;， 结果:&#123;&quot;Status&quot;:1,&quot;Content&quot;:null,&quot;Message&quot;:&quot;aliquip exercitation eiusmod ut velit&quot;&#125;</span><br><span class="line">2020-05-09 16:19:45,956 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :共查询到 1 条记录，成功处理 1条。</span><br><span class="line">2020-05-09 16:19:45,958 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :结束【YNXTYnxtUpload】任务。</span><br></pre></td></tr></table></figure>
-
-<p>数据推送到云信方，云信流程表【lending.YtrustFlow】此时表状态为50，表【lending.VFPProcess】状态为40。</p>
-<h3 id="2-4-测试用例-合同下载"><a href="#2-4-测试用例-合同下载" class="headerlink" title="2.4  测试用例-合同下载"></a>2.4  测试用例-合同下载</h3><p>可让部署的云信windows服务完成创建合同任务，完成后云信流程表【lending.YtrustFlow】表状态为50。</p>
-<p>运行文件处理程序，日志范例：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2020-05-09 17:31:47,701 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :启动【YNXTYnxtDownload】任务...</span><br><span class="line">2020-05-09 17:31:51,531 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :生成【17803509】接口参数完成</span><br><span class="line">2020-05-09 17:31:59,702 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :调用http:&#x2F;&#x2F;yapi.vcredit.com.local&#x2F;mock&#x2F;15&#x2F;api&#x2F;Ytrust&#x2F;Loan&#x2F;GetContractFile，结束:2020-05-09 05:31:59入参：&#123;&quot;IsGetFileContent&quot;:true,&quot;UniqueId&quot;:&quot;8c3c12bc53aa4178bbb19e2b1a5b6942&quot;,&quot;FlowId&quot;:311419&#125;， 结果:&#123;&quot;Status&quot;:1,&quot;Content&quot;:&#123;&quot;SignStatus&quot;:4,&quot;ContractFile&quot;:&quot;Length:220170&quot;&#125;,&quot;Message&quot;:&quot;do&quot;&#125;</span><br><span class="line">2020-05-09 17:32:10,814 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :TMP 上传【9f18fae1511f4e2cbb16284d2d5e9685贷款合同.pdf】至ftp【10.138.60.16】【DOCUMENTKIND&#x2F;KAKADAI&#x2F;YNXT_PH892&#x2F;DKHT&#x2F;2020&#x2F;05&#x2F;09&#x2F;9f18fae1511f4e2cbb16284d2d5e9685贷款合同.pdf】完成</span><br><span class="line">2020-05-09 17:32:11,059 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :TMP 上传【9f18fae1511f4e2cbb16284d2d5e9685贷款合同.pdf】至ecm【http:&#x2F;&#x2F;ecm-t2.msa.vcredit.com.local】完成【7c63b2304fba4dbaa689157cf0097c57】</span><br><span class="line">2020-05-09 17:32:50,593 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :共查询到 1 条记录，成功处理 1条。</span><br><span class="line">2020-05-09 17:32:50,595 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :结束【YNXTYnxtDownload】任务。</span><br><span class="line">2020-05-09 17:32:50,607 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :结束任务</span><br></pre></td></tr></table></figure>
-
-<p>从云信方获取文件存放到ftp和ecm，云信流程表【lending.YtrustFlow】此时表状态为60，表【lending.VFPProcess】状态为50，整个文件流程结束。</p>
-<p>验证 ftp 上文件，目录【DOCUMENTKIND/KAKADAI/YNXT_PH892/DKHT/2020/05/09/9f18fae1511f4e2cbb16284d2d5e9685贷款合同.pdf】。</p>
-<p>验证 ecm 上的文件，ecmId【7c63b2304fba4dbaa689157cf0097c57】。</p>
-<h2 id="三、上线说明"><a href="#三、上线说明" class="headerlink" title="三、上线说明"></a>三、上线说明</h2><p>需求名称： VBS-IR-0058_云信放款前置流程接入文件流程</p>
-<h3 id="3-1-上线代码"><a href="#3-1-上线代码" class="headerlink" title="3.1 上线代码"></a>3.1 上线代码</h3><p>开发分支：</p>
-<ul>
-<li><a href="https://10.10.250.74/svn/Loan/branches/VBS_Service/Cn.Vcredit.Ytrust.API_VBS-IR-0058" target="_blank" rel="noopener">https://10.10.250.74/svn/Loan/branches/VBS_Service/Cn.Vcredit.Ytrust.API_VBS-IR-0058</a></li>
-<li>VBS-IR-0058：<a href="http://10.138.61.72/vbs/loan/console/Cn.Vcredit.FileProcessTask.git" target="_blank" rel="noopener">http://10.138.61.72/vbs/loan/console/Cn.Vcredit.FileProcessTask.git</a></li>
-</ul>
-<h3 id="3-2-上线项目"><a href="#3-2-上线项目" class="headerlink" title="3.2 上线项目"></a>3.2 上线项目</h3><ul>
-<li>云信 windows 服务（YtrustService）</li>
-<li>云信接口服务（Ytrust.API）</li>
-<li>文件处理程序（FileProcessTask）（新增一个计划任务）</li>
-</ul>
-<h3 id="3-3-上线配置"><a href="#3-3-上线配置" class="headerlink" title="3.3 上线配置"></a>3.3 上线配置</h3><p>文件处理程序（FileProcessTask）</p>
-<ul>
-<li>新增配置（接口地址改成生产的！！！）：</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--******云南信托-start******--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--云南信托接口--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">add</span> <span class="attr">key</span>=<span class="string">"YnxtApiUrl"</span> <span class="attr">value</span>=<span class="string">"http://10.155.20.209:8384/api/Ytrust/Loan"</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!--******云南信托-end******--&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>修改配置：</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--流程Key：云南信托-卡卡贷--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">add</span> <span class="attr">key</span>=<span class="string">"ProcessKey"</span> <span class="attr">value</span>=<span class="string">"YNXT-KAKADAI"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="3-4-上线脚本"><a href="#3-4-上线脚本" class="headerlink" title="3.4 上线脚本"></a>3.4 上线脚本</h3><p>1.VBS-IR-0058_卡卡贷云信文件流程配置.sql</p>
-<h3 id="3-5-上线合同"><a href="#3-5-上线合同" class="headerlink" title="3.5 上线合同"></a>3.5 上线合同</h3><p>无。</p>
-<h2 id="四、线上验证"><a href="#四、线上验证" class="headerlink" title="四、线上验证"></a>四、线上验证</h2><ul>
-<li>验证身份证是否上传成功</li>
-<li>验证合同相关文件是否上传成功</li>
-<li>验证合同是否下载成功，打开验证是否盖章</li>
-</ul>
-<h2 id="T、附录"><a href="#T、附录" class="headerlink" title="T、附录"></a>T、附录</h2><h3 id="T-1-获取文件流程所有相关表信息"><a href="#T-1-获取文件流程所有相关表信息" class="headerlink" title="T.1 获取文件流程所有相关表信息"></a>T.1 获取文件流程所有相关表信息</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DECLARE</span> @ProcessKey <span class="built_in">VARCHAR</span>(<span class="number">20</span>) = <span class="string">'YNXT-KAKADAI'</span>,</span><br><span class="line">        @LOANSIDE <span class="built_in">VARCHAR</span>(<span class="number">20</span>) = <span class="string">'COMPANY/YNXT_LENDING'</span>,</span><br><span class="line">        @LOANKIND <span class="built_in">VARCHAR</span>(<span class="number">20</span>) = <span class="string">'LOANKIND/KAKADAI'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">DECLARE</span> @ProcessId <span class="built_in">INT</span>;</span><br><span class="line"><span class="keyword">SELECT</span> @ProcessId = <span class="keyword">Id</span></span><br><span class="line"><span class="keyword">FROM</span> commonFile.Process</span><br><span class="line"><span class="keyword">WHERE</span> ProcessKey = @ProcessKey;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> commonFile.Process <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line"><span class="keyword">WHERE</span> ProcessKey = @ProcessKey;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> commonFile.ProcessConfig <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line"><span class="keyword">WHERE</span> ProcessId = @ProcessId;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> commonFile.ProcessConfigRule <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line"><span class="keyword">WHERE</span> ProcessConfigId <span class="keyword">IN</span> (</span><br><span class="line">                             <span class="keyword">SELECT</span> <span class="keyword">Id</span></span><br><span class="line">                             <span class="keyword">FROM</span> commonFile.ProcessConfig <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">                             <span class="keyword">WHERE</span> ProcessId = @ProcessId</span><br><span class="line">                         );</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> commonFile.ProcessConfigRuleFile <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line"><span class="keyword">WHERE</span> ProcessConfigRuleId <span class="keyword">IN</span> (</span><br><span class="line">                                 <span class="keyword">SELECT</span> <span class="keyword">Id</span></span><br><span class="line">                                 <span class="keyword">FROM</span> commonFile.ProcessConfigRule <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">                                 <span class="keyword">WHERE</span> ProcessConfigId <span class="keyword">IN</span> (</span><br><span class="line">                                                              <span class="keyword">SELECT</span> <span class="keyword">Id</span></span><br><span class="line">                                                              <span class="keyword">FROM</span> commonFile.ProcessConfig <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">                                                              <span class="keyword">WHERE</span> ProcessId = @ProcessId</span><br><span class="line">                                                          )</span><br><span class="line">                             );</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> commonFile.ProcessConfigRuleFileAttribute <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line"><span class="keyword">WHERE</span> ProcessConfigRuleFileId <span class="keyword">IN</span> (</span><br><span class="line">                                     <span class="keyword">SELECT</span> <span class="keyword">Id</span></span><br><span class="line">                                     <span class="keyword">FROM</span> commonFile.ProcessConfigRuleFile <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">                                     <span class="keyword">WHERE</span> ProcessConfigRuleId <span class="keyword">IN</span> (</span><br><span class="line">                                                                      <span class="keyword">SELECT</span> <span class="keyword">Id</span></span><br><span class="line">                                                                      <span class="keyword">FROM</span> commonFile.ProcessConfigRule <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">                                                                      <span class="keyword">WHERE</span> ProcessConfigId <span class="keyword">IN</span> (</span><br><span class="line">                                                                                                   <span class="keyword">SELECT</span> <span class="keyword">Id</span></span><br><span class="line">                                                                                                   <span class="keyword">FROM</span> commonFile.ProcessConfig <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">                                                                                                   <span class="keyword">WHERE</span> ProcessId = @ProcessId</span><br><span class="line">                                                                                               )</span><br><span class="line">                                                                  )</span><br><span class="line">                                 );</span><br></pre></td></tr></table></figure>
-
-<h3 id="T-2-身份证上传取数逻辑"><a href="#T-2-身份证上传取数逻辑" class="headerlink" title="T.2 身份证上传取数逻辑"></a>T.2 身份证上传取数逻辑</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SET</span> XACT_ABORT <span class="keyword">ON</span>;</span><br><span class="line"><span class="keyword">BEGIN</span> TRAN;</span><br><span class="line">IF OBJECT_ID(N'tempdb..<span class="comment">#tempProcess', N'U') IS NOT NULL</span></span><br><span class="line">    <span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="comment">#tempProcess;</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="comment">#tempProcess</span></span><br><span class="line">(</span><br><span class="line">    ProcessId <span class="built_in">INT</span> PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">    Step <span class="built_in">INT</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="comment">#tempProcess</span></span><br><span class="line">(</span><br><span class="line">    ProcessId,</span><br><span class="line">    Step</span><br><span class="line">)</span><br><span class="line"><span class="keyword">SELECT</span> TOP <span class="number">100</span></span><br><span class="line">       p.Id <span class="keyword">AS</span> ProcessId,</span><br><span class="line">       p.Step</span><br><span class="line"><span class="keyword">FROM</span> lending.VFPProcess p <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">    <span class="keyword">JOIN</span> lending.Lending l <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> p.Bid = l.Bid</span><br><span class="line">           <span class="keyword">AND</span> l.Status &lt;&gt; <span class="number">4</span></span><br><span class="line">    <span class="keyword">JOIN</span> lending.YtrustFlow f <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> p.Bid = f.Bid</span><br><span class="line">           <span class="keyword">AND</span></span><br><span class="line">           (</span><br><span class="line">               f.Id <span class="keyword">IS</span> <span class="literal">NULL</span></span><br><span class="line">               <span class="keyword">OR</span></span><br><span class="line">               (</span><br><span class="line">                   f.Step = <span class="number">10</span></span><br><span class="line">                   <span class="keyword">AND</span> f.IsDisable = <span class="number">0</span></span><br><span class="line">               )</span><br><span class="line">           )</span><br><span class="line"><span class="keyword">WHERE</span> p.IsDelete = <span class="number">0</span></span><br><span class="line">      <span class="keyword">AND</span> p.IsHangUp = <span class="number">0</span></span><br><span class="line">      <span class="keyword">AND</span> p.OperationType = <span class="number">0</span></span><br><span class="line">      <span class="keyword">AND</span> p.Step = <span class="number">0</span></span><br><span class="line">      <span class="keyword">AND</span> p.HandleCount &lt;= <span class="number">6</span></span><br><span class="line">      <span class="keyword">AND</span> p.LoanSideKey = <span class="string">'COMPANY/YNXT_LENDING'</span></span><br><span class="line">      <span class="keyword">AND</span> p.LoanKind = <span class="string">'LOANKIND/KAKADAI'</span></span><br><span class="line">      <span class="keyword">AND</span> <span class="keyword">ISNULL</span>(p.LastCurrentRunTime, <span class="keyword">DATEADD</span>(<span class="keyword">MINUTE</span>, <span class="number">-10</span>, <span class="keyword">GETDATE</span>())) &lt; <span class="keyword">DATEADD</span>(<span class="keyword">MINUTE</span>, <span class="number">-9</span>, <span class="keyword">GETDATE</span>())</span><br><span class="line">      <span class="keyword">AND</span> l.Status = <span class="number">0</span></span><br><span class="line">      <span class="keyword">AND</span> l.Suspend = <span class="number">0</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> p.Id <span class="keyword">ASC</span>;</span><br><span class="line">IF OBJECT_ID(N'tempdb..<span class="comment">#temp', N'U') IS NOT NULL</span></span><br><span class="line">    <span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="comment">#temp;</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="comment">#temp</span></span><br><span class="line">(</span><br><span class="line">    <span class="keyword">Id</span> <span class="built_in">INT</span> PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">    Bid <span class="built_in">INT</span>,</span><br><span class="line">    LoanKind <span class="built_in">VARCHAR</span>(<span class="number">100</span>),</span><br><span class="line">    LoanSideKey <span class="built_in">VARCHAR</span>(<span class="number">50</span>),</span><br><span class="line">    FundSource <span class="built_in">VARCHAR</span>(<span class="number">50</span>),</span><br><span class="line">    ThreadId <span class="keyword">NVARCHAR</span>(<span class="number">100</span>),</span><br><span class="line">    Step <span class="built_in">TINYINT</span>,</span><br><span class="line">    IsHangUp <span class="built_in">BIT</span>,</span><br><span class="line">    ApplyNo <span class="built_in">VARCHAR</span>(<span class="number">100</span>),</span><br><span class="line">    CreateTime DATETIME,</span><br><span class="line">    RequestTime DATETIME,</span><br><span class="line">    HandleCount <span class="built_in">TINYINT</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="comment">#temp</span></span><br><span class="line">(</span><br><span class="line">    <span class="keyword">Id</span>,</span><br><span class="line">    Bid,</span><br><span class="line">    LoanKind,</span><br><span class="line">    LoanSideKey,</span><br><span class="line">    FundSource,</span><br><span class="line">    ThreadId,</span><br><span class="line">    Step,</span><br><span class="line">    IsHangUp,</span><br><span class="line">    ApplyNo,</span><br><span class="line">    CreateTime,</span><br><span class="line">    RequestTime,</span><br><span class="line">    HandleCount</span><br><span class="line">)</span><br><span class="line"><span class="keyword">SELECT</span> p.Id,</span><br><span class="line">       p.Bid,</span><br><span class="line">       p.LoanKind,</span><br><span class="line">       p.LoanSideKey,</span><br><span class="line">       l.FundSource,</span><br><span class="line">       e.ThreadId,</span><br><span class="line">       p.Step,</span><br><span class="line">       p.IsHangUp,</span><br><span class="line">       e.ApplyNo,</span><br><span class="line">       p.CreateTime,</span><br><span class="line">       t.CreateTime <span class="keyword">AS</span> RequestTime,</span><br><span class="line">       p.HandleCount</span><br><span class="line"><span class="keyword">FROM</span> lending.VFPProcess p <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">    <span class="keyword">JOIN</span> <span class="comment">#tempProcess tp</span></span><br><span class="line">        <span class="keyword">ON</span> p.Id = tp.ProcessId</span><br><span class="line">    <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> lending.Lending l <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> p.Bid = l.Bid</span><br><span class="line">    <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> lending.VFPLendingInfoExtend e <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> e.BId = p.Bid</span><br><span class="line">    <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> lendingcontrol.LendingTask t <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> p.Bid = t.Bid;</span><br><span class="line"></span><br><span class="line"><span class="comment">--UPDATE p</span></span><br><span class="line"><span class="comment">--SET p.OperationType = 1,</span></span><br><span class="line"><span class="comment">--    p.UpdateTime = GETDATE()</span></span><br><span class="line"><span class="comment">--FROM lending.VFPProcess p WITH (ROWLOCK)</span></span><br><span class="line"><span class="comment">--    JOIN #temp t</span></span><br><span class="line"><span class="comment">--        ON p.Id = t.Id;</span></span><br><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> <span class="comment">#temp;</span></span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="T-3-合同上传取数逻辑"><a href="#T-3-合同上传取数逻辑" class="headerlink" title="T.3 合同上传取数逻辑"></a>T.3 合同上传取数逻辑</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SET</span> XACT_ABORT <span class="keyword">ON</span>;</span><br><span class="line"><span class="keyword">BEGIN</span> TRAN;</span><br><span class="line">IF OBJECT_ID(N'tempdb..<span class="comment">#tempProcess', N'U') IS NOT NULL</span></span><br><span class="line">    <span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="comment">#tempProcess;</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="comment">#tempProcess</span></span><br><span class="line">(</span><br><span class="line">    ProcessId <span class="built_in">INT</span> PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">    Step <span class="built_in">INT</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="comment">#tempProcess</span></span><br><span class="line">(</span><br><span class="line">    ProcessId,</span><br><span class="line">    Step</span><br><span class="line">)</span><br><span class="line"><span class="keyword">SELECT</span> TOP <span class="number">100</span></span><br><span class="line">       p.Id <span class="keyword">AS</span> ProcessId,</span><br><span class="line">       p.Step</span><br><span class="line"><span class="keyword">FROM</span> lending.VFPProcess p <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">    <span class="keyword">JOIN</span> lending.Lending l <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> p.Bid = l.Bid</span><br><span class="line">           <span class="keyword">AND</span> l.Status &lt;&gt; <span class="number">4</span></span><br><span class="line">    <span class="keyword">JOIN</span> lending.YtrustFlow f <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> p.Bid = f.Bid</span><br><span class="line">           <span class="keyword">AND</span> f.Step = <span class="number">30</span></span><br><span class="line">    <span class="keyword">JOIN</span> contract.Contract c <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> p.Bid = c.Bid</span><br><span class="line">           <span class="keyword">AND</span> c.Status <span class="keyword">IN</span> ( <span class="number">4</span>, <span class="number">50</span> )</span><br><span class="line">           <span class="keyword">AND</span> c.SignatureStatus = <span class="number">1</span></span><br><span class="line"><span class="keyword">WHERE</span> p.IsDelete = <span class="number">0</span></span><br><span class="line">      <span class="keyword">AND</span> p.IsHangUp = <span class="number">0</span></span><br><span class="line">      <span class="keyword">AND</span> p.OperationType = <span class="number">0</span></span><br><span class="line">      <span class="keyword">AND</span> p.Step = <span class="number">10</span></span><br><span class="line">      <span class="keyword">AND</span> p.HandleCount &lt;= <span class="number">6</span></span><br><span class="line">      <span class="keyword">AND</span> p.LoanSideKey = <span class="string">'COMPANY/YNXT_LENDING'</span></span><br><span class="line">      <span class="keyword">AND</span> p.LoanKind = <span class="string">'LOANKIND/KAKADAI'</span></span><br><span class="line">      <span class="keyword">AND</span> <span class="keyword">ISNULL</span>(p.LastCurrentRunTime, <span class="keyword">DATEADD</span>(<span class="keyword">MINUTE</span>, <span class="number">-10</span>, <span class="keyword">GETDATE</span>())) &lt; <span class="keyword">DATEADD</span>(<span class="keyword">MINUTE</span>, <span class="number">-9</span>, <span class="keyword">GETDATE</span>())</span><br><span class="line">      <span class="keyword">AND</span> l.Status = <span class="number">0</span></span><br><span class="line">      <span class="keyword">AND</span> l.Suspend = <span class="number">0</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> p.Id <span class="keyword">ASC</span>;</span><br><span class="line">IF OBJECT_ID(N'tempdb..<span class="comment">#temp', N'U') IS NOT NULL</span></span><br><span class="line">    <span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="comment">#temp;</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="comment">#temp</span></span><br><span class="line">(</span><br><span class="line">    <span class="keyword">Id</span> <span class="built_in">INT</span> PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">    Bid <span class="built_in">INT</span>,</span><br><span class="line">    LoanKind <span class="built_in">VARCHAR</span>(<span class="number">100</span>),</span><br><span class="line">    LoanSideKey <span class="built_in">VARCHAR</span>(<span class="number">50</span>),</span><br><span class="line">    FundSource <span class="built_in">VARCHAR</span>(<span class="number">50</span>),</span><br><span class="line">    ThreadId <span class="keyword">NVARCHAR</span>(<span class="number">100</span>),</span><br><span class="line">    Step <span class="built_in">TINYINT</span>,</span><br><span class="line">    IsHangUp <span class="built_in">BIT</span>,</span><br><span class="line">    ApplyNo <span class="built_in">VARCHAR</span>(<span class="number">100</span>),</span><br><span class="line">    CreateTime DATETIME,</span><br><span class="line">    RequestTime DATETIME,</span><br><span class="line">    HandleCount <span class="built_in">TINYINT</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="comment">#temp</span></span><br><span class="line">(</span><br><span class="line">    <span class="keyword">Id</span>,</span><br><span class="line">    Bid,</span><br><span class="line">    LoanKind,</span><br><span class="line">    LoanSideKey,</span><br><span class="line">    FundSource,</span><br><span class="line">    ThreadId,</span><br><span class="line">    Step,</span><br><span class="line">    IsHangUp,</span><br><span class="line">    ApplyNo,</span><br><span class="line">    CreateTime,</span><br><span class="line">    RequestTime,</span><br><span class="line">    HandleCount</span><br><span class="line">)</span><br><span class="line"><span class="keyword">SELECT</span> p.Id,</span><br><span class="line">       p.Bid,</span><br><span class="line">       p.LoanKind,</span><br><span class="line">       p.LoanSideKey,</span><br><span class="line">       l.FundSource,</span><br><span class="line">       e.ThreadId,</span><br><span class="line">       p.Step,</span><br><span class="line">       p.IsHangUp,</span><br><span class="line">       e.ApplyNo,</span><br><span class="line">       p.CreateTime,</span><br><span class="line">       t.CreateTime <span class="keyword">AS</span> RequestTime,</span><br><span class="line">       p.HandleCount</span><br><span class="line"><span class="keyword">FROM</span> lending.VFPProcess p <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">    <span class="keyword">JOIN</span> <span class="comment">#tempProcess tp</span></span><br><span class="line">        <span class="keyword">ON</span> p.Id = tp.ProcessId</span><br><span class="line">    <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> lending.Lending l <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> p.Bid = l.Bid</span><br><span class="line">    <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> lending.VFPLendingInfoExtend e <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> e.BId = p.Bid</span><br><span class="line">    <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> lendingcontrol.LendingTask t <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> p.Bid = t.Bid;</span><br><span class="line"></span><br><span class="line"><span class="comment">--UPDATE p</span></span><br><span class="line"><span class="comment">--SET p.OperationType = 1,</span></span><br><span class="line"><span class="comment">--    p.UpdateTime = GETDATE()</span></span><br><span class="line"><span class="comment">--FROM lending.VFPProcess p WITH (ROWLOCK)</span></span><br><span class="line"><span class="comment">--    JOIN #temp t</span></span><br><span class="line"><span class="comment">--        ON p.Id = t.Id;</span></span><br><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> <span class="comment">#temp;</span></span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="T-4-合同下载取数逻辑"><a href="#T-4-合同下载取数逻辑" class="headerlink" title="T.4 合同下载取数逻辑"></a>T.4 合同下载取数逻辑</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SET</span> XACT_ABORT <span class="keyword">ON</span>;</span><br><span class="line"><span class="keyword">BEGIN</span> TRAN;</span><br><span class="line">IF OBJECT_ID(N'tempdb..<span class="comment">#tempProcess', N'U') IS NOT NULL</span></span><br><span class="line">    <span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="comment">#tempProcess;</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="comment">#tempProcess</span></span><br><span class="line">(</span><br><span class="line">    ProcessId <span class="built_in">INT</span> PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">    Step <span class="built_in">INT</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="comment">#tempProcess</span></span><br><span class="line">(</span><br><span class="line">    ProcessId,</span><br><span class="line">    Step</span><br><span class="line">)</span><br><span class="line"><span class="keyword">SELECT</span> TOP <span class="number">100</span></span><br><span class="line">       p.Id <span class="keyword">AS</span> ProcessId,</span><br><span class="line">       p.Step</span><br><span class="line"><span class="keyword">FROM</span> lending.VFPProcess p <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">    <span class="keyword">JOIN</span> lending.Lending l <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> p.Bid = l.Bid</span><br><span class="line">           <span class="keyword">AND</span> l.Status &lt;&gt; <span class="number">4</span></span><br><span class="line">    <span class="keyword">JOIN</span> lending.YtrustFlow f <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> p.Bid = f.Bid</span><br><span class="line">           <span class="keyword">AND</span> f.Step = <span class="number">50</span></span><br><span class="line">           <span class="keyword">AND</span> f.IsDisable = <span class="number">0</span></span><br><span class="line"><span class="keyword">WHERE</span> p.IsDelete = <span class="number">0</span></span><br><span class="line">      <span class="keyword">AND</span> p.IsHangUp = <span class="number">0</span></span><br><span class="line">      <span class="keyword">AND</span> p.OperationType = <span class="number">0</span></span><br><span class="line">      <span class="keyword">AND</span> p.Step = <span class="number">40</span></span><br><span class="line">      <span class="keyword">AND</span> p.HandleCount &lt;= <span class="number">6</span></span><br><span class="line">      <span class="keyword">AND</span> p.LoanSideKey = <span class="string">'COMPANY/YNXT_LENDING'</span></span><br><span class="line">      <span class="keyword">AND</span> p.LoanKind = <span class="string">'LOANKIND/KAKADAI'</span></span><br><span class="line">      <span class="keyword">AND</span> <span class="keyword">ISNULL</span>(p.LastCurrentRunTime, <span class="keyword">DATEADD</span>(<span class="keyword">MINUTE</span>, <span class="number">-10</span>, <span class="keyword">GETDATE</span>())) &lt; <span class="keyword">DATEADD</span>(<span class="keyword">MINUTE</span>, <span class="number">-9</span>, <span class="keyword">GETDATE</span>())</span><br><span class="line">      <span class="keyword">AND</span> l.Status = <span class="number">0</span></span><br><span class="line">      <span class="keyword">AND</span> l.Suspend = <span class="number">0</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> p.Id <span class="keyword">ASC</span>;</span><br><span class="line">IF OBJECT_ID(N'tempdb..<span class="comment">#temp', N'U') IS NOT NULL</span></span><br><span class="line">    <span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="comment">#temp;</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="comment">#temp</span></span><br><span class="line">(</span><br><span class="line">    <span class="keyword">Id</span> <span class="built_in">INT</span> PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">    Bid <span class="built_in">INT</span>,</span><br><span class="line">    LoanKind <span class="built_in">VARCHAR</span>(<span class="number">100</span>),</span><br><span class="line">    LoanSideKey <span class="built_in">VARCHAR</span>(<span class="number">50</span>),</span><br><span class="line">    FundSource <span class="built_in">VARCHAR</span>(<span class="number">50</span>),</span><br><span class="line">    ThreadId <span class="keyword">NVARCHAR</span>(<span class="number">100</span>),</span><br><span class="line">    Step <span class="built_in">TINYINT</span>,</span><br><span class="line">    IsHangUp <span class="built_in">BIT</span>,</span><br><span class="line">    ApplyNo <span class="built_in">VARCHAR</span>(<span class="number">100</span>),</span><br><span class="line">    CreateTime DATETIME,</span><br><span class="line">    RequestTime DATETIME,</span><br><span class="line">    HandleCount <span class="built_in">TINYINT</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="comment">#temp</span></span><br><span class="line">(</span><br><span class="line">    <span class="keyword">Id</span>,</span><br><span class="line">    Bid,</span><br><span class="line">    LoanKind,</span><br><span class="line">    LoanSideKey,</span><br><span class="line">    FundSource,</span><br><span class="line">    ThreadId,</span><br><span class="line">    Step,</span><br><span class="line">    IsHangUp,</span><br><span class="line">    ApplyNo,</span><br><span class="line">    CreateTime,</span><br><span class="line">    RequestTime,</span><br><span class="line">    HandleCount</span><br><span class="line">)</span><br><span class="line"><span class="keyword">SELECT</span> p.Id,</span><br><span class="line">       p.Bid,</span><br><span class="line">       p.LoanKind,</span><br><span class="line">       p.LoanSideKey,</span><br><span class="line">       l.FundSource,</span><br><span class="line">       e.ThreadId,</span><br><span class="line">       p.Step,</span><br><span class="line">       p.IsHangUp,</span><br><span class="line">       e.ApplyNo,</span><br><span class="line">       p.CreateTime,</span><br><span class="line">       t.CreateTime <span class="keyword">AS</span> RequestTime,</span><br><span class="line">       p.HandleCount</span><br><span class="line"><span class="keyword">FROM</span> lending.VFPProcess p <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">    <span class="keyword">JOIN</span> <span class="comment">#tempProcess tp</span></span><br><span class="line">        <span class="keyword">ON</span> p.Id = tp.ProcessId</span><br><span class="line">    <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> lending.Lending l <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> p.Bid = l.Bid</span><br><span class="line">    <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> lending.VFPLendingInfoExtend e <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> e.BId = p.Bid</span><br><span class="line">    <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> lendingcontrol.LendingTask t <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> p.Bid = t.Bid;</span><br><span class="line"></span><br><span class="line"><span class="comment">--UPDATE p</span></span><br><span class="line"><span class="comment">--SET p.OperationType = 1,</span></span><br><span class="line"><span class="comment">--    p.UpdateTime = GETDATE()</span></span><br><span class="line"><span class="comment">--FROM lending.VFPProcess p WITH (ROWLOCK)</span></span><br><span class="line"><span class="comment">--    JOIN #temp t</span></span><br><span class="line"><span class="comment">--        ON p.Id = t.Id;</span></span><br><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> <span class="comment">#temp;</span></span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="V、版本更新"><a href="#V、版本更新" class="headerlink" title="V、版本更新"></a>V、版本更新</h2><h3 id="2020-05-06"><a href="#2020-05-06" class="headerlink" title="2020-05-06"></a>2020-05-06</h3><p>文档初始化。</p>
-]]></content>
-      <categories>
-        <category>提测文档</category>
-      </categories>
-      <tags>
-        <tag>文件流程</tag>
-        <tag>云信</tag>
-        <tag>云信文件流程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>frp 内网穿透实战（一）：远程桌面连接 windows</title>
-    <url>/p/frp-remote-desk/</url>
-    <content><![CDATA[<h1 id="frp-内网穿透实战（一）：远程桌面连接-windows"><a href="#frp-内网穿透实战（一）：远程桌面连接-windows" class="headerlink" title="frp 内网穿透实战（一）：远程桌面连接 windows"></a>frp 内网穿透实战（一）：远程桌面连接 windows</h1><!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
-
-<!-- code_chunk_output -->
-
-<ul>
-<li><a href="#一-部署">一、部署</a><ul>
-<li><a href="#11-服务端部署">1.1 服务端部署</a></li>
-<li><a href="#12-客户端部署">1.2 客户端部署</a></li>
-</ul>
-</li>
-<li><a href="#二-测试">二、测试</a></li>
-<li><a href="#三-知识点">三、知识点</a></li>
-</ul>
-<!-- /code_chunk_output -->
-
-<br>
-
-<p>frp github 中文文档：<a href="https://github.com/fatedier/frp/blob/master/README_zh.md" target="_blank" rel="noopener">https://github.com/fatedier/frp/blob/master/README_zh.md</a></p>
-<p>release 下载：<a href="https://github.com/fatedier/frp/releases" target="_blank" rel="noopener">https://github.com/fatedier/frp/releases</a></p>
-<p><em>注：服务器端和客户端下载的版本要保持一致。</em></p>
-<p>本次下载的版本是【v0.31.2】：<a href="https://github.com/fatedier/frp/releases/tag/v0.31.2" target="_blank" rel="noopener">https://github.com/fatedier/frp/releases/tag/v0.31.2</a></p>
-<p>本次演示的是通过 frp 内网穿透，在远程连接一台windows电脑。</p>
-<h2 id="一、部署"><a href="#一、部署" class="headerlink" title="一、部署"></a>一、部署</h2><p>部署分为服务器端和客户端，服务器是阿里云的一台 CentOS 云服务器，客户机就是本地一台 windows。</p>
-<h3 id="1-1-服务端部署"><a href="#1-1-服务端部署" class="headerlink" title="1.1 服务端部署"></a>1.1 服务端部署</h3><p>本次下载的文件是【frp_0.31.2_linux_amd64.tar.gz】。</p>
-<p>因为用到了服务器默认是 7000 端口，需要在防火墙中开启，如果是云服务器则只需要在安全组的入站方向增加一个端口即可。<br>由于下面客户端配置的端口是 6000 ，因此一起加上：</p>
-<p><img src="content/2020-03-24_232349.png" alt="2323"></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 将文件上传到服务器</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压压缩包</span></span><br><span class="line">tar -zxvf frp_0.31.2_linux_amd64.tar.gz</span><br><span class="line">​</span><br><span class="line"><span class="comment"># 进入目录</span></span><br><span class="line"><span class="built_in">cd</span> frp_0.31.2_linux_amd64</span><br><span class="line">​</span><br><span class="line"><span class="comment"># 设置后台运行frp服务端</span></span><br><span class="line">nohup ./frps -c ./frps.ini &amp;</span><br></pre></td></tr></table></figure>
-
-<p>查看 nohub.out 日志：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@VM_0_7_centos frp_0.31.2_linux_amd64]<span class="comment"># cat nohup.out </span></span><br><span class="line">2020/03/24 22:48:05 [I] [service.go:152] frps tcp listen on 0.0.0.0:7000</span><br><span class="line">2020/03/24 22:48:05 [I] [root.go:205] start frps success</span><br><span class="line">[root@VM_0_7_centos frp_0.31.2_linux_amd64]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
-
-<p>服务端启动成功。</p>
-<h3 id="1-2-客户端部署"><a href="#1-2-客户端部署" class="headerlink" title="1.2 客户端部署"></a>1.2 客户端部署</h3><p>本次下载的文件是【frp_0.31.2_windows_386.zip】。</p>
-<p>解压目录，修改 frpc.ini 文件：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr &#x3D; 111.X.X.34</span><br><span class="line">server_port &#x3D; 7000</span><br><span class="line"></span><br><span class="line">[ssh]</span><br><span class="line">type &#x3D; tcp</span><br><span class="line">local_ip &#x3D; 127.0.0.1</span><br><span class="line">local_port &#x3D; 3389</span><br><span class="line">remote_port &#x3D; 6000</span><br></pre></td></tr></table></figure>
-
-<p>进入解压的根目录，输入命令 <code>frpc -c frpc.ini</code> ：</p>
-<p><img src="content/2020-03-24_231655.png" alt="2317"></p>
-<p>客户端启动成功。</p>
-<p>开启远程桌面功能：</p>
-<p><img src="content/2020-03-24_230259.png" alt="2318"></p>
-<h2 id="二、测试"><a href="#二、测试" class="headerlink" title="二、测试"></a>二、测试</h2><p>找一台非局域网的电脑远程连接上面部署的电脑：</p>
-<p><img src="content/2020-03-24_230744.png" alt="2325"></p>
-<p>校验了用户名或密码错误，出现了这个说明连接到了，下面输入正确的用户名密码：</p>
-<p><img src="content/2020-03-24_230925.png" alt="2326"></p>
-<p>连接成功。</p>
-<p>如有域名的话，可以将域名解析到这个公网服务器ip，然后通过【域名+端口】访问。</p>
-<h2 id="三、知识点"><a href="#三、知识点" class="headerlink" title="三、知识点"></a>三、知识点</h2>]]></content>
-      <categories>
-        <category>网络</category>
-      </categories>
-      <tags>
-        <tag>frp</tag>
-        <tag>内网穿透</tag>
-        <tag>远程桌面</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/p/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>Hexo 实战（二）：Hexo 基本设置</title>
     <url>/p/hexo-base/</url>
     <content><![CDATA[<h2 id="一、Hexo-站点配置文件"><a href="#一、Hexo-站点配置文件" class="headerlink" title="一、Hexo 站点配置文件"></a>一、Hexo 站点配置文件</h2><p>官方关于配置的文档：<a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/configuration</a></p>
@@ -436,6 +227,71 @@
       </tags>
   </entry>
   <entry>
+    <title>nas 折腾笔记（九）： 群晖系统的使用之 Monments</title>
+    <url>/p/nas-monments/</url>
+    <content><![CDATA[<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221026.png" alt="20200505221320"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221136.png" alt="20200505221331"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221455.png" alt="20200505221506"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221529.png" alt="20200505221542"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_222217.png" alt="20200505222249"></p>
+<p>安装完成，主页：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_222524.png" alt="20200505222540"></p>
+<h2 id="手机端登录"><a href="#手机端登录" class="headerlink" title="手机端登录"></a>手机端登录</h2><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_222627.png" alt="20200505222635"></p>
+<p>开启照片备份：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_222821.png" alt="20200505222844"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_222831.png" alt="20200505222856"></p>
+<h2 id="电脑端使用"><a href="#电脑端使用" class="headerlink" title="电脑端使用"></a>电脑端使用</h2><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_224032.png" alt="20200505224042"></p>
+<h2 id="异常问题"><a href="#异常问题" class="headerlink" title="异常问题"></a>异常问题</h2><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221900.png" alt="20200505221907"><br><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221926.png" alt="20200505221931"><br><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221949.png" alt="20200505221958"></p>
+]]></content>
+      <categories>
+        <category>nas</category>
+      </categories>
+      <tags>
+        <tag>群晖</tag>
+        <tag>dsm</tag>
+        <tag>套件</tag>
+        <tag>Monments</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>nas 折腾笔记（十一）：群晖系统的使用之 Frp 内网穿透</title>
+    <url>/p/nas-network-frp/</url>
+    <content><![CDATA[<p>服务端部署参考我的另一篇文章：<a href="/p/frp-remote-desk/">frp 内网穿透实战（一）：远程桌面连接 windows</a></p>
+<p>使用命令 <code>wget http://kungge.com/assist/frp_0.31.2_linux_amd64.tar.gz</code> 下载 frp 包，然后将包移动至目录【/usr/local/】下，进入该目录解压，进入解压的目录：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@Synology:~<span class="comment"># mv -f frp_0.31.2_linux_amd64.tar.gz /usr/local/</span></span><br><span class="line">root@Synology:~<span class="comment"># cd /usr/local/</span></span><br><span class="line">root@Synology:/usr/<span class="built_in">local</span><span class="comment"># ls</span></span><br><span class="line">bin  etc  frp_0.31.2_linux_amd64.tar.gz  lib  libexec  node  packages  share  SynologyApplicationService  transmission  zerotier</span><br><span class="line">root@Synology:/usr/<span class="built_in">local</span><span class="comment"># tar -zxvf frp_0.31.2_linux_amd64.tar.gz </span></span><br><span class="line">frp_0.31.2_linux_amd64/</span><br><span class="line">frp_0.31.2_linux_amd64/frps_full.ini</span><br><span class="line">frp_0.31.2_linux_amd64/frps.ini</span><br><span class="line">frp_0.31.2_linux_amd64/frpc</span><br><span class="line">frp_0.31.2_linux_amd64/frpc_full.ini</span><br><span class="line">frp_0.31.2_linux_amd64/frps</span><br><span class="line">frp_0.31.2_linux_amd64/LICENSE</span><br><span class="line">frp_0.31.2_linux_amd64/frpc.ini</span><br><span class="line">frp_0.31.2_linux_amd64/systemd/</span><br><span class="line">frp_0.31.2_linux_amd64/systemd/frpc@.service</span><br><span class="line">frp_0.31.2_linux_amd64/systemd/frpc.service</span><br><span class="line">frp_0.31.2_linux_amd64/systemd/frps.service</span><br><span class="line">frp_0.31.2_linux_amd64/systemd/frps@.service</span><br><span class="line">root@Synology:/usr/<span class="built_in">local</span><span class="comment"># cd frp_0.31.2_linux_amd64</span></span><br></pre></td></tr></table></figure>
+
+<p>使用命令 <code>vi frpc.ini</code> 修改客户端配置文件，修改内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">server_addr = 111.X.69.34</span><br><span class="line">server_port = 7000</span><br><span class="line"></span><br><span class="line">[ssh]</span><br><span class="line"><span class="built_in">type</span> = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 22</span><br><span class="line">remote_port = 5022</span><br><span class="line"></span><br><span class="line">[web1]</span><br><span class="line"><span class="built_in">type</span> = tcp</span><br><span class="line">local_port = 5000</span><br><span class="line">remote_port = 5000</span><br><span class="line">custom_domains = localhost</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>111.X.69.34 是服务器的公网IP</li>
+<li>ssh 配的是远程可以通过 ssh 连接工具连接到群晖SSh。</li>
+<li>web1 配的是远程访问群晖DSM系统。</li>
+</ul>
+<p>保存，然后后台启动：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@Synology:/usr/<span class="built_in">local</span>/frp_0.31.2_linux_amd64<span class="comment"># nohup ./frpc -c ./frpc.ini &amp;</span></span><br><span class="line">[1] 20768</span><br><span class="line">root@Synology:/usr/<span class="built_in">local</span>/frp_0.31.2_linux_amd64<span class="comment"># nohup: ignoring input and appending output to ‘nohup.out’</span></span><br></pre></td></tr></table></figure>
+
+<p>查看启动日志：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@Synology:/usr/<span class="built_in">local</span>/frp_0.31.2_linux_amd64<span class="comment"># cat nohup.out</span></span><br><span class="line">2020/05/06 00:19:23 [I] [service.go:250] [b0c859e1dc5b7a1f] login to server success, get run id [b0c859e1dc5b7a1f], server udp port [0]</span><br><span class="line">2020/05/06 00:19:23 [I] [proxy_manager.go:144] [b0c859e1dc5b7a1f] proxy added: [ssh web1]</span><br><span class="line">2020/05/06 00:19:23 [I] [control.go:164] [b0c859e1dc5b7a1f] [ssh] start proxy success</span><br><span class="line">2020/05/06 00:19:23 [I] [control.go:164] [b0c859e1dc5b7a1f] [web1] start proxy success</span><br></pre></td></tr></table></figure>
+
+<p>启动成功了。</p>
+<p>服务器防火墙开放5000和5022端口。</p>
+<p>直接在远程访问：http://公网IP:5000，如本次将域名【vrgamehome.com】解析到公网IP，因此使用【<a href="http://vrgamehome:5000】访问：">http://vrgamehome:5000】访问：</a></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-06_002512.png" alt="20200506005501"></p>
+<p>使用 frp 内网传透完成。</p>
+]]></content>
+      <categories>
+        <category>nas</category>
+      </categories>
+      <tags>
+        <tag>群晖</tag>
+        <tag>dsm</tag>
+        <tag>套件</tag>
+        <tag>内网穿透</tag>
+        <tag>frp</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>nas 折腾笔记（七）： 群晖系统的使用之 Zerotier 实现内网穿透</title>
     <url>/p/nas-network/</url>
     <content><![CDATA[<p>前面讲到路由器端口转发，但是需要公网IP，如果没有公网IP的话可以考虑内网穿透。</p>
@@ -527,9 +383,9 @@
         <category>nas</category>
       </categories>
       <tags>
-        <tag>内网穿透</tag>
         <tag>群晖</tag>
         <tag>dsm</tag>
+        <tag>内网穿透</tag>
         <tag>端口转发</tag>
       </tags>
   </entry>
@@ -559,68 +415,63 @@
       </tags>
   </entry>
   <entry>
-    <title>nas 折腾笔记（九）： 群晖系统的使用之 Monments</title>
-    <url>/p/nas-monments/</url>
-    <content><![CDATA[<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221026.png" alt="20200505221320"></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221136.png" alt="20200505221331"></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221455.png" alt="20200505221506"></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221529.png" alt="20200505221542"></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_222217.png" alt="20200505222249"></p>
-<p>安装完成，主页：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_222524.png" alt="20200505222540"></p>
-<h2 id="手机端登录"><a href="#手机端登录" class="headerlink" title="手机端登录"></a>手机端登录</h2><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_222627.png" alt="20200505222635"></p>
-<p>开启照片备份：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_222821.png" alt="20200505222844"></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_222831.png" alt="20200505222856"></p>
-<h2 id="电脑端使用"><a href="#电脑端使用" class="headerlink" title="电脑端使用"></a>电脑端使用</h2><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_224032.png" alt="20200505224042"></p>
-<h2 id="异常问题"><a href="#异常问题" class="headerlink" title="异常问题"></a>异常问题</h2><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221900.png" alt="20200505221907"><br><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221926.png" alt="20200505221931"><br><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221949.png" alt="20200505221958"></p>
-]]></content>
-      <categories>
-        <category>nas</category>
-      </categories>
-      <tags>
-        <tag>群晖</tag>
-        <tag>dsm</tag>
-        <tag>套件</tag>
-        <tag>Monments</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>nas 折腾笔记（十一）：群晖系统的使用之 Frp 内网穿透</title>
-    <url>/p/nas-network-frp/</url>
-    <content><![CDATA[<p>服务端部署参考我的另一篇文章：<a href="/p/frp-remote-desk/">frp 内网穿透实战（一）：远程桌面连接 windows</a></p>
-<p>使用命令 <code>wget http://kungge.com/assist/frp_0.31.2_linux_amd64.tar.gz</code> 下载 frp 包，然后将包移动至目录【/usr/local/】下，进入该目录解压，进入解压的目录：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@Synology:~<span class="comment"># mv -f frp_0.31.2_linux_amd64.tar.gz /usr/local/</span></span><br><span class="line">root@Synology:~<span class="comment"># cd /usr/local/</span></span><br><span class="line">root@Synology:/usr/<span class="built_in">local</span><span class="comment"># ls</span></span><br><span class="line">bin  etc  frp_0.31.2_linux_amd64.tar.gz  lib  libexec  node  packages  share  SynologyApplicationService  transmission  zerotier</span><br><span class="line">root@Synology:/usr/<span class="built_in">local</span><span class="comment"># tar -zxvf frp_0.31.2_linux_amd64.tar.gz </span></span><br><span class="line">frp_0.31.2_linux_amd64/</span><br><span class="line">frp_0.31.2_linux_amd64/frps_full.ini</span><br><span class="line">frp_0.31.2_linux_amd64/frps.ini</span><br><span class="line">frp_0.31.2_linux_amd64/frpc</span><br><span class="line">frp_0.31.2_linux_amd64/frpc_full.ini</span><br><span class="line">frp_0.31.2_linux_amd64/frps</span><br><span class="line">frp_0.31.2_linux_amd64/LICENSE</span><br><span class="line">frp_0.31.2_linux_amd64/frpc.ini</span><br><span class="line">frp_0.31.2_linux_amd64/systemd/</span><br><span class="line">frp_0.31.2_linux_amd64/systemd/frpc@.service</span><br><span class="line">frp_0.31.2_linux_amd64/systemd/frpc.service</span><br><span class="line">frp_0.31.2_linux_amd64/systemd/frps.service</span><br><span class="line">frp_0.31.2_linux_amd64/systemd/frps@.service</span><br><span class="line">root@Synology:/usr/<span class="built_in">local</span><span class="comment"># cd frp_0.31.2_linux_amd64</span></span><br></pre></td></tr></table></figure>
+    <title>frp 内网穿透实战（一）：远程桌面连接 windows</title>
+    <url>/p/frp-remote-desk/</url>
+    <content><![CDATA[<h1 id="frp-内网穿透实战（一）：远程桌面连接-windows"><a href="#frp-内网穿透实战（一）：远程桌面连接-windows" class="headerlink" title="frp 内网穿透实战（一）：远程桌面连接 windows"></a>frp 内网穿透实战（一）：远程桌面连接 windows</h1><!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
 
-<p>使用命令 <code>vi frpc.ini</code> 修改客户端配置文件，修改内容如下：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">server_addr = 111.X.69.34</span><br><span class="line">server_port = 7000</span><br><span class="line"></span><br><span class="line">[ssh]</span><br><span class="line"><span class="built_in">type</span> = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 22</span><br><span class="line">remote_port = 5022</span><br><span class="line"></span><br><span class="line">[web1]</span><br><span class="line"><span class="built_in">type</span> = tcp</span><br><span class="line">local_port = 5000</span><br><span class="line">remote_port = 5000</span><br><span class="line">custom_domains = localhost</span><br></pre></td></tr></table></figure>
+<!-- code_chunk_output -->
 
 <ul>
-<li>111.X.69.34 是服务器的公网IP</li>
-<li>ssh 配的是远程可以通过 ssh 连接工具连接到群晖SSh。</li>
-<li>web1 配的是远程访问群晖DSM系统。</li>
+<li><a href="#一-部署">一、部署</a><ul>
+<li><a href="#11-服务端部署">1.1 服务端部署</a></li>
+<li><a href="#12-客户端部署">1.2 客户端部署</a></li>
 </ul>
-<p>保存，然后后台启动：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@Synology:/usr/<span class="built_in">local</span>/frp_0.31.2_linux_amd64<span class="comment"># nohup ./frpc -c ./frpc.ini &amp;</span></span><br><span class="line">[1] 20768</span><br><span class="line">root@Synology:/usr/<span class="built_in">local</span>/frp_0.31.2_linux_amd64<span class="comment"># nohup: ignoring input and appending output to ‘nohup.out’</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><a href="#二-测试">二、测试</a></li>
+<li><a href="#三-知识点">三、知识点</a></li>
+</ul>
+<!-- /code_chunk_output -->
 
-<p>查看启动日志：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@Synology:/usr/<span class="built_in">local</span>/frp_0.31.2_linux_amd64<span class="comment"># cat nohup.out</span></span><br><span class="line">2020/05/06 00:19:23 [I] [service.go:250] [b0c859e1dc5b7a1f] login to server success, get run id [b0c859e1dc5b7a1f], server udp port [0]</span><br><span class="line">2020/05/06 00:19:23 [I] [proxy_manager.go:144] [b0c859e1dc5b7a1f] proxy added: [ssh web1]</span><br><span class="line">2020/05/06 00:19:23 [I] [control.go:164] [b0c859e1dc5b7a1f] [ssh] start proxy success</span><br><span class="line">2020/05/06 00:19:23 [I] [control.go:164] [b0c859e1dc5b7a1f] [web1] start proxy success</span><br></pre></td></tr></table></figure>
+<br>
 
-<p>启动成功了。</p>
-<p>服务器防火墙开放5000和5022端口。</p>
-<p>直接在远程访问：http://公网IP:5000，如本次将域名【vrgamehome.com】解析到公网IP，因此使用【<a href="http://vrgamehome:5000】访问：">http://vrgamehome:5000】访问：</a></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-06_002512.png" alt="20200506005501"></p>
-<p>使用 frp 内网传透完成。</p>
-]]></content>
+<p>frp github 中文文档：<a href="https://github.com/fatedier/frp/blob/master/README_zh.md" target="_blank" rel="noopener">https://github.com/fatedier/frp/blob/master/README_zh.md</a></p>
+<p>release 下载：<a href="https://github.com/fatedier/frp/releases" target="_blank" rel="noopener">https://github.com/fatedier/frp/releases</a></p>
+<p><em>注：服务器端和客户端下载的版本要保持一致。</em></p>
+<p>本次下载的版本是【v0.31.2】：<a href="https://github.com/fatedier/frp/releases/tag/v0.31.2" target="_blank" rel="noopener">https://github.com/fatedier/frp/releases/tag/v0.31.2</a></p>
+<p>本次演示的是通过 frp 内网穿透，在远程连接一台windows电脑。</p>
+<h2 id="一、部署"><a href="#一、部署" class="headerlink" title="一、部署"></a>一、部署</h2><p>部署分为服务器端和客户端，服务器是阿里云的一台 CentOS 云服务器，客户机就是本地一台 windows。</p>
+<h3 id="1-1-服务端部署"><a href="#1-1-服务端部署" class="headerlink" title="1.1 服务端部署"></a>1.1 服务端部署</h3><p>本次下载的文件是【frp_0.31.2_linux_amd64.tar.gz】。</p>
+<p>因为用到了服务器默认是 7000 端口，需要在防火墙中开启，如果是云服务器则只需要在安全组的入站方向增加一个端口即可。<br>由于下面客户端配置的端口是 6000 ，因此一起加上：</p>
+<p><img src="content/2020-03-24_232349.png" alt="2323"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 将文件上传到服务器</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压压缩包</span></span><br><span class="line">tar -zxvf frp_0.31.2_linux_amd64.tar.gz</span><br><span class="line">​</span><br><span class="line"><span class="comment"># 进入目录</span></span><br><span class="line"><span class="built_in">cd</span> frp_0.31.2_linux_amd64</span><br><span class="line">​</span><br><span class="line"><span class="comment"># 设置后台运行frp服务端</span></span><br><span class="line">nohup ./frps -c ./frps.ini &amp;</span><br></pre></td></tr></table></figure>
+
+<p>查看 nohub.out 日志：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@VM_0_7_centos frp_0.31.2_linux_amd64]<span class="comment"># cat nohup.out </span></span><br><span class="line">2020/03/24 22:48:05 [I] [service.go:152] frps tcp listen on 0.0.0.0:7000</span><br><span class="line">2020/03/24 22:48:05 [I] [root.go:205] start frps success</span><br><span class="line">[root@VM_0_7_centos frp_0.31.2_linux_amd64]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p>服务端启动成功。</p>
+<h3 id="1-2-客户端部署"><a href="#1-2-客户端部署" class="headerlink" title="1.2 客户端部署"></a>1.2 客户端部署</h3><p>本次下载的文件是【frp_0.31.2_windows_386.zip】。</p>
+<p>解压目录，修改 frpc.ini 文件：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr &#x3D; 111.X.X.34</span><br><span class="line">server_port &#x3D; 7000</span><br><span class="line"></span><br><span class="line">[ssh]</span><br><span class="line">type &#x3D; tcp</span><br><span class="line">local_ip &#x3D; 127.0.0.1</span><br><span class="line">local_port &#x3D; 3389</span><br><span class="line">remote_port &#x3D; 6000</span><br></pre></td></tr></table></figure>
+
+<p>进入解压的根目录，输入命令 <code>frpc -c frpc.ini</code> ：</p>
+<p><img src="content/2020-03-24_231655.png" alt="2317"></p>
+<p>客户端启动成功。</p>
+<p>开启远程桌面功能：</p>
+<p><img src="content/2020-03-24_230259.png" alt="2318"></p>
+<h2 id="二、测试"><a href="#二、测试" class="headerlink" title="二、测试"></a>二、测试</h2><p>找一台非局域网的电脑远程连接上面部署的电脑：</p>
+<p><img src="content/2020-03-24_230744.png" alt="2325"></p>
+<p>校验了用户名或密码错误，出现了这个说明连接到了，下面输入正确的用户名密码：</p>
+<p><img src="content/2020-03-24_230925.png" alt="2326"></p>
+<p>连接成功。</p>
+<p>如有域名的话，可以将域名解析到这个公网服务器ip，然后通过【域名+端口】访问。</p>
+<h2 id="三、知识点"><a href="#三、知识点" class="headerlink" title="三、知识点"></a>三、知识点</h2>]]></content>
       <categories>
-        <category>nas</category>
+        <category>网络</category>
       </categories>
       <tags>
-        <tag>frp</tag>
         <tag>内网穿透</tag>
-        <tag>群晖</tag>
-        <tag>dsm</tag>
-        <tag>套件</tag>
+        <tag>frp</tag>
+        <tag>远程桌面</tag>
       </tags>
   </entry>
 </search>
