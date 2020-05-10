@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/smiley_lock_32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/smiley_lock_16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="一、需求说明 标题云信放款前置流程接入文件流程重要性重要改动程序名称外贸影像件上传改动程序代码地址1. 云信盖章程序：YnxtThirdEstampConsole：https:&#x2F;&#x2F;10.10.250.74&#x2F;svn&#x2F;Loan&#x2F;trunk&#x2F;VBS_Service&#x2F;盖章服务&#x2F;盖章服务&#x2F;Cn.Vcredit.YnxtThirdEstampConsole  2. 云信windows服务程序：https:&#x2F;&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VBS-IR-0058_云信放款前置流程接入文件流程">
+<meta property="og:url" content="http://yoursite.com/p/vbs-ir-0058/index.html">
+<meta property="og:site_name" content="坤哥博客小站">
+<meta property="og:description" content="一、需求说明 标题云信放款前置流程接入文件流程重要性重要改动程序名称外贸影像件上传改动程序代码地址1. 云信盖章程序：YnxtThirdEstampConsole：https:&#x2F;&#x2F;10.10.250.74&#x2F;svn&#x2F;Loan&#x2F;trunk&#x2F;VBS_Service&#x2F;盖章服务&#x2F;盖章服务&#x2F;Cn.Vcredit.YnxtThirdEstampConsole  2. 云信windows服务程序：https:&#x2F;&#x2F;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-08T06:39:05.000Z">
+<meta property="article:modified_time" content="2020-05-10T10:33:45.213Z">
+<meta property="article:author" content="wankun">
+<meta property="article:tag" content="文件流程">
+<meta property="article:tag" content="云信">
+<meta property="article:tag" content="云信文件流程">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/p/vbs-ir-0058/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>VBS-IR-0058_云信放款前置流程接入文件流程 | 坤哥博客小站</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">坤哥博客小站</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">热爱生活,热爱技术,听听故事</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-fw fa-calendar"></i>日程表</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404.html" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/p/vbs-ir-0058/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
+      <meta itemprop="name" content="wankun">
+      <meta itemprop="description" content="生活是一门艺术,更是一门技术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坤哥博客小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          VBS-IR-0058_云信放款前置流程接入文件流程
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-08 14:39:05" itemprop="dateCreated datePublished" datetime="2020-05-08T14:39:05+08:00">2020-05-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-10 18:33:45" itemprop="dateModified" datetime="2020-05-10T18:33:45+08:00">2020-05-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8F%90%E6%B5%8B%E6%96%87%E6%A1%A3/" itemprop="url" rel="index"><span itemprop="name">提测文档</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/p/vbs-ir-0058/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/vbs-ir-0058/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="一、需求说明"><a href="#一、需求说明" class="headerlink" title="一、需求说明"></a>一、需求说明</h2><table>
+<thead>
+<tr>
+<th>标题</th>
+<th>云信放款前置流程接入文件流程</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>重要性</td>
+<td>重要</td>
+</tr>
+<tr>
+<td>改动程序名称</td>
+<td>外贸影像件上传</td>
+</tr>
+<tr>
+<td>改动程序代码地址</td>
+<td>1. 云信盖章程序：YnxtThirdEstampConsole：<a href="https://10.10.250.74/svn/Loan/trunk/VBS_Service/盖章服务/盖章服务/Cn.Vcredit.YnxtThirdEstampConsole" target="_blank" rel="noopener">https://10.10.250.74/svn/Loan/trunk/VBS_Service/盖章服务/盖章服务/Cn.Vcredit.YnxtThirdEstampConsole</a> <br> 2. 云信windows服务程序：<a href="https://10.10.250.74/svn/Loan/trunk/VBS_Service/Cn.Vcredit.Ytrust.API/YtrustService" target="_blank" rel="noopener">https://10.10.250.74/svn/Loan/trunk/VBS_Service/Cn.Vcredit.Ytrust.API/YtrustService</a></td>
+</tr>
+<tr>
+<td>目标产品范围</td>
+<td>卡卡和豆豆</td>
+</tr>
+<tr>
+<td>影响程序范围</td>
+<td>云信盖章程序和云信windows服务程序</td>
+</tr>
+<tr>
+<td>提出人</td>
+<td>万坤</td>
+</tr>
+<tr>
+<td>原因</td>
+<td>现有资方相关文件都已接入文件流程，云信放款前置流程有关文件的操作分布在两个独立的程序上不利于统一管理</td>
+</tr>
+<tr>
+<td>期望结果</td>
+<td>云信放款前置流程有关文件的现有业务逻辑：<br><br> 1. 云信流程初始化时会先推送身份证到云信，代码位于云信windows服务程序（YtrustService）。<br> 2. 云信流程状态为待上传状态时会取出满足条件的合同相关文件推送到云信，代码位于云信盖章程序（YnxtThirdEstampConsole）。 <br> 3. 云信流程状态为待获取合同状态时会从云信获取合同相关文件存储到我方ftp上，代码位于云信盖章程序（YnxtThirdEstampConsole）。<br>  4. 云信订单长时间未改变状态会邮件报警，主要包括2个：长时间停留在待合同上传状态和长时间停留在待获取合同状态，代码位于云信盖章程序（YnxtThirdEstampConsole）。<br><br>期望结果：<br> 1. 将第1、2、3分别改成文件流程中的3个步骤（新增ecm上传和下载处理逻辑），第4个不属于文件流程范围，暂时不接入。<br> 2. 与云信对接涉及加密传输，由于涉及到内容比较繁琐，直接将其放到文件处理程序会增加复杂度，将其封装成一个接口供文件处理程序调用。</td>
+</tr>
+<tr>
+<td>内容</td>
+<td>接入文件流程</td>
+</tr>
+<tr>
+<td>预计工时</td>
+<td>4d</td>
+</tr>
+</tbody></table>
+<p>需求名称： VBS-IR-0058_云信放款前置流程接入文件流程</p>
+<h2 id="二、测试说明"><a href="#二、测试说明" class="headerlink" title="二、测试说明"></a>二、测试说明</h2><ul>
+<li>云信放款前置流程关于文件的总共有3个节点：推送身份证到云信、推送合同相关文件到云信进行盖章、从云信方拉取盖章好的合同文件</li>
+<li>推送身份证到云信：该节点会初始化云信流程，如果云信流程表【lending.YtrustFlow】无记录则会新增，程序会处理该表无记录或状态为10的订单，完成后如果运行正常云信流程表【lending.YtrustFlow】状态为20，如果不正常则该表无记录或状态为10</li>
+<li>推送合同相关文件到云信进行盖章：该节点是【推送身份证到云信】完成后由云信windows服务创建借款人任务完成后才会执行，推送的文件配置在文件流程数据库中</li>
+<li>从云信方拉取盖章好的合同文件：该节点是在【推送合同相关文件到云信进行盖章】执行完成后由云信windows服务创建合同任务完成后才会执行，下载的文件配置在文件流程数据库中</li>
+<li>从外贸文件测试情况来看，为了让测试更加顺利，在附录中提供了一些sql来辅助测试，仅供参考，实际以脚本配置的文件流程具体逻辑为准，测试也可以编写自己的sql</li>
+</ul>
+<h3 id="2-1-测试准备"><a href="#2-1-测试准备" class="headerlink" title="2.1 测试准备"></a>2.1 测试准备</h3><ol>
+<li>运行脚本，初始化云信文件流程</li>
+<li>部署云信接口</li>
+<li>部署云信 windows 服务</li>
+<li>部署文件处理程序，配置云信接口地址</li>
+</ol>
+<h3 id="2-2-测试用例-身份证上传"><a href="#2-2-测试用例-身份证上传" class="headerlink" title="2.2 测试用例-身份证上传"></a>2.2 测试用例-身份证上传</h3><p>准备数据，可造数据，也可修改历史订单数据。</p>
+<p>运行文件处理程序，日志范例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">2020-05-09 15:30:23,797 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :开启任务...</span><br><span class="line">2020-05-09 15:30:24,882 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :启动【YNXTIdUpload】任务...</span><br><span class="line">2020-05-09 15:30:43,128 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :TMP ftp 下载【DOCUMENTKIND&#x2F;SHENFENZHENGZHENGMIAN】【DOCUMENTKIND&#x2F;SHENFENZHENGZHENGMIAN&#x2F;2023&#x2F;06&#x2F;202306030945482827身份证正面.jpg】完成</span><br><span class="line">2020-05-09 15:30:43,137 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :TMP ftp 下载【DOCUMENTKIND&#x2F;SHENFENZHENGFANMIAN】【DOCUMENTKIND&#x2F;SHENFENZHENGFANMIAN&#x2F;2023&#x2F;06&#x2F;202306030945487257身份证反面.jpg】完成</span><br><span class="line">2020-05-09 15:30:43,140 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :生成【17803509】接口参数完成</span><br><span class="line">2020-05-09 15:30:49,327 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :调用http:&#x2F;&#x2F;localhost:63974&#x2F;api&#x2F;Ytrust&#x2F;Loan&#x2F;IdUpload，结束:2020-05-09 03:30:49入参：&#123;&quot;Bid&quot;:17803509,&quot;IdenNo&quot;:&quot;43112219790101137X&quot;,&quot;Photos&quot;:[&#123;&quot;Kind&quot;:&quot;A&quot;,&quot;Path&quot;:null,&quot;IdenNo&quot;:null,&quot;Size&quot;:0,&quot;Content&quot;:&quot;Length:9938&quot;&#125;,&#123;&quot;Kind&quot;:&quot;B&quot;,&quot;Path&quot;:null,&quot;IdenNo&quot;:null,&quot;Size&quot;:0,&quot;Content&quot;:&quot;Length:9938&quot;&#125;]&#125;， 结果:&#123;&quot;Status&quot;:1,&quot;Content&quot;:&quot;8c3c12bc53aa4178bbb19e2b1a5b6942&quot;,&quot;Message&quot;:&quot;请求成功&quot;&#125;</span><br><span class="line">2020-05-09 15:31:10,432 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :共查询到 1 条记录，成功处理 1条。</span><br><span class="line">2020-05-09 15:31:10,435 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :结束【YNXTIdUpload】任务。</span><br></pre></td></tr></table></figure>
+
+<p>数据推送到云信方，其接口返回 UniqueId，更新到云信流程表【lending.YtrustFlow】中，此时表状态为20，表【lending.VFPProcess】状态为10。</p>
+<h3 id="2-3-测试用例-合同上传"><a href="#2-3-测试用例-合同上传" class="headerlink" title="2.3  测试用例-合同上传"></a>2.3  测试用例-合同上传</h3><p>可让部署的云信windows服务完成创建借款人任务，完成后云信流程表【lending.YtrustFlow】表状态为40。</p>
+<p>造数据让订单数据满足脚本配置里的条件。</p>
+<p>运行文件处理程序，日志范例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">2020-05-09 16:18:47,536 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :开启任务...</span><br><span class="line">2020-05-09 16:18:52,027 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :启动【YNXTYnxtUpload】任务...</span><br><span class="line">2020-05-09 16:19:02,472 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :TMP ftp 下载【DOCUMENTKIND&#x2F;KAKADAI&#x2F;YNXT_PH892&#x2F;DKHT】【DOCUMENTKIND&#x2F;KAKADAI&#x2F;YNXT_PH892&#x2F;DKHT&#x2F;2020&#x2F;01&#x2F;20200109120439611f67ceb3-b72f-49e5-8b75-14a4cf4b6d63贷款合同.pdf】完成</span><br><span class="line">2020-05-09 16:19:02,483 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :TMP ftp 下载【DOCUMENTKIND&#x2F;KAKADAI&#x2F;YNXT_PH892&#x2F;GRZXXXCXJBSSQS】【DOCUMENTKIND&#x2F;KAKADAI&#x2F;YNXT_PH892&#x2F;GRZXXXCXJBSSQS&#x2F;2020&#x2F;01&#x2F;2020010912094467b2378fef-5bed-4b14-80fa-3be5da7c16b5个人征信信息查询及报送授权书.pdf】完成</span><br><span class="line">2020-05-09 16:19:02,491 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :TMP ftp 下载【DOCUMENTKIND&#x2F;KAKADAI&#x2F;YNXT_PH892&#x2F;GRKHKKSQS_YX】【DOCUMENTKIND&#x2F;KAKADAI&#x2F;YNXT_PH892&#x2F;GRKHKKSQS_YX&#x2F;2020&#x2F;01&#x2F;2020010912095066a75fe800-48de-43e4-a26b-2ab2a541b2d3个人客户扣款授权书(云信).pdf】完成</span><br><span class="line">2020-05-09 16:19:05,772 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :生成【17803509】接口参数完成</span><br><span class="line">2020-05-09 16:19:13,804 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :调用http:&#x2F;&#x2F;yapi.vcredit.com.local&#x2F;mock&#x2F;15&#x2F;api&#x2F;Ytrust&#x2F;Loan&#x2F;FileUpload，结束:2020-05-09 04:19:13入参：&#123;&quot;Bid&quot;:17803509,&quot;FlowId&quot;:311419,&quot;UniqueId&quot;:&quot;8c3c12bc53aa4178bbb19e2b1a5b6942&quot;,&quot;IdenNo&quot;:&quot;43112219790101137X&quot;,&quot;LoanSide&quot;:null,&quot;ImageContent&quot;:[&#123;&quot;Content&quot;:&quot;Length:220170&quot;,&quot;Type&quot;:&quot;G&quot;&#125;,&#123;&quot;Content&quot;:&quot;Length:176122&quot;,&quot;Type&quot;:&quot;V&quot;&#125;,&#123;&quot;Content&quot;:&quot;Length:134438&quot;,&quot;Type&quot;:&quot;F&quot;&#125;]&#125;， 结果:&#123;&quot;Status&quot;:1,&quot;Content&quot;:null,&quot;Message&quot;:&quot;aliquip exercitation eiusmod ut velit&quot;&#125;</span><br><span class="line">2020-05-09 16:19:45,956 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :共查询到 1 条记录，成功处理 1条。</span><br><span class="line">2020-05-09 16:19:45,958 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :结束【YNXTYnxtUpload】任务。</span><br></pre></td></tr></table></figure>
+
+<p>数据推送到云信方，云信流程表【lending.YtrustFlow】此时表状态为50，表【lending.VFPProcess】状态为40。</p>
+<h3 id="2-4-测试用例-合同下载"><a href="#2-4-测试用例-合同下载" class="headerlink" title="2.4  测试用例-合同下载"></a>2.4  测试用例-合同下载</h3><p>可让部署的云信windows服务完成创建合同任务，完成后云信流程表【lending.YtrustFlow】表状态为50。</p>
+<p>运行文件处理程序，日志范例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">2020-05-09 17:31:47,701 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :启动【YNXTYnxtDownload】任务...</span><br><span class="line">2020-05-09 17:31:51,531 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :生成【17803509】接口参数完成</span><br><span class="line">2020-05-09 17:31:59,702 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :调用http:&#x2F;&#x2F;yapi.vcredit.com.local&#x2F;mock&#x2F;15&#x2F;api&#x2F;Ytrust&#x2F;Loan&#x2F;GetContractFile，结束:2020-05-09 05:31:59入参：&#123;&quot;IsGetFileContent&quot;:true,&quot;UniqueId&quot;:&quot;8c3c12bc53aa4178bbb19e2b1a5b6942&quot;,&quot;FlowId&quot;:311419&#125;， 结果:&#123;&quot;Status&quot;:1,&quot;Content&quot;:&#123;&quot;SignStatus&quot;:4,&quot;ContractFile&quot;:&quot;Length:220170&quot;&#125;,&quot;Message&quot;:&quot;do&quot;&#125;</span><br><span class="line">2020-05-09 17:32:10,814 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :TMP 上传【9f18fae1511f4e2cbb16284d2d5e9685贷款合同.pdf】至ftp【10.138.60.16】【DOCUMENTKIND&#x2F;KAKADAI&#x2F;YNXT_PH892&#x2F;DKHT&#x2F;2020&#x2F;05&#x2F;09&#x2F;9f18fae1511f4e2cbb16284d2d5e9685贷款合同.pdf】完成</span><br><span class="line">2020-05-09 17:32:11,059 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :TMP 上传【9f18fae1511f4e2cbb16284d2d5e9685贷款合同.pdf】至ecm【http:&#x2F;&#x2F;ecm-t2.msa.vcredit.com.local】完成【7c63b2304fba4dbaa689157cf0097c57】</span><br><span class="line">2020-05-09 17:32:50,593 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :共查询到 1 条记录，成功处理 1条。</span><br><span class="line">2020-05-09 17:32:50,595 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :结束【YNXTYnxtDownload】任务。</span><br><span class="line">2020-05-09 17:32:50,607 [INFO ]Cn.Vcredit.FileProcessTask.CommonTool :结束任务</span><br></pre></td></tr></table></figure>
+
+<p>从云信方获取文件存放到ftp和ecm，云信流程表【lending.YtrustFlow】此时表状态为60，表【lending.VFPProcess】状态为50，整个文件流程结束。</p>
+<p>验证 ftp 上文件，目录【DOCUMENTKIND/KAKADAI/YNXT_PH892/DKHT/2020/05/09/9f18fae1511f4e2cbb16284d2d5e9685贷款合同.pdf】。</p>
+<p>验证 ecm 上的文件，ecmId【7c63b2304fba4dbaa689157cf0097c57】。</p>
+<h2 id="三、上线说明"><a href="#三、上线说明" class="headerlink" title="三、上线说明"></a>三、上线说明</h2><p>需求名称： VBS-IR-0058_云信放款前置流程接入文件流程</p>
+<h3 id="3-1-上线代码"><a href="#3-1-上线代码" class="headerlink" title="3.1 上线代码"></a>3.1 上线代码</h3><p>开发分支：</p>
+<ul>
+<li><a href="https://10.10.250.74/svn/Loan/branches/VBS_Service/Cn.Vcredit.Ytrust.API_VBS-IR-0058" target="_blank" rel="noopener">https://10.10.250.74/svn/Loan/branches/VBS_Service/Cn.Vcredit.Ytrust.API_VBS-IR-0058</a></li>
+<li>VBS-IR-0058：<a href="http://10.138.61.72/vbs/loan/console/Cn.Vcredit.FileProcessTask.git" target="_blank" rel="noopener">http://10.138.61.72/vbs/loan/console/Cn.Vcredit.FileProcessTask.git</a></li>
+</ul>
+<h3 id="3-2-上线项目"><a href="#3-2-上线项目" class="headerlink" title="3.2 上线项目"></a>3.2 上线项目</h3><ul>
+<li>云信 windows 服务（YtrustService）</li>
+<li>云信接口服务（Ytrust.API）</li>
+<li>文件处理程序（FileProcessTask）（新增一个计划任务）</li>
+</ul>
+<h3 id="3-3-上线配置"><a href="#3-3-上线配置" class="headerlink" title="3.3 上线配置"></a>3.3 上线配置</h3><p>文件处理程序（FileProcessTask）</p>
+<ul>
+<li>新增配置（接口地址改成生产的！！！）：</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--******云南信托-start******--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--云南信托接口--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">add</span> <span class="attr">key</span>=<span class="string">"YnxtApiUrl"</span> <span class="attr">value</span>=<span class="string">"http://10.155.20.209:8384/api/Ytrust/Loan"</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!--******云南信托-end******--&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改配置：</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--流程Key：云南信托-卡卡贷--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">add</span> <span class="attr">key</span>=<span class="string">"ProcessKey"</span> <span class="attr">value</span>=<span class="string">"YNXT-KAKADAI"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-4-上线脚本"><a href="#3-4-上线脚本" class="headerlink" title="3.4 上线脚本"></a>3.4 上线脚本</h3><p>1.VBS-IR-0058_卡卡贷云信文件流程配置.sql</p>
+<h3 id="3-5-上线合同"><a href="#3-5-上线合同" class="headerlink" title="3.5 上线合同"></a>3.5 上线合同</h3><p>无。</p>
+<h2 id="四、线上验证"><a href="#四、线上验证" class="headerlink" title="四、线上验证"></a>四、线上验证</h2><ul>
+<li>验证身份证是否上传成功</li>
+<li>验证合同相关文件是否上传成功</li>
+<li>验证合同是否下载成功，打开验证是否盖章</li>
+</ul>
+<h2 id="T、附录"><a href="#T、附录" class="headerlink" title="T、附录"></a>T、附录</h2><h3 id="T-1-获取文件流程所有相关表信息"><a href="#T-1-获取文件流程所有相关表信息" class="headerlink" title="T.1 获取文件流程所有相关表信息"></a>T.1 获取文件流程所有相关表信息</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DECLARE</span> @ProcessKey <span class="built_in">VARCHAR</span>(<span class="number">20</span>) = <span class="string">'YNXT-KAKADAI'</span>,</span><br><span class="line">        @LOANSIDE <span class="built_in">VARCHAR</span>(<span class="number">20</span>) = <span class="string">'COMPANY/YNXT_LENDING'</span>,</span><br><span class="line">        @LOANKIND <span class="built_in">VARCHAR</span>(<span class="number">20</span>) = <span class="string">'LOANKIND/KAKADAI'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">DECLARE</span> @ProcessId <span class="built_in">INT</span>;</span><br><span class="line"><span class="keyword">SELECT</span> @ProcessId = <span class="keyword">Id</span></span><br><span class="line"><span class="keyword">FROM</span> commonFile.Process</span><br><span class="line"><span class="keyword">WHERE</span> ProcessKey = @ProcessKey;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> commonFile.Process <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line"><span class="keyword">WHERE</span> ProcessKey = @ProcessKey;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> commonFile.ProcessConfig <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line"><span class="keyword">WHERE</span> ProcessId = @ProcessId;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> commonFile.ProcessConfigRule <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line"><span class="keyword">WHERE</span> ProcessConfigId <span class="keyword">IN</span> (</span><br><span class="line">                             <span class="keyword">SELECT</span> <span class="keyword">Id</span></span><br><span class="line">                             <span class="keyword">FROM</span> commonFile.ProcessConfig <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">                             <span class="keyword">WHERE</span> ProcessId = @ProcessId</span><br><span class="line">                         );</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> commonFile.ProcessConfigRuleFile <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line"><span class="keyword">WHERE</span> ProcessConfigRuleId <span class="keyword">IN</span> (</span><br><span class="line">                                 <span class="keyword">SELECT</span> <span class="keyword">Id</span></span><br><span class="line">                                 <span class="keyword">FROM</span> commonFile.ProcessConfigRule <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">                                 <span class="keyword">WHERE</span> ProcessConfigId <span class="keyword">IN</span> (</span><br><span class="line">                                                              <span class="keyword">SELECT</span> <span class="keyword">Id</span></span><br><span class="line">                                                              <span class="keyword">FROM</span> commonFile.ProcessConfig <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">                                                              <span class="keyword">WHERE</span> ProcessId = @ProcessId</span><br><span class="line">                                                          )</span><br><span class="line">                             );</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> commonFile.ProcessConfigRuleFileAttribute <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line"><span class="keyword">WHERE</span> ProcessConfigRuleFileId <span class="keyword">IN</span> (</span><br><span class="line">                                     <span class="keyword">SELECT</span> <span class="keyword">Id</span></span><br><span class="line">                                     <span class="keyword">FROM</span> commonFile.ProcessConfigRuleFile <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">                                     <span class="keyword">WHERE</span> ProcessConfigRuleId <span class="keyword">IN</span> (</span><br><span class="line">                                                                      <span class="keyword">SELECT</span> <span class="keyword">Id</span></span><br><span class="line">                                                                      <span class="keyword">FROM</span> commonFile.ProcessConfigRule <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">                                                                      <span class="keyword">WHERE</span> ProcessConfigId <span class="keyword">IN</span> (</span><br><span class="line">                                                                                                   <span class="keyword">SELECT</span> <span class="keyword">Id</span></span><br><span class="line">                                                                                                   <span class="keyword">FROM</span> commonFile.ProcessConfig <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">                                                                                                   <span class="keyword">WHERE</span> ProcessId = @ProcessId</span><br><span class="line">                                                                                               )</span><br><span class="line">                                                                  )</span><br><span class="line">                                 );</span><br></pre></td></tr></table></figure>
+
+<h3 id="T-2-身份证上传取数逻辑"><a href="#T-2-身份证上传取数逻辑" class="headerlink" title="T.2 身份证上传取数逻辑"></a>T.2 身份证上传取数逻辑</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> XACT_ABORT <span class="keyword">ON</span>;</span><br><span class="line"><span class="keyword">BEGIN</span> TRAN;</span><br><span class="line">IF OBJECT_ID(N'tempdb..<span class="comment">#tempProcess', N'U') IS NOT NULL</span></span><br><span class="line">    <span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="comment">#tempProcess;</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="comment">#tempProcess</span></span><br><span class="line">(</span><br><span class="line">    ProcessId <span class="built_in">INT</span> PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">    Step <span class="built_in">INT</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="comment">#tempProcess</span></span><br><span class="line">(</span><br><span class="line">    ProcessId,</span><br><span class="line">    Step</span><br><span class="line">)</span><br><span class="line"><span class="keyword">SELECT</span> TOP <span class="number">100</span></span><br><span class="line">       p.Id <span class="keyword">AS</span> ProcessId,</span><br><span class="line">       p.Step</span><br><span class="line"><span class="keyword">FROM</span> lending.VFPProcess p <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">    <span class="keyword">JOIN</span> lending.Lending l <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> p.Bid = l.Bid</span><br><span class="line">           <span class="keyword">AND</span> l.Status &lt;&gt; <span class="number">4</span></span><br><span class="line">    <span class="keyword">JOIN</span> lending.YtrustFlow f <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> p.Bid = f.Bid</span><br><span class="line">           <span class="keyword">AND</span></span><br><span class="line">           (</span><br><span class="line">               f.Id <span class="keyword">IS</span> <span class="literal">NULL</span></span><br><span class="line">               <span class="keyword">OR</span></span><br><span class="line">               (</span><br><span class="line">                   f.Step = <span class="number">10</span></span><br><span class="line">                   <span class="keyword">AND</span> f.IsDisable = <span class="number">0</span></span><br><span class="line">               )</span><br><span class="line">           )</span><br><span class="line"><span class="keyword">WHERE</span> p.IsDelete = <span class="number">0</span></span><br><span class="line">      <span class="keyword">AND</span> p.IsHangUp = <span class="number">0</span></span><br><span class="line">      <span class="keyword">AND</span> p.OperationType = <span class="number">0</span></span><br><span class="line">      <span class="keyword">AND</span> p.Step = <span class="number">0</span></span><br><span class="line">      <span class="keyword">AND</span> p.HandleCount &lt;= <span class="number">6</span></span><br><span class="line">      <span class="keyword">AND</span> p.LoanSideKey = <span class="string">'COMPANY/YNXT_LENDING'</span></span><br><span class="line">      <span class="keyword">AND</span> p.LoanKind = <span class="string">'LOANKIND/KAKADAI'</span></span><br><span class="line">      <span class="keyword">AND</span> <span class="keyword">ISNULL</span>(p.LastCurrentRunTime, <span class="keyword">DATEADD</span>(<span class="keyword">MINUTE</span>, <span class="number">-10</span>, <span class="keyword">GETDATE</span>())) &lt; <span class="keyword">DATEADD</span>(<span class="keyword">MINUTE</span>, <span class="number">-9</span>, <span class="keyword">GETDATE</span>())</span><br><span class="line">      <span class="keyword">AND</span> l.Status = <span class="number">0</span></span><br><span class="line">      <span class="keyword">AND</span> l.Suspend = <span class="number">0</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> p.Id <span class="keyword">ASC</span>;</span><br><span class="line">IF OBJECT_ID(N'tempdb..<span class="comment">#temp', N'U') IS NOT NULL</span></span><br><span class="line">    <span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="comment">#temp;</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="comment">#temp</span></span><br><span class="line">(</span><br><span class="line">    <span class="keyword">Id</span> <span class="built_in">INT</span> PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">    Bid <span class="built_in">INT</span>,</span><br><span class="line">    LoanKind <span class="built_in">VARCHAR</span>(<span class="number">100</span>),</span><br><span class="line">    LoanSideKey <span class="built_in">VARCHAR</span>(<span class="number">50</span>),</span><br><span class="line">    FundSource <span class="built_in">VARCHAR</span>(<span class="number">50</span>),</span><br><span class="line">    ThreadId <span class="keyword">NVARCHAR</span>(<span class="number">100</span>),</span><br><span class="line">    Step <span class="built_in">TINYINT</span>,</span><br><span class="line">    IsHangUp <span class="built_in">BIT</span>,</span><br><span class="line">    ApplyNo <span class="built_in">VARCHAR</span>(<span class="number">100</span>),</span><br><span class="line">    CreateTime DATETIME,</span><br><span class="line">    RequestTime DATETIME,</span><br><span class="line">    HandleCount <span class="built_in">TINYINT</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="comment">#temp</span></span><br><span class="line">(</span><br><span class="line">    <span class="keyword">Id</span>,</span><br><span class="line">    Bid,</span><br><span class="line">    LoanKind,</span><br><span class="line">    LoanSideKey,</span><br><span class="line">    FundSource,</span><br><span class="line">    ThreadId,</span><br><span class="line">    Step,</span><br><span class="line">    IsHangUp,</span><br><span class="line">    ApplyNo,</span><br><span class="line">    CreateTime,</span><br><span class="line">    RequestTime,</span><br><span class="line">    HandleCount</span><br><span class="line">)</span><br><span class="line"><span class="keyword">SELECT</span> p.Id,</span><br><span class="line">       p.Bid,</span><br><span class="line">       p.LoanKind,</span><br><span class="line">       p.LoanSideKey,</span><br><span class="line">       l.FundSource,</span><br><span class="line">       e.ThreadId,</span><br><span class="line">       p.Step,</span><br><span class="line">       p.IsHangUp,</span><br><span class="line">       e.ApplyNo,</span><br><span class="line">       p.CreateTime,</span><br><span class="line">       t.CreateTime <span class="keyword">AS</span> RequestTime,</span><br><span class="line">       p.HandleCount</span><br><span class="line"><span class="keyword">FROM</span> lending.VFPProcess p <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">    <span class="keyword">JOIN</span> <span class="comment">#tempProcess tp</span></span><br><span class="line">        <span class="keyword">ON</span> p.Id = tp.ProcessId</span><br><span class="line">    <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> lending.Lending l <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> p.Bid = l.Bid</span><br><span class="line">    <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> lending.VFPLendingInfoExtend e <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> e.BId = p.Bid</span><br><span class="line">    <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> lendingcontrol.LendingTask t <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> p.Bid = t.Bid;</span><br><span class="line"></span><br><span class="line"><span class="comment">--UPDATE p</span></span><br><span class="line"><span class="comment">--SET p.OperationType = 1,</span></span><br><span class="line"><span class="comment">--    p.UpdateTime = GETDATE()</span></span><br><span class="line"><span class="comment">--FROM lending.VFPProcess p WITH (ROWLOCK)</span></span><br><span class="line"><span class="comment">--    JOIN #temp t</span></span><br><span class="line"><span class="comment">--        ON p.Id = t.Id;</span></span><br><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> <span class="comment">#temp;</span></span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="T-3-合同上传取数逻辑"><a href="#T-3-合同上传取数逻辑" class="headerlink" title="T.3 合同上传取数逻辑"></a>T.3 合同上传取数逻辑</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> XACT_ABORT <span class="keyword">ON</span>;</span><br><span class="line"><span class="keyword">BEGIN</span> TRAN;</span><br><span class="line">IF OBJECT_ID(N'tempdb..<span class="comment">#tempProcess', N'U') IS NOT NULL</span></span><br><span class="line">    <span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="comment">#tempProcess;</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="comment">#tempProcess</span></span><br><span class="line">(</span><br><span class="line">    ProcessId <span class="built_in">INT</span> PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">    Step <span class="built_in">INT</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="comment">#tempProcess</span></span><br><span class="line">(</span><br><span class="line">    ProcessId,</span><br><span class="line">    Step</span><br><span class="line">)</span><br><span class="line"><span class="keyword">SELECT</span> TOP <span class="number">100</span></span><br><span class="line">       p.Id <span class="keyword">AS</span> ProcessId,</span><br><span class="line">       p.Step</span><br><span class="line"><span class="keyword">FROM</span> lending.VFPProcess p <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">    <span class="keyword">JOIN</span> lending.Lending l <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> p.Bid = l.Bid</span><br><span class="line">           <span class="keyword">AND</span> l.Status &lt;&gt; <span class="number">4</span></span><br><span class="line">    <span class="keyword">JOIN</span> lending.YtrustFlow f <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> p.Bid = f.Bid</span><br><span class="line">           <span class="keyword">AND</span> f.Step = <span class="number">30</span></span><br><span class="line">    <span class="keyword">JOIN</span> contract.Contract c <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> p.Bid = c.Bid</span><br><span class="line">           <span class="keyword">AND</span> c.Status <span class="keyword">IN</span> ( <span class="number">4</span>, <span class="number">50</span> )</span><br><span class="line">           <span class="keyword">AND</span> c.SignatureStatus = <span class="number">1</span></span><br><span class="line"><span class="keyword">WHERE</span> p.IsDelete = <span class="number">0</span></span><br><span class="line">      <span class="keyword">AND</span> p.IsHangUp = <span class="number">0</span></span><br><span class="line">      <span class="keyword">AND</span> p.OperationType = <span class="number">0</span></span><br><span class="line">      <span class="keyword">AND</span> p.Step = <span class="number">10</span></span><br><span class="line">      <span class="keyword">AND</span> p.HandleCount &lt;= <span class="number">6</span></span><br><span class="line">      <span class="keyword">AND</span> p.LoanSideKey = <span class="string">'COMPANY/YNXT_LENDING'</span></span><br><span class="line">      <span class="keyword">AND</span> p.LoanKind = <span class="string">'LOANKIND/KAKADAI'</span></span><br><span class="line">      <span class="keyword">AND</span> <span class="keyword">ISNULL</span>(p.LastCurrentRunTime, <span class="keyword">DATEADD</span>(<span class="keyword">MINUTE</span>, <span class="number">-10</span>, <span class="keyword">GETDATE</span>())) &lt; <span class="keyword">DATEADD</span>(<span class="keyword">MINUTE</span>, <span class="number">-9</span>, <span class="keyword">GETDATE</span>())</span><br><span class="line">      <span class="keyword">AND</span> l.Status = <span class="number">0</span></span><br><span class="line">      <span class="keyword">AND</span> l.Suspend = <span class="number">0</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> p.Id <span class="keyword">ASC</span>;</span><br><span class="line">IF OBJECT_ID(N'tempdb..<span class="comment">#temp', N'U') IS NOT NULL</span></span><br><span class="line">    <span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="comment">#temp;</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="comment">#temp</span></span><br><span class="line">(</span><br><span class="line">    <span class="keyword">Id</span> <span class="built_in">INT</span> PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">    Bid <span class="built_in">INT</span>,</span><br><span class="line">    LoanKind <span class="built_in">VARCHAR</span>(<span class="number">100</span>),</span><br><span class="line">    LoanSideKey <span class="built_in">VARCHAR</span>(<span class="number">50</span>),</span><br><span class="line">    FundSource <span class="built_in">VARCHAR</span>(<span class="number">50</span>),</span><br><span class="line">    ThreadId <span class="keyword">NVARCHAR</span>(<span class="number">100</span>),</span><br><span class="line">    Step <span class="built_in">TINYINT</span>,</span><br><span class="line">    IsHangUp <span class="built_in">BIT</span>,</span><br><span class="line">    ApplyNo <span class="built_in">VARCHAR</span>(<span class="number">100</span>),</span><br><span class="line">    CreateTime DATETIME,</span><br><span class="line">    RequestTime DATETIME,</span><br><span class="line">    HandleCount <span class="built_in">TINYINT</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="comment">#temp</span></span><br><span class="line">(</span><br><span class="line">    <span class="keyword">Id</span>,</span><br><span class="line">    Bid,</span><br><span class="line">    LoanKind,</span><br><span class="line">    LoanSideKey,</span><br><span class="line">    FundSource,</span><br><span class="line">    ThreadId,</span><br><span class="line">    Step,</span><br><span class="line">    IsHangUp,</span><br><span class="line">    ApplyNo,</span><br><span class="line">    CreateTime,</span><br><span class="line">    RequestTime,</span><br><span class="line">    HandleCount</span><br><span class="line">)</span><br><span class="line"><span class="keyword">SELECT</span> p.Id,</span><br><span class="line">       p.Bid,</span><br><span class="line">       p.LoanKind,</span><br><span class="line">       p.LoanSideKey,</span><br><span class="line">       l.FundSource,</span><br><span class="line">       e.ThreadId,</span><br><span class="line">       p.Step,</span><br><span class="line">       p.IsHangUp,</span><br><span class="line">       e.ApplyNo,</span><br><span class="line">       p.CreateTime,</span><br><span class="line">       t.CreateTime <span class="keyword">AS</span> RequestTime,</span><br><span class="line">       p.HandleCount</span><br><span class="line"><span class="keyword">FROM</span> lending.VFPProcess p <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">    <span class="keyword">JOIN</span> <span class="comment">#tempProcess tp</span></span><br><span class="line">        <span class="keyword">ON</span> p.Id = tp.ProcessId</span><br><span class="line">    <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> lending.Lending l <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> p.Bid = l.Bid</span><br><span class="line">    <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> lending.VFPLendingInfoExtend e <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> e.BId = p.Bid</span><br><span class="line">    <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> lendingcontrol.LendingTask t <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> p.Bid = t.Bid;</span><br><span class="line"></span><br><span class="line"><span class="comment">--UPDATE p</span></span><br><span class="line"><span class="comment">--SET p.OperationType = 1,</span></span><br><span class="line"><span class="comment">--    p.UpdateTime = GETDATE()</span></span><br><span class="line"><span class="comment">--FROM lending.VFPProcess p WITH (ROWLOCK)</span></span><br><span class="line"><span class="comment">--    JOIN #temp t</span></span><br><span class="line"><span class="comment">--        ON p.Id = t.Id;</span></span><br><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> <span class="comment">#temp;</span></span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="T-4-合同下载取数逻辑"><a href="#T-4-合同下载取数逻辑" class="headerlink" title="T.4 合同下载取数逻辑"></a>T.4 合同下载取数逻辑</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> XACT_ABORT <span class="keyword">ON</span>;</span><br><span class="line"><span class="keyword">BEGIN</span> TRAN;</span><br><span class="line">IF OBJECT_ID(N'tempdb..<span class="comment">#tempProcess', N'U') IS NOT NULL</span></span><br><span class="line">    <span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="comment">#tempProcess;</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="comment">#tempProcess</span></span><br><span class="line">(</span><br><span class="line">    ProcessId <span class="built_in">INT</span> PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">    Step <span class="built_in">INT</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="comment">#tempProcess</span></span><br><span class="line">(</span><br><span class="line">    ProcessId,</span><br><span class="line">    Step</span><br><span class="line">)</span><br><span class="line"><span class="keyword">SELECT</span> TOP <span class="number">100</span></span><br><span class="line">       p.Id <span class="keyword">AS</span> ProcessId,</span><br><span class="line">       p.Step</span><br><span class="line"><span class="keyword">FROM</span> lending.VFPProcess p <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">    <span class="keyword">JOIN</span> lending.Lending l <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> p.Bid = l.Bid</span><br><span class="line">           <span class="keyword">AND</span> l.Status &lt;&gt; <span class="number">4</span></span><br><span class="line">    <span class="keyword">JOIN</span> lending.YtrustFlow f <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> p.Bid = f.Bid</span><br><span class="line">           <span class="keyword">AND</span> f.Step = <span class="number">50</span></span><br><span class="line">           <span class="keyword">AND</span> f.IsDisable = <span class="number">0</span></span><br><span class="line"><span class="keyword">WHERE</span> p.IsDelete = <span class="number">0</span></span><br><span class="line">      <span class="keyword">AND</span> p.IsHangUp = <span class="number">0</span></span><br><span class="line">      <span class="keyword">AND</span> p.OperationType = <span class="number">0</span></span><br><span class="line">      <span class="keyword">AND</span> p.Step = <span class="number">40</span></span><br><span class="line">      <span class="keyword">AND</span> p.HandleCount &lt;= <span class="number">6</span></span><br><span class="line">      <span class="keyword">AND</span> p.LoanSideKey = <span class="string">'COMPANY/YNXT_LENDING'</span></span><br><span class="line">      <span class="keyword">AND</span> p.LoanKind = <span class="string">'LOANKIND/KAKADAI'</span></span><br><span class="line">      <span class="keyword">AND</span> <span class="keyword">ISNULL</span>(p.LastCurrentRunTime, <span class="keyword">DATEADD</span>(<span class="keyword">MINUTE</span>, <span class="number">-10</span>, <span class="keyword">GETDATE</span>())) &lt; <span class="keyword">DATEADD</span>(<span class="keyword">MINUTE</span>, <span class="number">-9</span>, <span class="keyword">GETDATE</span>())</span><br><span class="line">      <span class="keyword">AND</span> l.Status = <span class="number">0</span></span><br><span class="line">      <span class="keyword">AND</span> l.Suspend = <span class="number">0</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> p.Id <span class="keyword">ASC</span>;</span><br><span class="line">IF OBJECT_ID(N'tempdb..<span class="comment">#temp', N'U') IS NOT NULL</span></span><br><span class="line">    <span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="comment">#temp;</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="comment">#temp</span></span><br><span class="line">(</span><br><span class="line">    <span class="keyword">Id</span> <span class="built_in">INT</span> PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">    Bid <span class="built_in">INT</span>,</span><br><span class="line">    LoanKind <span class="built_in">VARCHAR</span>(<span class="number">100</span>),</span><br><span class="line">    LoanSideKey <span class="built_in">VARCHAR</span>(<span class="number">50</span>),</span><br><span class="line">    FundSource <span class="built_in">VARCHAR</span>(<span class="number">50</span>),</span><br><span class="line">    ThreadId <span class="keyword">NVARCHAR</span>(<span class="number">100</span>),</span><br><span class="line">    Step <span class="built_in">TINYINT</span>,</span><br><span class="line">    IsHangUp <span class="built_in">BIT</span>,</span><br><span class="line">    ApplyNo <span class="built_in">VARCHAR</span>(<span class="number">100</span>),</span><br><span class="line">    CreateTime DATETIME,</span><br><span class="line">    RequestTime DATETIME,</span><br><span class="line">    HandleCount <span class="built_in">TINYINT</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="comment">#temp</span></span><br><span class="line">(</span><br><span class="line">    <span class="keyword">Id</span>,</span><br><span class="line">    Bid,</span><br><span class="line">    LoanKind,</span><br><span class="line">    LoanSideKey,</span><br><span class="line">    FundSource,</span><br><span class="line">    ThreadId,</span><br><span class="line">    Step,</span><br><span class="line">    IsHangUp,</span><br><span class="line">    ApplyNo,</span><br><span class="line">    CreateTime,</span><br><span class="line">    RequestTime,</span><br><span class="line">    HandleCount</span><br><span class="line">)</span><br><span class="line"><span class="keyword">SELECT</span> p.Id,</span><br><span class="line">       p.Bid,</span><br><span class="line">       p.LoanKind,</span><br><span class="line">       p.LoanSideKey,</span><br><span class="line">       l.FundSource,</span><br><span class="line">       e.ThreadId,</span><br><span class="line">       p.Step,</span><br><span class="line">       p.IsHangUp,</span><br><span class="line">       e.ApplyNo,</span><br><span class="line">       p.CreateTime,</span><br><span class="line">       t.CreateTime <span class="keyword">AS</span> RequestTime,</span><br><span class="line">       p.HandleCount</span><br><span class="line"><span class="keyword">FROM</span> lending.VFPProcess p <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">    <span class="keyword">JOIN</span> <span class="comment">#tempProcess tp</span></span><br><span class="line">        <span class="keyword">ON</span> p.Id = tp.ProcessId</span><br><span class="line">    <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> lending.Lending l <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> p.Bid = l.Bid</span><br><span class="line">    <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> lending.VFPLendingInfoExtend e <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> e.BId = p.Bid</span><br><span class="line">    <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> lendingcontrol.LendingTask t <span class="keyword">WITH</span> (NOLOCK)</span><br><span class="line">        <span class="keyword">ON</span> p.Bid = t.Bid;</span><br><span class="line"></span><br><span class="line"><span class="comment">--UPDATE p</span></span><br><span class="line"><span class="comment">--SET p.OperationType = 1,</span></span><br><span class="line"><span class="comment">--    p.UpdateTime = GETDATE()</span></span><br><span class="line"><span class="comment">--FROM lending.VFPProcess p WITH (ROWLOCK)</span></span><br><span class="line"><span class="comment">--    JOIN #temp t</span></span><br><span class="line"><span class="comment">--        ON p.Id = t.Id;</span></span><br><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> <span class="comment">#temp;</span></span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="V、版本更新"><a href="#V、版本更新" class="headerlink" title="V、版本更新"></a>V、版本更新</h2><h3 id="2020-05-06"><a href="#2020-05-06" class="headerlink" title="2020-05-06"></a>2020-05-06</h3><p>文档初始化。</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>您的支持是我最大的动力！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="wankun 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="wankun 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>wankun
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/p/vbs-ir-0058/" title="VBS-IR-0058_云信放款前置流程接入文件流程">http://yoursite.com/p/vbs-ir-0058/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E6%96%87%E4%BB%B6%E6%B5%81%E7%A8%8B/" rel="tag"><i class="fa fa-tag"></i> 文件流程</a>
+              <a href="/tags/%E4%BA%91%E4%BF%A1/" rel="tag"><i class="fa fa-tag"></i> 云信</a>
+              <a href="/tags/%E4%BA%91%E4%BF%A1%E6%96%87%E4%BB%B6%E6%B5%81%E7%A8%8B/" rel="tag"><i class="fa fa-tag"></i> 云信文件流程</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/p/nas-network-frp/" rel="prev" title="nas 折腾笔记（十一）：群晖系统的使用之 Frp 内网穿透">
+      <i class="fa fa-chevron-left"></i> nas 折腾笔记（十一）：群晖系统的使用之 Frp 内网穿透
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、需求说明"><span class="nav-number">1.</span> <span class="nav-text">一、需求说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、测试说明"><span class="nav-number">2.</span> <span class="nav-text">二、测试说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-测试准备"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 测试准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-测试用例-身份证上传"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 测试用例-身份证上传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-测试用例-合同上传"><span class="nav-number">2.3.</span> <span class="nav-text">2.3  测试用例-合同上传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-测试用例-合同下载"><span class="nav-number">2.4.</span> <span class="nav-text">2.4  测试用例-合同下载</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、上线说明"><span class="nav-number">3.</span> <span class="nav-text">三、上线说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-上线代码"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 上线代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-上线项目"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 上线项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-上线配置"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 上线配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-上线脚本"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 上线脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-上线合同"><span class="nav-number">3.5.</span> <span class="nav-text">3.5 上线合同</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、线上验证"><span class="nav-number">4.</span> <span class="nav-text">四、线上验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T、附录"><span class="nav-number">5.</span> <span class="nav-text">T、附录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#T-1-获取文件流程所有相关表信息"><span class="nav-number">5.1.</span> <span class="nav-text">T.1 获取文件流程所有相关表信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#T-2-身份证上传取数逻辑"><span class="nav-number">5.2.</span> <span class="nav-text">T.2 身份证上传取数逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#T-3-合同上传取数逻辑"><span class="nav-number">5.3.</span> <span class="nav-text">T.3 合同上传取数逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#T-4-合同下载取数逻辑"><span class="nav-number">5.4.</span> <span class="nav-text">T.4 合同下载取数逻辑</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#V、版本更新"><span class="nav-number">6.</span> <span class="nav-text">V、版本更新</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-05-06"><span class="nav-number">6.1.</span> <span class="nav-text">2020-05-06</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wankun"
+      src="http://img2.kungge.com/content/dog.jpg">
+  <p class="site-author-name" itemprop="name">wankun</p>
+  <div class="site-description" itemprop="description">生活是一门艺术,更是一门技术</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kungge" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kungge" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kunzhongzhong@163.com" title="E-Mail → mailto:kunzhongzhong@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">赣ICP备16000944号-1 </a>
+      <img src="http://img2.kungge.com/content/beian.png" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wankun</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'WS9yN0bdMnmWCTEGdPtRjty5-gzGzoHsz',
+      appKey     : 'rJRpp7BgWk5zx9WdsdFbPUXQ',
+      placeholder: "Just go go",
+      avatar     : 'monsterid',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

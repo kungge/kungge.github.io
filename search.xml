@@ -1,68 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello by hexo new command</title>
-    <url>/2020/03/29/Hello-by-hexo-new-command/</url>
-    <content><![CDATA[<p>这里是文章内容。。。</p>
-<p>草稿<br>刚刚提到了 Hexo 的一种特殊布局：draft，这种布局在建立时会被保存到 source/_drafts 文件夹，您可通过 publish 命令将草稿移动到 source/_posts 文件夹，该命令的使用方式与 new 十分类似，您也可在命令中指定 layout 来指定布局。</p>
-]]></content>
-      <categories>
-        <category>类别1</category>
-        <category>类别2</category>
-        <category>类别2-1</category>
-        <category>类别2-2</category>
-        <category>类别3</category>
-      </categories>
-      <tags>
-        <tag>标签1</tag>
-        <tag>标签2</tag>
-        <tag>标签3</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>VBS-IR-0058_云信放款前置流程接入文件流程</title>
-    <url>/2020/05/08/VBS-IR-0058.README/</url>
-    <content><![CDATA[<p>[ArticlePostInfo]</p>
-<p><strong>目录</strong></p>
-<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
-
-<!-- code_chunk_output -->
-
-<ul>
-<li><a href="#一-需求说明">一、需求说明</a></li>
-<li><a href="#二-测试说明">二、测试说明</a><ul>
-<li><a href="#21-测试准备">2.1 测试准备</a></li>
-<li><a href="#22-测试用例-身份证上传">2.2 测试用例-身份证上传</a></li>
-<li><a href="#23-测试用例-合同上传">2.3  测试用例-合同上传</a></li>
-<li><a href="#24-测试用例-合同下载">2.4  测试用例-合同下载</a></li>
-</ul>
-</li>
-<li><a href="#三-上线说明">三、上线说明</a><ul>
-<li><a href="#31-上线代码">3.1 上线代码</a></li>
-<li><a href="#32-上线项目">3.2 上线项目</a></li>
-<li><a href="#33-上线配置">3.3 上线配置</a></li>
-<li><a href="#34-上线脚本">3.4 上线脚本</a></li>
-<li><a href="#35-上线合同">3.5 上线合同</a></li>
-</ul>
-</li>
-<li><a href="#四-线上验证">四、线上验证</a></li>
-<li><a href="#t-附录">T、附录</a><ul>
-<li><a href="#t1-获取文件流程所有相关表信息">T.1 获取文件流程所有相关表信息</a></li>
-<li><a href="#t2-身份证上传取数逻辑">T.2 身份证上传取数逻辑</a></li>
-<li><a href="#t3-合同上传取数逻辑">T.3 合同上传取数逻辑</a></li>
-<li><a href="#t4-合同下载取数逻辑">T.4 合同下载取数逻辑</a></li>
-</ul>
-</li>
-<li><a href="#v-版本更新">V、版本更新</a><ul>
-<li><a href="#2020-05-06">2020-05-06</a></li>
-</ul>
-</li>
-</ul>
-<!-- /code_chunk_output -->
-
-<br>
-
-<h2 id="一、需求说明"><a href="#一、需求说明" class="headerlink" title="一、需求说明"></a>一、需求说明</h2><table>
+    <url>/p/vbs-ir-0058/</url>
+    <content><![CDATA[<h2 id="一、需求说明"><a href="#一、需求说明" class="headerlink" title="一、需求说明"></a>一、需求说明</h2><table>
 <thead>
 <tr>
 <th>标题</th>
@@ -191,8 +132,68 @@
       </tags>
   </entry>
   <entry>
+    <title>frp 内网穿透实战（一）：远程桌面连接 windows</title>
+    <url>/p/frp-remote-desk/</url>
+    <content><![CDATA[<h1 id="frp-内网穿透实战（一）：远程桌面连接-windows"><a href="#frp-内网穿透实战（一）：远程桌面连接-windows" class="headerlink" title="frp 内网穿透实战（一）：远程桌面连接 windows"></a>frp 内网穿透实战（一）：远程桌面连接 windows</h1><!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
+
+<!-- code_chunk_output -->
+
+<ul>
+<li><a href="#一-部署">一、部署</a><ul>
+<li><a href="#11-服务端部署">1.1 服务端部署</a></li>
+<li><a href="#12-客户端部署">1.2 客户端部署</a></li>
+</ul>
+</li>
+<li><a href="#二-测试">二、测试</a></li>
+<li><a href="#三-知识点">三、知识点</a></li>
+</ul>
+<!-- /code_chunk_output -->
+
+<br>
+
+<p>frp github 中文文档：<a href="https://github.com/fatedier/frp/blob/master/README_zh.md" target="_blank" rel="noopener">https://github.com/fatedier/frp/blob/master/README_zh.md</a></p>
+<p>release 下载：<a href="https://github.com/fatedier/frp/releases" target="_blank" rel="noopener">https://github.com/fatedier/frp/releases</a></p>
+<p><em>注：服务器端和客户端下载的版本要保持一致。</em></p>
+<p>本次下载的版本是【v0.31.2】：<a href="https://github.com/fatedier/frp/releases/tag/v0.31.2" target="_blank" rel="noopener">https://github.com/fatedier/frp/releases/tag/v0.31.2</a></p>
+<p>本次演示的是通过 frp 内网穿透，在远程连接一台windows电脑。</p>
+<h2 id="一、部署"><a href="#一、部署" class="headerlink" title="一、部署"></a>一、部署</h2><p>部署分为服务器端和客户端，服务器是阿里云的一台 CentOS 云服务器，客户机就是本地一台 windows。</p>
+<h3 id="1-1-服务端部署"><a href="#1-1-服务端部署" class="headerlink" title="1.1 服务端部署"></a>1.1 服务端部署</h3><p>本次下载的文件是【frp_0.31.2_linux_amd64.tar.gz】。</p>
+<p>因为用到了服务器默认是 7000 端口，需要在防火墙中开启，如果是云服务器则只需要在安全组的入站方向增加一个端口即可。<br>由于下面客户端配置的端口是 6000 ，因此一起加上：</p>
+<p><img src="content/2020-03-24_232349.png" alt="2323"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 将文件上传到服务器</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压压缩包</span></span><br><span class="line">tar -zxvf frp_0.31.2_linux_amd64.tar.gz</span><br><span class="line">​</span><br><span class="line"><span class="comment"># 进入目录</span></span><br><span class="line"><span class="built_in">cd</span> frp_0.31.2_linux_amd64</span><br><span class="line">​</span><br><span class="line"><span class="comment"># 设置后台运行frp服务端</span></span><br><span class="line">nohup ./frps -c ./frps.ini &amp;</span><br></pre></td></tr></table></figure>
+
+<p>查看 nohub.out 日志：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@VM_0_7_centos frp_0.31.2_linux_amd64]<span class="comment"># cat nohup.out </span></span><br><span class="line">2020/03/24 22:48:05 [I] [service.go:152] frps tcp listen on 0.0.0.0:7000</span><br><span class="line">2020/03/24 22:48:05 [I] [root.go:205] start frps success</span><br><span class="line">[root@VM_0_7_centos frp_0.31.2_linux_amd64]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p>服务端启动成功。</p>
+<h3 id="1-2-客户端部署"><a href="#1-2-客户端部署" class="headerlink" title="1.2 客户端部署"></a>1.2 客户端部署</h3><p>本次下载的文件是【frp_0.31.2_windows_386.zip】。</p>
+<p>解压目录，修改 frpc.ini 文件：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr &#x3D; 111.X.X.34</span><br><span class="line">server_port &#x3D; 7000</span><br><span class="line"></span><br><span class="line">[ssh]</span><br><span class="line">type &#x3D; tcp</span><br><span class="line">local_ip &#x3D; 127.0.0.1</span><br><span class="line">local_port &#x3D; 3389</span><br><span class="line">remote_port &#x3D; 6000</span><br></pre></td></tr></table></figure>
+
+<p>进入解压的根目录，输入命令 <code>frpc -c frpc.ini</code> ：</p>
+<p><img src="content/2020-03-24_231655.png" alt="2317"></p>
+<p>客户端启动成功。</p>
+<p>开启远程桌面功能：</p>
+<p><img src="content/2020-03-24_230259.png" alt="2318"></p>
+<h2 id="二、测试"><a href="#二、测试" class="headerlink" title="二、测试"></a>二、测试</h2><p>找一台非局域网的电脑远程连接上面部署的电脑：</p>
+<p><img src="content/2020-03-24_230744.png" alt="2325"></p>
+<p>校验了用户名或密码错误，出现了这个说明连接到了，下面输入正确的用户名密码：</p>
+<p><img src="content/2020-03-24_230925.png" alt="2326"></p>
+<p>连接成功。</p>
+<p>如有域名的话，可以将域名解析到这个公网服务器ip，然后通过【域名+端口】访问。</p>
+<h2 id="三、知识点"><a href="#三、知识点" class="headerlink" title="三、知识点"></a>三、知识点</h2>]]></content>
+      <categories>
+        <category>网络</category>
+      </categories>
+      <tags>
+        <tag>frp</tag>
+        <tag>内网穿透</tag>
+        <tag>远程桌面</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
-    <url>/2020/03/29/hello-world/</url>
+    <url>/p/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 
@@ -210,45 +211,8 @@
   </entry>
   <entry>
     <title>Hexo 实战（二）：Hexo 基本设置</title>
-    <url>/2020/03/30/hexo.2020032901/</url>
-    <content><![CDATA[<p><strong>目录</strong></p>
-<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
-
-<!-- code_chunk_output -->
-
-<ul>
-<li><a href="#一-hexo-站点配置文件">一、Hexo 站点配置文件</a><ul>
-<li><a href="#11-使用主题-next">1.1 使用主题 NexT</a></li>
-<li><a href="#12-网站信息配置">1.2 网站信息配置</a></li>
-<li><a href="#13-写作">1.3 写作</a></li>
-</ul>
-</li>
-<li><a href="#二-next-主题基本配置">二、NexT 主题基本配置</a><ul>
-<li><a href="#21-schemes-配置">2.1 Schemes 配置</a></li>
-<li><a href="#22-菜单配置">2.2 菜单配置</a></li>
-<li><a href="#23-侧栏配置">2.3 侧栏配置</a></li>
-<li><a href="#24-友情链接配置">2.4 友情链接配置</a></li>
-<li><a href="#25-站点建立时间配置">2.5 站点建立时间配置</a></li>
-</ul>
-</li>
-<li><a href="#三-页面添加">三、页面添加</a><ul>
-<li><a href="#31-分类页面添加">3.1 分类页面添加</a></li>
-<li><a href="#32-标签页面添加">3.2 标签页面添加</a></li>
-<li><a href="#34-404页面添加">3.4 404页面添加</a></li>
-<li><a href="#35-关于我页面添加">3.5 关于我页面添加</a></li>
-</ul>
-</li>
-<li><a href="#p-常见问题">P、常见问题</a><ul>
-<li><a href="#p1-网站中文乱码">P1 网站中文乱码</a></li>
-<li><a href="#p2-yml-可读性差">P2 .yml 可读性差</a></li>
-</ul>
-</li>
-</ul>
-<!-- /code_chunk_output -->
-
-<a id="more"></a>
-
-<h2 id="一、Hexo-站点配置文件"><a href="#一、Hexo-站点配置文件" class="headerlink" title="一、Hexo 站点配置文件"></a>一、Hexo 站点配置文件</h2><p>官方关于配置的文档：<a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/configuration</a></p>
+    <url>/p/hexo-base/</url>
+    <content><![CDATA[<h2 id="一、Hexo-站点配置文件"><a href="#一、Hexo-站点配置文件" class="headerlink" title="一、Hexo 站点配置文件"></a>一、Hexo 站点配置文件</h2><p>官方关于配置的文档：<a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/configuration</a></p>
 <p>网站的配置信息在文件 _config.yml 中，完整的初始配置信息（除了修改 Deployment）如下：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Hexo Configuration</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/configuration.html</span></span><br><span class="line"><span class="comment">## Source: https://github.com/hexojs/hexo/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Site</span></span><br><span class="line">title: Hexo</span><br><span class="line">subtitle: <span class="string">''</span></span><br><span class="line">description: <span class="string">''</span></span><br><span class="line">keywords:</span><br><span class="line">author: John Doe</span><br><span class="line">language: en</span><br><span class="line">timezone: <span class="string">''</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># URL</span></span><br><span class="line"><span class="comment">## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'</span></span><br><span class="line">url: http://yoursite.com</span><br><span class="line">root: /</span><br><span class="line">permalink: :year/:month/:day/:title/</span><br><span class="line">permalink_defaults:</span><br><span class="line">pretty_urls:</span><br><span class="line">  trailing_index: <span class="literal">true</span> <span class="comment"># Set to false to remove trailing 'index.html' from permalinks</span></span><br><span class="line">  trailing_html: <span class="literal">true</span> <span class="comment"># Set to false to remove trailing '.html' from permalinks</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Directory</span></span><br><span class="line">source_dir: <span class="built_in">source</span></span><br><span class="line">public_dir: public</span><br><span class="line">tag_dir: tags</span><br><span class="line">archive_dir: archives</span><br><span class="line">category_dir: categories</span><br><span class="line">code_dir: downloads/code</span><br><span class="line">i18n_dir: :lang</span><br><span class="line">skip_render:</span><br><span class="line"></span><br><span class="line"><span class="comment"># Writing</span></span><br><span class="line">new_post_name: :title.md <span class="comment"># File name of new posts</span></span><br><span class="line">default_layout: post</span><br><span class="line">titlecase: <span class="literal">false</span> <span class="comment"># Transform title into titlecase</span></span><br><span class="line">external_link:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span> <span class="comment"># Open external links in new tab</span></span><br><span class="line">  field: site <span class="comment"># Apply to the whole site</span></span><br><span class="line">  exclude: <span class="string">''</span></span><br><span class="line">filename_case: 0</span><br><span class="line">render_drafts: <span class="literal">false</span></span><br><span class="line">post_asset_folder: <span class="literal">false</span></span><br><span class="line">relative_link: <span class="literal">false</span></span><br><span class="line">future: <span class="literal">true</span></span><br><span class="line">highlight:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  line_number: <span class="literal">true</span></span><br><span class="line">  auto_detect: <span class="literal">false</span></span><br><span class="line">  tab_replace: <span class="string">''</span></span><br><span class="line">  wrap: <span class="literal">true</span></span><br><span class="line">  hljs: <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Home page setting</span></span><br><span class="line"><span class="comment"># path: Root path for your blogs index page. (default = '')</span></span><br><span class="line"><span class="comment"># per_page: Posts displayed per page. (0 = disable pagination)</span></span><br><span class="line"><span class="comment"># order_by: Posts order. (Order by date descending by default)</span></span><br><span class="line">index_generator:</span><br><span class="line">  path: <span class="string">''</span></span><br><span class="line">  per_page: 10</span><br><span class="line">  order_by: -date</span><br><span class="line"></span><br><span class="line"><span class="comment"># Category &amp; Tag</span></span><br><span class="line">default_category: uncategorized</span><br><span class="line">category_map:</span><br><span class="line">tag_map:</span><br><span class="line"></span><br><span class="line"><span class="comment"># Metadata elements</span></span><br><span class="line"><span class="comment">## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta</span></span><br><span class="line">meta_generator: <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Date / Time format</span></span><br><span class="line"><span class="comment">## Hexo uses Moment.js to parse and display date</span></span><br><span class="line"><span class="comment">## You can customize the date format as defined in</span></span><br><span class="line"><span class="comment">## http://momentjs.com/docs/#/displaying/format/</span></span><br><span class="line">date_format: YYYY-MM-DD</span><br><span class="line">time_format: HH:mm:ss</span><br><span class="line"><span class="comment">## Use post's date for updated date unless set in front-matter</span></span><br><span class="line">use_date_for_updated: <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Pagination</span></span><br><span class="line"><span class="comment">## Set per_page to 0 to disable pagination</span></span><br><span class="line">per_page: 10</span><br><span class="line">pagination_dir: page</span><br><span class="line"></span><br><span class="line"><span class="comment"># Include / Exclude file(s)</span></span><br><span class="line"><span class="comment">## include:/exclude: options only apply to the 'source/' folder</span></span><br><span class="line">include:</span><br><span class="line">exclude:</span><br><span class="line">ignore:</span><br><span class="line"></span><br><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"><span class="comment">## Plugins: https://hexo.io/plugins/</span></span><br><span class="line"><span class="comment">## Themes: https://hexo.io/themes/</span></span><br><span class="line">theme: landscape</span><br><span class="line"></span><br><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://github.com/kungge/kungge.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
 
@@ -473,26 +437,8 @@
   </entry>
   <entry>
     <title>nas 折腾笔记（七）： 群晖系统的使用之 Zerotier 实现内网穿透</title>
-    <url>/2020/05/05/nas.2020050505/</url>
-    <content><![CDATA[<p><strong>目录</strong></p>
-<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
-
-<!-- code_chunk_output -->
-
-<ul>
-<li><a href="#内网穿透原理">内网穿透原理</a></li>
-<li><a href="#注册登录-zerotier">注册登录 zerotier</a></li>
-<li><a href="#创建网络">创建网络</a></li>
-<li><a href="#安装群晖版客户端">安装群晖版客户端</a></li>
-<li><a href="#群晖版客户端连接-zerotier-网络">群晖版客户端连接 zerotier 网络</a></li>
-<li><a href="#安装-windows-版客户端并连接-zerotier-网络">安装 windows 版客户端并连接 zerotier 网络</a></li>
-<li><a href="#测试连接">测试连接</a></li>
-</ul>
-<!-- /code_chunk_output -->
-
-<br>
-
-<p>前面讲到路由器端口转发，但是需要公网IP，如果没有公网IP的话可以考虑内网穿透。</p>
+    <url>/p/nas-network/</url>
+    <content><![CDATA[<p>前面讲到路由器端口转发，但是需要公网IP，如果没有公网IP的话可以考虑内网穿透。</p>
 <h2 id="内网穿透原理"><a href="#内网穿透原理" class="headerlink" title="内网穿透原理"></a>内网穿透原理</h2><p>百度百科的解释：内网穿透，也即 NAT 穿透，进行 NAT 穿透是为了使具有某一个特定源 IP 地址和源端口号的数据包不被 NAT 设备屏蔽而正确路由到内网主机。</p>
 <p>简单点说就是让外部能访问某局域网内没有公网IP的计算机。</p>
 <p>ngrok和frp 反向代理型。<br>zerotier 点对点的型。</p>
@@ -581,28 +527,16 @@
         <category>nas</category>
       </categories>
       <tags>
+        <tag>内网穿透</tag>
         <tag>群晖</tag>
         <tag>dsm</tag>
         <tag>端口转发</tag>
-        <tag>内网穿透</tag>
       </tags>
   </entry>
   <entry>
     <title>nas 折腾笔记（八）： 群晖系统的使用之 Video Station</title>
-    <url>/2020/05/05/nas.2020050506/</url>
-    <content><![CDATA[<p><strong>目录</strong></p>
-<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
-
-<!-- code_chunk_output -->
-
-<ul>
-<li><a href="#播放失败">播放失败</a></li>
-<li><a href="#关于洗白问题">关于洗白问题</a></li>
-</ul>
-<!-- /code_chunk_output -->
-
-
-<h2 id="播放失败"><a href="#播放失败" class="headerlink" title="播放失败"></a>播放失败</h2><p>一直在转：</p>
+    <url>/p/nas-video-station/</url>
+    <content><![CDATA[<h2 id="播放失败"><a href="#播放失败" class="headerlink" title="播放失败"></a>播放失败</h2><p>一直在转：</p>
 <p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_214629.png" alt="20200505214648"></p>
 <p>应该是转码的问题，网上搜了下：</p>
 <p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_214744.png" alt="20200505214758"></p>
@@ -626,22 +560,8 @@
   </entry>
   <entry>
     <title>nas 折腾笔记（九）： 群晖系统的使用之 Monments</title>
-    <url>/2020/05/05/nas.2020050507/</url>
-    <content><![CDATA[<p><strong>目录</strong></p>
-<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
-
-<!-- code_chunk_output -->
-
-<ul>
-<li><a href="#安装">安装</a></li>
-<li><a href="#手机端登录">手机端登录</a></li>
-<li><a href="#电脑端使用">电脑端使用</a></li>
-<li><a href="#异常问题">异常问题</a></li>
-</ul>
-<!-- /code_chunk_output -->
-
-
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221026.png" alt="20200505221320"></p>
+    <url>/p/nas-monments/</url>
+    <content><![CDATA[<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221026.png" alt="20200505221320"></p>
 <p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221136.png" alt="20200505221331"></p>
 <p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221455.png" alt="20200505221506"></p>
 <p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_221529.png" alt="20200505221542"></p>
@@ -666,46 +586,9 @@
       </tags>
   </entry>
   <entry>
-    <title>标题</title>
-    <url>/2020/05/05/nas.2020050508/</url>
-    <content><![CDATA[<p><strong>目录</strong></p>
-<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
-
-<!-- code_chunk_output -->
-
-<ul>
-<li><a href="#套件安装">套件安装</a></li>
-<li><a href="#windows-客户端">windows 客户端</a></li>
-<li><a href="#iphone-客户端">iPhone 客户端</a></li>
-</ul>
-<!-- /code_chunk_output -->
-
-
-<h2 id="套件安装"><a href="#套件安装" class="headerlink" title="套件安装"></a>套件安装</h2><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_224248.png" alt="20200505231348"></p>
-<h2 id="windows-客户端"><a href="#windows-客户端" class="headerlink" title="windows 客户端"></a>windows 客户端</h2><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_231409.png" alt="20200505231443"></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_231228.png" alt="20200505231500"></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_232235.png" alt="20200505232207"></p>
-<h2 id="iPhone-客户端"><a href="#iPhone-客户端" class="headerlink" title="iPhone 客户端"></a>iPhone 客户端</h2><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_231753.png" alt="20200505231802"></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_231642.png" alt="20200505231816"></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_231653.png" alt="20200505231832"></p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_231705.png" alt="20200505231842"></p>
-<p>手机端上传：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-05_231939.png" alt="20200505231948"></p>
-]]></content>
-      <categories>
-        <category>nas</category>
-      </categories>
-      <tags>
-        <tag>群晖</tag>
-        <tag>dsm</tag>
-        <tag>套件</tag>
-        <tag>Drive</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>nas 折腾笔记（十一）：群晖系统的使用之 Frp 内网穿透</title>
-    <url>/2020/05/06/nas.2020050509/</url>
-    <content><![CDATA[<p>服务端部署参考我的另一篇文章：<a href="frp.2020032301.md">frp 内网穿透实战（一）：远程桌面连接 windows</a></p>
+    <url>/p/nas-network-frp/</url>
+    <content><![CDATA[<p>服务端部署参考我的另一篇文章：<a href="/p/frp-remote-desk/">frp 内网穿透实战（一）：远程桌面连接 windows</a></p>
 <p>使用命令 <code>wget http://kungge.com/assist/frp_0.31.2_linux_amd64.tar.gz</code> 下载 frp 包，然后将包移动至目录【/usr/local/】下，进入该目录解压，进入解压的目录：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@Synology:~<span class="comment"># mv -f frp_0.31.2_linux_amd64.tar.gz /usr/local/</span></span><br><span class="line">root@Synology:~<span class="comment"># cd /usr/local/</span></span><br><span class="line">root@Synology:/usr/<span class="built_in">local</span><span class="comment"># ls</span></span><br><span class="line">bin  etc  frp_0.31.2_linux_amd64.tar.gz  lib  libexec  node  packages  share  SynologyApplicationService  transmission  zerotier</span><br><span class="line">root@Synology:/usr/<span class="built_in">local</span><span class="comment"># tar -zxvf frp_0.31.2_linux_amd64.tar.gz </span></span><br><span class="line">frp_0.31.2_linux_amd64/</span><br><span class="line">frp_0.31.2_linux_amd64/frps_full.ini</span><br><span class="line">frp_0.31.2_linux_amd64/frps.ini</span><br><span class="line">frp_0.31.2_linux_amd64/frpc</span><br><span class="line">frp_0.31.2_linux_amd64/frpc_full.ini</span><br><span class="line">frp_0.31.2_linux_amd64/frps</span><br><span class="line">frp_0.31.2_linux_amd64/LICENSE</span><br><span class="line">frp_0.31.2_linux_amd64/frpc.ini</span><br><span class="line">frp_0.31.2_linux_amd64/systemd/</span><br><span class="line">frp_0.31.2_linux_amd64/systemd/frpc@.service</span><br><span class="line">frp_0.31.2_linux_amd64/systemd/frpc.service</span><br><span class="line">frp_0.31.2_linux_amd64/systemd/frps.service</span><br><span class="line">frp_0.31.2_linux_amd64/systemd/frps@.service</span><br><span class="line">root@Synology:/usr/<span class="built_in">local</span><span class="comment"># cd frp_0.31.2_linux_amd64</span></span><br></pre></td></tr></table></figure>
 
@@ -733,11 +616,11 @@
         <category>nas</category>
       </categories>
       <tags>
+        <tag>frp</tag>
+        <tag>内网穿透</tag>
         <tag>群晖</tag>
         <tag>dsm</tag>
-        <tag>内网穿透</tag>
         <tag>套件</tag>
-        <tag>frp</tag>
       </tags>
   </entry>
 </search>

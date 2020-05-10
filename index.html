@@ -18,7 +18,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="生活是一门艺术,更是一门技术">
@@ -212,10 +212,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/08/VBS-IR-0058.README/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/p/vbs-ir-0058/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
       <meta itemprop="name" content="wankun">
       <meta itemprop="description" content="生活是一门艺术,更是一门技术">
     </span>
@@ -226,7 +226,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/05/08/VBS-IR-0058.README/" class="post-title-link" itemprop="url">VBS-IR-0058_云信放款前置流程接入文件流程</a>
+            <a href="/p/vbs-ir-0058/" class="post-title-link" itemprop="url">VBS-IR-0058_云信放款前置流程接入文件流程</a>
         </h2>
 
         <div class="post-meta">
@@ -243,7 +243,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-09 18:23:14" itemprop="dateModified" datetime="2020-05-09T18:23:14+08:00">2020-05-09</time>
+                <time title="修改时间：2020-05-10 18:33:45" itemprop="dateModified" datetime="2020-05-10T18:33:45+08:00">2020-05-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -264,8 +264,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/05/08/VBS-IR-0058.README/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/08/VBS-IR-0058.README/" itemprop="commentCount"></span>
+    <a title="valine" href="/p/vbs-ir-0058/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/vbs-ir-0058/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -280,32 +280,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          [ArticlePostInfo]
-
-目录
-
- * 一、需求说明
- * 二、测试说明 * 2.1 测试准备
-    * 2.2 测试用例-身份证上传
-    * 2.3 测试用例-合同上传
-    * 2.4 测试用例-合同下载
-   
-   
- * 三、上线说明 * 3.1 上线代码
-    * 3.2 上线项目
-    * 3.3 上线配置
-    * 3.4 上线脚本
-    * 3.5 上线合同
-   
-   
- * 四、线上验证
- * T、附录 * T.1 获取文件流程所有相关表信息
-    * T.2 身份证上传取数逻辑
-    * T.3 合同上传取数逻辑
-    * T.4 合
+          一、需求说明
+标题云信放款前置流程接入文件流程重要性重要改动程序名称外贸影像件上传改动程序代码地址1. 云信盖章程序：YnxtThirdEstampConsole：https://10.10.250.74/svn/Loan/trunk/VBS_Service/盖章服务/盖章服务/Cn.Vcredit.YnxtThirdEstampConsole 
+2. 云信windows服务程序：https://10.10.250.74/svn/Loan/trunk/VBS_Service/Cn.Vcredit.Ytrust.API/YtrustService目标产品范围卡卡和豆豆影响程序范围云信盖章程序和云
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/05/08/VBS-IR-0058.README/#more" rel="contents">
+              <a class="btn" href="/p/vbs-ir-0058/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -329,10 +309,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/06/nas.2020050509/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/p/nas-network-frp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
       <meta itemprop="name" content="wankun">
       <meta itemprop="description" content="生活是一门艺术,更是一门技术">
     </span>
@@ -343,7 +323,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/05/06/nas.2020050509/" class="post-title-link" itemprop="url">nas 折腾笔记（十一）：群晖系统的使用之 Frp 内网穿透</a>
+            <a href="/p/nas-network-frp/" class="post-title-link" itemprop="url">nas 折腾笔记（十一）：群晖系统的使用之 Frp 内网穿透</a>
         </h2>
 
         <div class="post-meta">
@@ -352,10 +332,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-05-06 00:02:19 / 修改时间：23:15:43" itemprop="dateCreated datePublished" datetime="2020-05-06T00:02:19+08:00">2020-05-06</time>
+              <time title="创建时间：2020-05-06 00:02:19" itemprop="dateCreated datePublished" datetime="2020-05-06T00:02:19+08:00">2020-05-06</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-10 19:14:53" itemprop="dateModified" datetime="2020-05-10T19:14:53+08:00">2020-05-10</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -375,8 +361,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/05/06/nas.2020050509/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/06/nas.2020050509/" itemprop="commentCount"></span>
+    <a title="valine" href="/p/nas-network-frp/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/nas-network-frp/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -420,7 +406,7 @@ root@Synology:~# mv -f frp_0.31.2_linux_amd64.tar.gz /usr/local/
 root@Synology:~# cd /usr
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/05/06/nas.2020050509/#more" rel="contents">
+              <a class="btn" href="/p/nas-network-frp/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -444,10 +430,10 @@ root@Synology:~# cd /usr
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/05/nas.2020050508/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/p/nas-monments/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
       <meta itemprop="name" content="wankun">
       <meta itemprop="description" content="生活是一门艺术,更是一门技术">
     </span>
@@ -458,127 +444,7 @@ root@Synology:~# cd /usr
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/05/05/nas.2020050508/" class="post-title-link" itemprop="url">标题</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-05 23:12:59" itemprop="dateCreated datePublished" datetime="2020-05-05T23:12:59+08:00">2020-05-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-06 23:15:36" itemprop="dateModified" datetime="2020-05-06T23:15:36+08:00">2020-05-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/nas/" itemprop="url" rel="index"><span itemprop="name">nas</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/05/05/nas.2020050508/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/05/nas.2020050508/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          目录
-
- * 套件安装
- * windows 客户端
- * iPhone 客户端
-
-套件安装
-
-
-windows 客户端
-
-
-
-
-
-
-iPhone 客户端
-
-
-
-
-
-
-
-
-手机端上传：
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/05/nas.2020050508/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/05/nas.2020050507/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活是一门艺术,更是一门技术">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="坤哥博客小站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/05/nas.2020050507/" class="post-title-link" itemprop="url">nas 折腾笔记（九）： 群晖系统的使用之 Monments</a>
+            <a href="/p/nas-monments/" class="post-title-link" itemprop="url">nas 折腾笔记（九）： 群晖系统的使用之 Monments</a>
         </h2>
 
         <div class="post-meta">
@@ -595,7 +461,7 @@ iPhone 客户端
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-06 23:16:17" itemprop="dateModified" datetime="2020-05-06T23:16:17+08:00">2020-05-06</time>
+                <time title="修改时间：2020-05-10 18:33:54" itemprop="dateModified" datetime="2020-05-10T18:33:54+08:00">2020-05-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -616,8 +482,8 @@ iPhone 客户端
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/05/05/nas.2020050507/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/05/nas.2020050507/" itemprop="commentCount"></span>
+    <a title="valine" href="/p/nas-monments/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/nas-monments/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -632,14 +498,7 @@ iPhone 客户端
     <div class="post-body" itemprop="articleBody">
 
       
-          目录
-
- * 安装
- * 手机端登录
- * 电脑端使用
- * 异常问题
-
-安装
+          安装
 
 
 
@@ -669,7 +528,7 @@ iPhone 客户端
 异常问题
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/05/05/nas.2020050507/#more" rel="contents">
+              <a class="btn" href="/p/nas-monments/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -693,10 +552,10 @@ iPhone 客户端
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/05/nas.2020050506/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/p/nas-video-station/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
       <meta itemprop="name" content="wankun">
       <meta itemprop="description" content="生活是一门艺术,更是一门技术">
     </span>
@@ -707,7 +566,7 @@ iPhone 客户端
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/05/05/nas.2020050506/" class="post-title-link" itemprop="url">nas 折腾笔记（八）： 群晖系统的使用之 Video Station</a>
+            <a href="/p/nas-video-station/" class="post-title-link" itemprop="url">nas 折腾笔记（八）： 群晖系统的使用之 Video Station</a>
         </h2>
 
         <div class="post-meta">
@@ -724,7 +583,7 @@ iPhone 客户端
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-06 23:17:16" itemprop="dateModified" datetime="2020-05-06T23:17:16+08:00">2020-05-06</time>
+                <time title="修改时间：2020-05-10 18:34:01" itemprop="dateModified" datetime="2020-05-10T18:34:01+08:00">2020-05-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -745,8 +604,8 @@ iPhone 客户端
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/05/05/nas.2020050506/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/05/nas.2020050506/" itemprop="commentCount"></span>
+    <a title="valine" href="/p/nas-video-station/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/nas-video-station/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -761,12 +620,7 @@ iPhone 客户端
     <div class="post-body" itemprop="articleBody">
 
       
-          目录
-
- * 播放失败
- * 关于洗白问题
-
-播放失败
+          播放失败
 一直在转：
 
 
@@ -790,7 +644,7 @@ iPhone 客户端
 关于洗白问题
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/05/05/nas.2020050506/#more" rel="contents">
+              <a class="btn" href="/p/nas-video-station/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -814,10 +668,10 @@ iPhone 客户端
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/05/nas.2020050505/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/p/nas-network/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
       <meta itemprop="name" content="wankun">
       <meta itemprop="description" content="生活是一门艺术,更是一门技术">
     </span>
@@ -828,7 +682,7 @@ iPhone 客户端
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/05/05/nas.2020050505/" class="post-title-link" itemprop="url">nas 折腾笔记（七）： 群晖系统的使用之 Zerotier 实现内网穿透</a>
+            <a href="/p/nas-network/" class="post-title-link" itemprop="url">nas 折腾笔记（七）： 群晖系统的使用之 Zerotier 实现内网穿透</a>
         </h2>
 
         <div class="post-meta">
@@ -845,7 +699,7 @@ iPhone 客户端
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-06 23:17:04" itemprop="dateModified" datetime="2020-05-06T23:17:04+08:00">2020-05-06</time>
+                <time title="修改时间：2020-05-10 18:34:07" itemprop="dateModified" datetime="2020-05-10T18:34:07+08:00">2020-05-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -866,8 +720,8 @@ iPhone 客户端
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/05/05/nas.2020050505/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/05/nas.2020050505/" itemprop="commentCount"></span>
+    <a title="valine" href="/p/nas-network/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/nas-network/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -882,18 +736,7 @@ iPhone 客户端
     <div class="post-body" itemprop="articleBody">
 
       
-          目录
-
- * 内网穿透原理
- * 注册登录 zerotier
- * 创建网络
- * 安装群晖版客户端
- * 群晖版客户端连接 zerotier 网络
- * 安装 windows 版客户端并连接 zerotier 网络
- * 测试连接
-
-
-前面讲到路由器端口转发，但是需要公网IP，如果没有公网IP的话可以考虑内网穿透。
+          前面讲到路由器端口转发，但是需要公网IP，如果没有公网IP的话可以考虑内网穿透。
 
 内网穿透原理
 百度百科的解释：内网穿透，也即 NAT 穿透，进行 NAT 穿透是为了使具有某一个特定源 IP 地址和源端口号的数据包不被 NAT 设备屏蔽而正确路由到内网主机。
@@ -901,10 +744,35 @@ iPhone 客户端
 简单点说就是让外部能访问某局域网内没有公网IP的计算机。
 
 ngrok和frp 反向代理型。
-ze
+zerotier 点对点的型。
+
+注册登录 zerotier
+点击登录：
+
+
+
+点击注册：
+
+
+
+输入基本信息：
+
+
+
+登录邮箱验证：
+
+
+
+
+
+注册成功后账户信息：
+
+
+
+API Access Tokens 是开发者使用的，这里暂不使用，其
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/05/05/nas.2020050505/#more" rel="contents">
+              <a class="btn" href="/p/nas-network/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -928,10 +796,10 @@ ze
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/30/hexo.2020032901/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/p/frp-remote-desk/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
       <meta itemprop="name" content="wankun">
       <meta itemprop="description" content="生活是一门艺术,更是一门技术">
     </span>
@@ -942,7 +810,117 @@ ze
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/30/hexo.2020032901/" class="post-title-link" itemprop="url">Hexo 实战（二）：Hexo 基本设置</a>
+            <a href="/p/frp-remote-desk/" class="post-title-link" itemprop="url">frp 内网穿透实战（一）：远程桌面连接 windows</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-13 20:39:51" itemprop="dateCreated datePublished" datetime="2020-04-13T20:39:51+08:00">2020-04-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-10 18:32:11" itemprop="dateModified" datetime="2020-05-10T18:32:11+08:00">2020-05-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">网络</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/p/frp-remote-desk/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/frp-remote-desk/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          frp 内网穿透实战（一）：远程桌面连接 windows
+ * 一、部署 * 1.1 服务端部署
+    * 1.2 客户端部署
+   
+   
+ * 二、测试
+ * 三、知识点
+
+
+frp github 中文文档：https://github.com/fatedier/frp/blob/master/README_zh.md
+
+release 下载：https://github.com/fatedier/frp/releases
+
+注：服务器端和客户端下载的版本要保持一致。
+
+本次下载的版本是【v0.31.2】：https://github.com/fatedier/frp/releases
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/p/frp-remote-desk/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/p/hexo-base/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
+      <meta itemprop="name" content="wankun">
+      <meta itemprop="description" content="生活是一门艺术,更是一门技术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坤哥博客小站">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/p/hexo-base/" class="post-title-link" itemprop="url">Hexo 实战（二）：Hexo 基本设置</a>
         </h2>
 
         <div class="post-meta">
@@ -959,7 +937,7 @@ ze
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-08 23:40:53" itemprop="dateModified" datetime="2020-05-08T23:40:53+08:00">2020-05-08</time>
+                <time title="修改时间：2020-05-10 18:34:17" itemprop="dateModified" datetime="2020-05-10T18:34:17+08:00">2020-05-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -980,8 +958,8 @@ ze
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/03/30/hexo.2020032901/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/30/hexo.2020032901/" itemprop="commentCount"></span>
+    <a title="valine" href="/p/hexo-base/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/hexo-base/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -996,31 +974,77 @@ ze
     <div class="post-body" itemprop="articleBody">
 
       
-          目录
+          一、Hexo 站点配置文件
+官方关于配置的文档：https://hexo.io/zh-cn/docs/configuration
 
- * 一、Hexo 站点配置文件 * 1.1 使用主题 NexT
-    * 1.2 网站信息配置
-    * 1.3 写作
-   
-   
- * 二、NexT 主题基本配置 * 2.1 Schemes 配置
-    * 2.2 菜单配置
-    * 2.3 侧栏配置
-    * 2.4 友情链接配置
-    * 2.5 站点建立时间配置
-   
-   
- * 三、页面添加 * 3.1 分类页面添加
-    * 3.2 标签页面添加
-    * 3.4 404页面添加
-    * 3.5 关于我页面添加
-   
-   
- * P、常见问题 * P1 网站中文乱码
-    * P2 .y
+网站的配置信息在文件 _config.yml 中，完整的初始配置信息（除了修改 Deployment）如下：
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+6
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/03/30/hexo.2020032901/#more" rel="contents">
+              <a class="btn" href="/p/hexo-base/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1044,10 +1068,10 @@ ze
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/29/Hello-by-hexo-new-command/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/p/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
       <meta itemprop="name" content="wankun">
       <meta itemprop="description" content="生活是一门艺术,更是一门技术">
     </span>
@@ -1058,121 +1082,7 @@ ze
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/29/Hello-by-hexo-new-command/" class="post-title-link" itemprop="url">Hello by hexo new command</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-29 01:09:05" itemprop="dateCreated datePublished" datetime="2020-03-29T01:09:05+08:00">2020-03-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-31 23:10:05" itemprop="dateModified" datetime="2020-03-31T23:10:05+08:00">2020-03-31</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%B1%BB%E5%88%AB1/" itemprop="url" rel="index"><span itemprop="name">类别1</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%B1%BB%E5%88%AB2/" itemprop="url" rel="index"><span itemprop="name">类别2</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%B1%BB%E5%88%AB2/%E7%B1%BB%E5%88%AB2-1/" itemprop="url" rel="index"><span itemprop="name">类别2-1</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%B1%BB%E5%88%AB2/%E7%B1%BB%E5%88%AB2-2/" itemprop="url" rel="index"><span itemprop="name">类别2-2</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%B1%BB%E5%88%AB3/" itemprop="url" rel="index"><span itemprop="name">类别3</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/03/29/Hello-by-hexo-new-command/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/29/Hello-by-hexo-new-command/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          这里是文章内容。。。
-
-草稿
-刚刚提到了 Hexo 的一种特殊布局：draft，这种布局在建立时会被保存到 source/_drafts 文件夹，您可通过 publish 命令将草稿移动到 source/_posts 文件夹，该命令的使用方式与 new 十分类似，您也可在命令中指定 layout 来指定布局。
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/03/29/Hello-by-hexo-new-command/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/29/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活是一门艺术,更是一门技术">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="坤哥博客小站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/29/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+            <a href="/p/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
         </h2>
 
         <div class="post-meta">
@@ -1184,6 +1094,13 @@ ze
 
               <time title="创建时间：2020-03-29 00:51:27" itemprop="dateCreated datePublished" datetime="2020-03-29T00:51:27+08:00">2020-03-29</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-10 18:34:20" itemprop="dateModified" datetime="2020-05-10T18:34:20+08:00">2020-05-10</time>
+              </span>
 
           
   
@@ -1194,8 +1111,8 @@ ze
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/03/29/hello-world/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/29/hello-world/" itemprop="commentCount"></span>
+    <a title="valine" href="/p/hello-world/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/hello-world/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -1229,7 +1146,7 @@ Run server
 $ hexo s
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/03/29/hello-world/#more" rel="contents">
+              <a class="btn" href="/p/hello-world/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1308,6 +1225,8 @@ $ hexo s
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wankun"
+      src="http://img2.kungge.com/content/dog.jpg">
   <p class="site-author-name" itemprop="name">wankun</p>
   <div class="site-description" itemprop="description">生活是一门艺术,更是一门技术</div>
 </div>
@@ -1316,20 +1235,20 @@ $ hexo s
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1341,6 +1260,9 @@ $ hexo s
       <span class="links-of-author-item">
         <a href="mailto:kunzhongzhong@163.com" title="E-Mail → mailto:kunzhongzhong@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
   </div>
 
 
@@ -1366,14 +1288,14 @@ $ hexo s
 
 <div class="copyright">
   
-  &copy; 
+  &copy; 2019 – 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">wankun</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
 
         
@@ -1469,7 +1391,7 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
       appId      : 'WS9yN0bdMnmWCTEGdPtRjty5-gzGzoHsz',
       appKey     : 'rJRpp7BgWk5zx9WdsdFbPUXQ',
       placeholder: "Just go go",
-      avatar     : 'mm',
+      avatar     : 'monsterid',
       meta       : guest,
       pageSize   : '10' || 10,
       visitor    : false,
