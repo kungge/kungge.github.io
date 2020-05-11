@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/smiley_lock_32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/smiley_lock_16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="<meta name="baidu-site-verification" content="xSB5shU7SK" />">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-material.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.kungge.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Hexo 是使用 Node.js 技术实现的静态博客框架，依赖很少，安装非常简单，可以将 markdown 文件生成博客文章，而 且可以将生成的静态内容发布到 Github 上。  本次使用的操作系统是 Windows，在 Linux 上操作类似。  一、环境准备 1.1 安装 git 下载地址：https:&#x2F;&#x2F;git-scm.com&#x2F;download&#x2F;win  本次下载安装的文件是【Git-2.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo 实战（一）：搭建开源博客系统 Hexo，并将其部署到 GitHub">
+<meta property="og:url" content="http://blog.kungge.com/p/hexo-create-github/index.html">
+<meta property="og:site_name" content="坤哥的博客小站">
+<meta property="og:description" content="Hexo 是使用 Node.js 技术实现的静态博客框架，依赖很少，安装非常简单，可以将 markdown 文件生成博客文章，而 且可以将生成的静态内容发布到 Github 上。  本次使用的操作系统是 Windows，在 Linux 上操作类似。  一、环境准备 1.1 安装 git 下载地址：https:&#x2F;&#x2F;git-scm.com&#x2F;download&#x2F;win  本次下载安装的文件是【Git-2.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-29_212329.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-29_010139.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-29_010630.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-29_010648.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-29_010936.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-29_010959.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-29_211234.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-30_203410.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-29_215644.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-29_222602.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-29_222710.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-29_222726.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-29_224043.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-29_232554.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-29_225412.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-30_001637.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-08_225323.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-08_225514.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-08_225542.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-08_225728.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-29_002023.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-29_004703.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-29_211540.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-29_212858.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-29_224648.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-29_225202.png">
+<meta property="article:published_time" content="2020-03-28T15:03:13.000Z">
+<meta property="article:modified_time" content="2020-05-11T15:42:37.269Z">
+<meta property="article:author" content="wankun">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="hexo 搭建">
+<meta property="article:tag" content="hexo 部署">
+<meta property="article:tag" content="github">
+<meta property="article:tag" content="hexo 实战">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-29_212329.png">
+
+<link rel="canonical" href="http://blog.kungge.com/p/hexo-create-github/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Hexo 实战（一）：搭建开源博客系统 Hexo，并将其部署到 GitHub | 坤哥的博客小站</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">坤哥的博客小站</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个热爱生活的90后</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404.html" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/hexo-create-github/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
+      <meta itemprop="name" content="wankun">
+      <meta itemprop="description" content="生活一门技术，更是一门艺术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坤哥的博客小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hexo 实战（一）：搭建开源博客系统 Hexo，并将其部署到 GitHub
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-28 23:03:13" itemprop="dateCreated datePublished" datetime="2020-03-28T23:03:13+08:00">2020-03-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-11 23:42:37" itemprop="dateModified" datetime="2020-05-11T23:42:37+08:00">2020-05-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BC%80%E6%BA%90%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index"><span itemprop="name">开源博客</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/p/hexo-create-github/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/hexo-create-github/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Hexo 是使用 Node.js 技术实现的静态博客框架，依赖很少，安装非常简单，可以将 markdown 文件生成博客文章，而<br>且可以将生成的静态内容发布到 Github 上。</p>
+<p>本次使用的操作系统是 Windows，在 Linux 上操作类似。</p>
+<h2 id="一、环境准备"><a href="#一、环境准备" class="headerlink" title="一、环境准备"></a>一、环境准备</h2><h3 id="1-1-安装-git"><a href="#1-1-安装-git" class="headerlink" title="1.1 安装 git"></a>1.1 安装 git</h3><p>下载地址：<a href="https://git-scm.com/download/win" target="_blank" rel="noopener">https://git-scm.com/download/win</a></p>
+<p>本次下载安装的文件是【Git-2.22.0-64-bit.exe】。</p>
+<p>安装完成后在命令窗口输入命令 <code>git --version</code> 验证是否安装成功，如下能输出 git 版本说明安装成功：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Administrator&gt;git --version</span><br><span class="line">git version 2.22.0.windows.1</span><br></pre></td></tr></table></figure>
+
+<p>在鼠标右键也会有 git 操作的显示：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_212329.png" alt="2123"></p>
+<h3 id="1-2-安装-Node-js"><a href="#1-2-安装-Node-js" class="headerlink" title="1.2 安装 Node.js"></a>1.2 安装 Node.js</h3><p>下载地址：<a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">https://nodejs.org/en/download/</a></p>
+<p>本次下载安装的文件是【node-v12.16.1-x64.msi】。</p>
+<p>安装完成后在命令窗口输入命令 <code>node -v</code> 验证是否安装成功，如下能输出 node 版本说明安装成功：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Administrator&gt;node -v</span><br><span class="line">v12.16.1</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、安装-Hexo"><a href="#二、安装-Hexo" class="headerlink" title="二、安装 Hexo"></a>二、安装 Hexo</h2><p>使用命令 <code>npm install -g hexo-cli</code> 安装 Hexo。</p>
+<p>使用命令 <code>hexo init blog</code> 初始化博客：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_010139.png" alt="2054"></p>
+<p>如上已初始化完成，目录结构如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>_config.yml：网站配置信息文件</li>
+<li>package.json：应用程序的信息</li>
+<li>scaffolds：目标目录</li>
+<li>source：存放用户资源的目录，除 _posts 文件夹之外，开头命名为 _ (下划线)的文件 / 文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 public 文件夹，而其他文件会被拷贝过去。</li>
+<li>themes：主题目录，hexo 会根据主题来生成静态页面</li>
+</ul>
+<h2 id="三、基本使用-hexo"><a href="#三、基本使用-hexo" class="headerlink" title="三、基本使用 hexo"></a>三、基本使用 hexo</h2><p>进入 blog 文件夹，使用命令 <code>hexo server</code> （可简写 <code>hexo s</code>）启动服务：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_010630.png" alt="2057"></p>
+<p>如上 hexo 博客系统服务已启动完成，浏览器输入地址 <code>http://localhost:4000</code> 访问：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_010648.png" alt="2059"></p>
+<p>系统默认新建了一个 Hello World 博文，其实这个博客就是目录【source/_posts】中文件为【hello-world.md】的内容，使用命令 <code>hexo new &quot;Hello by hexo newcommand&quot;</code> 则会在该目录中新增一个文件【Hello-by-hexo-new-command.md】：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_010936.png" alt="2101"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\Special\Test\HexoTest\blog&gt;hexo new <span class="string">"Hello by hexo new command"</span></span><br><span class="line">INFO  Created: C:\Special\Test\HexoTest\blog\<span class="built_in">source</span>\_posts\Hello-by-hexo-new-command.md</span><br></pre></td></tr></table></figure>
+
+<p>就会在博客系统中产生一篇名为【Hello by hexo newcommand】的博文：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_010959.png" alt="2102"></p>
+<p>直接在目录中【source/_posts】拷贝过来一个文件，如【frp.2020032301.md】，Hexo 检测到有文件就会在博客系统中生成一篇博文与文件名相同的博文，如：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_211234.png" alt="0329"></p>
+<p>如果是多层目录，也会对应生成多层路径如：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-30_203410.png" alt="2034"></p>
+<h2 id="四、结合-GitHub-使用"><a href="#四、结合-GitHub-使用" class="headerlink" title="四、结合 GitHub 使用"></a>四、结合 GitHub 使用</h2><h3 id="4-1-GitHub-创建个人仓库"><a href="#4-1-GitHub-创建个人仓库" class="headerlink" title="4.1 GitHub 创建个人仓库"></a>4.1 GitHub 创建个人仓库</h3><p>登录 GitHub ,新建仓库（New repository）,在 Repository name 输入【你的用户名.github.io】，这样配置在后面部署到 GitHub 时就能被失败，如：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_215644.png" alt="2327"></p>
+<h3 id="4-2-Git-与-GitHub-帐号绑定"><a href="#4-2-Git-与-GitHub-帐号绑定" class="headerlink" title="4.2 Git 与 GitHub 帐号绑定"></a>4.2 Git 与 GitHub 帐号绑定</h3><ol>
+<li>配置 git 全局的的用户名和邮箱</li>
+</ol>
+<p>将 git 全局的的用户名和邮箱配置成 GitHub：</p>
+<blockquote>
+<ol>
+<li>使用命令 <code>git config --global user.name &quot;你的GitHub用户名&quot;</code> 配置 git 全局的的用户名。</li>
+<li>使用命令 <code>git config --global user.email &quot;你的GitHub使用的邮箱&quot;</code> 配置 git 全局的的邮箱。</li>
+</ol>
+</blockquote>
+<p>范例如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Administrator@ecs-x-large-2-win-20200316202505 MINGW64 ~</span><br><span class="line">$ git config --global user.name <span class="string">"kungge"</span></span><br><span class="line"></span><br><span class="line">Administrator@ecs-x-large-2-win-20200316202505 MINGW64 ~</span><br><span class="line">$ git config --global user.email <span class="string">"kunggewan@hotmail.com"</span></span><br><span class="line"></span><br><span class="line">Administrator@ecs-x-large-2-win-20200316202505 MINGW64 ~</span><br><span class="line">$ git config user.name</span><br><span class="line">kungge</span><br><span class="line"></span><br><span class="line">Administrator@ecs-x-large-2-win-20200316202505 MINGW64 ~</span><br><span class="line">$ git config user.email</span><br><span class="line">kunggewan@hotmail.com</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>生成密钥</li>
+</ol>
+<p>使用命令 <code>ssh-keygen -t rsa -C &quot;kunggewan@hotmail.com&quot;</code> 后一直回车即可，范例如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Administrator@ecs-x-large-2-win-20200316202505 MINGW64 ~</span><br><span class="line">$ ssh-keygen -t rsa -C <span class="string">"kunggewan@hotmail.com"</span></span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file <span class="keyword">in</span> <span class="built_in">which</span> to save the key (/c/Users/Administrator/.ssh/id_rsa):</span><br><span class="line">Enter passphrase (empty <span class="keyword">for</span> no passphrase):</span><br><span class="line">Enter same passphrase again:</span><br><span class="line">Your identification has been saved <span class="keyword">in</span> /c/Users/Administrator/.ssh/id_rsa.</span><br><span class="line">Your public key has been saved <span class="keyword">in</span> /c/Users/Administrator/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:97THjWf3vbYf4BpwOfUra/sz/Sr0gk8SFNEU9RotcM0 kunggewan@hotmail.com</span><br><span class="line">The key<span class="string">'s randomart image is:</span></span><br><span class="line"><span class="string">+---[RSA 3072]----+</span></span><br><span class="line"><span class="string">|          o++ooo |</span></span><br><span class="line"><span class="string">|           ..o oE|</span></span><br><span class="line"><span class="string">|          .  .o o|</span></span><br><span class="line"><span class="string">|         .  o .+ |</span></span><br><span class="line"><span class="string">|        S.o+.... |</span></span><br><span class="line"><span class="string">|         .o++o.o.|</span></span><br><span class="line"><span class="string">|          .++++o*|</span></span><br><span class="line"><span class="string">|          .o=o+**|</span></span><br><span class="line"><span class="string">|           oo===%|</span></span><br><span class="line"><span class="string">+----[SHA256]-----+</span></span><br></pre></td></tr></table></figure>
+
+<p>这样就在目录【C:\Users\你的用户名.ssh】中生成密钥，如【C:\Users\Administrator.ssh】中：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_222602.png" alt="2309"></p>
+<ol start="3">
+<li>将生成的密钥更新到 GitHub 上</li>
+</ol>
+<p>打开 GitHub settings 下的 【SSH and GPG keys】，然后添加 SSH Key，Title 自取，Key 的内容为上面生成的文件【id_rsa.pub】的内容：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_222710.png" alt="2312"></p>
+<p>点击【Add SSH Key】后会在列表中显示新增的 SSH Key，如：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_222726.png" alt="2316"></p>
+<ol start="4">
+<li>验证是否成功</li>
+</ol>
+<p>使用命令 <code>ssh -T git@github.com</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Administrator@ecs-x-large-2-win-20200316202505 MINGW64 /c/Special/Test/HexoTest/blog</span><br><span class="line">$ ssh -T git@github.com</span><br><span class="line">The authenticity of host <span class="string">'github.com (52.74.223.119)'</span> can<span class="string">'t be established.</span></span><br><span class="line"><span class="string">RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCsp***TxdCARLviKw6E5SY8.</span></span><br><span class="line"><span class="string">Are you sure you want to continue connecting (yes/no/[fingerprint])? yes</span></span><br><span class="line"><span class="string">Warning: Permanently added '</span>github.com,52.74.223.119<span class="string">' (RSA) to the list of known hosts.</span></span><br><span class="line"><span class="string">Hi kungge! You'</span>ve successfully authenticated, but GitHub does not provide shell access.</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-将-Hexo-部署到-GitHub"><a href="#4-3-将-Hexo-部署到-GitHub" class="headerlink" title="4.3 将 Hexo 部署到 GitHub"></a>4.3 将 Hexo 部署到 GitHub</h3><p>打开配置文件【_config.yml】，将 deploy 节点下内容修改如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https:&#x2F;&#x2F;github.com&#x2F;kungge&#x2F;kungge.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<p>repo 为你上面创建的项目仓库地址。</p>
+<p>安装 git 部署插件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">C:\Special\Test\HexoTest\blog&gt;npm install hexo-deployer-git --save</span><br><span class="line">npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.1.2 (node_modules\fsevents):</span><br><span class="line">npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform <span class="keyword">for</span> fsevents@2.1.2: wanted &#123;<span class="string">"os"</span>:<span class="string">"darwin"</span>,<span class="string">"arch"</span>:<span class="string">"any"</span>&#125; (current: &#123;<span class="string">"os"</span>:<span class="string">"win32"</span>,<span class="string">"arch"</span>:<span class="string">"x64"</span>&#125;)</span><br><span class="line"></span><br><span class="line">+ hexo-deployer-git@2.1.0</span><br><span class="line">added 1 package from 1 contributor and audited 570 packages <span class="keyword">in</span> 3.271s</span><br><span class="line"></span><br><span class="line">5 packages are looking <span class="keyword">for</span> funding</span><br><span class="line">  run `npm fund` <span class="keyword">for</span> details</span><br><span class="line"></span><br><span class="line">found 2 low severity vulnerabilities</span><br><span class="line">  run `npm audit fix` to fix them, or `npm audit` <span class="keyword">for</span> details</span><br></pre></td></tr></table></figure>
+
+<p>然后分别执行如下命令：</p>
+<ul>
+<li><code>hexo clean</code>：清除</li>
+<li><code>hexo generate</code>，可简写成 <code>hexo g</code>：生成静态内容</li>
+<li><code>hexo deploy</code>，可简写成 <code>hexo d</code>：部署文章</li>
+</ul>
+<p>执行部署命令 <code>hexo deploy</code> 时，会要求输入 GitHub 的用户名和密码：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_224043.png" alt="2324"></p>
+<br>
+
+<p>登录确认，如果出现如下则表示部署成功：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_232554.png" alt="2325"></p>
+<p><em>注：如果失败可参考【P.3 部署到 GitHub 失败】解决。</em></p>
+<p>如下已部署到 GitHub 成功：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_225412.png" alt="2254"></p>
+<p>查看 GitHub 仓库代码可看到静态页面已经发布过来了：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-30_001637.png" alt="0017"></p>
+<h2 id="五、绑定域名"><a href="#五、绑定域名" class="headerlink" title="五、绑定域名"></a>五、绑定域名</h2><h3 id="5-1-域名解析设置"><a href="#5-1-域名解析设置" class="headerlink" title="5.1 域名解析设置"></a>5.1 域名解析设置</h3><p>进入域名控制台，本次使用的华为云，添加记录集，主机记录，如果是主域名，则使用 www，如果是二级域名则使用二级域名名称，如 blog，类型选择 CNAME，值就是你的 github 博客网站项目地址，如 <code>kungge.github.com</code>：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-08_225323.png" alt="20200508230714"></p>
+<p>这个时候如果直接访问你的域名还是会404报错：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-08_225514.png" alt="20200508230831"></p>
+<h3 id="5-2-github-设置"><a href="#5-2-github-设置" class="headerlink" title="5.2 github 设置"></a>5.2 github 设置</h3><p>进入你的项目，点击 Settings 进入设置页面：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-08_225542.png" alt="20200508231343"></p>
+<p>在 GitHub Pages 一栏中找到 Custom domain 然后在文本框中输入你的域名，点击 save 即可：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-08_225728.png" alt="20200508231455"></p>
+<p>其实这个时候就可以通过访问域名来访问网站了。</p>
+<h3 id="5-3-本地博客设置"><a href="#5-3-本地博客设置" class="headerlink" title="5.3 本地博客设置"></a>5.3 本地博客设置</h3><p>在本地博客的 blog/source  目录中，创建一个记事本，内容输入你的域名，如本次为 blog.kungge.com，保存为 CNAME 文件名称，不要带后缀。</p>
+<p>然后使用如下三个命令来重新生成内容并部署到 Github。</p>
+<h2 id="P、常见问题"><a href="#P、常见问题" class="headerlink" title="P、常见问题"></a>P、常见问题</h2><h3 id="P1-安装-hexo-出错"><a href="#P1-安装-hexo-出错" class="headerlink" title="P1 安装 hexo 出错"></a>P1 安装 hexo 出错</h3><p>使用命令 <code>npm install -g hexo-cli</code> 后，再使用的时候报 git 不是内部或外部命令：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_002023.png" alt="2025"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_004703.png" alt="2026"></p>
+<p>解决办法：重新删除目录重来。</p>
+<h3 id="P2-图片解析不出来"><a href="#P2-图片解析不出来" class="headerlink" title="P2 图片解析不出来"></a>P2 图片解析不出来</h3><p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_211540.png" alt="0329"></p>
+<p>可以将图片放置在目录【source】，这样图片就能显示出来：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_212858.png" alt="2130"></p>
+<p>但是这样肯定不行，当图片不哦多时则会占据大量的存储空间，文章加载时候会变慢，而且md文件过多图片过多，这个目录就会变得很大，难于维护。</p>
+<p>可以使用图床解决这个问题，图片存储在云存储中，如阿里云存储、又拍云存储等第三方的文件存储服务，使用的使用使用图片链接地址即可，如在 markdown 中就可以这样使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![2323](http:&#x2F;&#x2F;img.kungge.com&#x2F;a&#x2F;2020-03-24_232349.png)</span><br></pre></td></tr></table></figure>
+
+<h3 id="P3-部署到-GitHub-失败"><a href="#P3-部署到-GitHub-失败" class="headerlink" title="P3 部署到 GitHub 失败"></a>P3 部署到 GitHub 失败</h3><p>使用命令 <code>hexo d</code> 部署如出现访问git地址失败，如： </p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_224648.png" alt="2247"></p>
+<p>解决：重新使用命令 <code>hexo d</code> 则会在命令窗口要求输入 github 的用户和密码，回车即可：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_225202.png" alt="2252"></p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>您的支持是我最大的动力！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="wankun 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="wankun 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>wankun
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://blog.kungge.com/p/hexo-create-github/" title="Hexo 实战（一）：搭建开源博客系统 Hexo，并将其部署到 GitHub">http://blog.kungge.com/p/hexo-create-github/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/hexo/" rel="tag"><i class="fa fa-tag"></i> hexo</a>
+              <a href="/tags/hexo-%E6%90%AD%E5%BB%BA/" rel="tag"><i class="fa fa-tag"></i> hexo 搭建</a>
+              <a href="/tags/hexo-%E9%83%A8%E7%BD%B2/" rel="tag"><i class="fa fa-tag"></i> hexo 部署</a>
+              <a href="/tags/github/" rel="tag"><i class="fa fa-tag"></i> github</a>
+              <a href="/tags/hexo-%E5%AE%9E%E6%88%98/" rel="tag"><i class="fa fa-tag"></i> hexo 实战</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/p/frp-linux-web/" rel="prev" title="frp 内网穿透实战（二）：linux 连接和 web 访问">
+      <i class="fa fa-chevron-left"></i> frp 内网穿透实战（二）：linux 连接和 web 访问
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/p/hexo-base/" rel="next" title="Hexo 实战（二）：Hexo 基本设置">
+      Hexo 实战（二）：Hexo 基本设置 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、环境准备"><span class="nav-number">1.</span> <span class="nav-text">一、环境准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-安装-git"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 安装 git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-安装-Node-js"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 安装 Node.js</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、安装-Hexo"><span class="nav-number">2.</span> <span class="nav-text">二、安装 Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、基本使用-hexo"><span class="nav-number">3.</span> <span class="nav-text">三、基本使用 hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、结合-GitHub-使用"><span class="nav-number">4.</span> <span class="nav-text">四、结合 GitHub 使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-GitHub-创建个人仓库"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 GitHub 创建个人仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-Git-与-GitHub-帐号绑定"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 Git 与 GitHub 帐号绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-将-Hexo-部署到-GitHub"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 将 Hexo 部署到 GitHub</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、绑定域名"><span class="nav-number">5.</span> <span class="nav-text">五、绑定域名</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-域名解析设置"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 域名解析设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-github-设置"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 github 设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-本地博客设置"><span class="nav-number">5.3.</span> <span class="nav-text">5.3 本地博客设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P、常见问题"><span class="nav-number">6.</span> <span class="nav-text">P、常见问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#P1-安装-hexo-出错"><span class="nav-number">6.1.</span> <span class="nav-text">P1 安装 hexo 出错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#P2-图片解析不出来"><span class="nav-number">6.2.</span> <span class="nav-text">P2 图片解析不出来</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#P3-部署到-GitHub-失败"><span class="nav-number">6.3.</span> <span class="nav-text">P3 部署到 GitHub 失败</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wankun"
+      src="http://img2.kungge.com/content/dog.jpg">
+  <p class="site-author-name" itemprop="name">wankun</p>
+  <div class="site-description" itemprop="description">生活一门技术，更是一门艺术</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kungge" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kungge" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kunzhongzhong@163.com" title="E-Mail → mailto:kunzhongzhong@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">赣ICP备16000944号-1 </a>
+      <img src="http://img2.kungge.com/content/beian.png" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wankun</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'WS9yN0bdMnmWCTEGdPtRjty5-gzGzoHsz',
+      appKey     : 'rJRpp7BgWk5zx9WdsdFbPUXQ',
+      placeholder: "Just go go",
+      avatar     : 'monsterid',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

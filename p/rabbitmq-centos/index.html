@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/smiley_lock_32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/smiley_lock_16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="<meta name="baidu-site-verification" content="xSB5shU7SK" />">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-material.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.kungge.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="一、环境安装 RabbitMQ 是 Erlang 语言开发的，所以需要先安装该语言环境，而该语言又需要很多依赖。  1.1 安装依赖 使用命令 yum install gcc gcc-c++ glibc-devel make ncurses-devel openssl-devel autoconf java-1.8.0-openjdk-devel git wget wxBase.x86_64 安装">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RabbitMQ 实战笔记（一）：CentOS 7 安装 RabbitMQ">
+<meta property="og:url" content="http://blog.kungge.com/p/rabbitmq-centos/index.html">
+<meta property="og:site_name" content="坤哥的博客小站">
+<meta property="og:description" content="一、环境安装 RabbitMQ 是 Erlang 语言开发的，所以需要先安装该语言环境，而该语言又需要很多依赖。  1.1 安装依赖 使用命令 yum install gcc gcc-c++ glibc-devel make ncurses-devel openssl-devel autoconf java-1.8.0-openjdk-devel git wget wxBase.x86_64 安装">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://blog.kungge.com/p/rabbitmq-centos/content/2020-04-06_194847.png">
+<meta property="og:image" content="http://blog.kungge.com/p/rabbitmq-centos/content/2020-04-06_203123.png">
+<meta property="og:image" content="http://blog.kungge.com/p/rabbitmq-centos/content/2020-04-06_204819.png">
+<meta property="og:image" content="http://blog.kungge.com/p/rabbitmq-centos/content/2020-04-06_203310.png">
+<meta property="article:published_time" content="2020-04-06T08:39:51.000Z">
+<meta property="article:modified_time" content="2020-05-11T15:04:42.825Z">
+<meta property="article:author" content="wankun">
+<meta property="article:tag" content="rabbitmq">
+<meta property="article:tag" content="消息队列">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.kungge.com/p/rabbitmq-centos/content/2020-04-06_194847.png">
+
+<link rel="canonical" href="http://blog.kungge.com/p/rabbitmq-centos/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>RabbitMQ 实战笔记（一）：CentOS 7 安装 RabbitMQ | 坤哥的博客小站</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">坤哥的博客小站</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个热爱生活的90后</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404.html" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/rabbitmq-centos/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
+      <meta itemprop="name" content="wankun">
+      <meta itemprop="description" content="生活一门技术，更是一门艺术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坤哥的博客小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          RabbitMQ 实战笔记（一）：CentOS 7 安装 RabbitMQ
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-06 16:39:51" itemprop="dateCreated datePublished" datetime="2020-04-06T16:39:51+08:00">2020-04-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-11 23:04:42" itemprop="dateModified" datetime="2020-05-11T23:04:42+08:00">2020-05-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" itemprop="url" rel="index"><span itemprop="name">消息队列</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/p/rabbitmq-centos/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/rabbitmq-centos/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="一、环境安装"><a href="#一、环境安装" class="headerlink" title="一、环境安装"></a>一、环境安装</h2><p>RabbitMQ 是 Erlang 语言开发的，所以需要先安装该语言环境，而该语言又需要很多依赖。</p>
+<h3 id="1-1-安装依赖"><a href="#1-1-安装依赖" class="headerlink" title="1.1 安装依赖"></a>1.1 安装依赖</h3><p>使用命令 <code>yum install gcc gcc-c++ glibc-devel make ncurses-devel openssl-devel autoconf java-1.8.0-openjdk-devel git wget wxBase.x86_64</code> 安装需要的依赖：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># yum install gcc gcc-c++ glibc-devel make ncurses-devel openssl-devel autoconf java-1.8.0-openjdk-devel git wget wxBase.x86_64</span></span><br><span class="line">...</span><br><span class="line">Installed:</span><br><span class="line">  autoconf.noarch 0:2.69-11.el7                                       git.x86_64 0:1.8.3.1-21.el7_7                           </span><br><span class="line">  java-1.8.0-openjdk-devel.x86_64 1:1.8.0.242.b08-0.el7_7             ncurses-devel.x86_64 0:5.9-14.20130511.el7_4            </span><br><span class="line">  openssl-devel.x86_64 1:1.0.2k-19.el7                               </span><br><span class="line"></span><br><span class="line">Dependency Installed:</span><br><span class="line">  keyutils-libs-devel.x86_64 0:1.5.8-3.el7   krb5-devel.x86_64 0:1.15.1-37.el7_7.2   libcom_err-devel.x86_64 0:1.42.9-16.el7  </span><br><span class="line">  libverto-devel.x86_64 0:0.2.5-4.el7        m4.x86_64 0:1.4.16-10.el7               perl-Data-Dumper.x86_64 0:2.145-3.el7    </span><br><span class="line">  perl-Error.noarch 1:0.17020-2.el7          perl-Git.noarch 0:1.8.3.1-21.el7_7      perl-TermReadKey.x86_64 0:2.30-20.el7    </span><br><span class="line">  zlib-devel.x86_64 0:1.2.7-18.el7          </span><br><span class="line"></span><br><span class="line">Updated:</span><br><span class="line">  glibc-devel.x86_64 0:2.17-292.el7             make.x86_64 1:3.82-24.el7             wget.x86_64 0:1.14-18.el7_6.1            </span><br><span class="line"></span><br><span class="line">Dependency Updated:</span><br><span class="line">  copy-jdk-configs.noarch 0:3.3-10.el7_5                    e2fsprogs.x86_64 0:1.42.9-16.el7                                  </span><br><span class="line">  e2fsprogs-libs.x86_64 0:1.42.9-16.el7                     glibc.x86_64 0:2.17-292.el7                                       </span><br><span class="line">  glibc-common.x86_64 0:2.17-292.el7                        glibc-headers.x86_64 0:2.17-292.el7                               </span><br><span class="line">  java-1.8.0-openjdk.x86_64 1:1.8.0.242.b08-0.el7_7         java-1.8.0-openjdk-headless.x86_64 1:1.8.0.242.b08-0.el7_7        </span><br><span class="line">  krb5-libs.x86_64 0:1.15.1-37.el7_7.2                      krb5-workstation.x86_64 0:1.15.1-37.el7_7.2                       </span><br><span class="line">  libcom_err.x86_64 0:1.42.9-16.el7                         libkadm5.x86_64 0:1.15.1-37.el7_7.2                               </span><br><span class="line">  libss.x86_64 0:1.42.9-16.el7                              ncurses.x86_64 0:5.9-14.20130511.el7_4                            </span><br><span class="line">  ncurses-base.noarch 0:5.9-14.20130511.el7_4               ncurses-libs.x86_64 0:5.9-14.20130511.el7_4                       </span><br><span class="line">  zlib.x86_64 0:1.2.7-18.el7                               </span><br><span class="line"></span><br><span class="line">Complete!</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-安装-Erlang"><a href="#1-2-安装-Erlang" class="headerlink" title="1.2 安装 Erlang"></a>1.2 安装 Erlang</h3><p>Erlang 官网下载地址：<a href="http://erlang.org/download" target="_blank" rel="noopener">http://erlang.org/download</a></p>
+<p>本次选择 22.0 版本下载：<code>wget http://erlang.org/download/otp_src_22.0.tar.gz</code></p>
+<p>直接从这个地址下载速度比较慢，建议从其他地方下载。</p>
+<p>将下载好的文件移动到 /usr/local 目录下，解压后再进入目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># cp otp_src_22.0.tar.gz /usr/local</span></span><br><span class="line">[root@localhost ~]<span class="comment"># tar -zxvf otp_src_22.0.tar.gz</span></span><br><span class="line">[root@localhost <span class="built_in">local</span>]<span class="comment"># cd /usr/local/otp_src_22.0/</span></span><br><span class="line">[root@localhost otp_src_22.0]<span class="comment"># ls</span></span><br><span class="line">AUTHORS        CONTRIBUTING.md         Jenkinsfile.benchmark      make             otp_versions.table     scripts</span><br><span class="line">bin            erl-build-tool-vars.sh  Jenkinsfile.run-otp-tests  Makefile.in      plt                    system</span><br><span class="line">bootstrap      erts                    Jenkinsfile.windows        otp_build        prebuilt.files         TAR.include</span><br><span class="line">configure      HOWTO                   lib                        otp_patch_apply  proposed_updates.json  xcomp</span><br><span class="line">configure.src  Jenkinsfile</span><br></pre></td></tr></table></figure>
+
+<p>返回上一级目录，创建安装的目录 erlang，当然也可以不切换目录直接使用命 <code>mkdir ../erlang</code> 创建 erlang：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost otp_src_22.0]# cd ..</span><br><span class="line">[root@localhost local]# mkdir erlang</span><br></pre></td></tr></table></figure>
+
+<p>进入目录 <code>otp_src_22.0</code>，配置安装路径：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost <span class="built_in">local</span>]<span class="comment"># cd otp_src_22.0/</span></span><br><span class="line">[root@localhost otp_src_22.0]<span class="comment"># ./configure --prefix=/usr/local/erlang</span></span><br><span class="line">...</span><br><span class="line">configure: WARNING:</span><br><span class="line">                wxWidgets must be installed on your system.</span><br><span class="line"></span><br><span class="line">                Please check that wx-config is <span class="keyword">in</span> path, the directory</span><br><span class="line">                <span class="built_in">where</span> wxWidgets libraries are installed (returned by</span><br><span class="line">                <span class="string">'wx-config --libs'</span> or <span class="string">'wx-config --static --libs'</span> <span class="built_in">command</span>)</span><br><span class="line">                is <span class="keyword">in</span> LD_LIBRARY_PATH or equivalent variable and</span><br><span class="line">                wxWidgets version is 2.8.4 or above.</span><br><span class="line"></span><br><span class="line">*********************************************************************</span><br><span class="line">**********************  APPLICATIONS DISABLED  **********************</span><br><span class="line">*********************************************************************</span><br><span class="line"></span><br><span class="line">odbc           : ODBC library - link check failed</span><br><span class="line"></span><br><span class="line">*********************************************************************</span><br><span class="line">*********************************************************************</span><br><span class="line">**********************  APPLICATIONS INFORMATION  *******************</span><br><span class="line">*********************************************************************</span><br><span class="line"></span><br><span class="line">wx             : wxWidgets not found, wx will NOT be usable</span><br><span class="line"></span><br><span class="line">*********************************************************************</span><br><span class="line">*********************************************************************</span><br><span class="line">**********************  DOCUMENTATION INFORMATION  ******************</span><br><span class="line">*********************************************************************</span><br><span class="line"></span><br><span class="line">documentation  : </span><br><span class="line">                 fop is missing.</span><br><span class="line">                 Using fakefop to generate placeholder PDF files.</span><br><span class="line"></span><br><span class="line">*********************************************************************</span><br><span class="line">[root@localhost otp_src_22.0]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p>先使用命令 <code>make</code> 编译下，然后使用命令 <code>make install</code> 进行安装，安装完成后会在目录【/usr.local/erlang/】中产生两个文件夹，其中 bin 就是安装的目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost otp_src_22.0]<span class="comment"># make</span></span><br><span class="line">...</span><br><span class="line">[root@localhost otp_src_22.0]<span class="comment"># make install</span></span><br><span class="line">...</span><br><span class="line">[root@localhost <span class="built_in">local</span>]<span class="comment"># ls erlang/</span></span><br><span class="line">bin  lib</span><br><span class="line">[root@localhost <span class="built_in">local</span>]<span class="comment"># ls erlang/bin/</span></span><br><span class="line">ct_run  dialyzer  epmd  erl  erlc  escript  run_erl  to_erl  typer</span><br><span class="line">[root@localhost <span class="built_in">local</span>]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p>进入 bin 目录就可以使用 erl 命令了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost <span class="built_in">local</span>]<span class="comment"># cd erlang/bin</span></span><br><span class="line">[root@localhost bin]<span class="comment"># ./erl</span></span><br><span class="line">Erlang/OTP 22 [erts-10.4] [<span class="built_in">source</span>] [64-bit] [smp:4:4] [ds:4:4:10] [async-threads:1] [hipe]</span><br><span class="line"></span><br><span class="line">Eshell V10.4  (abort with ^G)</span><br><span class="line">1&gt;</span><br></pre></td></tr></table></figure>
+
+<p>为了方便使用可以添加环境变量：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># echo 'export PATH=$PATH:/usr/local/erlang/bin' &gt;&gt; /etc/profile</span></span><br><span class="line">[root@localhost bin]<span class="comment"># source /etc/profile</span></span><br><span class="line">[root@localhost bin]<span class="comment"># erl</span></span><br><span class="line">Erlang/OTP 22 [erts-10.4] [<span class="built_in">source</span>] [64-bit] [smp:4:4] [ds:4:4:10] [async-threads:1] [hipe]</span><br><span class="line"></span><br><span class="line">Eshell V10.4  (abort with ^G)</span><br><span class="line">1&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、安装-RabbitMQ"><a href="#二、安装-RabbitMQ" class="headerlink" title="二、安装 RabbitMQ"></a>二、安装 RabbitMQ</h2><p>github 地址：<a href="https://github.com/rabbitmq/rabbitmq-server/" target="_blank" rel="noopener">https://github.com/rabbitmq/rabbitmq-server/</a></p>
+<p>本次下载：<a href="https://github.com/rabbitmq/rabbitmq-server/releases/download/v3.7.24/rabbitmq-server-generic-unix-3.7.24.tar.xz" target="_blank" rel="noopener">https://github.com/rabbitmq/rabbitmq-server/releases/download/v3.7.24/rabbitmq-server-generic-unix-3.7.24.tar.xz</a></p>
+<p>下载的是 .tar.xz 文件，是一个压缩类型的文件：</p>
+<p><img src="content/2020-04-06_194847.png" alt="1949"></p>
+<p>由于文件下载太慢，这边直接将下载好的文件传到 CentOS 上。</p>
+<p>需要用 xz 解压，没有则需要使用命令 <code>yum install -y xz</code> 安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># yum install -y xz</span></span><br><span class="line">Loaded plugins: fastestmirror, langpacks</span><br><span class="line">gitlab_gitlab-ce/x86_64/signature                                                                       |  862 B  00:00:00     </span><br><span class="line">gitlab_gitlab-ce/x86_64/signature                                                                       | 1.0 kB  00:00:00 !!! </span><br><span class="line">gitlab_gitlab-ce-source/signature                                                                       |  836 B  00:00:00     </span><br><span class="line">gitlab_gitlab-ce-source/signature                                                                       |  951 B  00:00:00 !!! </span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line"> * base: mirrors.nju.edu.cn</span><br><span class="line"> * extras: mirrors.nju.edu.cn</span><br><span class="line"> * updates: mirrors.nju.edu.cn</span><br><span class="line">Package xz-5.2.2-1.el7.x86_64 already installed and latest version</span><br><span class="line">Nothing to <span class="keyword">do</span></span><br><span class="line">[root@localhost bin]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p>如上我这边已经安装过了。</p>
+<p>将压缩包移动到目录【/usr/local】，然后解压：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost <span class="built_in">local</span>]<span class="comment"># mv ~/rabbitmq-server-generic-unix-3.7.24.tar.xz /usr/local/</span></span><br><span class="line">[root@localhost <span class="built_in">local</span>]<span class="comment"># xz -d rabbitmq-server-generic-unix-3.7.24.tar.xz</span></span><br><span class="line">[root@localhost <span class="built_in">local</span>]<span class="comment"># tar -xvf rabbitmq-server-generic-unix-3.7.24.tar</span></span><br><span class="line">[root@localhost <span class="built_in">local</span>]<span class="comment"># cd rabbitmq_server-3.7.24/</span></span><br><span class="line">[root@localhost rabbitmq_server-3.7.24]<span class="comment"># ll</span></span><br><span class="line">total 232</span><br><span class="line">drwxr-xr-x. 2 root root  8192 Feb 12 14:18 ebin</span><br><span class="line">drwxr-xr-x. 2 root root    77 Feb 12 14:18 escript</span><br><span class="line">drwxr-xr-x. 3 root root    22 Feb 12 14:18 etc</span><br><span class="line">drwxr-xr-x. 2 root root   242 Feb 12 14:18 include</span><br><span class="line">-rw-r--r--. 1 root root    75 Feb 12 14:18 INSTALL</span><br><span class="line">-rw-r--r--. 1 root root 28095 Feb 12 14:18 LICENSE</span><br><span class="line">-rw-r--r--. 1 root root 11352 Feb 12 14:18 LICENSE-APACHE2</span><br><span class="line">-rw-r--r--. 1 root root 11360 Feb 12 14:18 LICENSE-APACHE2-excanvas</span><br><span class="line">-rw-r--r--. 1 root root 11358 Feb 12 14:18 LICENSE-APACHE2-ExplorerCanvas</span><br><span class="line">-rw-r--r--. 1 root root 10851 Feb 12 14:18 LICENSE-APL2-Stomp-Websocket</span><br><span class="line">-rw-r--r--. 1 root root  1207 Feb 12 14:18 LICENSE-BSD-base64js</span><br><span class="line">-rw-r--r--. 1 root root  1469 Feb 12 14:18 LICENSE-BSD-recon</span><br><span class="line">-rw-r--r--. 1 root root  1274 Feb 12 14:18 LICENSE-erlcloud</span><br><span class="line">-rw-r--r--. 1 root root  1471 Feb 12 14:18 LICENSE-httpc_aws</span><br><span class="line">-rw-r--r--. 1 root root   757 Feb 12 14:18 LICENSE-ISC-cowboy</span><br><span class="line">-rw-r--r--. 1 root root  1084 Feb 12 14:18 LICENSE-MIT-EJS</span><br><span class="line">-rw-r--r--. 1 root root  1087 Feb 12 14:18 LICENSE-MIT-EJS10</span><br><span class="line">-rw-r--r--. 1 root root  1057 Feb 12 14:18 LICENSE-MIT-Erlware-Commons</span><br><span class="line">-rw-r--r--. 1 root root  1069 Feb 12 14:18 LICENSE-MIT-Flot</span><br><span class="line">-rw-r--r--. 1 root root  1075 Feb 12 14:18 LICENSE-MIT-jQuery</span><br><span class="line">-rw-r--r--. 1 root root  1075 Feb 12 14:18 LICENSE-MIT-jQuery164</span><br><span class="line">-rw-r--r--. 1 root root  1087 Feb 12 14:18 LICENSE-MIT-Mochi</span><br><span class="line">-rw-r--r--. 1 root root  1073 Feb 12 14:18 LICENSE-MIT-Sammy</span><br><span class="line">-rw-r--r--. 1 root root  1076 Feb 12 14:18 LICENSE-MIT-Sammy060</span><br><span class="line">-rw-r--r--. 1 root root 24900 Feb 12 14:18 LICENSE-MPL</span><br><span class="line">-rw-r--r--. 1 root root 16726 Feb 12 14:18 LICENSE-MPL2</span><br><span class="line">-rw-r--r--. 1 root root 24899 Feb 12 14:18 LICENSE-MPL-RabbitMQ</span><br><span class="line">-rw-r--r--. 1 root root  1471 Feb 12 14:18 LICENSE-rabbitmq_aws</span><br><span class="line">drwxr-xr-x. 2 root root  4096 Feb 12 14:18 plugins</span><br><span class="line">drwxr-xr-x. 3 root root    20 Feb 12 14:18 priv</span><br><span class="line">drwxr-xr-x. 2 root root   163 Feb 12 14:18 sbin</span><br><span class="line">drwxr-xr-x. 3 root root    17 Feb 12 14:18 share</span><br><span class="line">[root@localhost rabbitmq_server-3.7.24]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p>使用命令 <code>rabbitmq-server</code> 启动：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost rabbitmq_server-3.7.24]<span class="comment"># ./sbin/rabbitmq-server</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">##  ##</span></span><br><span class="line">  <span class="comment">##  ##      RabbitMQ 3.7.24. Copyright (c) 2007-2020 Pivotal Software, Inc.</span></span><br><span class="line">  <span class="comment">##########  Licensed under the MPL.  See https://www.rabbitmq.com/</span></span><br><span class="line">  <span class="comment">######  ##</span></span><br><span class="line">  <span class="comment">##########  Logs: /usr/local/rabbitmq_server-3.7.24/var/log/rabbitmq/rabbit@localhost.log</span></span><br><span class="line">                    /usr/<span class="built_in">local</span>/rabbitmq_server-3.7.24/var/<span class="built_in">log</span>/rabbitmq/rabbit@localhost_upgrade.log</span><br><span class="line"></span><br><span class="line">              Starting broker...</span><br><span class="line"> completed with 0 plugins.</span><br></pre></td></tr></table></figure>
+
+<p>为了方便可在命令后加上参数 <code>-detached</code> 让其在后台运行。</p>
+<p>使用命令 <code>rabbitmqctl status</code> 查看状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost sbin]<span class="comment"># ./rabbitmqctl status</span></span><br><span class="line">Status of node rabbit@localhost ...</span><br><span class="line">[&#123;pid,65261&#125;,</span><br><span class="line"> &#123;running_applications,</span><br><span class="line">     [&#123;rabbit,<span class="string">"RabbitMQ"</span>,<span class="string">"3.7.24"</span>&#125;,</span><br><span class="line">      &#123;mnesia,<span class="string">"MNESIA  CXC 138 12"</span>,<span class="string">"4.16"</span>&#125;,</span><br><span class="line">      &#123;rabbit_common,</span><br><span class="line">          <span class="string">"Modules shared by rabbitmq-server and rabbitmq-erlang-client"</span>,</span><br><span class="line">          <span class="string">"3.7.24"</span>&#125;,</span><br><span class="line">      &#123;ranch,<span class="string">"Socket acceptor pool for TCP protocols."</span>,<span class="string">"1.7.1"</span>&#125;,</span><br><span class="line">      &#123;ssl,<span class="string">"Erlang/OTP SSL application"</span>,<span class="string">"9.3"</span>&#125;,</span><br><span class="line">      &#123;public_key,<span class="string">"Public key infrastructure"</span>,<span class="string">"1.6.7"</span>&#125;,</span><br><span class="line">      &#123;asn1,<span class="string">"The Erlang ASN1 compiler version 5.0.9"</span>,<span class="string">"5.0.9"</span>&#125;,</span><br><span class="line">      &#123;credentials_obfuscation,</span><br><span class="line">          <span class="string">"Helper library that obfuscates sensitive values in process state"</span>,</span><br><span class="line">          <span class="string">"1.1.0"</span>&#125;,</span><br><span class="line">      &#123;crypto,<span class="string">"CRYPTO"</span>,<span class="string">"4.5"</span>&#125;,</span><br><span class="line">      &#123;inets,<span class="string">"INETS  CXC 138 49"</span>,<span class="string">"7.0.8"</span>&#125;,</span><br><span class="line">      &#123;os_mon,<span class="string">"CPO  CXC 138 46"</span>,<span class="string">"2.5"</span>&#125;,</span><br><span class="line">      &#123;sysmon_handler,<span class="string">"Rate-limiting system_monitor event handler"</span>,<span class="string">"1.1.0"</span>&#125;,</span><br><span class="line">      &#123;tools,<span class="string">"DEVTOOLS  CXC 138 16"</span>,<span class="string">"3.2"</span>&#125;,</span><br><span class="line">      &#123;xmerl,<span class="string">"XML parser"</span>,<span class="string">"1.3.21"</span>&#125;,</span><br><span class="line">      &#123;stdout_formatter,</span><br><span class="line">          <span class="string">"Tools to format paragraphs, lists and tables as plain text"</span>,</span><br><span class="line">          <span class="string">"0.2.2"</span>&#125;,</span><br><span class="line">      &#123;jsx,<span class="string">"a streaming, evented json parsing toolkit"</span>,<span class="string">"2.9.0"</span>&#125;,</span><br><span class="line">      &#123;observer_cli,<span class="string">"Visualize Erlang Nodes On The Command Line"</span>,<span class="string">"1.5.2"</span>&#125;,</span><br><span class="line">      &#123;recon,<span class="string">"Diagnostic tools for production use"</span>,<span class="string">"2.5.0"</span>&#125;,</span><br><span class="line">      &#123;lager,<span class="string">"Erlang logging framework"</span>,<span class="string">"3.8.0"</span>&#125;,</span><br><span class="line">      &#123;goldrush,<span class="string">"Erlang event stream processor"</span>,<span class="string">"0.1.9"</span>&#125;,</span><br><span class="line">      &#123;compiler,<span class="string">"ERTS  CXC 138 10"</span>,<span class="string">"7.4"</span>&#125;,</span><br><span class="line">      &#123;syntax_tools,<span class="string">"Syntax tools"</span>,<span class="string">"2.2"</span>&#125;,</span><br><span class="line">      &#123;sasl,<span class="string">"SASL  CXC 138 11"</span>,<span class="string">"3.4"</span>&#125;,</span><br><span class="line">      &#123;stdlib,<span class="string">"ERTS  CXC 138 10"</span>,<span class="string">"3.9"</span>&#125;,</span><br><span class="line">      &#123;kernel,<span class="string">"ERTS  CXC 138 10"</span>,<span class="string">"6.4"</span>&#125;]&#125;,</span><br><span class="line"> &#123;os,&#123;unix,linux&#125;&#125;,</span><br><span class="line"> &#123;erlang_version,</span><br><span class="line">     <span class="string">"Erlang/OTP 22 [erts-10.4] [source] [64-bit] [smp:4:4] [ds:4:4:10] [async-threads:64] [hipe]\n"</span>&#125;,</span><br><span class="line"> &#123;memory,</span><br><span class="line">     [&#123;connection_readers,0&#125;,</span><br><span class="line">      &#123;connection_writers,0&#125;,</span><br><span class="line">      &#123;connection_channels,0&#125;,</span><br><span class="line">      &#123;connection_other,0&#125;,</span><br><span class="line">      &#123;queue_procs,0&#125;,</span><br><span class="line">      &#123;queue_slave_procs,0&#125;,</span><br><span class="line">      &#123;plugins,11916&#125;,</span><br><span class="line">      &#123;other_proc,25933696&#125;,</span><br><span class="line">      &#123;metrics,196012&#125;,</span><br><span class="line">      &#123;mgmt_db,0&#125;,</span><br><span class="line">      &#123;mnesia,76168&#125;,</span><br><span class="line">      &#123;other_ets,2571704&#125;,</span><br><span class="line">      &#123;binary,142584&#125;,</span><br><span class="line">      &#123;msg_index,32064&#125;,</span><br><span class="line">      &#123;code,21526815&#125;,</span><br><span class="line">      &#123;atom,1180881&#125;,</span><br><span class="line">      &#123;other_system,12259352&#125;,</span><br><span class="line">      &#123;allocated_unused,5405896&#125;,</span><br><span class="line">      &#123;reserved_unallocated,3940352&#125;,</span><br><span class="line">      &#123;strategy,rss&#125;,</span><br><span class="line">      &#123;total,[&#123;erlang,63931192&#125;,&#123;rss,73277440&#125;,&#123;allocated,69337088&#125;]&#125;]&#125;,</span><br><span class="line"> &#123;alarms,[]&#125;,</span><br><span class="line"> &#123;listeners,[&#123;clustering,25672,<span class="string">"::"</span>&#125;,&#123;amqp,5672,<span class="string">"::"</span>&#125;]&#125;,</span><br><span class="line"> &#123;vm_memory_calculation_strategy,rss&#125;,</span><br><span class="line"> &#123;vm_memory_high_watermark,0.4&#125;,</span><br><span class="line"> &#123;vm_memory_limit,1268578713&#125;,</span><br><span class="line"> &#123;disk_free_limit,50000000&#125;,</span><br><span class="line"> &#123;disk_free,6577901568&#125;,</span><br><span class="line"> &#123;file_descriptors,</span><br><span class="line">     [&#123;total_limit,924&#125;,&#123;total_used,2&#125;,&#123;sockets_limit,829&#125;,&#123;sockets_used,0&#125;]&#125;,</span><br><span class="line"> &#123;processes,[&#123;<span class="built_in">limit</span>,1048576&#125;,&#123;used,231&#125;]&#125;,</span><br><span class="line"> &#123;run_queue,1&#125;,</span><br><span class="line"> &#123;uptime,354&#125;,</span><br><span class="line"> &#123;kernel,&#123;net_ticktime,60&#125;&#125;]</span><br><span class="line">[root@localhost sbin]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p>服务关闭使用命令 <code>rabbitmqctl stop</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost sbin]<span class="comment"># ./rabbitmqctl stop</span></span><br><span class="line">Stopping and halting node rabbit@localhost ...</span><br></pre></td></tr></table></figure>
+
+<p>至此，RabbitMQ 安装完成，为了方便管理，添加 RabbitMQ 环境变量：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost rabbitmq_server-3.7.24]<span class="comment"># echo 'export PATH=$PATH:/usr/local/rabbitmq_server-3.7.24/sbin' &gt;&gt; /etc/profile</span></span><br><span class="line">[root@localhost rabbitmq_server-3.7.24]<span class="comment"># source /etc/profile</span></span><br></pre></td></tr></table></figure>
+
+<p>让 RabbitMQ 后台运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost rabbitmq_server-3.7.24]<span class="comment"># rabbitmq-server -detached</span></span><br><span class="line">Warning: PID file not written; -detached was passed.</span><br><span class="line">[root@localhost rabbitmq_server-3.7.24]<span class="comment"># rabbitmqctl status</span></span><br><span class="line">Status of node rabbit@localhost ...</span><br><span class="line">[&#123;pid,68675&#125;,</span><br><span class="line"> &#123;running_applications,</span><br><span class="line">     [&#123;rabbit,<span class="string">"RabbitMQ"</span>,<span class="string">"3.7.24"</span>&#125;,</span><br><span class="line">     ...</span><br><span class="line">[root@localhost rabbitmq_server-3.7.24]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p>查看进程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost rabbitmq_server-3.7.24]<span class="comment"># netstat -lnpt</span></span><br><span class="line">Active Internet connections (only servers)</span><br><span class="line">Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    </span><br><span class="line">tcp        0      0 0.0.0.0:6379            0.0.0.0:*               LISTEN      87882/./redis-serve </span><br><span class="line">tcp        0      0 0.0.0.0:111             0.0.0.0:*               LISTEN      1/systemd           </span><br><span class="line">tcp        0      0 0.0.0.0:4369            0.0.0.0:*               LISTEN      65206/epmd          </span><br><span class="line">tcp        0      0 192.168.122.1:53        0.0.0.0:*               LISTEN      1609/dnsmasq        </span><br><span class="line">tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      3653/sshd           </span><br><span class="line">tcp        0      0 127.0.0.1:631           0.0.0.0:*               LISTEN      888/cupsd           </span><br><span class="line">tcp        0      0 0.0.0.0:15672           0.0.0.0:*               LISTEN      68675/beam.smp      </span><br><span class="line">tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      4385/master         </span><br><span class="line">tcp        0      0 0.0.0.0:25672           0.0.0.0:*               LISTEN      68675/beam.smp      </span><br><span class="line">tcp6       0      0 :::6379                 :::*                    LISTEN      87882/./redis-serve </span><br><span class="line">tcp6       0      0 :::111                  :::*                    LISTEN      1/systemd           </span><br><span class="line">tcp6       0      0 :::4369                 :::*                    LISTEN      65206/epmd          </span><br><span class="line">tcp6       0      0 :::22                   :::*                    LISTEN      3653/sshd           </span><br><span class="line">tcp6       0      0 ::1:631                 :::*                    LISTEN      888/cupsd           </span><br><span class="line">tcp6       0      0 ::1:25                  :::*                    LISTEN      4385/master         </span><br><span class="line">tcp6       0      0 :::5672                 :::*                    LISTEN      68675/beam.smp      </span><br><span class="line">[root@localhost rabbitmq_server-3.7.24]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p>68675 就是 RabbitMQ 的进程。</p>
+<h2 id="三、启用-RabbitMQ-的管理插件"><a href="#三、启用-RabbitMQ-的管理插件" class="headerlink" title="三、启用 RabbitMQ 的管理插件"></a>三、启用 RabbitMQ 的管理插件</h2><p>RabbitMQ自带一个 web 管理系统，只需通过启动插件 rabbitmq_management 就可以：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost rabbitmq_server-3.7.24]<span class="comment"># rabbitmq-plugins enable rabbitmq_management</span></span><br><span class="line">Enabling plugins on node rabbit@localhost:</span><br><span class="line">rabbitmq_management</span><br><span class="line">The following plugins have been configured:</span><br><span class="line">  rabbitmq_management</span><br><span class="line">  rabbitmq_management_agent</span><br><span class="line">  rabbitmq_web_dispatch</span><br><span class="line">Applying plugin configuration to rabbit@localhost...</span><br><span class="line">The following plugins have been enabled:</span><br><span class="line">  rabbitmq_management</span><br><span class="line">  rabbitmq_management_agent</span><br><span class="line">  rabbitmq_web_dispatch</span><br><span class="line"></span><br><span class="line">started 3 plugins.</span><br><span class="line">[root@localhost rabbitmq_server-3.7.24]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p>在浏览器中输入地址【<a href="http://ip:15672】就可以访问了，使用">http://ip:15672】就可以访问了，使用</a> guest/guest 登录：</p>
+<p><img src="content/2020-04-06_203123.png" alt="2031"></p>
+<p><img src="content/2020-04-06_204819.png" alt="2048"></p>
+<h2 id="P、常见问题"><a href="#P、常见问题" class="headerlink" title="P、常见问题"></a>P、常见问题</h2><h3 id="P-1-User-can-only-log-in-via-localhost"><a href="#P-1-User-can-only-log-in-via-localhost" class="headerlink" title="P.1 User can only log in via localhost"></a>P.1 User can only log in via localhost</h3><p><img src="content/2020-04-06_203310.png" alt="2033"></p>
+<p>出现这个问题的原因是 RabbitMQ 从 3.3.0 版本开始禁止使用 guest/guest 权限通过除 localhost 以外的地址访问。</p>
+<p>将 ebin/rabbit.app 中的内容 <code>{loopback_users, [&lt;&lt;&quot;guest&quot;&gt;&gt;]},</code> 改为 <code>{loopback_users, []},</code>，然后重启服务即可。</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>您的支持是我最大的动力！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="wankun 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="wankun 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>wankun
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://blog.kungge.com/p/rabbitmq-centos/" title="RabbitMQ 实战笔记（一）：CentOS 7 安装 RabbitMQ">http://blog.kungge.com/p/rabbitmq-centos/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/rabbitmq/" rel="tag"><i class="fa fa-tag"></i> rabbitmq</a>
+              <a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" rel="tag"><i class="fa fa-tag"></i> 消息队列</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/p/hexo-base/" rel="prev" title="Hexo 实战（二）：Hexo 基本设置">
+      <i class="fa fa-chevron-left"></i> Hexo 实战（二）：Hexo 基本设置
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/p/frp-remote-desk/" rel="next" title="frp 内网穿透实战（一）：远程桌面连接 windows">
+      frp 内网穿透实战（一）：远程桌面连接 windows <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、环境安装"><span class="nav-number">1.</span> <span class="nav-text">一、环境安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-安装依赖"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 安装依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-安装-Erlang"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 安装 Erlang</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、安装-RabbitMQ"><span class="nav-number">2.</span> <span class="nav-text">二、安装 RabbitMQ</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、启用-RabbitMQ-的管理插件"><span class="nav-number">3.</span> <span class="nav-text">三、启用 RabbitMQ 的管理插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P、常见问题"><span class="nav-number">4.</span> <span class="nav-text">P、常见问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#P-1-User-can-only-log-in-via-localhost"><span class="nav-number">4.1.</span> <span class="nav-text">P.1 User can only log in via localhost</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wankun"
+      src="http://img2.kungge.com/content/dog.jpg">
+  <p class="site-author-name" itemprop="name">wankun</p>
+  <div class="site-description" itemprop="description">生活一门技术，更是一门艺术</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kungge" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kungge" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kunzhongzhong@163.com" title="E-Mail → mailto:kunzhongzhong@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">赣ICP备16000944号-1 </a>
+      <img src="http://img2.kungge.com/content/beian.png" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wankun</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'WS9yN0bdMnmWCTEGdPtRjty5-gzGzoHsz',
+      appKey     : 'rJRpp7BgWk5zx9WdsdFbPUXQ',
+      placeholder: "Just go go",
+      avatar     : 'monsterid',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

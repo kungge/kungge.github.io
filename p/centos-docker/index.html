@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/smiley_lock_32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/smiley_lock_16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="<meta name="baidu-site-verification" content="xSB5shU7SK" />">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-material.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.kungge.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="docker 官方文档：https:&#x2F;&#x2F;docs.docker.com&#x2F;get-started&#x2F;  centOS 上安装 docker 官方文档：Install Docker Engine on CentOS  阿里云安装 docker 介绍：Docker CE 镜像源站  一、安装 docker 前准备 docker 支持 Linux、Windows、MacOS平台，支持的平台可以参考官网：ht">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker 实战（一）：CentOS 7 上安装 Docker">
+<meta property="og:url" content="http://blog.kungge.com/p/centos-docker/index.html">
+<meta property="og:site_name" content="坤哥的博客小站">
+<meta property="og:description" content="docker 官方文档：https:&#x2F;&#x2F;docs.docker.com&#x2F;get-started&#x2F;  centOS 上安装 docker 官方文档：Install Docker Engine on CentOS  阿里云安装 docker 介绍：Docker CE 镜像源站  一、安装 docker 前准备 docker 支持 Linux、Windows、MacOS平台，支持的平台可以参考官网：ht">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202004/2020-04-24_224712.png">
+<meta property="article:published_time" content="2020-04-25T02:22:23.000Z">
+<meta property="article:modified_time" content="2020-05-11T14:44:00.834Z">
+<meta property="article:author" content="wankun">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="容器">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img2.kungge.com/md-content/2020/202004/2020-04-24_224712.png">
+
+<link rel="canonical" href="http://blog.kungge.com/p/centos-docker/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Docker 实战（一）：CentOS 7 上安装 Docker | 坤哥的博客小站</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">坤哥的博客小站</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个热爱生活的90后</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404.html" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/centos-docker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
+      <meta itemprop="name" content="wankun">
+      <meta itemprop="description" content="生活一门技术，更是一门艺术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坤哥的博客小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Docker 实战（一）：CentOS 7 上安装 Docker
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-25 10:22:23" itemprop="dateCreated datePublished" datetime="2020-04-25T10:22:23+08:00">2020-04-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-11 22:44:00" itemprop="dateModified" datetime="2020-05-11T22:44:00+08:00">2020-05-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/p/centos-docker/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/centos-docker/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>docker 官方文档：<a href="https://docs.docker.com/get-started/" target="_blank" rel="noopener">https://docs.docker.com/get-started/</a></p>
+<p>centOS 上安装 docker 官方文档：<a href="https://docs.docker.com/engine/install/centos/" target="_blank" rel="noopener">Install Docker Engine on CentOS</a></p>
+<p>阿里云安装 docker 介绍：<a href="https://yq.aliyun.com/articles/110806" target="_blank" rel="noopener">Docker CE 镜像源站</a></p>
+<h2 id="一、安装-docker-前准备"><a href="#一、安装-docker-前准备" class="headerlink" title="一、安装 docker 前准备"></a>一、安装 docker 前准备</h2><p>docker 支持 Linux、Windows、MacOS平台，支持的平台可以参考官网：<a href="https://docs.docker.com/engine/install/。" target="_blank" rel="noopener">https://docs.docker.com/engine/install/。</a></p>
+<p>支持的 Linux 大部分版本，但是要求 Linux 版本内核在 3.10 以上，使用命令 <code>uname -r</code> 查看系统内核版本验证你的 CentOS 是否支持 Docker：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># uname -r</span></span><br><span class="line">3.10.0-514.el7.x86_64</span><br></pre></td></tr></table></figure>
+
+<p>使用命令 <code>yum install -y yum-utils device-mapper-persistent-data lvm2</code> 安装需要的包。</p>
+<p>配置阿里云 docker yum 源：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># yum install -y yum-utils device-mapper-persistent-data lvm2</span></span><br><span class="line">...</span><br><span class="line">[root@localhost ~]<span class="comment"># yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span></span><br><span class="line">Loaded plugins: fastestmirror, langpacks</span><br><span class="line">adding repo from: http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br><span class="line">grabbing file http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo to /etc/yum.repos.d/docker-ce.repo</span><br><span class="line">repo saved to /etc/yum.repos.d/docker-ce.repo</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、安装-docker"><a href="#二、安装-docker" class="headerlink" title="二、安装 docker"></a>二、安装 docker</h2><h3 id="2-1-docker-版本介绍"><a href="#2-1-docker-版本介绍" class="headerlink" title="2.1 docker 版本介绍"></a>2.1 docker 版本介绍</h3><p>目前主要有两个版本：docker-ce和docker-ee，前者是社区版（开源免费），后者是企业版（闭源收费，docker的商业版本）。</p>
+<p>docker-io 和 docker-engin 是之前的版本，版本号是1.X。</p>
+<h3 id="2-2-安装指定版本的-docker"><a href="#2-2-安装指定版本的-docker" class="headerlink" title="2.2 安装指定版本的 docker"></a>2.2 安装指定版本的 docker</h3><p>本次安装社区版本 docker-ce。</p>
+<p>查看仓库中的所有 docker-ce 版本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># yum list docker-ce --showduplicates | sort -r</span></span><br><span class="line"> * updates: mirrors.aliyun.com</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line">Loaded plugins: fastestmirror, langpacks</span><br><span class="line"> * extras: mirrors.aliyun.com</span><br><span class="line">docker-ce.x86_64            3:19.03.8-3.el7                     docker-ce-stable</span><br><span class="line">docker-ce.x86_64            3:19.03.7-3.el7                     docker-ce-stable</span><br><span class="line">docker-ce.x86_64            3:19.03.6-3.el7                     docker-ce-stable</span><br><span class="line">docker-ce.x86_64            3:19.03.5-3.el7                     docker-ce-stable</span><br><span class="line">docker-ce.x86_64            3:19.03.4-3.el7                     docker-ce-stable</span><br><span class="line">docker-ce.x86_64            3:19.03.3-3.el7                     docker-ce-stable</span><br><span class="line">docker-ce.x86_64            3:19.03.2-3.el7                     docker-ce-stable</span><br><span class="line">docker-ce.x86_64            3:19.03.1-3.el7                     docker-ce-stable</span><br><span class="line">docker-ce.x86_64            3:19.03.0-3.el7                     docker-ce-stable</span><br><span class="line">docker-ce.x86_64            3:18.09.9-3.el7                     docker-ce-stable</span><br><span class="line">docker-ce.x86_64            3:18.09.8-3.el7                     docker-ce-stable</span><br><span class="line">docker-ce.x86_64            3:18.09.7-3.el7                     docker-ce-stable</span><br><span class="line">docker-ce.x86_64            3:18.09.6-3.el7                     docker-ce-stable</span><br><span class="line">docker-ce.x86_64            3:18.09.5-3.el7                     docker-ce-stable</span><br><span class="line">docker-ce.x86_64            3:18.09.4-3.el7                     docker-ce-stable</span><br><span class="line">docker-ce.x86_64            3:18.09.3-3.el7                     docker-ce-stable</span><br><span class="line">docker-ce.x86_64            3:18.09.2-3.el7                     docker-ce-stable</span><br><span class="line">docker-ce.x86_64            3:18.09.1-3.el7                     docker-ce-stable</span><br><span class="line">docker-ce.x86_64            3:18.09.0-3.el7                     docker-ce-stable</span><br><span class="line">docker-ce.x86_64            18.06.3.ce-3.el7                    docker-ce-stable</span><br><span class="line">docker-ce.x86_64            18.06.2.ce-3.el7                    docker-ce-stable</span><br><span class="line">docker-ce.x86_64            18.06.1.ce-3.el7                    docker-ce-stable</span><br><span class="line">docker-ce.x86_64            18.06.0.ce-3.el7                    docker-ce-stable</span><br><span class="line">docker-ce.x86_64            18.03.1.ce-1.el7.centos             docker-ce-stable</span><br><span class="line">docker-ce.x86_64            18.03.0.ce-1.el7.centos             docker-ce-stable</span><br><span class="line">docker-ce.x86_64            17.12.1.ce-1.el7.centos             docker-ce-stable</span><br><span class="line">docker-ce.x86_64            17.12.0.ce-1.el7.centos             docker-ce-stable</span><br><span class="line">docker-ce.x86_64            17.09.1.ce-1.el7.centos             docker-ce-stable</span><br><span class="line">docker-ce.x86_64            17.09.0.ce-1.el7.centos             docker-ce-stable</span><br><span class="line">docker-ce.x86_64            17.06.2.ce-1.el7.centos             docker-ce-stable</span><br><span class="line">docker-ce.x86_64            17.06.1.ce-1.el7.centos             docker-ce-stable</span><br><span class="line">docker-ce.x86_64            17.06.0.ce-1.el7.centos             docker-ce-stable</span><br><span class="line">docker-ce.x86_64            17.03.3.ce-1.el7                    docker-ce-stable</span><br><span class="line">docker-ce.x86_64            17.03.2.ce-1.el7.centos             docker-ce-stable</span><br><span class="line">docker-ce.x86_64            17.03.1.ce-1.el7.centos             docker-ce-stable</span><br><span class="line">docker-ce.x86_64            17.03.0.ce-1.el7.centos             docker-ce-stable</span><br><span class="line"> * base: mirrors.aliyun.com</span><br><span class="line">Available Packages</span><br><span class="line">[root@localhost ~]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p>安装指定的版本需要加上版本信息，如 <code>yum install docker-ce-18.06.3.ce</code>，不指定版本信息则默认安装最新稳定版：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># yum install docker-ce</span></span><br><span class="line">...</span><br><span class="line">Installed:</span><br><span class="line">  docker-ce.x86_64 3:19.03.8-3.el7                                                                                                          </span><br><span class="line">  </span><br><span class="line">Dependency Installed:</span><br><span class="line">  container-selinux.noarch 2:2.107-3.el7         containerd.io.x86_64 0:1.2.13-3.1.el7         docker-ce-cli.x86_64 1:19.03.8-3.el7        </span><br><span class="line">  </span><br><span class="line">Complete!</span><br></pre></td></tr></table></figure>
+
+<p>如上表示安装完成。</p>
+<h3 id="2-3-启动-docker"><a href="#2-3-启动-docker" class="headerlink" title="2.3 启动 docker"></a>2.3 启动 docker</h3><p>安装完成后，使用命令 <code>systemctl start docker</code> 启动 docker，然后可使用命令 <code>systemctl status docker</code> 查看 docker 的状态。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># systemctl start docker</span></span><br><span class="line">[root@localhost ~]<span class="comment"># systemctl status docker</span></span><br><span class="line">● docker.service - Docker Application Container Engine</span><br><span class="line">   Loaded: loaded (/usr/lib/systemd/system/docker.service; disabled; vendor preset: disabled)</span><br><span class="line">   Active: active (running) since Fri 2020-04-24 06:43:27 PDT; 16s ago</span><br><span class="line">     Docs: https://docs.docker.com</span><br><span class="line"> Main PID: 120921 (dockerd)</span><br><span class="line">    Tasks: 13</span><br><span class="line">   Memory: 45.8M</span><br><span class="line">   CGroup: /system.slice/docker.service</span><br><span class="line">           └─120921 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock</span><br><span class="line">  </span><br><span class="line">Apr 24 06:43:26 localhost.localdomain dockerd[120921]: time=<span class="string">"2020-04-24T06:43:26.824128116-07:00"</span> level=info msg=<span class="string">"ccResolverWrapper...e=grpc</span></span><br><span class="line"><span class="string">Apr 24 06:43:26 localhost.localdomain dockerd[120921]: time="</span>2020-04-24T06:43:26.824138795-07:00<span class="string">" level=info msg="</span>ClientConn switch...e=grpc</span><br><span class="line">Apr 24 06:43:26 localhost.localdomain dockerd[120921]: time=<span class="string">"2020-04-24T06:43:26.857763277-07:00"</span> level=info msg=<span class="string">"Loading container...tart."</span></span><br><span class="line">Apr 24 06:43:26 localhost.localdomain dockerd[120921]: time=<span class="string">"2020-04-24T06:43:26.972274142-07:00"</span> level=info msg=<span class="string">"Default bridge (d...dress"</span></span><br><span class="line">Apr 24 06:43:27 localhost.localdomain dockerd[120921]: time=<span class="string">"2020-04-24T06:43:27.088685674-07:00"</span> level=info msg=<span class="string">"Loading containers: done."</span></span><br><span class="line">Apr 24 06:43:27 localhost.localdomain dockerd[120921]: time=<span class="string">"2020-04-24T06:43:27.132097640-07:00"</span> level=warning msg=<span class="string">"Not using nati...erlay2</span></span><br><span class="line"><span class="string">Apr 24 06:43:27 localhost.localdomain dockerd[120921]: time="</span>2020-04-24T06:43:27.132364215-07:00<span class="string">" level=info msg="</span>Docker daemon<span class="string">" co...9.03.8</span></span><br><span class="line"><span class="string">Apr 24 06:43:27 localhost.localdomain dockerd[120921]: time="</span>2020-04-24T06:43:27.132510032-07:00<span class="string">" level=info msg="</span>Daemon has comple...ation<span class="string">"</span></span><br><span class="line"><span class="string">Apr 24 06:43:27 localhost.localdomain dockerd[120921]: time="</span>2020-04-24T06:43:27.194040570-07:00<span class="string">" level=info msg="</span>API listen on /va....sock<span class="string">"</span></span><br><span class="line"><span class="string">Apr 24 06:43:27 localhost.localdomain systemd[1]: Started Docker Application Container Engine.</span></span><br><span class="line"><span class="string">Hint: Some lines were ellipsized, use -l to show in full.</span></span><br></pre></td></tr></table></figure>
+
+<p>若要开机启动，可使用命令 <code>systemctl enable docker</code>。</p>
+<p>使用命令 <code>docker version</code> 查看 docker 版本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># docker version</span></span><br><span class="line">Client: Docker Engine - Community</span><br><span class="line"> Version:           19.03.8</span><br><span class="line"> API version:       1.40</span><br><span class="line"> Go version:        go1.12.17</span><br><span class="line"> Git commit:        afacb8b</span><br><span class="line"> Built:             Wed Mar 11 01:27:04 2020</span><br><span class="line"> OS/Arch:           linux/amd64</span><br><span class="line"> Experimental:      <span class="literal">false</span></span><br><span class="line">  </span><br><span class="line">Server: Docker Engine - Community</span><br><span class="line"> Engine:</span><br><span class="line">  Version:          19.03.8</span><br><span class="line">  API version:      1.40 (minimum version 1.12)</span><br><span class="line">  Go version:       go1.12.17</span><br><span class="line">  Git commit:       afacb8b</span><br><span class="line">  Built:            Wed Mar 11 01:25:42 2020</span><br><span class="line">  OS/Arch:          linux/amd64</span><br><span class="line">  Experimental:     <span class="literal">false</span></span><br><span class="line"> containerd:</span><br><span class="line">  Version:          1.2.13</span><br><span class="line">  GitCommit:        7ad184331fa3e55e52b890ea95e65ba581ae3429</span><br><span class="line"> runc:</span><br><span class="line">  Version:          1.0.0-rc10</span><br><span class="line">  GitCommit:        dc9208a3303feef5b3839f4323d9beb36df0a9dd</span><br><span class="line"> docker-init:</span><br><span class="line">  Version:          0.18.0</span><br><span class="line">  GitCommit:        fec3683</span><br><span class="line">[root@localhost ~]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p>如上显示出了包含 Client 和 Server 的版本信息。</p>
+<h2 id="三、docker-镜像"><a href="#三、docker-镜像" class="headerlink" title="三、docker 镜像"></a>三、docker 镜像</h2><h3 id="3-1-拉取镜像"><a href="#3-1-拉取镜像" class="headerlink" title="3.1 拉取镜像"></a>3.1 拉取镜像</h3><p>hello-world 是 docker 官方提供的最小镜像，通过它可以用来验证 Docker 是否安装成功，先使用 pull 命令把它拉下来，如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># docker pull hello-world</span></span><br><span class="line">Using default tag: latest</span><br><span class="line">latest: Pulling from library/hello-world</span><br><span class="line">0e03bdcc26d7: Pull complete </span><br><span class="line">Digest: sha256:8e3114318a995a1ee497790535e7b88365222a21771ae7e53687ad76563e8e76</span><br><span class="line">Status: Downloaded newer image <span class="keyword">for</span> hello-world:latest</span><br><span class="line">docker.io/library/hello-world:latest</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-查看镜像信息"><a href="#3-2-查看镜像信息" class="headerlink" title="3.2 查看镜像信息"></a>3.2 查看镜像信息</h3><p>使用命令 <code>docker images</code> 查看系统已有镜像。</p>
+<p>使用命令 <code>docker images [镜像名称]</code> 查看指定镜像：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker.io/library/hello-world:latest</span><br><span class="line">[root@localhost ~]<span class="comment"># docker images hello-world</span></span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">hello-world         latest              bf756fb1ae65        3 months ago        13.3kB</span><br></pre></td></tr></table></figure>
+
+<p>列表字段含义：</p>
+<ul>
+<li>REPOSITORY：来自的仓库</li>
+<li>TAG：镜像的标签信息</li>
+<li>IMAGE ID: 镜像 ID，若 ID 相同说明指向同一个镜像</li>
+<li>CREATED：镜像最后更新时间</li>
+<li>SIZE：镜像大小</li>
+</ul>
+<p>使用命令 <code>docker inspect [镜像名称]</code> 查看镜像详细信息，如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># docker inspect hello-world</span></span><br><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"Id"</span>: <span class="string">"sha256:bf756fb1ae65adf866bd8c456593cd24beb6a0a061dedf42b26a993176745f6b"</span>,</span><br><span class="line">        <span class="string">"RepoTags"</span>: [</span><br><span class="line">            <span class="string">"hello-world:latest"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">"RepoDigests"</span>: [</span><br><span class="line">            <span class="string">"hello-world@sha256:8e3114318a995a1ee497790535e7b88365222a21771ae7e53687ad76563e8e76"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">"Parent"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="string">"Comment"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="string">"Created"</span>: <span class="string">"2020-01-03T01:21:37.263809283Z"</span>,</span><br><span class="line">        <span class="string">"Container"</span>: <span class="string">"71237a2659e6419aee44fc0b51ffbd12859d1a50ba202e02c2586ed999def583"</span>,</span><br><span class="line">        <span class="string">"ContainerConfig"</span>: &#123;</span><br><span class="line">            <span class="string">"Hostname"</span>: <span class="string">"71237a2659e6"</span>,</span><br><span class="line">            <span class="string">"Domainname"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="string">"User"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="string">"AttachStdin"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="string">"AttachStdout"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="string">"AttachStderr"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="string">"Tty"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="string">"OpenStdin"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="string">"StdinOnce"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="string">"Env"</span>: [</span><br><span class="line">                <span class="string">"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="string">"Cmd"</span>: [</span><br><span class="line">                <span class="string">"/bin/sh"</span>,</span><br><span class="line">                <span class="string">"-c"</span>,</span><br><span class="line">                <span class="string">"#(nop) "</span>,</span><br><span class="line">                <span class="string">"CMD [\"/hello\"]"</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="string">"ArgsEscaped"</span>: <span class="literal">true</span>,</span><br><span class="line">            <span class="string">"Image"</span>: <span class="string">"sha256:eb850c6a1aedb3d5c62c3a484ff01b6b4aade130b950e3bf3e9c016f17f70c34"</span>,</span><br><span class="line">            <span class="string">"Volumes"</span>: null,</span><br><span class="line">            <span class="string">"WorkingDir"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="string">"Entrypoint"</span>: null,</span><br><span class="line">            <span class="string">"OnBuild"</span>: null,</span><br><span class="line">            <span class="string">"Labels"</span>: &#123;&#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="string">"DockerVersion"</span>: <span class="string">"18.06.1-ce"</span>,</span><br><span class="line">        <span class="string">"Author"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="string">"Config"</span>: &#123;</span><br><span class="line">            <span class="string">"Hostname"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="string">"Domainname"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="string">"User"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="string">"AttachStdin"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="string">"AttachStdout"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="string">"AttachStderr"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="string">"Tty"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="string">"OpenStdin"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="string">"StdinOnce"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="string">"Env"</span>: [</span><br><span class="line">                <span class="string">"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="string">"Cmd"</span>: [</span><br><span class="line">                <span class="string">"/hello"</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="string">"ArgsEscaped"</span>: <span class="literal">true</span>,</span><br><span class="line">            <span class="string">"Image"</span>: <span class="string">"sha256:eb850c6a1aedb3d5c62c3a484ff01b6b4aade130b950e3bf3e9c016f17f70c34"</span>,</span><br><span class="line">            <span class="string">"Volumes"</span>: null,</span><br><span class="line">            <span class="string">"WorkingDir"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="string">"Entrypoint"</span>: null,</span><br><span class="line">            <span class="string">"OnBuild"</span>: null,</span><br><span class="line">            <span class="string">"Labels"</span>: null</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="string">"Architecture"</span>: <span class="string">"amd64"</span>,</span><br><span class="line">        <span class="string">"Os"</span>: <span class="string">"linux"</span>,</span><br><span class="line">        <span class="string">"Size"</span>: 13336,</span><br><span class="line">        <span class="string">"VirtualSize"</span>: 13336,</span><br><span class="line">        <span class="string">"GraphDriver"</span>: &#123;</span><br><span class="line">            <span class="string">"Data"</span>: &#123;</span><br><span class="line">                <span class="string">"MergedDir"</span>: <span class="string">"/var/lib/docker/overlay2/dffcec0071ed9fa1ea69b4ded806c8a45e4ff64514fda7708d492500c2d4cd1b/merged"</span>,</span><br><span class="line">                <span class="string">"UpperDir"</span>: <span class="string">"/var/lib/docker/overlay2/dffcec0071ed9fa1ea69b4ded806c8a45e4ff64514fda7708d492500c2d4cd1b/diff"</span>,</span><br><span class="line">                <span class="string">"WorkDir"</span>: <span class="string">"/var/lib/docker/overlay2/dffcec0071ed9fa1ea69b4ded806c8a45e4ff64514fda7708d492500c2d4cd1b/work"</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="string">"Name"</span>: <span class="string">"overlay2"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="string">"RootFS"</span>: &#123;</span><br><span class="line">            <span class="string">"Type"</span>: <span class="string">"layers"</span>,</span><br><span class="line">            <span class="string">"Layers"</span>: [</span><br><span class="line">                <span class="string">"sha256:9c27e219663c25e0f28493790cc0b88bc973ba3b1686355f221c38a36978ac63"</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="string">"Metadata"</span>: &#123;</span><br><span class="line">            <span class="string">"LastTagTime"</span>: <span class="string">"0001-01-01T00:00:00Z"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>使用命令 <code>docker history [镜像名称]</code> 查看镜像历史，如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># docker history hello-world</span></span><br><span class="line">IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT</span><br><span class="line">bf756fb1ae65        3 months ago        /bin/sh -c <span class="comment">#(nop)  CMD ["/hello"]               0B                  </span></span><br><span class="line">&lt;missing&gt;           3 months ago        /bin/sh -c <span class="comment">#(nop) COPY file:7bf12aab75c3867a…   13.3kB</span></span><br></pre></td></tr></table></figure>
+
+<p>镜像是由多个层组成，上面列出的就是各个层的创建信息。</p>
+<h3 id="3-3-运行镜像"><a href="#3-3-运行镜像" class="headerlink" title="3.3 运行镜像"></a>3.3 运行镜像</h3><p>使用命令 <code>docker run [镜像名称]</code> 运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># docker run hello-world</span></span><br><span class="line">  </span><br><span class="line">Hello from Docker!</span><br><span class="line">This message shows that your installation appears to be working correctly.</span><br><span class="line">  </span><br><span class="line">To generate this message, Docker took the following steps:</span><br><span class="line"> 1. The Docker client contacted the Docker daemon.</span><br><span class="line"> 2. The Docker daemon pulled the <span class="string">"hello-world"</span> image from the Docker Hub.</span><br><span class="line">    (amd64)</span><br><span class="line"> 3. The Docker daemon created a new container from that image <span class="built_in">which</span> runs the</span><br><span class="line">    executable that produces the output you are currently reading.</span><br><span class="line"> 4. The Docker daemon streamed that output to the Docker client, <span class="built_in">which</span> sent it</span><br><span class="line">    to your terminal.</span><br><span class="line">  </span><br><span class="line">To try something more ambitious, you can run an Ubuntu container with:</span><br><span class="line"> $ docker run -it ubuntu bash</span><br><span class="line">  </span><br><span class="line">Share images, automate workflows, and more with a free Docker ID:</span><br><span class="line"> https://hub.docker.com/</span><br><span class="line">  </span><br><span class="line">For more examples and ideas, visit:</span><br><span class="line"> https://docs.docker.com/get-started/</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、配置-docker-镜像加速器"><a href="#四、配置-docker-镜像加速器" class="headerlink" title="四、配置 docker 镜像加速器"></a>四、配置 docker 镜像加速器</h2><h3 id="4-1-镜像地址介绍"><a href="#4-1-镜像地址介绍" class="headerlink" title="4.1 镜像地址介绍"></a>4.1 镜像地址介绍</h3><p>docker 官方镜像地址：<a href="https://hub.docker.com/search?q=&amp;type=image" target="_blank" rel="noopener">https://hub.docker.com/search?q=&amp;type=image</a></p>
+<p>你打开看下网站加载是不是有点慢，因为网站是国外的。</p>
+<p>我们可以配置国内的镜像地址来提升获取 docker 官方镜像的速度。</p>
+<p>目前国内比较出名的镜像站有：</p>
+<ul>
+<li>阿里云镜像：https://{your_id}.mirror.aliyuncs.com</li>
+<li>Docker中国区官方镜像：<a href="https://registry.docker-cn.com" target="_blank" rel="noopener">https://registry.docker-cn.com</a></li>
+<li>网易163镜像：<a href="http://hub-mirror.c.163.com" target="_blank" rel="noopener">http://hub-mirror.c.163.com</a></li>
+<li>daocloud镜像：http://{your_id}.m.daocloud.io</li>
+<li>中科大镜像：<a href="https://docker.mirrors.ustc.edu.cn" target="_blank" rel="noopener">https://docker.mirrors.ustc.edu.cn</a></li>
+</ul>
+<h3 id="4-2-配置国内镜像地址"><a href="#4-2-配置国内镜像地址" class="headerlink" title="4.2 配置国内镜像地址"></a>4.2 配置国内镜像地址</h3><p>docker 版本不低于 1.10 时可以直接通过 daemon config 进行配置。</p>
+<p>如果目录【/etc/docker】不存在，先创建 <code>mkdir -p /etc/docker</code>，使用命令 <code>vi /etc/docker/daemon.json</code> 编辑文件（没有会新增），添加内容：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"registry-mirrors"</span>: [<span class="string">"配置的加速地址"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如配置Docker中国区官方镜像为：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"registry-mirrors"</span>: [<span class="string">"https://registry.docker-cn.com"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>配置阿里云 docker 镜像加速器比较麻烦，需要要注册账号后登录到容器镜像服务控制台中获取镜像加速地址。</p>
+<p>登录阿里云的容器镜像服务控制台：<a href="https://cr.console.aliyun.com/" target="_blank" rel="noopener">https://cr.console.aliyun.com/</a></p>
+<p>选择镜像加速器，可以看到你的专属镜像加速地址：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202004/2020-04-24_224712.png" alt="2317"></p>
+<p>修改完成后重启 docker 服务即可：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># systemctl daemon-reload</span></span><br><span class="line">[root@localhost ~]<span class="comment"># systemctl restart docker</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-测试拉取较大点的镜像"><a href="#4-3-测试拉取较大点的镜像" class="headerlink" title="4.3 测试拉取较大点的镜像"></a>4.3 测试拉取较大点的镜像</h3><p>拉取一个较大一点的镜像 MySql：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># docker pull mysql</span></span><br><span class="line">Using default tag: latest</span><br><span class="line">latest: Pulling from library/mysql</span><br><span class="line">54fec2fa59d0: Pull complete </span><br><span class="line">bcc6c6145912: Pull complete </span><br><span class="line">951c3d959c9d: Pull complete </span><br><span class="line">05de4d0e206e: Pull complete </span><br><span class="line">319f0394ef42: Pull complete </span><br><span class="line">d9185034607b: Pull complete </span><br><span class="line">013a9c64dadc: Pull complete </span><br><span class="line">96d4c3d31f9f: Pull complete </span><br><span class="line">785bc90808da: Pull complete </span><br><span class="line">1339cf094729: Pull complete </span><br><span class="line">beb8f531cc37: Pull complete </span><br><span class="line">2b40c9f6a918: Pull complete </span><br><span class="line">Digest: sha256:9643e9fbd6330d10686f8922292dcb20995e7b792c17d4e94ddf95255f1d5449</span><br><span class="line">Status: Downloaded newer image <span class="keyword">for</span> mysql:latest</span><br><span class="line">docker.io/library/mysql:latest</span><br><span class="line">[root@localhost ~]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p>下载很快，一两分钟就完成了。</p>
+<p>使用命令 <code>docker images</code> 查看镜像列表，如下已经有两个镜像了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># docker images</span></span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">hello-world         latest              bf756fb1ae65        3 months ago        13.3kB</span><br><span class="line">mysql               latest              0c27e8e5fcfa        46 hours ago        546MB</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>您的支持是我最大的动力！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="wankun 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="wankun 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>wankun
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://blog.kungge.com/p/centos-docker/" title="Docker 实战（一）：CentOS 7 上安装 Docker">http://blog.kungge.com/p/centos-docker/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/docker/" rel="tag"><i class="fa fa-tag"></i> docker</a>
+              <a href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag"><i class="fa fa-tag"></i> 容器</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/p/frp-remote-desk/" rel="prev" title="frp 内网穿透实战（一）：远程桌面连接 windows">
+      <i class="fa fa-chevron-left"></i> frp 内网穿透实战（一）：远程桌面连接 windows
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/p/router-port-transfer/" rel="next" title="多级路由器如何设置端口转发">
+      多级路由器如何设置端口转发 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、安装-docker-前准备"><span class="nav-number">1.</span> <span class="nav-text">一、安装 docker 前准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、安装-docker"><span class="nav-number">2.</span> <span class="nav-text">二、安装 docker</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-docker-版本介绍"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 docker 版本介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-安装指定版本的-docker"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 安装指定版本的 docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-启动-docker"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 启动 docker</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、docker-镜像"><span class="nav-number">3.</span> <span class="nav-text">三、docker 镜像</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-拉取镜像"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 拉取镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-查看镜像信息"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 查看镜像信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-运行镜像"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 运行镜像</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、配置-docker-镜像加速器"><span class="nav-number">4.</span> <span class="nav-text">四、配置 docker 镜像加速器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-镜像地址介绍"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 镜像地址介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-配置国内镜像地址"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 配置国内镜像地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-测试拉取较大点的镜像"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 测试拉取较大点的镜像</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wankun"
+      src="http://img2.kungge.com/content/dog.jpg">
+  <p class="site-author-name" itemprop="name">wankun</p>
+  <div class="site-description" itemprop="description">生活一门技术，更是一门艺术</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kungge" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kungge" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kunzhongzhong@163.com" title="E-Mail → mailto:kunzhongzhong@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">赣ICP备16000944号-1 </a>
+      <img src="http://img2.kungge.com/content/beian.png" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wankun</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'WS9yN0bdMnmWCTEGdPtRjty5-gzGzoHsz',
+      appKey     : 'rJRpp7BgWk5zx9WdsdFbPUXQ',
+      placeholder: "Just go go",
+      avatar     : 'monsterid',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/smiley_lock_32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/smiley_lock_16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="<meta name="baidu-site-verification" content="xSB5shU7SK" />">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-material.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.kungge.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="本次使用的版本是 redis-4.0.14。  一、安装 redis 下载地址：http:&#x2F;&#x2F;download.redis.io&#x2F;releases&#x2F;redis-4.0.14.tar.gz  下载完成进行解压，然后删除压缩包：  1 2   tar xf redis-4.0.14.tar.gz  rm -rf .&#x2F;redis-4.0.14.tar.gz   redis 版本4需要 tcl(版本3不需">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在 linux 中安装与启动 redis 详解">
+<meta property="og:url" content="http://blog.kungge.com/p/redis-instal-start/index.html">
+<meta property="og:site_name" content="坤哥的博客小站">
+<meta property="og:description" content="本次使用的版本是 redis-4.0.14。  一、安装 redis 下载地址：http:&#x2F;&#x2F;download.redis.io&#x2F;releases&#x2F;redis-4.0.14.tar.gz  下载完成进行解压，然后删除压缩包：  1 2   tar xf redis-4.0.14.tar.gz  rm -rf .&#x2F;redis-4.0.14.tar.gz   redis 版本4需要 tcl(版本3不需">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2019/201912/tech.redis.2019120201.01.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2019/201912/tech.redis.2019120201.02.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2019/201912/tech.redis.2019120201.03.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2019/201912/tech.redis.2019120201.04.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2019/201912/tech.redis.2019120201.05.png">
+<meta property="article:published_time" content="2019-12-04T15:45:11.000Z">
+<meta property="article:modified_time" content="2020-05-11T15:28:43.724Z">
+<meta property="article:author" content="wankun">
+<meta property="article:tag" content="redis安装">
+<meta property="article:tag" content="redis启动">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img2.kungge.com/md-content/2019/201912/tech.redis.2019120201.01.png">
+
+<link rel="canonical" href="http://blog.kungge.com/p/redis-instal-start/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>在 linux 中安装与启动 redis 详解 | 坤哥的博客小站</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">坤哥的博客小站</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个热爱生活的90后</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404.html" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/redis-instal-start/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
+      <meta itemprop="name" content="wankun">
+      <meta itemprop="description" content="生活一门技术，更是一门艺术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坤哥的博客小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          在 linux 中安装与启动 redis 详解
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-04 23:45:11" itemprop="dateCreated datePublished" datetime="2019-12-04T23:45:11+08:00">2019-12-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-11 23:28:43" itemprop="dateModified" datetime="2020-05-11T23:28:43+08:00">2020-05-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/p/redis-instal-start/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/redis-instal-start/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本次使用的版本是 redis-4.0.14。</p>
+<h2 id="一、安装-redis"><a href="#一、安装-redis" class="headerlink" title="一、安装 redis"></a>一、安装 redis</h2><p>下载地址：<a href="http://download.redis.io/releases/redis-4.0.14.tar.gz" target="_blank" rel="noopener">http://download.redis.io/releases/redis-4.0.14.tar.gz</a></p>
+<p>下载完成进行解压，然后删除压缩包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar xf redis-4.0.14.tar.gz </span><br><span class="line">rm -rf ./redis-4.0.14.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>redis 版本4需要 tcl(版本3不需要)，因此需要先安装 tcl：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install tcl -y</span><br></pre></td></tr></table></figure>
+
+<p>需要对源码进行编译，因为 redis 是 c 语言开发的，编译需要依赖 gcc 环境，因此需要先安装 gcc-c++：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install gcc-c++ -y</span><br></pre></td></tr></table></figure>
+
+<p>进入 redis 目录，查看是否有 Makefile 目录，如果有说明是可以源码编译的，redis 目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># cd redis-4.0.14/</span></span><br><span class="line">[root@localhost redis-4.0.14]<span class="comment"># ll</span></span><br><span class="line">total 304</span><br><span class="line">-rw-rw-r--.  1 root root 166629 Mar 18  2019 00-RELEASENOTES</span><br><span class="line">-rw-rw-r--.  1 root root     53 Mar 18  2019 BUGS</span><br><span class="line">-rw-rw-r--.  1 root root   1815 Mar 18  2019 CONTRIBUTING</span><br><span class="line">-rw-rw-r--.  1 root root   1487 Mar 18  2019 COPYING</span><br><span class="line">drwxrwxr-x.  6 root root    124 Mar 18  2019 deps</span><br><span class="line">-rw-rw-r--.  1 root root     11 Mar 18  2019 INSTALL</span><br><span class="line">-rw-rw-r--.  1 root root    151 Mar 18  2019 Makefile</span><br><span class="line">-rw-rw-r--.  1 root root   4223 Mar 18  2019 MANIFESTO</span><br><span class="line">-rw-rw-r--.  1 root root  20543 Mar 18  2019 README.md</span><br><span class="line">-rw-rw-r--.  1 root root  58766 Mar 18  2019 redis.conf</span><br><span class="line">-rwxrwxr-x.  1 root root    271 Mar 18  2019 runtest</span><br><span class="line">-rwxrwxr-x.  1 root root    280 Mar 18  2019 runtest-cluster</span><br><span class="line">-rwxrwxr-x.  1 root root    281 Mar 18  2019 runtest-sentinel</span><br><span class="line">-rw-rw-r--.  1 root root   7921 Mar 18  2019 sentinel.conf</span><br><span class="line">drwxrwxr-x.  3 root root   4096 Mar 18  2019 src</span><br><span class="line">drwxrwxr-x. 10 root root    167 Mar 18  2019 tests</span><br></pre></td></tr></table></figure>
+
+<p>编译 redis(以4核方式，速度快)源文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make -j 4</span><br></pre></td></tr></table></figure>
+
+<p>编译完成，提示【Hint: It’s a good idea to run ‘make test’ ;)】</p>
+<p>make test 表示测试编译是否有问题：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make <span class="built_in">test</span> -j 4</span><br></pre></td></tr></table></figure>
+
+<p>测试编译没什么问题：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\o/ All tests passed without errors!</span><br><span class="line"></span><br><span class="line">Cleanup: may take some time... OK</span><br><span class="line">make[1]: Leaving directory /root/redis-4.0.14/src</span><br></pre></td></tr></table></figure>
+
+<p>安装 redis 到指定目录【/usr/local/redis】:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make PREFIX=/usr/<span class="built_in">local</span>/redis install</span><br></pre></td></tr></table></figure>
+
+<p>进入安装的 bin 目录，里面就是所有的 redis 命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost redis-4.0.14]<span class="comment"># cd /usr/local/redis/</span></span><br><span class="line">[root@localhost redis]<span class="comment"># ll</span></span><br><span class="line">total 0</span><br><span class="line">drwxr-xr-x. 2 root root 134 Dec  2 08:02 bin</span><br><span class="line">[root@localhost redis]<span class="comment"># cd bin/</span></span><br><span class="line">[root@localhost bin]<span class="comment"># ll</span></span><br><span class="line">total 21884</span><br><span class="line">-rwxr-xr-x. 1 root root 2451040 Dec  2 08:02 redis-benchmark</span><br><span class="line">-rwxr-xr-x. 1 root root 5777304 Dec  2 08:02 redis-check-aof</span><br><span class="line">-rwxr-xr-x. 1 root root 5777304 Dec  2 08:02 redis-check-rdb</span><br><span class="line">-rwxr-xr-x. 1 root root 2617120 Dec  2 08:02 redis-cli</span><br><span class="line">lrwxrwxrwx. 1 root root      12 Dec  2 08:02 redis-sentinel -&gt; redis-server</span><br><span class="line">-rwxr-xr-x. 1 root root 5777304 Dec  2 08:02 redis-server</span><br><span class="line">[root@localhost bin]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p>到此 redis 安装完成。</p>
+<h2 id="二、启动-redis"><a href="#二、启动-redis" class="headerlink" title="二、启动 redis"></a>二、启动 redis</h2><p>启动 redis 有多种方式：</p>
+<ul>
+<li>前端默认启动</li>
+<li>指定端口启动</li>
+<li>指定配置文件启动</li>
+</ul>
+<h3 id="2-1-前端默认启动"><a href="#2-1-前端默认启动" class="headerlink" title="2.1 前端默认启动"></a>2.1 前端默认启动</h3><p>前端默认启动可使用命令【./redis-server】启动即可：</p>
+<p><img src="http://img2.kungge.com/md-content/2019/201912/tech.redis.2019120201.01.png" alt="Alt text" title="Optional title"></p>
+<p>如上所示，可以看到，Redis 的版本是 4.0.14，运行的模式是【standalone mode】(单机模式)，端口是6379，当把当前的关掉，redis 服务就自动关闭了。</p>
+<p>重新打开一个会话，进入 redis 的 bin 目录，开启一个客户端连接 redis：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># ./redis-cli </span></span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> key1 val1</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; get key1</span><br><span class="line"><span class="string">"val1"</span></span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> key2 val2</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> key3 val3</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; keys *</span><br><span class="line">1) <span class="string">"key2"</span></span><br><span class="line">2) <span class="string">"key3"</span></span><br><span class="line">3) <span class="string">"key1"</span></span><br><span class="line">127.0.0.1:6379&gt;</span><br></pre></td></tr></table></figure>
+
+<p>当关闭 redis 服务后：</p>
+<p><img src="http://img2.kungge.com/md-content/2019/201912/tech.redis.2019120201.02.png" alt="Alt text" title="Optional title"></p>
+<p>客户端就连接不上，重新打开后，再次连接原来的数据还在，这是因为 redis 有数据备份机制，存在文件 dump.rdb 中。</p>
+<p>再次启动 redis，可以看到数据是从磁盘加载的：</p>
+<p><img src="http://img2.kungge.com/md-content/2019/201912/tech.redis.2019120201.03.png" alt="Alt text" title="Optional title"></p>
+<h3 id="2-2-指定端口启动"><a href="#2-2-指定端口启动" class="headerlink" title="2.2 指定端口启动"></a>2.2 指定端口启动</h3><p>如指定端口6380启动，使用命令【./redis-server –port 6380】:</p>
+<p><img src="http://img2.kungge.com/md-content/2019/201912/tech.redis.2019120201.04.png" alt="Alt text" title="Optional title"></p>
+<p>但是当客户端连接时却连不上，因为连接的是默认端口 6379：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># ./redis-cli</span></span><br><span class="line">Could not connect to Redis at 127.0.0.1:6379: Connection refused</span><br><span class="line">Could not connect to Redis at 127.0.0.1:6379: Connection refused</span><br><span class="line">not connected&gt;</span><br></pre></td></tr></table></figure>
+
+<p>那么需要指定连接到指定端口，使用命令【./redis-cli -p 6380】即可。</p>
+<h3 id="2-3-指定配置文件启动"><a href="#2-3-指定配置文件启动" class="headerlink" title="2.3 指定配置文件启动"></a>2.3 指定配置文件启动</h3><p>在开发的时候一般会将配置文件拷贝，将配置文件【/root/redis-4.0.14/redis.conf】拷贝到 redis 的 bin 目录中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># cp /root/redis-4.0.14/redis.conf ./redis.conf</span></span><br></pre></td></tr></table></figure>
+
+<p>文本文件内容比较多，大多是注释，将注释去掉看起来比较清晰：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># cat redis.conf | grep -v "#" | grep -v "^$"</span></span><br><span class="line"><span class="built_in">bind</span> 127.0.0.1</span><br><span class="line">protected-mode yes</span><br><span class="line">port 6379</span><br><span class="line">tcp-backlog 511</span><br><span class="line">timeout 0</span><br><span class="line">tcp-keepalive 300</span><br><span class="line">daemonize no</span><br><span class="line">supervised no</span><br><span class="line">pidfile /var/run/redis_6379.pid</span><br><span class="line">loglevel notice</span><br><span class="line">logfile <span class="string">""</span></span><br><span class="line">databases 16</span><br><span class="line">always-show-logo yes</span><br><span class="line">save 900 1</span><br><span class="line">save 300 10</span><br><span class="line">save 60 10000</span><br><span class="line">stop-writes-on-bgsave-error yes</span><br><span class="line">rdbcompression yes</span><br><span class="line">rdbchecksum yes</span><br><span class="line">dbfilename dump.rdb</span><br><span class="line">dir ./</span><br><span class="line">slave-serve-stale-data yes</span><br><span class="line">slave-read-only yes</span><br><span class="line">repl-diskless-sync no</span><br><span class="line">repl-diskless-sync-delay 5</span><br><span class="line">repl-disable-tcp-nodelay no</span><br><span class="line">slave-priority 100</span><br><span class="line">lazyfree-lazy-eviction no</span><br><span class="line">lazyfree-lazy-expire no</span><br><span class="line">lazyfree-lazy-server-del no</span><br><span class="line">slave-lazy-flush no</span><br><span class="line">appendonly no</span><br><span class="line">appendfilename <span class="string">"appendonly.aof"</span></span><br><span class="line">appendfsync everysec</span><br><span class="line">no-appendfsync-on-rewrite no</span><br><span class="line">auto-aof-rewrite-percentage 100</span><br><span class="line">auto-aof-rewrite-min-size 64mb</span><br><span class="line">aof-load-truncated yes</span><br><span class="line">aof-use-rdb-preamble no</span><br><span class="line">lua-time-limit 5000</span><br><span class="line">slowlog-log-slower-than 10000</span><br><span class="line">slowlog-max-len 128</span><br><span class="line">latency-monitor-threshold 0</span><br><span class="line">notify-keyspace-events <span class="string">""</span></span><br><span class="line"><span class="built_in">hash</span>-max-ziplist-entries 512</span><br><span class="line"><span class="built_in">hash</span>-max-ziplist-value 64</span><br><span class="line">list-max-ziplist-size -2</span><br><span class="line">list-compress-depth 0</span><br><span class="line"><span class="built_in">set</span>-max-intset-entries 512</span><br><span class="line">zset-max-ziplist-entries 128</span><br><span class="line">zset-max-ziplist-value 64</span><br><span class="line">hll-sparse-max-bytes 3000</span><br><span class="line">activerehashing yes</span><br><span class="line">client-output-buffer-limit normal 0 0 0</span><br><span class="line">client-output-buffer-limit slave 256mb 64mb 60</span><br><span class="line">client-output-buffer-limit pubsub 32mb 8mb 60</span><br><span class="line">hz 10</span><br><span class="line">aof-rewrite-incremental-fsync yes</span><br></pre></td></tr></table></figure>
+
+<p>以配置文件方式启动 redis 服务使用命令 <code>./redis-server ./redis.conf</code></p>
+<p>查看启动的 redis 服务： </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># ps -ef | grep redis</span></span><br><span class="line">root      19811  17108  0 06:01 pts/4    00:00:00 ./redis-server 127.0.0.1:6379</span><br><span class="line">root      19849  17061  0 06:06 pts/3    00:00:00 grep --color=auto redis</span><br></pre></td></tr></table></figure>
+
+<p>在实际使用时往往会部署多台 redis，不同的 redis 不同的端口号，配置文件以端口号命名：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat redis.conf | grep -v <span class="string">"#"</span> | grep -v <span class="string">"^$"</span> &gt; redis_6379.conf</span><br></pre></td></tr></table></figure>
+
+<p>将 redis 安装目录拷贝多个，目录名称用端口号体现，配置文件也是一样，这样方便管理。</p>
+<h2 id="三、远程连接-redis"><a href="#三、远程连接-redis" class="headerlink" title="三、远程连接 redis"></a>三、远程连接 redis</h2><p>远程连接 redis 使用命令  <code>./redis-cli -p [端口号] -h [主机]</code>，如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># ./redis-cli -p 6379 -h 127.0.0.1</span></span><br><span class="line">127.0.0.1:6379&gt;</span><br></pre></td></tr></table></figure>
+
+<p>4.0版本的 redis 保护机制，默认绑定了 127.0.0.1 ，在 redis.conf 文件中的配置 <code>bind 127.0.0.1</code>。<br>可以使用 requirepass 设置访问密码，如 <code>requirepass 1234567a</code>。</p>
+<p>客户端连接到 redis 就需要输入密码，不然无法使用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># ./redis-cli -p 6379 -h 127.0.0.1</span></span><br><span class="line">127.0.0.1:6379&gt; keys *</span><br><span class="line">(error) NOAUTH Authentication required.</span><br><span class="line">127.0.0.1:6379&gt;</span><br></pre></td></tr></table></figure>
+
+<p>输入密码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># ./redis-cli -p 6379 -h 127.0.0.1</span></span><br><span class="line">127.0.0.1:6379&gt; auth 1234567a</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; keys *</span><br><span class="line">1) <span class="string">"key1"</span></span><br><span class="line">2) <span class="string">"key3"</span></span><br><span class="line">3) <span class="string">"key2"</span></span><br><span class="line">127.0.0.1:6379&gt;</span><br></pre></td></tr></table></figure>
+
+<p>或者使用命令时带上密码： <code>./redis-cli -p [端口号] -h [主机] -a [密码]</code>，如<code>./redis-cli -p 6379 -h 127.0.0.1 -a 1234567a</code>，但这样会提示不安全：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]<span class="comment"># ./redis-cli -p 6379 -h 127.0.0.1 -a 1234567a</span></span><br><span class="line">Warning: Using a password with <span class="string">'-a'</span> option on the <span class="built_in">command</span> line interface may not be safe.</span><br><span class="line">127.0.0.1:6379&gt; keys *</span><br><span class="line">1) <span class="string">"key2"</span></span><br><span class="line">2) <span class="string">"key3"</span></span><br><span class="line">3) <span class="string">"key1"</span></span><br><span class="line">127.0.0.1:6379&gt;</span><br></pre></td></tr></table></figure>
+
+<p>如果是局域网中的一台主机连接该 redis，报如下错误：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">PS D:\noinstall\redis\redis-2.4.5-win32-win64\64bit&gt; ./redis-cli -p 6379 -h 192.168.2.57</span><br><span class="line">redis 192.168.2.57:6379&gt; auth 1234567a</span><br><span class="line">(error) DENIED Redis is running <span class="keyword">in</span> protected mode because protected mode is enabled, </span><br><span class="line">no <span class="built_in">bind</span> address was specified, no authentication password is requested to clients.</span><br><span class="line"> In this mode connections are only accepted from the loopback interface. </span><br><span class="line"> If you want to connect from external computers to Redis you may adopt one of the following solutions: </span><br><span class="line"> 1) Just <span class="built_in">disable</span> protected mode sending the <span class="built_in">command</span> <span class="string">'CONFIG SET protected-mode no'</span> from the loopback interface by connecting to Redis from the same host the server is running,</span><br><span class="line">  however MAKE SURE Redis is not publicly accessible from internet <span class="keyword">if</span> you <span class="keyword">do</span> so. </span><br><span class="line"> Use CONFIG REWRITE to make this change permanent. </span><br><span class="line"> 2) Alternatively you can just <span class="built_in">disable</span> the protected mode by editing the Redis configuration file, </span><br><span class="line"> and setting the protected mode option to <span class="string">'no'</span>, and <span class="keyword">then</span> restarting the server. </span><br><span class="line"> 3) If you started the server manually just <span class="keyword">for</span> testing, restart it with the <span class="string">'--protected-mode no'</span> option. </span><br><span class="line"> 4) Setup a <span class="built_in">bind</span> address or an authentication password. </span><br><span class="line"> NOTE: You only need to <span class="keyword">do</span> one of the above things <span class="keyword">in</span> order <span class="keyword">for</span> the server to start accepting connections from the outside.</span><br><span class="line">redis 192.168.2.57:6379&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="四、关闭-redis"><a href="#四、关闭-redis" class="headerlink" title="四、关闭 redis"></a>四、关闭 redis</h2><p>使用 Ctrl+C 可以强制关闭 redis，或者使用命令 <code>kill -9 [端口号]</code> 但是容易导致数据丢失，正常关闭应该使用命令，如【./redis-cli -p 6380 shutdown】，redis 服务端已经关闭了：</p>
+<p><img src="http://img2.kungge.com/md-content/2019/201912/tech.redis.2019120201.05.png" alt="Alt text" title="Optional title"></p>
+<p>关闭 redis 要保证数据不丢失。</p>
+<p>如果设置了密码，则需要加上密码才能关闭，使用命令 <code>./redis-cli -a [密码] -p [端口号]</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]# .&#x2F;redis-cli -p 6379 shutdown</span><br><span class="line">(error) NOAUTH Authentication required.</span><br><span class="line">[root@localhost bin]# .&#x2F;redis-cli -a 1234567a -p 6379 shutdown</span><br><span class="line">Warning: Using a password with &#39;-a&#39; option on the command line interface may not be safe</span><br></pre></td></tr></table></figure>
+
+<h2 id="五、防火墙配置"><a href="#五、防火墙配置" class="headerlink" title="五、防火墙配置"></a>五、防火墙配置</h2><p>虽然通过 ssh 工具连接可以连接和操作 redis，但是在外面用程序连接会连接超时，这是因为端口不被外面访问，要设置防火墙。</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>您的支持是我最大的动力！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="wankun 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="wankun 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>wankun
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://blog.kungge.com/p/redis-instal-start/" title="在 linux 中安装与启动 redis 详解">http://blog.kungge.com/p/redis-instal-start/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/redis%E5%AE%89%E8%A3%85/" rel="tag"><i class="fa fa-tag"></i> redis安装</a>
+              <a href="/tags/redis%E5%90%AF%E5%8A%A8/" rel="tag"><i class="fa fa-tag"></i> redis启动</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/p/redis-datatype/" rel="next" title="redis 五种数据类型的基本使用">
+      redis 五种数据类型的基本使用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、安装-redis"><span class="nav-number">1.</span> <span class="nav-text">一、安装 redis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、启动-redis"><span class="nav-number">2.</span> <span class="nav-text">二、启动 redis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-前端默认启动"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 前端默认启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-指定端口启动"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 指定端口启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-指定配置文件启动"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 指定配置文件启动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、远程连接-redis"><span class="nav-number">3.</span> <span class="nav-text">三、远程连接 redis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、关闭-redis"><span class="nav-number">4.</span> <span class="nav-text">四、关闭 redis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、防火墙配置"><span class="nav-number">5.</span> <span class="nav-text">五、防火墙配置</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wankun"
+      src="http://img2.kungge.com/content/dog.jpg">
+  <p class="site-author-name" itemprop="name">wankun</p>
+  <div class="site-description" itemprop="description">生活一门技术，更是一门艺术</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kungge" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kungge" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kunzhongzhong@163.com" title="E-Mail → mailto:kunzhongzhong@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">赣ICP备16000944号-1 </a>
+      <img src="http://img2.kungge.com/content/beian.png" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wankun</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'WS9yN0bdMnmWCTEGdPtRjty5-gzGzoHsz',
+      appKey     : 'rJRpp7BgWk5zx9WdsdFbPUXQ',
+      placeholder: "Just go go",
+      avatar     : 'monsterid',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
