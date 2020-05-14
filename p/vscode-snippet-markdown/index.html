@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/smiley_lock_32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/smiley_lock_16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="<meta name="baidu-site-verification" content="xSB5shU7SK" />">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-material.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.kungge.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="visual studio code 编辑器支持添加用户自定义代码片段，而且可以根据文件类型来添加，本次以 markdown 为例进行介绍，其它语言类似。  一、如何添加？ 菜单 File -&gt; Preferences -&gt; User Snippets：    然后选择文件类型，如本次选择 Markdown：    会打开 markdown.json 配置文件：    1 2 3 4 5 6 7">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vs code 添加 markdown 自定义代码片段">
+<meta property="og:url" content="http://blog.kungge.com/p/vscode-snippet-markdown/index.html">
+<meta property="og:site_name" content="坤哥的博客小站">
+<meta property="og:description" content="visual studio code 编辑器支持添加用户自定义代码片段，而且可以根据文件类型来添加，本次以 markdown 为例进行介绍，其它语言类似。  一、如何添加？ 菜单 File -&gt; Preferences -&gt; User Snippets：    然后选择文件类型，如本次选择 Markdown：    会打开 markdown.json 配置文件：    1 2 3 4 5 6 7">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-03_162550.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-03_163319.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-03_163526.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-03_175511.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-03_175702.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-03_180222.gif">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-03_2059.gif">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-14.applyBranch.gif">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-14.taskInfo.gif">
+<meta property="article:published_time" content="2020-05-07T15:28:41.000Z">
+<meta property="article:modified_time" content="2020-05-13T16:41:43.227Z">
+<meta property="article:author" content="wankun">
+<meta property="article:tag" content="编辑器">
+<meta property="article:tag" content="vs code">
+<meta property="article:tag" content="markdown">
+<meta property="article:tag" content="代码片段">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-03_162550.png">
+
+<link rel="canonical" href="http://blog.kungge.com/p/vscode-snippet-markdown/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>vs code 添加 markdown 自定义代码片段 | 坤哥的博客小站</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">坤哥的博客小站</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个热爱生活的90后</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404.html" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/vscode-snippet-markdown/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
+      <meta itemprop="name" content="wankun">
+      <meta itemprop="description" content="生活一门技术，更是一门艺术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坤哥的博客小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          vs code 添加 markdown 自定义代码片段
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-07 23:28:41" itemprop="dateCreated datePublished" datetime="2020-05-07T23:28:41+08:00">2020-05-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-14 00:41:43" itemprop="dateModified" datetime="2020-05-14T00:41:43+08:00">2020-05-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/p/vscode-snippet-markdown/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/vscode-snippet-markdown/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>visual studio code 编辑器支持添加用户自定义代码片段，而且可以根据文件类型来添加，本次以 markdown 为例进行介绍，其它语言类似。</p>
+<h2 id="一、如何添加？"><a href="#一、如何添加？" class="headerlink" title="一、如何添加？"></a>一、如何添加？</h2><p>菜单 File -&gt; Preferences -&gt; User Snippets：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-03_162550.png" alt="1630"></p>
+<p>然后选择文件类型，如本次选择 Markdown：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-03_163319.png" alt="1634"></p>
+<p>会打开 markdown.json 配置文件：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-03_163526.png" alt="1635"></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="comment">// Place your snippets for markdown here. Each snippet is defined under a snippet name and has a prefix, body and </span></span><br><span class="line">	<span class="comment">// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:</span></span><br><span class="line">	<span class="comment">// $1, $2 for tab stops, $0 for the final cursor position, and $&#123;1:label&#125;, $&#123;2:another&#125; for placeholders. Placeholders with the </span></span><br><span class="line">	<span class="comment">// same ids are connected.</span></span><br><span class="line">	<span class="comment">// Example:</span></span><br><span class="line">	<span class="comment">// "Print to console": &#123;</span></span><br><span class="line">	<span class="comment">// 	"prefix": "log",</span></span><br><span class="line">	<span class="comment">// 	"body": [</span></span><br><span class="line">	<span class="comment">// 		"console.log('$1');",</span></span><br><span class="line">	<span class="comment">// 		"$2"</span></span><br><span class="line">	<span class="comment">// 	],</span></span><br><span class="line">	<span class="comment">// 	"description": "Log output to console"</span></span><br><span class="line">	<span class="comment">// &#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、配置文件介绍"><a href="#二、配置文件介绍" class="headerlink" title="二、配置文件介绍"></a>二、配置文件介绍</h2><p>josn 配置文件由3部分组成：</p>
+<ul>
+<li>prefix：触发代码片段的字符</li>
+<li>body：代码块内容，光标首次为【<code>$1</code>】，按 tab 键切换到第2次为【<code>$2</code>】，依次类推</li>
+<li>description：代码块描述，会在快捷键右侧注释的地方显示</li>
+</ul>
+<h2 id="三、body-内容语法介绍"><a href="#三、body-内容语法介绍" class="headerlink" title="三、body 内容语法介绍"></a>三、body 内容语法介绍</h2><p>body 内容可以携带参数：</p>
+<ul>
+<li>光标：语法 <code>$number</code> </li>
+<li>光标添加可选值：<code>$number</code> 后面可以跟可选的值，语法 <code>${number | a,b,c,...}</code>，【a、b、c】就是可选的项， 范例如 <code>{$1 | a1,a2}</code> 表示第1个光标位置，候选值为zan【a1】和【a2】，如果只有一个默认值，可以写成 <code>${1:default}</code>，还支持嵌套模式，如 <code>${1:a1 ${2: b1}}</code></li>
+<li>变量：可以插入变量值，语法 <code>$variable</code>，可以有默认值 <code>${variable:default}</code></li>
+</ul>
+<p>vs code 提供很多变量供使用，如文本或文件相关：</p>
+<table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TM_SELECTED_TEXT</td>
+<td>当前选定的文本或空字符串</td>
+</tr>
+<tr>
+<td>TM_CURRENT_LINE</td>
+<td>当前行的内容</td>
+</tr>
+<tr>
+<td>TM_CURRENT_WORD</td>
+<td>光标所处单词或空字符串</td>
+</tr>
+<tr>
+<td>TM_LINE_INDEX</td>
+<td>行号（从零开始）</td>
+</tr>
+<tr>
+<td>TM_LINE_NUMBER</td>
+<td>行号（从一开始）</td>
+</tr>
+<tr>
+<td>TM_FILENAME</td>
+<td>当前文档的文件名（含后缀名）</td>
+</tr>
+<tr>
+<td>TM_FILENAME_BASE</td>
+<td>当前文档的文件名（不含后缀名）</td>
+</tr>
+<tr>
+<td>TM_DIRECTORY</td>
+<td>当前文档所在目录</td>
+</tr>
+<tr>
+<td>TM_FILEPATH</td>
+<td>当前文档的完整文件路径</td>
+</tr>
+<tr>
+<td>CLIPBOARD</td>
+<td>当前剪贴板中内容</td>
+</tr>
+</tbody></table>
+<p>日期时间相关：</p>
+<table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CURRENT_YEAR</td>
+<td>当前年份</td>
+</tr>
+<tr>
+<td>CURRENT_YEAR_SHORT</td>
+<td>当前年份的后两位</td>
+</tr>
+<tr>
+<td>CURRENT_MONTH</td>
+<td>格式化为两位数字的当前月份，如</td>
+</tr>
+<tr>
+<td>CURRENT_MONTH_NAME</td>
+<td>当前月份的全称，如</td>
+</tr>
+<tr>
+<td>CURRENT_MONTH_NAME_SHORT</td>
+<td>当前月份的简称，如</td>
+</tr>
+<tr>
+<td>CURRENT_DATE</td>
+<td>当天月份第几天</td>
+</tr>
+<tr>
+<td>CURRENT_DAY_NAME</td>
+<td>当天周几，如</td>
+</tr>
+<tr>
+<td>CURRENT_DAY_NAME_SHORT</td>
+<td>当天周几的简称，如</td>
+</tr>
+<tr>
+<td>CURRENT_HOUR</td>
+<td>当前小时（24</td>
+</tr>
+<tr>
+<td>CURRENT_MINUTE</td>
+<td>当前分钟</td>
+</tr>
+<tr>
+<td>CURRENT_SECOND</td>
+<td>当前秒数</td>
+</tr>
+</tbody></table>
+<p>若想将语法关键字当做普通字符使用则需要使用转义字符【\】（反斜杠）进行转义。</p>
+<h2 id="四、代码片段范例"><a href="#四、代码片段范例" class="headerlink" title="四、代码片段范例"></a>四、代码片段范例</h2><p>像主流的语言如 java、c#、c++可以直接提示，但是 markdown 默认是不能提示的，需要额外设置，快捷键【Ctrl+Shift+P】后，输入【settings】选择【Preferences: Open Settings(JSON)】：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-03_175511.png" alt="1809"></p>
+<p>然后添加：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">"[markdown]":  &#123;</span><br><span class="line">	"editor.quickSuggestions": true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-03_175702.png" alt="1810"></p>
+<p>markdown 代码片段配置：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="comment">// Place your snippets for markdown here. Each snippet is defined under a snippet name and has a prefix, body and </span></span><br><span class="line">	<span class="comment">// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:</span></span><br><span class="line">	<span class="comment">// $1, $2 for tab stops, $0 for the final cursor position, and $&#123;1:label&#125;, $&#123;2:another&#125; for placeholders. Placeholders with the </span></span><br><span class="line">	<span class="comment">// same ids are connected.</span></span><br><span class="line">	<span class="comment">// Example:</span></span><br><span class="line">	<span class="attr">"mdInfo-template"</span>: &#123;</span><br><span class="line">		<span class="attr">"prefix"</span>: <span class="string">"mdBaseInfo"</span>,</span><br><span class="line">		<span class="attr">"body"</span>: [</span><br><span class="line">            <span class="string">"---"</span>,</span><br><span class="line">            <span class="string">"title: $&#123;1:标题&#125;"</span>,</span><br><span class="line">            <span class="string">"date: $&#123;CURRENT_YEAR&#125;-$&#123;CURRENT_MONTH&#125;-$&#123;CURRENT_DATE&#125; $&#123;CURRENT_HOUR&#125;:$&#123;CURRENT_MINUTE&#125;:$&#123;CURRENT_SECOND&#125;"</span>,</span><br><span class="line">            <span class="string">"tags: [$&#123;2:标签1,标签2&#125;]"</span>,</span><br><span class="line">            <span class="string">"categories: $&#123;3:类别&#125;"</span>,</span><br><span class="line">            <span class="string">"---"</span></span><br><span class="line">		],</span><br><span class="line">		<span class="attr">"description"</span>: <span class="string">"markdown 文章基本信息模板"</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>保存，在 markdown 文件中输入演示：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-03_180222.gif" alt="1804"></p>
+<p>为了方便后来设置 hexo 头会这样使用：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">"mdInfo-template": &#123;</span><br><span class="line">		"prefix": "mdBaseInfo",</span><br><span class="line">		"body": [</span><br><span class="line">			"---",</span><br><span class="line">			"title: $&#123;1: 标题&#125;",</span><br><span class="line">			"id: $&#123;CURRENT_YEAR&#125;-$&#123;CURRENT_MONTH&#125;-$&#123;CURRENT_DATE&#125;_$&#123;CURRENT_HOUR&#125;",</span><br><span class="line">			"date: $&#123;CURRENT_YEAR&#125;-$&#123;CURRENT_MONTH&#125;-$&#123;CURRENT_DATE&#125; $&#123;CURRENT_HOUR&#125;:$&#123;CURRENT_MINUTE&#125;:$&#123;CURRENT_SECOND&#125;",</span><br><span class="line">			"tags: [$&#123;2:标签1,标签2&#125;]",</span><br><span class="line">			"categories: $&#123;3:类别&#125;",</span><br><span class="line">			"---",</span><br><span class="line">			<span class="string">""</span></span><br><span class="line">		],</span><br><span class="line">		"description": "markdown 文章基本信息模板"</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>markdown 中经常使用图片，可以安装快捷键插件来快速插入一个图片但是感觉还不够好，有时候还要想一个名称，使用代码片段会更快，使用时间来生成名称，配置范例如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">"mdImg-template": &#123;</span><br><span class="line">	"prefix": "mdImg",</span><br><span class="line">	"body": [</span><br><span class="line">		<span class="string">"![$&#123;CURRENT_YEAR&#125;$&#123;CURRENT_MONTH&#125;$&#123;CURRENT_DATE&#125;$&#123;CURRENT_HOUR&#125;$&#123;CURRENT_MINUTE&#125;$&#123;CURRENT_SECOND&#125;]($1)"</span></span><br><span class="line">	],</span><br><span class="line">	"description": "markdown 图片基本模板"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>演示：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-03_2059.gif" alt="20200503205902"></p>
+<p>可能在工作中会编写表格，可以将表格框架写到代码片段中，如申请一个开发分支的简单的表格：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">"jobBranchApply-template": &#123;</span><br><span class="line">		"prefix": "branchApply",</span><br><span class="line">		"body": [</span><br><span class="line">			"| 需求 | $1 |",</span><br><span class="line">			"|------|------|",</span><br><span class="line">			" 涉及程序 | ",</span><br><span class="line">			" 拥有人 | 万坤",</span><br><span class="line">			<span class="string">" 备注 | "</span></span><br><span class="line">		],</span><br><span class="line">		"description": "代码分支申请"</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-14.applyBranch.gif" alt="20200514002457"></p>
+<p>还有比如工作中会写一些固定格式的文档，如开发写的需求相关的提测文档，如：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-14.taskInfo.gif" alt="20200514003119"></p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>您的支持是我最大的动力！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="wankun 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="wankun 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>wankun
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://blog.kungge.com/p/vscode-snippet-markdown/" title="vs code 添加 markdown 自定义代码片段">http://blog.kungge.com/p/vscode-snippet-markdown/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E7%BC%96%E8%BE%91%E5%99%A8/" rel="tag"><i class="fa fa-tag"></i> 编辑器</a>
+              <a href="/tags/vs-code/" rel="tag"><i class="fa fa-tag"></i> vs code</a>
+              <a href="/tags/markdown/" rel="tag"><i class="fa fa-tag"></i> markdown</a>
+              <a href="/tags/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/" rel="tag"><i class="fa fa-tag"></i> 代码片段</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/p/nas-network-frp/" rel="prev" title="nas 折腾笔记（十一）：群晖系统的使用之 Frp 内网穿透">
+      <i class="fa fa-chevron-left"></i> nas 折腾笔记（十一）：群晖系统的使用之 Frp 内网穿透
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/p/hexo-seo/" rel="next" title="Hexo 实战：搜索引擎 SEO Settings">
+      Hexo 实战：搜索引擎 SEO Settings <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、如何添加？"><span class="nav-number">1.</span> <span class="nav-text">一、如何添加？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、配置文件介绍"><span class="nav-number">2.</span> <span class="nav-text">二、配置文件介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、body-内容语法介绍"><span class="nav-number">3.</span> <span class="nav-text">三、body 内容语法介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、代码片段范例"><span class="nav-number">4.</span> <span class="nav-text">四、代码片段范例</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wankun"
+      src="http://img2.kungge.com/content/dog.jpg">
+  <p class="site-author-name" itemprop="name">wankun</p>
+  <div class="site-description" itemprop="description">生活一门技术，更是一门艺术</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kungge" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kungge" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kunzhongzhong@163.com" title="E-Mail → mailto:kunzhongzhong@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">赣ICP备16000944号-1 </a>
+      <img src="http://img2.kungge.com/content/beian.png" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wankun</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'WS9yN0bdMnmWCTEGdPtRjty5-gzGzoHsz',
+      appKey     : 'rJRpp7BgWk5zx9WdsdFbPUXQ',
+      placeholder: "Just go go",
+      avatar     : 'monsterid',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

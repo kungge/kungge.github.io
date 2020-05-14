@@ -40,13 +40,21 @@
 <meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-11_001320.png">
 <meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-11_000027.png">
 <meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-11_000329.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-13_235309.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-13_235534.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-13_225941.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-13_230110.png">
 <meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_214358.png">
 <meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_224443.png">
 <meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_220432.png">
 <meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_224624.png">
 <meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_224900.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-13_235732.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-14_000004.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-14_215302.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-14_215527.png">
 <meta property="article:published_time" content="2020-05-10T13:49:38.000Z">
-<meta property="article:modified_time" content="2020-05-11T15:42:45.276Z">
+<meta property="article:modified_time" content="2020-05-14T14:19:51.734Z">
 <meta property="article:author" content="wankun">
 <meta property="article:tag" content="hexo">
 <meta property="article:tag" content="hexo 实战">
@@ -258,7 +266,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-11 23:42:45" itemprop="dateModified" datetime="2020-05-11T23:42:45+08:00">2020-05-11</time>
+                <time title="修改时间：2020-05-14 22:19:51" itemprop="dateModified" datetime="2020-05-14T22:19:51+08:00">2020-05-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -321,7 +329,8 @@
 <p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-11_001357.png" alt="20200511001439"></p>
 <p>如果已经有主站添加了验证，可以批量添加子站：</p>
 <p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-11_001320.png" alt="20200510215413"></p>
-<h2 id="提交链接"><a href="#提交链接" class="headerlink" title="提交链接"></a>提交链接</h2><p>使用 npm 自动生成 sitemap，然后将其提交到百度或者其它搜索引擎。</p>
+<h2 id="生成站点地图"><a href="#生成站点地图" class="headerlink" title="生成站点地图"></a>生成站点地图</h2><p>站点地图是网站上各网页的列表，创建这个文件有助于搜索引擎发现并了解网站的所有网页。</p>
+<p>使用 npm 自动生成 sitemap，然后将其提交到百度或者其它搜索引擎。</p>
 <p>安装两个组件：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-sitemap --save</span><br><span class="line">npm install hexo-generator-baidu-sitemap --save</span><br></pre></td></tr></table></figure>
 
@@ -329,6 +338,15 @@
 <p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-11_000027.png" alt="20200511000047"></p>
 <p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-11_000329.png" alt="20200511000337"></p>
 <p>生成的 baidusitemap.xml 中只包含文章内容，其它页面不包含（如404、类别、标签页面等）。</p>
+<h2 id="提交站点地图"><a href="#提交站点地图" class="headerlink" title="提交站点地图"></a>提交站点地图</h2><p>向搜索引擎主动提交信息，可以缩短搜索引起爬虫发现网站链接的时间，百度后台管理中提供了这个功能，进入【百度收录】一栏：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-13_235309.png" alt="20200513235400"></p>
+<p>提交完成，属于等待状态：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-13_235534.png" alt="20200513235647"></p>
+<p>过一会儿就能看到新的状态了。</p>
+<h2 id="验证网站是否收录"><a href="#验证网站是否收录" class="headerlink" title="验证网站是否收录"></a>验证网站是否收录</h2><p>在百度搜索框中输入 <code>site:blog.kungge.com</code>，没有收录的话，如下：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-13_225941.png" alt="20200513225948"></p>
+<p>过一段时间再来查，就可以看到类似这样：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-13_230110.png" alt="20200513230116"></p>
 <h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="验证网站失败"><a href="#验证网站失败" class="headerlink" title="验证网站失败"></a>验证网站失败</h3><p>验证网站：</p>
 <p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-10_214358.png" alt="20200510215322"></p>
 <p>在 source 目录中添加这个文件，然后重新生成再发布即可。</p>
@@ -340,6 +358,15 @@
 <p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-10_224624.png" alt="20200510224657"></p>
 <p>因为最终生成的这个文件不再是之前的那个文件：</p>
 <p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-10_224900.png" alt="20200510224932"></p>
+<h3 id="提交站点地图状态抓取失败"><a href="#提交站点地图状态抓取失败" class="headerlink" title="提交站点地图状态抓取失败"></a>提交站点地图状态抓取失败</h3><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-13_235732.png" alt="20200513235835"></p>
+<p>点击【抓取失败】进去提示：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-14_000004.png" alt="20200514000019"></p>
+<p>先确定资源是否能正常访问，如果能正常访问则不用管它。</p>
+<p>可以晚点再看看，可能百度方系统异常了，第二天再看看，发现【抓取失败】可以点进去：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-14_215302.png" alt="20200514215313"></p>
+<p>查看网络IP情况：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-14_215527.png" alt="20200514215543"></p>
+<p>经查阅资料发现 GitHub 禁止了百度爬虫，如果要解决这个问题可以双线部署 Coding Pages 和 GitHub Pages 。</p>
 
     </div>
 
@@ -399,10 +426,13 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/p/nas-network-frp/" rel="prev" title="nas 折腾笔记（十一）：群晖系统的使用之 Frp 内网穿透">
-      <i class="fa fa-chevron-left"></i> nas 折腾笔记（十一）：群晖系统的使用之 Frp 内网穿透
+    <a href="/p/vscode-snippet-markdown/" rel="prev" title="vs code 添加 markdown 自定义代码片段">
+      <i class="fa fa-chevron-left"></i> vs code 添加 markdown 自定义代码片段
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/p/sqlserver-sql-string/" rel="next" title="sqlserver 获取字符串获中某个字符的最后一个位置">
+      sqlserver 获取字符串获中某个字符的最后一个位置 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -463,7 +493,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#添加网站"><span class="nav-number">1.</span> <span class="nav-text">添加网站</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提交链接"><span class="nav-number">2.</span> <span class="nav-text">提交链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见问题"><span class="nav-number">3.</span> <span class="nav-text">常见问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#验证网站失败"><span class="nav-number">3.1.</span> <span class="nav-text">验证网站失败</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#添加网站"><span class="nav-number">1.</span> <span class="nav-text">添加网站</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成站点地图"><span class="nav-number">2.</span> <span class="nav-text">生成站点地图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提交站点地图"><span class="nav-number">3.</span> <span class="nav-text">提交站点地图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证网站是否收录"><span class="nav-number">4.</span> <span class="nav-text">验证网站是否收录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见问题"><span class="nav-number">5.</span> <span class="nav-text">常见问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#验证网站失败"><span class="nav-number">5.1.</span> <span class="nav-text">验证网站失败</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提交站点地图状态抓取失败"><span class="nav-number">5.2.</span> <span class="nav-text">提交站点地图状态抓取失败</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -479,20 +509,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-count">58</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

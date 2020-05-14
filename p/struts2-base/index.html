@@ -26,7 +26,7 @@
 
   <meta name="description" content="Struts2 是一个 MVC 框架。  Struts1 完全依赖于 Servlet 的 API 但是耦合性太高，被 Struts2 替代了。  Struts2 并不是在 Struts1 基础上设计的，两者没有直接的关系。  一、环境配置 下载 Struts2 的压缩包，下载地址：https:&#x2F;&#x2F;struts.apache.org&#x2F;  本次下载的版本是【struts-2.3.37】。  下载完成后">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Struts2 学习笔记：基本使用">
+<meta property="og:title" content="Struts2 学习笔记：一文学会基本使用">
 <meta property="og:url" content="http://blog.kungge.com/p/struts2-base/index.html">
 <meta property="og:site_name" content="坤哥的博客小站">
 <meta property="og:description" content="Struts2 是一个 MVC 框架。  Struts1 完全依赖于 Servlet 的 API 但是耦合性太高，被 Struts2 替代了。  Struts2 并不是在 Struts1 基础上设计的，两者没有直接的关系。  一、环境配置 下载 Struts2 的压缩包，下载地址：https:&#x2F;&#x2F;struts.apache.org&#x2F;  本次下载的版本是【struts-2.3.37】。  下载完成后">
@@ -61,12 +61,12 @@
 <meta property="og:image" content="http://img2.kungge.com/md-content/2020/202002/struts2.2020020501.png">
 <meta property="og:image" content="http://img2.kungge.com/md-content/2020/202002/struts2.2020020502.png">
 <meta property="og:image" content="http://img2.kungge.com/md-content/2020/202002/struts2.2020-03-14_220730.png">
-<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202002/struts2.2020-03-14_215832.png">
-<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202002/struts2.2020-03-14_215904.png">
-<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202002/struts2.2020-03-14_230637.png">
-<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202002/struts2.2020-03-15_122159.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/struts2.2020-03-14_215832.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/struts2.2020-03-14_215904.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/struts2.2020-03-14_230637.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/struts2.2020-03-15_122159.png">
 <meta property="article:published_time" content="2020-02-01T03:17:19.000Z">
-<meta property="article:modified_time" content="2020-05-11T14:53:01.858Z">
+<meta property="article:modified_time" content="2020-05-13T16:09:04.554Z">
 <meta property="article:author" content="wankun">
 <meta property="article:tag" content="struts2">
 <meta property="article:tag" content="java框架">
@@ -86,7 +86,7 @@
   };
 </script>
 
-  <title>Struts2 学习笔记：基本使用 | 坤哥的博客小站</title>
+  <title>Struts2 学习笔记：一文学会基本使用 | 坤哥的博客小站</title>
   
 
 
@@ -259,7 +259,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Struts2 学习笔记：基本使用
+          Struts2 学习笔记：一文学会基本使用
         </h1>
 
         <div class="post-meta">
@@ -276,7 +276,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-11 22:53:01" itemprop="dateModified" datetime="2020-05-11T22:53:01+08:00">2020-05-11</time>
+                <time title="修改时间：2020-05-14 00:09:04" itemprop="dateModified" datetime="2020-05-14T00:09:04+08:00">2020-05-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -505,9 +505,9 @@
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">"text/html;charset=UTF-8"</span> language=<span class="string">"java"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;用户登录后的主页&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">当前登录用户：$&#123;sessionScope.current_user&#125;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
 
 <h3 id="3-4-登录验证演示"><a href="#3-4-登录验证演示" class="headerlink" title="3.4 登录验证演示"></a>3.4 登录验证演示</h3><p>登录页面：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202002/struts2.2020-03-14_215832.png" alt="loginPage"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/struts2.2020-03-14_215832.png" alt="loginPage"></p>
 <p>登录成功：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202002/struts2.2020-03-14_215904.png" alt="login success"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/struts2.2020-03-14_215904.png" alt="login success"></p>
 <h3 id="3-5-异常处理"><a href="#3-5-异常处理" class="headerlink" title="3.5 异常处理"></a>3.5 异常处理</h3><p>异常有系统异常和业务异常。</p>
 <p>若是系统异常，对应的错误页面【errorPage.jsp】：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">"text/html;charset=UTF-8"</span> language=<span class="string">"java"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;这是错误页面&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    系统出现异常。</span><br><span class="line">    &lt;s:debug&gt;&lt;/s:debug&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
@@ -519,7 +519,7 @@
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"basepkg"</span> <span class="attr">extends</span>=<span class="string">"struts-default"</span> <span class="attr">abstract</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--配置全局视图--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">global-results</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">type</span>=<span class="string">"redirect"</span> <span class="attr">name</span>=<span class="string">"login"</span>&gt;</span>/loginPage.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"error"</span>&gt;</span>/errorPage.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"businessEx"</span>&gt;</span>/businessExPage.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">global-results</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--配置全局异常--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">global-exception-mappings</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">exception-mapping</span> <span class="attr">exception</span>=<span class="string">"java.lang.Exception"</span> <span class="attr">result</span>=<span class="string">"error"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">exception-mapping</span> <span class="attr">exception</span>=<span class="string">"com.nice.core.common.ex.BusinessException"</span> <span class="attr">result</span>=<span class="string">"businessEx"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">global-exception-mappings</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">package</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>登录页面输入错误的用户和密码，上面的【UserAction】类中在逻辑中是直接 <code>throw new UserException(&quot;用户登录异常&quot;);</code>，因此会抛出一个业务异常：</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202002/struts2.2020-03-14_230637.png" alt="异常页面"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/struts2.2020-03-14_230637.png" alt="异常页面"></p>
 <h2 id="三、Struts2-拦截器"><a href="#三、Struts2-拦截器" class="headerlink" title="三、Struts2 拦截器"></a>三、Struts2 拦截器</h2><h3 id="3-1-自定义拦截器类"><a href="#3-1-自定义拦截器类" class="headerlink" title="3.1 自定义拦截器类"></a>3.1 自定义拦截器类</h3><p>拦截器分成两种：</p>
 <ul>
 <li>类拦截器：AbstractInterceptor</li>
@@ -549,7 +549,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">TheMethodInterceptor doIntercept start</span><br><span class="line">actionInvocation.getAction()=com.nice.core.user.action.UserAction@556479a2</span><br><span class="line">current_user session =null</span><br></pre></td></tr></table></figure>
 
 <p>页面跳转到登录页面，先登录再访问这个新增页面就会放行，新增页面就能访问到</p>
-<p><img src="http://img2.kungge.com/md-content/2020/202002/struts2.2020-03-15_122159.png" alt="用户新增页面"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/struts2.2020-03-15_122159.png" alt="用户新增页面"></p>
 
     </div>
 
@@ -585,7 +585,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://blog.kungge.com/p/struts2-base/" title="Struts2 学习笔记：基本使用">http://blog.kungge.com/p/struts2-base/</a>
+    <a href="http://blog.kungge.com/p/struts2-base/" title="Struts2 学习笔记：一文学会基本使用">http://blog.kungge.com/p/struts2-base/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -611,8 +611,8 @@
       <i class="fa fa-chevron-left"></i> sqlserver 中使用 sql 解析 json 格式数据的实现方案
     </a></div>
       <div class="post-nav-item">
-    <a href="/p/nuget-nugetorg-email/" rel="next" title="nuget.org 温馨邮件提示 github 上出现 API key 暖心">
-      nuget.org 温馨邮件提示 github 上出现 API key 暖心 <i class="fa fa-chevron-right"></i>
+    <a href="/p/sqlserver-query-nolock/" rel="next" title="一次 sqlserver 单表查询过慢处理记录">
+      一次 sqlserver 单表查询过慢处理记录 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -690,20 +690,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-count">58</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
