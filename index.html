@@ -9,7 +9,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/smiley_lock_32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/smiley_lock_16x16.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
-  <meta name="baidu-site-verification" content="<meta name="baidu-site-verification" content="xSB5shU7SK" />">
+  <meta name="google-site-verification" content="gVkA-jeqZSVbPLhHyQnRI8oEBse0D3GaV0B98Yjai_k" />
+  <meta name="baidu-site-verification" content="xSB5shU7SK" />
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -739,7 +740,7 @@ TheStringTheCharIndexGOODMAN/KUNGGE/WAN8查了下 sqlserver 的函数库，没�
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/p/hexo-seo/" class="post-title-link" itemprop="url">Hexo 实战：搜索引擎 SEO Settings</a>
+            <a href="/p/hexo-seo/" class="post-title-link" itemprop="url">Hexo 实战：搜索引擎 SEO Settings 设置百度和谷歌</a>
         </h2>
 
         <div class="post-meta">
@@ -756,7 +757,7 @@ TheStringTheCharIndexGOODMAN/KUNGGE/WAN8查了下 sqlserver 的函数库，没�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-14 22:19:51" itemprop="dateModified" datetime="2020-05-14T22:19:51+08:00">2020-05-14</time>
+                <time title="修改时间：2020-05-16 14:11:04" itemprop="dateModified" datetime="2020-05-16T14:11:04+08:00">2020-05-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -793,7 +794,7 @@ TheStringTheCharIndexGOODMAN/KUNGGE/WAN8查了下 sqlserver 的函数库，没�
     <div class="post-body" itemprop="articleBody">
 
       
-          本次以百度为例。
+          本次以百度为例，谷歌类似。
 
 添加网站
 进入【百度站长平台】，添加站点
@@ -804,7 +805,13 @@ TheStringTheCharIndexGOODMAN/KUNGGE/WAN8查了下 sqlserver 的函数库，没�
 
 
 
-next 支持 SEO Settings，将标签内容赋值给 baidu_site_verification：
+采用【HTMl标签验证】：
+
+
+
+html 内容就是 content 中的内容。
+
+next 支持 SEO Settings，配置项如下：
 
 1
 2
@@ -842,7 +849,7 @@ next 支持 SEO Settings，将标签内容赋值给 baidu_site_verification：
 
 # ---------------------------------------------------------------
 # SEO Settings
-# ------------------------
+# ----
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/p/hexo-seo/#more" rel="contents">
@@ -1485,6 +1492,47 @@ root@Synology:~# cd /usr
   <span class="author" itemprop="copyrightHolder">wankun</span>
 </div>
 
+<!--添加运行时间-->
+<span id="sitetime"></span>
+<script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* 
+      Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+      year - 作为date对象的年份，为4位年份值
+      month - 0-11之间的整数，做为date对象的月份
+      day - 1-31之间的整数，做为date对象的天数
+      hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+      minutes - 0-59之间的整数，做为date对象的分钟数
+      seconds - 0-59之间的整数，做为date对象的秒数
+      microseconds - 0-999之间的整数，做为date对象的毫秒数
+     */
+		var t1 = Date.UTC(2020,03,29,00,51,12);
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML=" 已运行"+/*diffYears+" 年 "+*/diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒";
+	}
+	siteTime();
+</script>
+<!--添加运行时间-->
+
         
 <div class="busuanzi-count">
   <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
@@ -1539,6 +1587,15 @@ root@Synology:~# cd /usr
 
 
   
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
 
 
 
