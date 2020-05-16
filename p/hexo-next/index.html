@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/smiley_lock_32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/smiley_lock_16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="gVkA-jeqZSVbPLhHyQnRI8oEBse0D3GaV0B98Yjai_k" />
+  <meta name="baidu-site-verification" content="xSB5shU7SK" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-material.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.kungge.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="使用主题 NexT 默认的主题是 landscape，而 NexT 主题很多人选择，简洁好看，接下来会在该主题基础上进行设置。  NexT 主题源码地址：https:&#x2F;&#x2F;github.com&#x2F;theme-next&#x2F;hexo-theme-next  下载 release 版：https:&#x2F;&#x2F;github.com&#x2F;theme-next&#x2F;hexo-theme-next&#x2F;releases  将下载的压缩包">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo 实战（三）：主题 NexT 使用和基本设置">
+<meta property="og:url" content="http://blog.kungge.com/p/hexo-next/index.html">
+<meta property="og:site_name" content="坤哥的博客小站">
+<meta property="og:description" content="使用主题 NexT 默认的主题是 landscape，而 NexT 主题很多人选择，简洁好看，接下来会在该主题基础上进行设置。  NexT 主题源码地址：https:&#x2F;&#x2F;github.com&#x2F;theme-next&#x2F;hexo-theme-next  下载 release 版：https:&#x2F;&#x2F;github.com&#x2F;theme-next&#x2F;hexo-theme-next&#x2F;releases  将下载的压缩包">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-30_225028.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-30_225430.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-30_225933.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_163654.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-30_230927.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-30_232856.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-30_234930.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-30_235238.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_180745.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_141102.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_152534.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_165528.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_170455.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_170648.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_170733.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_171608.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_211929.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_212145.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_172308.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_172939.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_164635.png">
+<meta property="article:published_time" content="2020-04-06T06:54:22.000Z">
+<meta property="article:modified_time" content="2020-05-16T07:53:31.810Z">
+<meta property="article:author" content="wankun">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="hexo 实战">
+<meta property="article:tag" content="next 主题">
+<meta property="article:tag" content="hexo 主题">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-30_225028.png">
+
+<link rel="canonical" href="http://blog.kungge.com/p/hexo-next/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Hexo 实战（三）：主题 NexT 使用和基本设置 | 坤哥的博客小站</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">坤哥的博客小站</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个热爱生活的90后</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404.html" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/hexo-next/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
+      <meta itemprop="name" content="wankun">
+      <meta itemprop="description" content="生活一门技术，更是一门艺术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坤哥的博客小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hexo 实战（三）：主题 NexT 使用和基本设置
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-06 14:54:22" itemprop="dateCreated datePublished" datetime="2020-04-06T14:54:22+08:00">2020-04-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-16 15:53:31" itemprop="dateModified" datetime="2020-05-16T15:53:31+08:00">2020-05-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BC%80%E6%BA%90%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index"><span itemprop="name">开源博客</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/p/hexo-next/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/hexo-next/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="使用主题-NexT"><a href="#使用主题-NexT" class="headerlink" title="使用主题 NexT"></a>使用主题 NexT</h2><p>默认的主题是 landscape，而 NexT 主题很多人选择，简洁好看，接下来会在该主题基础上进行设置。</p>
+<p>NexT 主题源码地址：<a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">https://github.com/theme-next/hexo-theme-next</a></p>
+<p>下载 release 版：<a href="https://github.com/theme-next/hexo-theme-next/releases" target="_blank" rel="noopener">https://github.com/theme-next/hexo-theme-next/releases</a></p>
+<p>将下载的压缩包解压到 <code>themes/</code> 目录下，将_config.yml 中 theme 修改为 :</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Extensions</span></span><br><span class="line">theme: next</span><br></pre></td></tr></table></figure>
+
+<h2 id="NexT-主题基本配置"><a href="#NexT-主题基本配置" class="headerlink" title="NexT 主题基本配置"></a>NexT 主题基本配置</h2><h3 id="Schemes-配置"><a href="#Schemes-配置" class="headerlink" title="Schemes 配置"></a>Schemes 配置</h3><p>scheme 默认是 Muse：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-30_225028.png" alt="2250"></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Schemes</span></span><br><span class="line"><span class="attr">scheme:</span> <span class="string">Muse</span></span><br><span class="line"><span class="comment"># scheme: Mist</span></span><br><span class="line"><span class="comment"># scheme: Pisces</span></span><br><span class="line"><span class="comment">#scheme: Gemini</span></span><br></pre></td></tr></table></figure>
+
+<p>Pisces 效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-30_225430.png" alt="2254"></p>
+<p>Mist 效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-30_225933.png" alt="2259"></p>
+<p>Gemini 效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-10_163654.png" alt="20200510163714"></p>
+<p>个人推荐使用 Gemini，比较好看。</p>
+<h3 id="菜单配置"><a href="#菜单配置" class="headerlink" title="菜单配置"></a>菜单配置</h3><p>默认的菜单配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Usage: `Key: /link/ || icon`</span></span><br><span class="line"><span class="comment"># Key is the name of menu item. If the translation for this item is available, the translated text will be loaded, otherwise the Key name will be used. Key is case-senstive.</span></span><br><span class="line"><span class="comment"># Value before `||` delimiter is the target link, value after `||` delimiter is the name of Font Awesome icon.</span></span><br><span class="line"><span class="comment"># When running the site in a subdirectory (e.g. yoursite.com/blog), remove the leading slash from link value (/archives -&gt; archives).</span></span><br><span class="line"><span class="comment"># External url should start with http:// or https://</span></span><br><span class="line">menu:</span><br><span class="line">  home: / || home</span><br><span class="line">  <span class="comment">#about: /about/ || user</span></span><br><span class="line">  <span class="comment">#tags: /tags/ || tags</span></span><br><span class="line">  <span class="comment">#categories: /categories/ || th</span></span><br><span class="line">  archives: /archives/ || archive</span><br><span class="line">  <span class="comment">#schedule: /schedule/ || calendar</span></span><br><span class="line">  <span class="comment">#sitemap: /sitemap.xml || sitemap</span></span><br><span class="line">  <span class="comment">#commonweal: /404/ || heartbeat</span></span><br></pre></td></tr></table></figure>
+
+<p><code>||</code> 前面的是超链接，后面的是图标，修改如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: / || home</span><br><span class="line">  about: /about/ || user</span><br><span class="line">  tags: /tags/ || tags</span><br><span class="line">  categories: /categories/ || th</span><br><span class="line">  archives: /archives/ || archive</span><br><span class="line">  schedule: /schedule/ || calendar</span><br><span class="line">  sitemap: /sitemap.xml || sitemap</span><br><span class="line">  commonweal: /404/ || heartbeat</span><br></pre></td></tr></table></figure>
+
+<p>渲染效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-30_230927.png" alt="2309"></p>
+<p>配置的是英文，为啥会显示成对应中文？</p>
+<p>其实这是有语言配置文件决定的，配置什么语言就用目录 【languages/】下【语言.yml】文件，如本次配置的是【language: zh-CN】，使用的文件就是【zh-CN.yml】。</p>
+<h3 id="侧栏配置"><a href="#侧栏配置" class="headerlink" title="侧栏配置"></a>侧栏配置</h3><p>侧栏默认配置如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ---------------------------------------------------------------</span></span><br><span class="line"><span class="comment"># Sidebar Settings</span></span><br><span class="line"><span class="comment"># See: https://theme-next.org/docs/theme-settings/sidebar</span></span><br><span class="line"><span class="comment"># ---------------------------------------------------------------</span></span><br><span class="line"></span><br><span class="line">sidebar:</span><br><span class="line">  <span class="comment"># Sidebar Position.</span></span><br><span class="line">  position: left</span><br><span class="line">  <span class="comment">#position: right</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Manual define the sidebar width. If commented, will be default for:</span></span><br><span class="line">  <span class="comment"># Muse | Mist: 320</span></span><br><span class="line">  <span class="comment"># Pisces | Gemini: 240</span></span><br><span class="line">  <span class="comment">#width: 300</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Sidebar Display (only for Muse | Mist), available values:</span></span><br><span class="line">  <span class="comment">#  - post    expand on posts automatically. Default.</span></span><br><span class="line">  <span class="comment">#  - always  expand for all pages automatically.</span></span><br><span class="line">  <span class="comment">#  - hide    expand only when click on the sidebar toggle icon.</span></span><br><span class="line">  <span class="comment">#  - remove  totally remove sidebar including sidebar toggle.</span></span><br><span class="line">  display: post</span><br><span class="line"></span><br><span class="line">  <span class="comment"># Sidebar padding in pixels.</span></span><br><span class="line">  padding: 18</span><br><span class="line">  <span class="comment"># Sidebar offset from top menubar in pixels (only for Pisces | Gemini).</span></span><br><span class="line">  offset: 12</span><br><span class="line">  <span class="comment"># Enable sidebar on narrow view (only for Muse | Mist).</span></span><br><span class="line">  onmobile: <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Sidebar Avatar</span></span><br><span class="line">avatar:</span><br><span class="line">  <span class="comment"># Replace the default image and set the url here.</span></span><br><span class="line">  url: <span class="comment">#/images/avatar.gif</span></span><br><span class="line">  <span class="comment"># If true, the avatar will be dispalyed in circle.</span></span><br><span class="line">  rounded: <span class="literal">false</span></span><br><span class="line">  <span class="comment"># If true, the avatar will be rotated with the cursor.</span></span><br><span class="line">  rotated: <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Posts / Categories / Tags in sidebar.</span></span><br><span class="line">site_state: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>渲染效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-30_232856.png" alt="2329"></p>
+<ul>
+<li>Sidebar Position 用来配置侧栏的位置</li>
+<li>Sidebar Display 用来配置侧栏的显示时机</li>
+<li>Sidebar Avatar 用来配置侧栏头像</li>
+</ul>
+<h3 id="友情链接配置"><a href="#友情链接配置" class="headerlink" title="友情链接配置"></a>友情链接配置</h3><p>默认：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Social Links</span></span><br><span class="line"><span class="comment"># Usage: `Key: permalink || icon`</span></span><br><span class="line"><span class="comment"># Key is the link label showing to end users.</span></span><br><span class="line"><span class="comment"># Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.</span></span><br><span class="line">social:</span><br><span class="line">  <span class="comment">#GitHub: https://github.com/yourname || github</span></span><br><span class="line">  <span class="comment">#E-Mail: mailto:yourname@gmail.com || envelope</span></span><br><span class="line">  <span class="comment">#Weibo: https://weibo.com/yourname || weibo</span></span><br><span class="line">  <span class="comment">#Google: https://plus.google.com/yourname || google</span></span><br><span class="line">  <span class="comment">#Twitter: https://twitter.com/yourname || twitter</span></span><br><span class="line">  <span class="comment">#FB Page: https://www.facebook.com/yourname || facebook</span></span><br><span class="line">  <span class="comment">#StackOverflow: https://stackoverflow.com/yourname || stack-overflow</span></span><br><span class="line">  <span class="comment">#YouTube: https://youtube.com/yourname || youtube</span></span><br><span class="line">  <span class="comment">#Instagram: https://instagram.com/yourname || instagram</span></span><br><span class="line">  <span class="comment">#Skype: skype:yourname?call|chat || skype</span></span><br><span class="line"></span><br><span class="line">social_icons:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  icons_only: <span class="literal">false</span></span><br><span class="line">  transition: <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p>把注释去掉，看看效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-30_234930.png" alt="2349"></p>
+<h3 id="站点建立时间配置"><a href="#站点建立时间配置" class="headerlink" title="站点建立时间配置"></a>站点建立时间配置</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">footer:</span></span><br><span class="line">  <span class="comment"># Specify the date when the site was setup. If not defined, current year will be used.</span></span><br><span class="line">  <span class="attr">since:</span> <span class="number">2020</span></span><br></pre></td></tr></table></figure>
+
+<p>底部显示的是：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-30_235238.png" alt="2352"></p>
+<p>修改成2019，显示效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-10_180745.png" alt="20200510180826"></p>
+<h3 id="修改网站图标"><a href="#修改网站图标" class="headerlink" title="修改网站图标"></a>修改网站图标</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">favicon:</span></span><br><span class="line">  <span class="attr">small:</span> <span class="string">/images/favicon-16x16-next.png</span></span><br><span class="line">  <span class="attr">medium:</span> <span class="string">/images/favicon-32x32-next.png</span></span><br><span class="line">  <span class="attr">apple_touch_icon:</span> <span class="string">/images/apple-touch-icon-next.png</span></span><br><span class="line">  <span class="attr">safari_pinned_tab:</span> <span class="string">/images/logo.svg</span></span><br><span class="line">  <span class="comment">#android_manifest: /images/manifest.json</span></span><br><span class="line">  <span class="comment">#ms_browserconfig: /images/browserconfig.xml</span></span><br></pre></td></tr></table></figure>
+
+<p>进入主题图片目录【C:\Special\Test\HexoTest\blog\themes\next\source\images】，换成自己的就好：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">favicon:</span></span><br><span class="line">  <span class="attr">small:</span> <span class="string">/images/smiley_lock_16x16.png</span></span><br><span class="line">  <span class="attr">medium:</span> <span class="string">/images/smiley_lock_32x32.png</span></span><br><span class="line">  <span class="attr">apple_touch_icon:</span> <span class="string">/images/apple-touch-icon-next.png</span></span><br><span class="line">  <span class="attr">safari_pinned_tab:</span> <span class="string">/images/logo.svg</span></span><br><span class="line">  <span class="comment">#android_manifest: /images/manifest.json</span></span><br><span class="line">  <span class="comment">#ms_browserconfig: /images/browserconfig.xml</span></span><br></pre></td></tr></table></figure>
+
+<p>效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-10_141102.png" alt="20200510141112"></p>
+<h3 id="备案信息配置"><a href="#备案信息配置" class="headerlink" title="备案信息配置"></a>备案信息配置</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">footer:</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Beian ICP and gongan information for Chinese users. See: http://www.beian.miit.gov.cn, http://www.beian.gov.cn</span></span><br><span class="line">  <span class="attr">beian:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">icp:</span></span><br><span class="line">    <span class="comment"># The digit in the num of gongan beian.</span></span><br><span class="line">    <span class="attr">gongan_id:</span></span><br><span class="line">    <span class="comment"># The full num of gongan beian.</span></span><br><span class="line">    <span class="attr">gongan_num:</span></span><br><span class="line">    <span class="comment"># The icon for gongan beian. See: http://www.beian.gov.cn/portal/download</span></span><br><span class="line">    <span class="attr">gongan_icon_url:</span></span><br></pre></td></tr></table></figure>
+
+<p>修改：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Beian ICP and gongan information for Chinese users. See: http://www.beian.miit.gov.cn, http://www.beian.gov.cn</span></span><br><span class="line">  <span class="attr">beian:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">icp:</span> <span class="string">赣ICP备16000944号-1</span></span><br><span class="line">    <span class="comment"># The digit in the num of gongan beian.</span></span><br><span class="line">    <span class="attr">gongan_id:</span></span><br><span class="line">    <span class="comment"># The full num of gongan beian.</span></span><br><span class="line">    <span class="attr">gongan_num:</span></span><br><span class="line">    <span class="comment"># The icon for gongan beian. See: http://www.beian.gov.cn/portal/download</span></span><br><span class="line">    <span class="attr">gongan_icon_url:</span> <span class="string">http://img2.kungge.com/content/beian.png</span></span><br></pre></td></tr></table></figure>
+
+<p>显示效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-10_152534.png" alt="20200510152547"></p>
+<h3 id="修改侧边栏头像"><a href="#修改侧边栏头像" class="headerlink" title="修改侧边栏头像"></a>修改侧边栏头像</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Sidebar Avatar</span></span><br><span class="line"><span class="attr">avatar:</span></span><br><span class="line">  <span class="comment"># Replace the default image and set the url here.</span></span><br><span class="line">  <span class="attr">url:</span> <span class="comment">#/images/avatar.gif</span></span><br><span class="line">  <span class="comment"># If true, the avatar will be dispalyed in circle.</span></span><br><span class="line">  <span class="attr">rounded:</span> <span class="literal">false</span></span><br><span class="line">  <span class="comment"># If true, the avatar will be rotated with the cursor.</span></span><br><span class="line">  <span class="attr">rotated:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p>修改：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Sidebar Avatar</span></span><br><span class="line"><span class="attr">avatar:</span></span><br><span class="line">  <span class="comment"># Replace the default image and set the url here.</span></span><br><span class="line">  <span class="attr">url:</span> <span class="string">http://img2.kungge.com/content/dog.jpg</span></span><br><span class="line">  <span class="comment"># If true, the avatar will be dispalyed in circle.</span></span><br><span class="line">  <span class="attr">rounded:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># If true, the avatar will be rotated with the cursor.</span></span><br><span class="line">  <span class="attr">rotated:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>显示效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-10_165528.png" alt="20200510165535"></p>
+<h3 id="修改标签样式"><a href="#修改标签样式" class="headerlink" title="修改标签样式"></a>修改标签样式</h3><p>文章末尾标签样式展示，在控制【blog\themes\next\layout_macro\post.swig】：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-10_170455.png" alt="20200510170531"></p>
+<p>默认标签小图标是不展示：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Use icon instead of the symbol # to indicate the tag at the bottom of the post</span></span><br><span class="line"><span class="attr">tag_icon:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>#</code> ：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-10_170648.png" alt="20200510170700"></p>
+<p>只需要修改配置，将其设为 true，效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-10_170733.png" alt="20200510170740"></p>
+<h3 id="添加文章版权信息"><a href="#添加文章版权信息" class="headerlink" title="添加文章版权信息"></a>添加文章版权信息</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Creative Commons 4.0 International License.</span></span><br><span class="line"><span class="comment"># See: https://creativecommons.org/share-your-work/licensing-types-examples</span></span><br><span class="line"><span class="comment"># Available values of license: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero</span></span><br><span class="line"><span class="comment"># You can set a language value if you prefer a translated version of CC license, e.g. deed.zh</span></span><br><span class="line"><span class="comment"># CC licenses are available in 39 languages, you can find the specific and correct abbreviation you need on https://creativecommons.org</span></span><br><span class="line"><span class="attr">creative_commons:</span></span><br><span class="line">  <span class="attr">license:</span> <span class="string">by-nc-sa</span></span><br><span class="line">  <span class="attr">sidebar:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">post:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">language:</span></span><br></pre></td></tr></table></figure>
+
+<p>将 false 都设为 true，效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-10_171608.png" alt="20200510171629"></p>
+<h3 id="不显示-power-by"><a href="#不显示-power-by" class="headerlink" title="不显示 power by"></a>不显示 power by</h3><p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-10_211929.png" alt="20200510212035"></p>
+<p>主题配置文件将 fo0ter 下 powered 设为 <code>powered: false</code>：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-10_212145.png" alt="20200510212152"></p>
+<h3 id="设置代码块"><a href="#设置代码块" class="headerlink" title="设置代码块"></a>设置代码块</h3><p>默认：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">codeblock:</span></span><br><span class="line">  <span class="comment"># Code Highlight theme</span></span><br><span class="line">  <span class="comment"># Available values: normal | night | night eighties | night blue | night bright | solarized | solarized dark | galactic</span></span><br><span class="line">  <span class="comment"># See: https://github.com/chriskempson/tomorrow-theme</span></span><br><span class="line">  <span class="attr">highlight_theme:</span> <span class="string">normal</span></span><br><span class="line">  <span class="comment"># Add copy button on codeblock</span></span><br><span class="line">  <span class="attr">copy_button:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">false</span></span><br><span class="line">    <span class="comment"># Show text copy result.</span></span><br><span class="line">    <span class="attr">show_result:</span> <span class="literal">false</span></span><br><span class="line">    <span class="comment"># Available values: default | flat | mac</span></span><br><span class="line">    <span class="attr">style:</span></span><br></pre></td></tr></table></figure>
+
+<p>效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-10_172308.png" alt="20200510172319"></p>
+<p>修改样式，复制按钮可见：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">codeblock:</span></span><br><span class="line">  <span class="comment"># Code Highlight theme</span></span><br><span class="line">  <span class="comment"># Available values: normal | night | night eighties | night blue | night bright | solarized | solarized dark | galactic</span></span><br><span class="line">  <span class="comment"># See: https://github.com/chriskempson/tomorrow-theme</span></span><br><span class="line">  <span class="attr">highlight_theme:</span> <span class="string">night</span></span><br><span class="line">  <span class="comment"># Add copy button on codeblock</span></span><br><span class="line">  <span class="attr">copy_button:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># Show text copy result.</span></span><br><span class="line">    <span class="attr">show_result:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># Available values: default | flat | mac</span></span><br><span class="line">    <span class="attr">style:</span></span><br></pre></td></tr></table></figure>
+
+<p>显示效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-10_172939.png" alt="20200510172950"></p>
+<h3 id="添加-github-banner"><a href="#添加-github-banner" class="headerlink" title="添加 github_banner"></a>添加 github_banner</h3><p>启用：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># `Follow me on GitHub` banner in the top-right corner.</span></span><br><span class="line"><span class="attr">github_banner:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">permalink:</span> <span class="string">https://github.com/kungge</span></span><br><span class="line">  <span class="attr">title:</span> <span class="string">Follow</span> <span class="string">me</span> <span class="string">on</span> <span class="string">GitHub</span></span><br></pre></td></tr></table></figure>
+
+<p>效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-10_164635.png" alt="20200510164644"></p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>您的支持是我最大的动力！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="wankun 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="wankun 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>wankun
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://blog.kungge.com/p/hexo-next/" title="Hexo 实战（三）：主题 NexT 使用和基本设置">http://blog.kungge.com/p/hexo-next/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/hexo/" rel="tag"><i class="fa fa-tag"></i> hexo</a>
+              <a href="/tags/hexo-%E5%AE%9E%E6%88%98/" rel="tag"><i class="fa fa-tag"></i> hexo 实战</a>
+              <a href="/tags/next-%E4%B8%BB%E9%A2%98/" rel="tag"><i class="fa fa-tag"></i> next 主题</a>
+              <a href="/tags/hexo-%E4%B8%BB%E9%A2%98/" rel="tag"><i class="fa fa-tag"></i> hexo 主题</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/p/idea-maven-problem/" rel="prev" title="在 idea 中使用 maven 下载过慢问题解决">
+      <i class="fa fa-chevron-left"></i> 在 idea 中使用 maven 下载过慢问题解决
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/p/rabbitmq-centos/" rel="next" title="RabbitMQ 实战笔记（一）：CentOS 7 安装 RabbitMQ">
+      RabbitMQ 实战笔记（一）：CentOS 7 安装 RabbitMQ <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用主题-NexT"><span class="nav-number">1.</span> <span class="nav-text">使用主题 NexT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NexT-主题基本配置"><span class="nav-number">2.</span> <span class="nav-text">NexT 主题基本配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Schemes-配置"><span class="nav-number">2.1.</span> <span class="nav-text">Schemes 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#菜单配置"><span class="nav-number">2.2.</span> <span class="nav-text">菜单配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#侧栏配置"><span class="nav-number">2.3.</span> <span class="nav-text">侧栏配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#友情链接配置"><span class="nav-number">2.4.</span> <span class="nav-text">友情链接配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#站点建立时间配置"><span class="nav-number">2.5.</span> <span class="nav-text">站点建立时间配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改网站图标"><span class="nav-number">2.6.</span> <span class="nav-text">修改网站图标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#备案信息配置"><span class="nav-number">2.7.</span> <span class="nav-text">备案信息配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改侧边栏头像"><span class="nav-number">2.8.</span> <span class="nav-text">修改侧边栏头像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改标签样式"><span class="nav-number">2.9.</span> <span class="nav-text">修改标签样式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加文章版权信息"><span class="nav-number">2.10.</span> <span class="nav-text">添加文章版权信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不显示-power-by"><span class="nav-number">2.11.</span> <span class="nav-text">不显示 power by</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置代码块"><span class="nav-number">2.12.</span> <span class="nav-text">设置代码块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加-github-banner"><span class="nav-number">2.13.</span> <span class="nav-text">添加 github_banner</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wankun"
+      src="http://img2.kungge.com/content/dog.jpg">
+  <p class="site-author-name" itemprop="name">wankun</p>
+  <div class="site-description" itemprop="description">生活一门技术，更是一门艺术</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">87</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kungge" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kungge" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kunzhongzhong@163.com" title="E-Mail → mailto:kunzhongzhong@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">赣ICP备16000944号-1 </a>
+      <img src="http://img2.kungge.com/content/beian.png" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wankun</span>
+</div>
+
+<!--添加运行时间-->
+<span id="sitetime"></span>
+<script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* 
+      Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+      year - 作为date对象的年份，为4位年份值
+      month - 0-11之间的整数，做为date对象的月份
+      day - 1-31之间的整数，做为date对象的天数
+      hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+      minutes - 0-59之间的整数，做为date对象的分钟数
+      seconds - 0-59之间的整数，做为date对象的秒数
+      microseconds - 0-999之间的整数，做为date对象的毫秒数
+     */
+		var t1 = Date.UTC(2020,03,29,00,51,12);
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML=" 已运行"+/*diffYears+" 年 "+*/diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒";
+	}
+	siteTime();
+</script>
+<!--添加运行时间-->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'WS9yN0bdMnmWCTEGdPtRjty5-gzGzoHsz',
+      appKey     : 'rJRpp7BgWk5zx9WdsdFbPUXQ',
+      placeholder: "Just go go",
+      avatar     : 'monsterid',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/smiley_lock_32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/smiley_lock_16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="gVkA-jeqZSVbPLhHyQnRI8oEBse0D3GaV0B98Yjai_k" />
+  <meta name="baidu-site-verification" content="xSB5shU7SK" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-material.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.kungge.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="远程代码库下载到本地 菜单，【文件】-&gt;【克隆&#x2F;新建…】：    输入需要克隆的远程仓库地址、克隆到本地的目录，选择检出的分支，勾选【递归子模块】：    点击克隆后，就会从远程下载，可显示完整输出：  1 2 3 4 5 6 7 8 9 10 11 12 13   git -c filter.lfs.smudge&#x3D; -c filter.lfs.required&#x3D;false -c diff.mne">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git 客户端 sourcetree 基本使用">
+<meta property="og:url" content="http://blog.kungge.com/p/sourcetree-baseuse/index.html">
+<meta property="og:site_name" content="坤哥的博客小站">
+<meta property="og:description" content="远程代码库下载到本地 菜单，【文件】-&gt;【克隆&#x2F;新建…】：    输入需要克隆的远程仓库地址、克隆到本地的目录，选择检出的分支，勾选【递归子模块】：    点击克隆后，就会从远程下载，可显示完整输出：  1 2 3 4 5 6 7 8 9 10 11 12 13   git -c filter.lfs.smudge&#x3D; -c filter.lfs.required&#x3D;false -c diff.mne">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2019/201912/sourcetree.122901.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2019/201912/sourcetree.122902.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2019/201912/sourcetree.122903.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2019/201912/sourcetree.122904.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2019/201912/sourcetree.122905.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2019/201912/sourcetree.122906.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2019/201912/sourcetree.122907.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2019/201912/sourcetree.122908.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2019/201912/sourcetree.122909.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2019/201912/sourcetree.122910.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2019/201912/sourcetree.122911.png">
+<meta property="article:published_time" content="2019-12-29T06:41:24.000Z">
+<meta property="article:modified_time" content="2020-05-16T14:41:27.496Z">
+<meta property="article:author" content="wankun">
+<meta property="article:tag" content="git">
+<meta property="article:tag" content="git客户端">
+<meta property="article:tag" content="sourcetree">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img2.kungge.com/md-content/2019/201912/sourcetree.122901.png">
+
+<link rel="canonical" href="http://blog.kungge.com/p/sourcetree-baseuse/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>git 客户端 sourcetree 基本使用 | 坤哥的博客小站</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">坤哥的博客小站</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个热爱生活的90后</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404.html" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/sourcetree-baseuse/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
+      <meta itemprop="name" content="wankun">
+      <meta itemprop="description" content="生活一门技术，更是一门艺术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坤哥的博客小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          git 客户端 sourcetree 基本使用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-29 14:41:24" itemprop="dateCreated datePublished" datetime="2019-12-29T14:41:24+08:00">2019-12-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-16 22:41:27" itemprop="dateModified" datetime="2020-05-16T22:41:27+08:00">2020-05-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/p/sourcetree-baseuse/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/sourcetree-baseuse/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="远程代码库下载到本地"><a href="#远程代码库下载到本地" class="headerlink" title="远程代码库下载到本地"></a>远程代码库下载到本地</h2><p>菜单，【文件】-&gt;【克隆/新建…】：</p>
+<p><img src="http://img2.kungge.com/md-content/2019/201912/sourcetree.122901.png" alt="Alt text"></p>
+<p>输入需要克隆的远程仓库地址、克隆到本地的目录，选择检出的分支，勾选【递归子模块】：</p>
+<p><img src="http://img2.kungge.com/md-content/2019/201912/sourcetree.122902.png" alt="Alt text"></p>
+<p>点击克隆后，就会从远程下载，可显示完整输出：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">git -c filter.lfs.smudge= -c filter.lfs.required=<span class="literal">false</span> -c diff.mnemonicprefix=<span class="literal">false</span> -c core.quotepath=<span class="literal">false</span> --no-optional-locks <span class="built_in">clone</span> --branch develop_TR620 --recursive http://10.138.61.72/vbs/service-group/console/LoanInfoProcess.git D:\svn\Loan\branches\LoanInfoProcess_TR620</span><br><span class="line">Cloning into <span class="string">'D:\svn\Loan\branches\LoanInfoProcess_TR620'</span>...</span><br><span class="line"></span><br><span class="line">[KUpdating files:  66% (162/243)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[KUpdating files:  67% (163/243)</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">[KUpdating files: 100% (243/243), <span class="keyword">done</span>.</span><br><span class="line"></span><br><span class="line">执行成功</span><br></pre></td></tr></table></figure>
+
+<p>远程代码会下载到本地目录：</p>
+<p><img src="http://img2.kungge.com/md-content/2019/201912/sourcetree.122903.png" alt="Alt text"></p>
+<p>在 sourcetree 主界面中就可以看到代码的提交信息：</p>
+<p><img src="http://img2.kungge.com/md-content/2019/201912/sourcetree.122904.png" alt="Alt text"></p>
+<p>设置本地分支跟踪远程分支：</p>
+<p><img src="http://img2.kungge.com/md-content/2019/201912/sourcetree.122905.png" alt="Alt text"></p>
+<h2 id="选择一个工作副本仓库添加到-sourcetree"><a href="#选择一个工作副本仓库添加到-sourcetree" class="headerlink" title="选择一个工作副本仓库添加到 sourcetree"></a>选择一个工作副本仓库添加到 sourcetree</h2><p>地址就是本地的副本仓库目录：</p>
+<p><img src="http://img2.kungge.com/md-content/2019/201912/sourcetree.122906.png" alt="Alt text"></p>
+<p><img src="http://img2.kungge.com/md-content/2019/201912/sourcetree.122907.png" alt="Alt text"></p>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="P1"><a href="#P1" class="headerlink" title="P1"></a>P1</h3><p>将本地副本仓库直接推送到远程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">git -c diff.mnemonicprefix=<span class="literal">false</span> -c core.quotepath=<span class="literal">false</span> --no-optional-locks push -v --tags origin master:master</span><br><span class="line">Pushing to https://github.com/kungge/KunNote.git</span><br><span class="line">To https://github.com/kungge/KunNote.git</span><br><span class="line"> ! [rejected]        master -&gt; master (fetch first)</span><br><span class="line">error: failed to push some refs to <span class="string">'https://github.com/kungge/KunNote.git'</span></span><br><span class="line">hint: Updates were rejected because the remote contains work that you <span class="keyword">do</span></span><br><span class="line">hint: not have locally. This is usually caused by another repository pushing</span><br><span class="line">hint: to the same ref. You may want to first integrate the remote changes</span><br><span class="line">hint: (e.g., <span class="string">'git pull ...'</span>) before pushing again.</span><br><span class="line">hint: See the <span class="string">'Note about fast-forwards'</span> <span class="keyword">in</span> <span class="string">'git push --help'</span> <span class="keyword">for</span> details.</span><br></pre></td></tr></table></figure>
+<p>这种情况应先拉取再推送即可。</p>
+<h3 id="P2"><a href="#P2" class="headerlink" title="P2"></a>P2</h3><p>你想参与别人的项目，你直接克隆的是别人的项目，修改后把你本地的代码推送到远程会报错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git -c diff.mnemonicprefix&#x3D;false -c core.quotepath&#x3D;false --no-optional-locks push -v --tags origin master:master</span><br><span class="line">remote: Permission to 404658568&#x2F;GoodBlog.git denied to kungge.</span><br><span class="line">fatal: unable to access &#39;https:&#x2F;&#x2F;github.com&#x2F;404658568&#x2F;GoodBlog.git&#x2F;&#39;: The requested URL returned error: 403</span><br><span class="line"></span><br><span class="line">Pushing to https:&#x2F;&#x2F;github.com&#x2F;404658568&#x2F;GoodBlog.git</span><br><span class="line">完成时带有错误，见上文。</span><br></pre></td></tr></table></figure>
+
+<p>初看属于权限问题，别人的项目你不能直接推送的。</p>
+<p>你可以先fork别人的项目，更改后推送，当你再次推送会打开一个 pull 请求：</p>
+<p><img src="http://img2.kungge.com/md-content/2019/201912/sourcetree.122908.png" alt="Alt text"></p>
+<p>创建 pull 请求：</p>
+<p><img src="http://img2.kungge.com/md-content/2019/201912/sourcetree.122909.png" alt="Alt text"></p>
+<p>这个时候项目创始人github的项目主页中会出现：</p>
+<p><img src="http://img2.kungge.com/md-content/2019/201912/sourcetree.122910.png" alt="Alt text"></p>
+<p><img src="http://img2.kungge.com/md-content/2019/201912/sourcetree.122911.png" alt="Alt text"></p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>您的支持是我最大的动力！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="wankun 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="wankun 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>wankun
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://blog.kungge.com/p/sourcetree-baseuse/" title="git 客户端 sourcetree 基本使用">http://blog.kungge.com/p/sourcetree-baseuse/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/git/" rel="tag"><i class="fa fa-tag"></i> git</a>
+              <a href="/tags/git%E5%AE%A2%E6%88%B7%E7%AB%AF/" rel="tag"><i class="fa fa-tag"></i> git客户端</a>
+              <a href="/tags/sourcetree/" rel="tag"><i class="fa fa-tag"></i> sourcetree</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/p/sonar-install-use/" rel="prev" title="代码质量管理工具 Sonar 安装与基本使用">
+      <i class="fa fa-chevron-left"></i> 代码质量管理工具 Sonar 安装与基本使用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/p/vscode-markdown-plugin/" rel="next" title="vs code 中使用这些插件让编写 markdown 变得更方便">
+      vs code 中使用这些插件让编写 markdown 变得更方便 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#远程代码库下载到本地"><span class="nav-number">1.</span> <span class="nav-text">远程代码库下载到本地</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择一个工作副本仓库添加到-sourcetree"><span class="nav-number">2.</span> <span class="nav-text">选择一个工作副本仓库添加到 sourcetree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见问题"><span class="nav-number">3.</span> <span class="nav-text">常见问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#P1"><span class="nav-number">3.1.</span> <span class="nav-text">P1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#P2"><span class="nav-number">3.2.</span> <span class="nav-text">P2</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wankun"
+      src="http://img2.kungge.com/content/dog.jpg">
+  <p class="site-author-name" itemprop="name">wankun</p>
+  <div class="site-description" itemprop="description">生活一门技术，更是一门艺术</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">87</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kungge" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kungge" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kunzhongzhong@163.com" title="E-Mail → mailto:kunzhongzhong@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">赣ICP备16000944号-1 </a>
+      <img src="http://img2.kungge.com/content/beian.png" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wankun</span>
+</div>
+
+<!--添加运行时间-->
+<span id="sitetime"></span>
+<script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* 
+      Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+      year - 作为date对象的年份，为4位年份值
+      month - 0-11之间的整数，做为date对象的月份
+      day - 1-31之间的整数，做为date对象的天数
+      hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+      minutes - 0-59之间的整数，做为date对象的分钟数
+      seconds - 0-59之间的整数，做为date对象的秒数
+      microseconds - 0-999之间的整数，做为date对象的毫秒数
+     */
+		var t1 = Date.UTC(2020,03,29,00,51,12);
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML=" 已运行"+/*diffYears+" 年 "+*/diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒";
+	}
+	siteTime();
+</script>
+<!--添加运行时间-->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'WS9yN0bdMnmWCTEGdPtRjty5-gzGzoHsz',
+      appKey     : 'rJRpp7BgWk5zx9WdsdFbPUXQ',
+      placeholder: "Just go go",
+      avatar     : 'monsterid',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

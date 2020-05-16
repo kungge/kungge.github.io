@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/smiley_lock_32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/smiley_lock_16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="gVkA-jeqZSVbPLhHyQnRI8oEBse0D3GaV0B98Yjai_k" />
+  <meta name="baidu-site-verification" content="xSB5shU7SK" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-material.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.kungge.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="页面浏览进度展示 1 2 3 4 5 6   back2top:   enable: true   # Back to top in sidebar.   sidebar: false   # Scroll percent label in b2t button.   scrollpercent: false   将 scrollpercent 设为 true。  若想把 top 按钮放在侧边栏，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo 实战（五）：主题 NexT 进阶配置和使用">
+<meta property="og:url" content="http://blog.kungge.com/p/hexo-next-advance/index.html">
+<meta property="og:site_name" content="坤哥的博客小站">
+<meta property="og:description" content="页面浏览进度展示 1 2 3 4 5 6   back2top:   enable: true   # Back to top in sidebar.   sidebar: false   # Scroll percent label in b2t button.   scrollpercent: false   将 scrollpercent 设为 true。  若想把 top 按钮放在侧边栏，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_231119.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-16_105832.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-08_235039.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-08_234213.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_153226.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-09_000807.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-09_001029.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-09_001411.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-09_001444.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_185914.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-09_003140.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-09_003848.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_153855.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_142716.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_155524.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_160844.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_161116.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_161752.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_162139.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_212340.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_210939.png">
+<meta property="article:published_time" content="2020-04-20T07:18:39.000Z">
+<meta property="article:modified_time" content="2020-05-16T07:53:58.705Z">
+<meta property="article:author" content="wankun">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="hexo 实战">
+<meta property="article:tag" content="next 主题">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-10_231119.png">
+
+<link rel="canonical" href="http://blog.kungge.com/p/hexo-next-advance/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Hexo 实战（五）：主题 NexT 进阶配置和使用 | 坤哥的博客小站</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">坤哥的博客小站</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个热爱生活的90后</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404.html" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/hexo-next-advance/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
+      <meta itemprop="name" content="wankun">
+      <meta itemprop="description" content="生活一门技术，更是一门艺术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坤哥的博客小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hexo 实战（五）：主题 NexT 进阶配置和使用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-20 15:18:39" itemprop="dateCreated datePublished" datetime="2020-04-20T15:18:39+08:00">2020-04-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-16 15:53:58" itemprop="dateModified" datetime="2020-05-16T15:53:58+08:00">2020-05-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BC%80%E6%BA%90%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index"><span itemprop="name">开源博客</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/p/hexo-next-advance/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/hexo-next-advance/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="页面浏览进度展示"><a href="#页面浏览进度展示" class="headerlink" title="页面浏览进度展示"></a>页面浏览进度展示</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">back2top:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Back to top in sidebar.</span></span><br><span class="line">  <span class="attr">sidebar:</span> <span class="literal">false</span></span><br><span class="line">  <span class="comment"># Scroll percent label in b2t button.</span></span><br><span class="line">  <span class="attr">scrollpercent:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p>将 scrollpercent 设为 true。</p>
+<p>若想把 top 按钮放在侧边栏，将 sidebar 设为 true。</p>
+<p>效果（侧边栏向上的小箭头）：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-10_231119.png" alt="20200510231141"></p>
+<p>还是放到文章右侧吧：</p>
+<h2 id="页面加载进度展示"><a href="#页面加载进度展示" class="headerlink" title="页面加载进度展示"></a>页面加载进度展示</h2><p>命令窗口进入目录【themes/next/】,然后下载安装 <code>git clone https://github.com/theme-next/theme-next-pace source/lib/pace</code>，在主题配置文件中找到下面的设置：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Progress bar in the top during page loading.</span></span><br><span class="line"><span class="comment"># Dependencies: https://github.com/theme-next/theme-next-pace</span></span><br><span class="line"><span class="comment"># For more information: https://github.com/HubSpot/pace</span></span><br><span class="line"><span class="attr">pace:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">false</span></span><br><span class="line">  <span class="comment"># Themes list:</span></span><br><span class="line">  <span class="comment"># big-counter | bounce | barber-shop | center-atom | center-circle | center-radar | center-simple</span></span><br><span class="line">  <span class="comment"># corner-indicator | fill-left | flat-top | flash | loading-bar | mac-osx | material | minimal</span></span><br><span class="line">  <span class="attr">theme:</span> <span class="string">minimal</span></span><br></pre></td></tr></table></figure>
+
+<p>将 enable 设为 true 即可，theme 表示不同的样式效果。</p>
+<h2 id="增加网站运行时间"><a href="#增加网站运行时间" class="headerlink" title="增加网站运行时间"></a>增加网站运行时间</h2><p>找到底部设置的代码【themes\next\layout_partials\footer.swig】，在后面增加如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--添加运行时间--&gt;</span><br><span class="line">&lt;span id=<span class="string">"sitetime"</span>&gt;&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">&lt;script language=javascript&gt;</span></span><br><span class="line"><span class="regexp">	function siteTime()&#123;</span></span><br><span class="line"><span class="regexp">		window.setTimeout("siteTime()", 1000);</span></span><br><span class="line"><span class="regexp">		var seconds = 1000;</span></span><br><span class="line"><span class="regexp">		var minutes = seconds * 60;</span></span><br><span class="line"><span class="regexp">		var hours = minutes * 60;</span></span><br><span class="line"><span class="regexp">		var days = hours * 24;</span></span><br><span class="line"><span class="regexp">		var years = days * 365;</span></span><br><span class="line"><span class="regexp">		var today = new Date();</span></span><br><span class="line"><span class="regexp">		var todayYear = today.getFullYear();</span></span><br><span class="line"><span class="regexp">		var todayMonth = today.getMonth()+1;</span></span><br><span class="line"><span class="regexp">		var todayDate = today.getDate();</span></span><br><span class="line"><span class="regexp">		var todayHour = today.getHours();</span></span><br><span class="line"><span class="regexp">		var todayMinute = today.getMinutes();</span></span><br><span class="line"><span class="regexp">		var todaySecond = today.getSeconds();</span></span><br><span class="line"><span class="regexp">		/</span>* </span><br><span class="line">      <span class="built_in">Date</span>.UTC() -- 返回date对象距世界标准时间(UTC)<span class="number">1970</span>年<span class="number">1</span>月<span class="number">1</span>日午夜之间的毫秒数(时间戳)</span><br><span class="line">      year - 作为date对象的年份，为<span class="number">4</span>位年份值</span><br><span class="line">      month - <span class="number">0</span><span class="number">-11</span>之间的整数，做为date对象的月份</span><br><span class="line">      day - <span class="number">1</span><span class="number">-31</span>之间的整数，做为date对象的天数</span><br><span class="line">      hours - <span class="number">0</span>(午夜<span class="number">24</span>点)<span class="number">-23</span>之间的整数，做为date对象的小时数</span><br><span class="line">      minutes - <span class="number">0</span><span class="number">-59</span>之间的整数，做为date对象的分钟数</span><br><span class="line">      seconds - <span class="number">0</span><span class="number">-59</span>之间的整数，做为date对象的秒数</span><br><span class="line">      microseconds - <span class="number">0</span><span class="number">-999</span>之间的整数，做为date对象的毫秒数</span><br><span class="line">     *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">		var t1 = Date.UTC(2020,03,29,00,51,12);</span></span><br><span class="line"><span class="regexp">		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);</span></span><br><span class="line"><span class="regexp">		var diff = t2-t1;</span></span><br><span class="line"><span class="regexp">		var diffYears = Math.floor(diff/y</span>ears);</span><br><span class="line">		<span class="keyword">var</span> diffDays = <span class="built_in">Math</span>.floor((diff/days)-diffYears*<span class="number">365</span>);</span><br><span class="line">		<span class="keyword">var</span> diffHours = <span class="built_in">Math</span>.floor((diff-(diffYears*<span class="number">365</span>+diffDays)*days)/hours);</span><br><span class="line">		<span class="keyword">var</span> diffMinutes = <span class="built_in">Math</span>.floor((diff-(diffYears*<span class="number">365</span>+diffDays)*days-diffHours*hours)/minutes);</span><br><span class="line">		<span class="keyword">var</span> diffSeconds = <span class="built_in">Math</span>.floor((diff-(diffYears*<span class="number">365</span>+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);</span><br><span class="line">		<span class="built_in">document</span>.getElementById(<span class="string">"sitetime"</span>).innerHTML=<span class="string">" 已运行"</span>+<span class="comment">/*diffYears+" 年 "+*/</span>diffDays+<span class="string">" 天 "</span>+diffHours+<span class="string">" 小时 "</span>+diffMinutes+<span class="string">" 分钟 "</span>+diffSeconds+<span class="string">" 秒"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	siteTime();</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;!--添加运行时间--&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>显示效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-16_105832.png" alt="20200516105841"></p>
+<h2 id="添加显示文章摘要"><a href="#添加显示文章摘要" class="headerlink" title="添加显示文章摘要"></a>添加显示文章摘要</h2><p>在首页默认为展示很多，可以显示【阅读全文】的链接，找到主题的配置文件 _config.yml 关于此的内容：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Automatically excerpt description in homepage as preamble text.</span></span><br><span class="line"><span class="attr">excerpt_description:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Read more button</span></span><br><span class="line"><span class="comment"># If true, the read more button will be displayed in excerpt section.</span></span><br><span class="line"><span class="attr">read_more_btn:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>可以不用设置，只需要在截断处添加 <code>&lt;!-- more --&gt;</code> 标签，如（使用了 Hexo 可以不用自己添加目录了，上面的目录应该去掉）：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-08_235039.png" alt="20200508235056"></p>
+<p>渲染效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-08_234213.png" alt="20200508235151"></p>
+<p>如果要自动添加摘要，可以安装插件 <code>npm install hexo-auto-excerpt</code>，然后在 package.json 中添加 <code>&quot;hexo-auto-excerpt&quot;: &quot;^1.1.2&quot;</code> ，显示效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-10_153226.png" alt="20200510153237"></p>
+<h2 id="打赏设置"><a href="#打赏设置" class="headerlink" title="打赏设置"></a>打赏设置</h2><p>找到主题的配置文件 _config.yml 关于此的内容：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Reward (Donate)</span></span><br><span class="line"><span class="comment"># Front-matter variable (unsupport animation).</span></span><br><span class="line"><span class="attr">reward_settings:</span></span><br><span class="line">  <span class="comment"># If true, reward will be displayed in every article by default.</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">animation:</span> <span class="literal">false</span></span><br><span class="line">  <span class="comment">#comment: Donate comment here.</span></span><br><span class="line"></span><br><span class="line"><span class="attr">reward:</span></span><br><span class="line">  <span class="comment">#wechatpay: /images/wechatpay.png</span></span><br><span class="line">  <span class="comment">#alipay: /images/alipay.png</span></span><br><span class="line">  <span class="comment">#paypal: /images/paypal.png</span></span><br><span class="line">  <span class="comment">#bitcoin: /images/bitcoin.png</span></span><br></pre></td></tr></table></figure>
+
+<p>本次使用支付宝和微信，准备好收款图片，将其存放到 source 的目录下或某个目录下如 images，设置修改如下：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Reward (Donate)</span></span><br><span class="line"><span class="comment"># Front-matter variable (unsupport animation).</span></span><br><span class="line"><span class="attr">reward_settings:</span></span><br><span class="line">  <span class="comment"># If true, reward will be displayed in every article by default.</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">animation:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">comment:</span> <span class="string">您的支持是我最大的动力！</span></span><br><span class="line"></span><br><span class="line"><span class="attr">reward:</span></span><br><span class="line">  <span class="attr">wechatpay:</span> <span class="string">/images/wechatpay.jpg</span></span><br><span class="line">  <span class="attr">alipay:</span> <span class="string">/images/alipay.jpg</span></span><br><span class="line">  <span class="comment">#paypal: /images/paypal.png</span></span><br><span class="line">  <span class="comment">#bitcoin: /images/bitcoin.png</span></span><br></pre></td></tr></table></figure>
+
+<p>在文章末尾出现了打赏按钮：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-09_000807.png" alt="20200509000818"></p>
+<p>点击打赏按钮则会跳出设置的图片：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-09_001029.png" alt="20200509001042"></p>
+<p>animation 如果设置为 true，鼠标放上去图片下面的字会动。</p>
+<h2 id="网站访问次数统计"><a href="#网站访问次数统计" class="headerlink" title="网站访问次数统计"></a>网站访问次数统计</h2><p>将 enable 设为 true：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Show Views / Visitors of the website / page with busuanzi.</span></span><br><span class="line"><span class="comment"># Get more information on http://ibruce.info/2015/04/04/busuanzi</span></span><br><span class="line"><span class="attr">busuanzi_count:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">total_visitors:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">total_visitors_icon:</span> <span class="string">user</span></span><br><span class="line">  <span class="attr">total_views:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">total_views_icon:</span> <span class="string">eye</span></span><br><span class="line">  <span class="attr">post_views:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">post_views_icon:</span> <span class="string">eye</span></span><br></pre></td></tr></table></figure>
+
+<p>渲染效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-09_001411.png" alt="20200509001656"></p>
+<p>换个浏览器再次访问：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-09_001444.png" alt="20200509001719"></p>
+<p>次数增加了，说明功能正常，使用域名访问，次数清空了：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-10_185914.png" alt="20200510190036"></p>
+<p>文章阅读数：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-09_003140.png" alt="20200509003231"></p>
+<h2 id="本地搜索"><a href="#本地搜索" class="headerlink" title="本地搜索"></a>本地搜索</h2><p>设置内容：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Local Search</span></span><br><span class="line"><span class="comment"># Dependencies: https://github.com/theme-next/hexo-generator-searchdb</span></span><br><span class="line"><span class="attr">local_search:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">false</span></span><br><span class="line">  <span class="comment"># If auto, trigger search by changing input.</span></span><br><span class="line">  <span class="comment"># If manual, trigger search by pressing enter key or search button.</span></span><br><span class="line">  <span class="attr">trigger:</span> <span class="string">auto</span></span><br><span class="line">  <span class="comment"># Show top n results per article, show all results by setting to -1</span></span><br><span class="line">  <span class="attr">top_n_per_article:</span> <span class="number">1</span></span><br><span class="line">  <span class="comment"># Unescape html strings to the readable one.</span></span><br><span class="line">  <span class="attr">unescape:</span> <span class="literal">false</span></span><br><span class="line">  <span class="comment"># Preload the search data when the page loads.</span></span><br><span class="line">  <span class="attr">preload:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Swiftype Search API Key</span></span><br><span class="line"><span class="attr">swiftype_key:</span></span><br></pre></td></tr></table></figure>
+
+<p>将 local_search.enable 设为 true。</p>
+<p>npm 安装 hexo-generator-searchdb 依赖，</p>
+<p>然后在根目录下的 _config.xml 中添加如下内容：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">search:</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">search.xml</span></span><br><span class="line">  <span class="attr">field:</span> <span class="string">post</span></span><br><span class="line">  <span class="attr">format:</span> <span class="string">html</span></span><br><span class="line">  <span class="attr">limit:</span> <span class="number">10000</span></span><br></pre></td></tr></table></figure>
+
+<p>这样就会产生一个搜索框，然后点击会弹出一个窗口，文本框输入关键字即可实现搜索：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-09_003848.png" alt="20200509003921"></p>
+<p>实现原理主要是 hexo-generator-searchdb 会预先生成一个文本库 search.xml，如：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-10_153855.png" alt="20200510153903"></p>
+<p>本地搜索是，NexT就会直接使用 js 来调用这个文件，这样就实现了静态网站的本地搜索。</p>
+<h2 id="图片弹出"><a href="#图片弹出" class="headerlink" title="图片弹出"></a>图片弹出</h2><p>github 地址：<a href="https://github.com/theme-next/theme-next-fancybox" target="_blank" rel="noopener">https://github.com/theme-next/theme-next-fancybox</a></p>
+<p>使用命令将远程代码下载下来：<code>git clone https://github.com/theme-next/theme-next-fancybox3 source/lib/fancybox</code>，速度可能会很慢，可从本站下载：<a href="http://www.kungge.com/assist/theme-next-fancybox-master.zip" target="_blank" rel="noopener">http://www.kungge.com/assist/theme-next-fancybox-master.zip</a></p>
+<p>主题配置文件 <code>fancybox: true</code>。</p>
+<p>点击图片即可弹出来，显示效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-10_142716.png" alt="20200510142736"></p>
+<h2 id="添加评论"><a href="#添加评论" class="headerlink" title="添加评论"></a>添加评论</h2><p>目前hexo支持的评论系统很多，next 主题自带了 gitalk，需要配置下，但是需要 github 账号登录，很麻烦，网上也有人反馈国内会报网络错误，翻墙才能使用。</p>
+<p>本次添加 Valine，比较简洁好用，官网：<a href="https://valine.js.org/" target="_blank" rel="noopener">https://valine.js.org/</a></p>
+<p>分三个版本：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-10_155524.png" alt="20200510162629"></p>
+<p>个人直接使用开发版即可，一般够用。</p>
+<p>next 本身也集成了 valine。</p>
+<h3 id="创建应用"><a href="#创建应用" class="headerlink" title="创建应用"></a>创建应用</h3><p>去注册登录，然后创建应用，创建好的应用：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-10_160844.png" alt="20200510160919"></p>
+<p>点击应用进入配置：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-10_161116.png" alt="20200510161154"></p>
+<h3 id="配置-valine"><a href="#配置-valine" class="headerlink" title="配置 valine"></a>配置 valine</h3><p>打开主题配置文件，找到 valine，初始信息：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Valine</span></span><br><span class="line"><span class="comment"># For more information: https://valine.js.org, https://github.com/xCss/Valine</span></span><br><span class="line"><span class="attr">valine:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">appid:</span> <span class="comment"># Your leancloud application appid</span></span><br><span class="line">  <span class="attr">appkey:</span> <span class="comment"># Your leancloud application appkey</span></span><br><span class="line">  <span class="attr">notify:</span> <span class="literal">false</span> <span class="comment"># Mail notifier</span></span><br><span class="line">  <span class="attr">verify:</span> <span class="literal">false</span> <span class="comment"># Verification code</span></span><br><span class="line">  <span class="attr">placeholder:</span> <span class="string">Just</span> <span class="string">go</span> <span class="string">go</span> <span class="comment"># Comment box placeholder</span></span><br><span class="line">  <span class="attr">avatar:</span> <span class="string">mm</span> <span class="comment"># Gravatar style</span></span><br><span class="line">  <span class="attr">guest_info:</span> <span class="string">nick,mail,link</span> <span class="comment"># Custom comment header</span></span><br><span class="line">  <span class="attr">pageSize:</span> <span class="number">10</span> <span class="comment"># Pagination size</span></span><br><span class="line">  <span class="attr">language:</span> <span class="comment"># Language, available values: en, zh-cn</span></span><br><span class="line">  <span class="attr">visitor:</span> <span class="literal">false</span> <span class="comment"># Article reading statistic</span></span><br><span class="line">  <span class="attr">comment_count:</span> <span class="literal">true</span> <span class="comment"># If false, comment count will only be displayed in post page, not in home page</span></span><br><span class="line">  <span class="attr">recordIP:</span> <span class="literal">false</span> <span class="comment"># Whether to record the commenter IP</span></span><br><span class="line">  <span class="attr">serverURLs:</span> <span class="comment"># When the custom domain name is enabled, fill it in here (it will be detected automatically by default, no need to fill in)</span></span><br><span class="line">  <span class="comment">#post_meta_order: 0</span></span><br></pre></td></tr></table></figure>
+
+<p>将 appid 和 appkey 填入进来</p>
+<p>显示效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-10_161752.png" alt="20200510161816"></p>
+<h3 id="测试评论效果"><a href="#测试评论效果" class="headerlink" title="测试评论效果"></a>测试评论效果</h3><p>评论一下：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-10_162139.png" alt="20200510162158"></p>
+<p>修改评论头像，属性是 avatar</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-10_212340.png" alt="20200510212352"></p>
+<h3 id="查看评论数据"><a href="#查看评论数据" class="headerlink" title="查看评论数据"></a>查看评论数据</h3><p>登录 leancloud 进入应用选择存储（如本次的地址是【<a href="https://leancloud.cn/dashboard/data.html?appid=WS9yN0bdMnmWCTEGdPtRjty5-gzGzoHsz】），然后选择的" target="_blank" rel="noopener">https://leancloud.cn/dashboard/data.html?appid=WS9yN0bdMnmWCTEGdPtRjty5-gzGzoHsz】），然后选择的</a> Class 为 Comment，就可以看到评论数据了：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-10_210939.png" alt="20200510211015"></p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>您的支持是我最大的动力！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="wankun 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="wankun 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>wankun
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://blog.kungge.com/p/hexo-next-advance/" title="Hexo 实战（五）：主题 NexT 进阶配置和使用">http://blog.kungge.com/p/hexo-next-advance/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/hexo/" rel="tag"><i class="fa fa-tag"></i> hexo</a>
+              <a href="/tags/hexo-%E5%AE%9E%E6%88%98/" rel="tag"><i class="fa fa-tag"></i> hexo 实战</a>
+              <a href="/tags/next-%E4%B8%BB%E9%A2%98/" rel="tag"><i class="fa fa-tag"></i> next 主题</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/p/hexo-page-add/" rel="prev" title="Hexo 实战（四）：页面添加">
+      <i class="fa fa-chevron-left"></i> Hexo 实战（四）：页面添加
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/p/centos-docker/" rel="next" title="Docker 实战（一）：CentOS 7 上安装 Docker">
+      Docker 实战（一）：CentOS 7 上安装 Docker <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#页面浏览进度展示"><span class="nav-number">1.</span> <span class="nav-text">页面浏览进度展示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#页面加载进度展示"><span class="nav-number">2.</span> <span class="nav-text">页面加载进度展示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增加网站运行时间"><span class="nav-number">3.</span> <span class="nav-text">增加网站运行时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加显示文章摘要"><span class="nav-number">4.</span> <span class="nav-text">添加显示文章摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打赏设置"><span class="nav-number">5.</span> <span class="nav-text">打赏设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网站访问次数统计"><span class="nav-number">6.</span> <span class="nav-text">网站访问次数统计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地搜索"><span class="nav-number">7.</span> <span class="nav-text">本地搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图片弹出"><span class="nav-number">8.</span> <span class="nav-text">图片弹出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加评论"><span class="nav-number">9.</span> <span class="nav-text">添加评论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建应用"><span class="nav-number">9.1.</span> <span class="nav-text">创建应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-valine"><span class="nav-number">9.2.</span> <span class="nav-text">配置 valine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试评论效果"><span class="nav-number">9.3.</span> <span class="nav-text">测试评论效果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看评论数据"><span class="nav-number">9.4.</span> <span class="nav-text">查看评论数据</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wankun"
+      src="http://img2.kungge.com/content/dog.jpg">
+  <p class="site-author-name" itemprop="name">wankun</p>
+  <div class="site-description" itemprop="description">生活一门技术，更是一门艺术</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">87</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kungge" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kungge" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kunzhongzhong@163.com" title="E-Mail → mailto:kunzhongzhong@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">赣ICP备16000944号-1 </a>
+      <img src="http://img2.kungge.com/content/beian.png" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wankun</span>
+</div>
+
+<!--添加运行时间-->
+<span id="sitetime"></span>
+<script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* 
+      Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+      year - 作为date对象的年份，为4位年份值
+      month - 0-11之间的整数，做为date对象的月份
+      day - 1-31之间的整数，做为date对象的天数
+      hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+      minutes - 0-59之间的整数，做为date对象的分钟数
+      seconds - 0-59之间的整数，做为date对象的秒数
+      microseconds - 0-999之间的整数，做为date对象的毫秒数
+     */
+		var t1 = Date.UTC(2020,03,29,00,51,12);
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML=" 已运行"+/*diffYears+" 年 "+*/diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒";
+	}
+	siteTime();
+</script>
+<!--添加运行时间-->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'WS9yN0bdMnmWCTEGdPtRjty5-gzGzoHsz',
+      appKey     : 'rJRpp7BgWk5zx9WdsdFbPUXQ',
+      placeholder: "Just go go",
+      avatar     : 'monsterid',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

@@ -25,12 +25,12 @@
     var CONFIG = {"hostname":"blog.kungge.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Hexo 是使用 Node.js 技术实现的静态博客框架，依赖很少，安装非常简单，可以将 markdown 文件生成博客文章，而 且可以将生成的静态内容发布到 Github 上。  本次使用的操作系统是 Windows，在 Linux 上操作类似。  一、环境准备 1.1 安装 git 下载地址：https:&#x2F;&#x2F;git-scm.com&#x2F;download&#x2F;win  本次下载安装的文件是【Git-2.">
+  <meta name="description" content="Hexo 是使用 Node.js 技术实现的静态博客框架，依赖很少，安装非常简单，可以将 markdown 文件生成博客文章，而 且可以将生成的静态内容发布到 Github 上。  本次使用的操作系统是 Windows，在 Linux 上操作类似。  环境准备 安装 git 下载地址：https:&#x2F;&#x2F;git-scm.com&#x2F;download&#x2F;win  本次下载安装的文件是【Git-2.22.0-6">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo 实战（一）：搭建开源博客系统 Hexo，并将其部署到 GitHub">
+<meta property="og:title" content="Hexo 实战（一）：搭建开源博客系统 Hexo 并将其部署到 GitHub">
 <meta property="og:url" content="http://blog.kungge.com/p/hexo-create-github/index.html">
 <meta property="og:site_name" content="坤哥的博客小站">
-<meta property="og:description" content="Hexo 是使用 Node.js 技术实现的静态博客框架，依赖很少，安装非常简单，可以将 markdown 文件生成博客文章，而 且可以将生成的静态内容发布到 Github 上。  本次使用的操作系统是 Windows，在 Linux 上操作类似。  一、环境准备 1.1 安装 git 下载地址：https:&#x2F;&#x2F;git-scm.com&#x2F;download&#x2F;win  本次下载安装的文件是【Git-2.">
+<meta property="og:description" content="Hexo 是使用 Node.js 技术实现的静态博客框架，依赖很少，安装非常简单，可以将 markdown 文件生成博客文章，而 且可以将生成的静态内容发布到 Github 上。  本次使用的操作系统是 Windows，在 Linux 上操作类似。  环境准备 安装 git 下载地址：https:&#x2F;&#x2F;git-scm.com&#x2F;download&#x2F;win  本次下载安装的文件是【Git-2.22.0-6">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-29_212329.png">
 <meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-29_010139.png">
@@ -59,7 +59,7 @@
 <meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-29_224648.png">
 <meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-29_225202.png">
 <meta property="article:published_time" content="2020-03-28T15:03:13.000Z">
-<meta property="article:modified_time" content="2020-05-16T02:51:47.204Z">
+<meta property="article:modified_time" content="2020-05-16T07:56:31.177Z">
 <meta property="article:author" content="wankun">
 <meta property="article:tag" content="hexo">
 <meta property="article:tag" content="hexo 实战">
@@ -82,7 +82,7 @@
   };
 </script>
 
-  <title>Hexo 实战（一）：搭建开源博客系统 Hexo，并将其部署到 GitHub | 坤哥的博客小站</title>
+  <title>Hexo 实战（一）：搭建开源博客系统 Hexo 并将其部署到 GitHub | 坤哥的博客小站</title>
   
 
 
@@ -255,7 +255,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hexo 实战（一）：搭建开源博客系统 Hexo，并将其部署到 GitHub
+          Hexo 实战（一）：搭建开源博客系统 Hexo 并将其部署到 GitHub
         </h1>
 
         <div class="post-meta">
@@ -272,7 +272,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-16 10:51:47" itemprop="dateModified" datetime="2020-05-16T10:51:47+08:00">2020-05-16</time>
+                <time title="修改时间：2020-05-16 15:56:31" itemprop="dateModified" datetime="2020-05-16T15:56:31+08:00">2020-05-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -318,19 +318,19 @@
       
         <p>Hexo 是使用 Node.js 技术实现的静态博客框架，依赖很少，安装非常简单，可以将 markdown 文件生成博客文章，而<br>且可以将生成的静态内容发布到 Github 上。</p>
 <p>本次使用的操作系统是 Windows，在 Linux 上操作类似。</p>
-<h2 id="一、环境准备"><a href="#一、环境准备" class="headerlink" title="一、环境准备"></a>一、环境准备</h2><h3 id="1-1-安装-git"><a href="#1-1-安装-git" class="headerlink" title="1.1 安装 git"></a>1.1 安装 git</h3><p>下载地址：<a href="https://git-scm.com/download/win" target="_blank" rel="noopener">https://git-scm.com/download/win</a></p>
+<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><h3 id="安装-git"><a href="#安装-git" class="headerlink" title="安装 git"></a>安装 git</h3><p>下载地址：<a href="https://git-scm.com/download/win" target="_blank" rel="noopener">https://git-scm.com/download/win</a></p>
 <p>本次下载安装的文件是【Git-2.22.0-64-bit.exe】。</p>
 <p>安装完成后在命令窗口输入命令 <code>git --version</code> 验证是否安装成功，如下能输出 git 版本说明安装成功：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Administrator&gt;git --version</span><br><span class="line">git version 2.22.0.windows.1</span><br></pre></td></tr></table></figure>
 
 <p>在鼠标右键也会有 git 操作的显示：</p>
 <p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_212329.png" alt="2123"></p>
-<h3 id="1-2-安装-Node-js"><a href="#1-2-安装-Node-js" class="headerlink" title="1.2 安装 Node.js"></a>1.2 安装 Node.js</h3><p>下载地址：<a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">https://nodejs.org/en/download/</a></p>
+<h3 id="安装-Node-js"><a href="#安装-Node-js" class="headerlink" title="安装 Node.js"></a>安装 Node.js</h3><p>下载地址：<a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">https://nodejs.org/en/download/</a></p>
 <p>本次下载安装的文件是【node-v12.16.1-x64.msi】。</p>
 <p>安装完成后在命令窗口输入命令 <code>node -v</code> 验证是否安装成功，如下能输出 node 版本说明安装成功：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Administrator&gt;node -v</span><br><span class="line">v12.16.1</span><br></pre></td></tr></table></figure>
 
-<h2 id="二、安装-Hexo"><a href="#二、安装-Hexo" class="headerlink" title="二、安装 Hexo"></a>二、安装 Hexo</h2><p>使用命令 <code>npm install -g hexo-cli</code> 安装 Hexo。</p>
+<h2 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h2><p>使用命令 <code>npm install -g hexo-cli</code> 安装 Hexo。</p>
 <p>使用命令 <code>hexo init blog</code> 初始化博客：</p>
 <p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_010139.png" alt="2054"></p>
 <p>如上已初始化完成，目录结构如下：</p>
@@ -343,7 +343,7 @@
 <li>source：存放用户资源的目录，除 _posts 文件夹之外，开头命名为 _ (下划线)的文件 / 文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 public 文件夹，而其他文件会被拷贝过去。</li>
 <li>themes：主题目录，hexo 会根据主题来生成静态页面</li>
 </ul>
-<h2 id="三、基本使用-hexo"><a href="#三、基本使用-hexo" class="headerlink" title="三、基本使用 hexo"></a>三、基本使用 hexo</h2><p>进入 blog 文件夹，使用命令 <code>hexo server</code> （可简写 <code>hexo s</code>）启动服务：</p>
+<h2 id="hexo-基本使用"><a href="#hexo-基本使用" class="headerlink" title="hexo 基本使用"></a>hexo 基本使用</h2><p>进入 blog 文件夹，使用命令 <code>hexo server</code> （可简写 <code>hexo s</code>）启动服务：</p>
 <p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_010630.png" alt="2057"></p>
 <p>如上 hexo 博客系统服务已启动完成，浏览器输入地址 <code>http://localhost:4000</code> 访问：</p>
 <p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_010648.png" alt="2059"></p>
@@ -357,9 +357,9 @@
 <p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_211234.png" alt="0329"></p>
 <p>如果是多层目录，也会对应生成多层路径如：</p>
 <p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-30_203410.png" alt="2034"></p>
-<h2 id="四、结合-GitHub-使用"><a href="#四、结合-GitHub-使用" class="headerlink" title="四、结合 GitHub 使用"></a>四、结合 GitHub 使用</h2><h3 id="4-1-GitHub-创建个人仓库"><a href="#4-1-GitHub-创建个人仓库" class="headerlink" title="4.1 GitHub 创建个人仓库"></a>4.1 GitHub 创建个人仓库</h3><p>登录 GitHub ,新建仓库（New repository）,在 Repository name 输入【你的用户名.github.io】，这样配置在后面部署到 GitHub 时就能被失败，如：</p>
+<h2 id="结合-GitHub-使用"><a href="#结合-GitHub-使用" class="headerlink" title="结合 GitHub 使用"></a>结合 GitHub 使用</h2><h3 id="GitHub-创建个人仓库"><a href="#GitHub-创建个人仓库" class="headerlink" title="GitHub 创建个人仓库"></a>GitHub 创建个人仓库</h3><p>登录 GitHub ,新建仓库（New repository）,在 Repository name 输入【你的用户名.github.io】，这样配置在后面部署到 GitHub 时就能被失败，如：</p>
 <p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_215644.png" alt="2327"></p>
-<h3 id="4-2-Git-与-GitHub-帐号绑定"><a href="#4-2-Git-与-GitHub-帐号绑定" class="headerlink" title="4.2 Git 与 GitHub 帐号绑定"></a>4.2 Git 与 GitHub 帐号绑定</h3><ol>
+<h3 id="Git-与-GitHub-帐号绑定"><a href="#Git-与-GitHub-帐号绑定" class="headerlink" title="Git 与 GitHub 帐号绑定"></a>Git 与 GitHub 帐号绑定</h3><ol>
 <li>配置 git 全局的的用户名和邮箱</li>
 </ol>
 <p>将 git 全局的的用户名和邮箱配置成 GitHub：</p>
@@ -393,7 +393,7 @@
 <p>使用命令 <code>ssh -T git@github.com</code>：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Administrator@ecs-x-large-2-win-20200316202505 MINGW64 /c/Special/Test/HexoTest/blog</span><br><span class="line">$ ssh -T git@github.com</span><br><span class="line">The authenticity of host <span class="string">'github.com (52.74.223.119)'</span> can<span class="string">'t be established.</span></span><br><span class="line"><span class="string">RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCsp***TxdCARLviKw6E5SY8.</span></span><br><span class="line"><span class="string">Are you sure you want to continue connecting (yes/no/[fingerprint])? yes</span></span><br><span class="line"><span class="string">Warning: Permanently added '</span>github.com,52.74.223.119<span class="string">' (RSA) to the list of known hosts.</span></span><br><span class="line"><span class="string">Hi kungge! You'</span>ve successfully authenticated, but GitHub does not provide shell access.</span><br></pre></td></tr></table></figure>
 
-<h3 id="4-3-将-Hexo-部署到-GitHub"><a href="#4-3-将-Hexo-部署到-GitHub" class="headerlink" title="4.3 将 Hexo 部署到 GitHub"></a>4.3 将 Hexo 部署到 GitHub</h3><p>打开配置文件【_config.yml】，将 deploy 节点下内容修改如下：</p>
+<h3 id="将-Hexo-部署到-GitHub"><a href="#将-Hexo-部署到-GitHub" class="headerlink" title="将 Hexo 部署到 GitHub"></a>将 Hexo 部署到 GitHub</h3><p>打开配置文件【_config.yml】，将 deploy 节点下内容修改如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https:&#x2F;&#x2F;github.com&#x2F;kungge&#x2F;kungge.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
 
 <p>repo 为你上面创建的项目仓库地址。</p>
@@ -418,29 +418,29 @@
 <p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_225412.png" alt="2254"></p>
 <p>查看 GitHub 仓库代码可看到静态页面已经发布过来了：</p>
 <p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-30_001637.png" alt="0017"></p>
-<h2 id="五、绑定域名"><a href="#五、绑定域名" class="headerlink" title="五、绑定域名"></a>五、绑定域名</h2><h3 id="5-1-域名解析设置"><a href="#5-1-域名解析设置" class="headerlink" title="5.1 域名解析设置"></a>5.1 域名解析设置</h3><p>进入域名控制台，本次使用的华为云，添加记录集，主机记录，如果是主域名，则使用 www，如果是二级域名则使用二级域名名称，如 blog，类型选择 CNAME，值就是你的 github 博客网站项目地址，如 <code>kungge.github.com</code>：</p>
+<h2 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h2><h3 id="域名解析设置"><a href="#域名解析设置" class="headerlink" title="域名解析设置"></a>域名解析设置</h3><p>进入域名控制台，本次使用的华为云，添加记录集，主机记录，如果是主域名，则使用 www，如果是二级域名则使用二级域名名称，如 blog，类型选择 CNAME，值就是你的 github 博客网站项目地址，如 <code>kungge.github.com</code>：</p>
 <p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-08_225323.png" alt="20200508230714"></p>
 <p>这个时候如果直接访问你的域名还是会404报错：</p>
 <p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-08_225514.png" alt="20200508230831"></p>
-<h3 id="5-2-github-设置"><a href="#5-2-github-设置" class="headerlink" title="5.2 github 设置"></a>5.2 github 设置</h3><p>进入你的项目，点击 Settings 进入设置页面：</p>
+<h3 id="github-设置"><a href="#github-设置" class="headerlink" title="github 设置"></a>github 设置</h3><p>进入你的项目，点击 Settings 进入设置页面：</p>
 <p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-08_225542.png" alt="20200508231343"></p>
 <p>在 GitHub Pages 一栏中找到 Custom domain 然后在文本框中输入你的域名，点击 save 即可：</p>
 <p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-08_225728.png" alt="20200508231455"></p>
 <p>其实这个时候就可以通过访问域名来访问网站了。</p>
-<h3 id="5-3-本地博客设置"><a href="#5-3-本地博客设置" class="headerlink" title="5.3 本地博客设置"></a>5.3 本地博客设置</h3><p>在本地博客的 blog/source  目录中，创建一个记事本，内容输入你的域名，如本次为 blog.kungge.com，保存为 CNAME 文件名称，不要带后缀。</p>
+<h3 id="本地博客设置"><a href="#本地博客设置" class="headerlink" title="本地博客设置"></a>本地博客设置</h3><p>在本地博客的 blog/source  目录中，创建一个记事本，内容输入你的域名，如本次为 blog.kungge.com，保存为 CNAME 文件名称，不要带后缀。</p>
 <p>然后使用如下三个命令来重新生成内容并部署到 Github。</p>
-<h2 id="P、常见问题"><a href="#P、常见问题" class="headerlink" title="P、常见问题"></a>P、常见问题</h2><h3 id="P1-安装-hexo-出错"><a href="#P1-安装-hexo-出错" class="headerlink" title="P1 安装 hexo 出错"></a>P1 安装 hexo 出错</h3><p>使用命令 <code>npm install -g hexo-cli</code> 后，再使用的时候报 git 不是内部或外部命令：</p>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="安装-hexo-出错"><a href="#安装-hexo-出错" class="headerlink" title="安装 hexo 出错"></a>安装 hexo 出错</h3><p>使用命令 <code>npm install -g hexo-cli</code> 后，再使用的时候报 git 不是内部或外部命令：</p>
 <p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_002023.png" alt="2025"></p>
 <p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_004703.png" alt="2026"></p>
 <p>解决办法：重新删除目录重来。</p>
-<h3 id="P2-图片解析不出来"><a href="#P2-图片解析不出来" class="headerlink" title="P2 图片解析不出来"></a>P2 图片解析不出来</h3><p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_211540.png" alt="0329"></p>
+<h3 id="图片解析不出来"><a href="#图片解析不出来" class="headerlink" title="图片解析不出来"></a>图片解析不出来</h3><p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_211540.png" alt="0329"></p>
 <p>可以将图片放置在目录【source】，这样图片就能显示出来：</p>
 <p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_212858.png" alt="2130"></p>
 <p>但是这样肯定不行，当图片不哦多时则会占据大量的存储空间，文章加载时候会变慢，而且md文件过多图片过多，这个目录就会变得很大，难于维护。</p>
-<p>可以使用图床解决这个问题，图片存储在云存储中，如阿里云存储、又拍云存储等第三方的文件存储服务，使用的使用使用图片链接地址即可，如在 markdown 中就可以这样使用：</p>
+<p>可以使用图床解决这个问题，图片存储在云存储中，如阿里云存储、又拍云存储等第三方的文件存储服务，使用图片链接地址即可，如在 markdown 中就可以这样使用：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![2323](http:&#x2F;&#x2F;img.kungge.com&#x2F;a&#x2F;2020-03-24_232349.png)</span><br></pre></td></tr></table></figure>
 
-<h3 id="P3-部署到-GitHub-失败"><a href="#P3-部署到-GitHub-失败" class="headerlink" title="P3 部署到 GitHub 失败"></a>P3 部署到 GitHub 失败</h3><p>使用命令 <code>hexo d</code> 部署如出现访问git地址失败，如： </p>
+<h3 id="部署到-GitHub-失败"><a href="#部署到-GitHub-失败" class="headerlink" title="部署到 GitHub 失败"></a>部署到 GitHub 失败</h3><p>使用命令 <code>hexo d</code> 部署如出现访问git地址失败，如： </p>
 <p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_224648.png" alt="2247"></p>
 <p>解决：重新使用命令 <code>hexo d</code> 则会在命令窗口要求输入 github 的用户和密码，回车即可：</p>
 <p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-29_225202.png" alt="2252"></p>
@@ -479,7 +479,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://blog.kungge.com/p/hexo-create-github/" title="Hexo 实战（一）：搭建开源博客系统 Hexo，并将其部署到 GitHub">http://blog.kungge.com/p/hexo-create-github/</a>
+    <a href="http://blog.kungge.com/p/hexo-create-github/" title="Hexo 实战（一）：搭建开源博客系统 Hexo 并将其部署到 GitHub">http://blog.kungge.com/p/hexo-create-github/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -508,8 +508,8 @@
       <i class="fa fa-chevron-left"></i> frp 内网穿透实战（二）：linux 连接和 web 访问
     </a></div>
       <div class="post-nav-item">
-    <a href="/p/hexo-base/" rel="next" title="Hexo 实战（二）：Hexo 基本设置">
-      Hexo 实战（二）：Hexo 基本设置 <i class="fa fa-chevron-right"></i>
+    <a href="/p/hexo-base/" rel="next" title="Hexo 实战（二）：Hexo 基本设置和使用">
+      Hexo 实战（二）：Hexo 基本设置和使用 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -571,7 +571,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、环境准备"><span class="nav-number">1.</span> <span class="nav-text">一、环境准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-安装-git"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 安装 git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-安装-Node-js"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 安装 Node.js</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、安装-Hexo"><span class="nav-number">2.</span> <span class="nav-text">二、安装 Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、基本使用-hexo"><span class="nav-number">3.</span> <span class="nav-text">三、基本使用 hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、结合-GitHub-使用"><span class="nav-number">4.</span> <span class="nav-text">四、结合 GitHub 使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-GitHub-创建个人仓库"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 GitHub 创建个人仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-Git-与-GitHub-帐号绑定"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 Git 与 GitHub 帐号绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-将-Hexo-部署到-GitHub"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 将 Hexo 部署到 GitHub</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、绑定域名"><span class="nav-number">5.</span> <span class="nav-text">五、绑定域名</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-域名解析设置"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 域名解析设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-github-设置"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 github 设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-本地博客设置"><span class="nav-number">5.3.</span> <span class="nav-text">5.3 本地博客设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P、常见问题"><span class="nav-number">6.</span> <span class="nav-text">P、常见问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#P1-安装-hexo-出错"><span class="nav-number">6.1.</span> <span class="nav-text">P1 安装 hexo 出错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#P2-图片解析不出来"><span class="nav-number">6.2.</span> <span class="nav-text">P2 图片解析不出来</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#P3-部署到-GitHub-失败"><span class="nav-number">6.3.</span> <span class="nav-text">P3 部署到 GitHub 失败</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境准备"><span class="nav-number">1.</span> <span class="nav-text">环境准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-git"><span class="nav-number">1.1.</span> <span class="nav-text">安装 git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-Node-js"><span class="nav-number">1.2.</span> <span class="nav-text">安装 Node.js</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Hexo"><span class="nav-number">2.</span> <span class="nav-text">安装 Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo-基本使用"><span class="nav-number">3.</span> <span class="nav-text">hexo 基本使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结合-GitHub-使用"><span class="nav-number">4.</span> <span class="nav-text">结合 GitHub 使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GitHub-创建个人仓库"><span class="nav-number">4.1.</span> <span class="nav-text">GitHub 创建个人仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git-与-GitHub-帐号绑定"><span class="nav-number">4.2.</span> <span class="nav-text">Git 与 GitHub 帐号绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将-Hexo-部署到-GitHub"><span class="nav-number">4.3.</span> <span class="nav-text">将 Hexo 部署到 GitHub</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绑定域名"><span class="nav-number">5.</span> <span class="nav-text">绑定域名</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#域名解析设置"><span class="nav-number">5.1.</span> <span class="nav-text">域名解析设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#github-设置"><span class="nav-number">5.2.</span> <span class="nav-text">github 设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地博客设置"><span class="nav-number">5.3.</span> <span class="nav-text">本地博客设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见问题"><span class="nav-number">6.</span> <span class="nav-text">常见问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-hexo-出错"><span class="nav-number">6.1.</span> <span class="nav-text">安装 hexo 出错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图片解析不出来"><span class="nav-number">6.2.</span> <span class="nav-text">图片解析不出来</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署到-GitHub-失败"><span class="nav-number">6.3.</span> <span class="nav-text">部署到 GitHub 失败</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -587,20 +587,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">52</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-count">87</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

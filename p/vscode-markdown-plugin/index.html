@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/smiley_lock_32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/smiley_lock_16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="gVkA-jeqZSVbPLhHyQnRI8oEBse0D3GaV0B98Yjai_k" />
+  <meta name="baidu-site-verification" content="xSB5shU7SK" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-material.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.kungge.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="一、Markdown Preview Enhanced Markdown Preview Enhanced 应该是 vs code 的 markdown 插件中最全也是最强大的一个。  以下简称 MPE。  1.1 导入外部文件 语法 ：@import &quot;你的文件&quot;  如导入一张图片：@import &quot;content&#x2F;yun_bg.jpg&quot;  如果引入图片类型的文件，不建议这样使用，因为其它很多插">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vs code 中使用这些插件让编写 markdown 变得更方便">
+<meta property="og:url" content="http://blog.kungge.com/p/vscode-markdown-plugin/index.html">
+<meta property="og:site_name" content="坤哥的博客小站">
+<meta property="og:description" content="一、Markdown Preview Enhanced Markdown Preview Enhanced 应该是 vs code 的 markdown 插件中最全也是最强大的一个。  以下简称 MPE。  1.1 导入外部文件 语法 ：@import &quot;你的文件&quot;  如导入一张图片：@import &quot;content&#x2F;yun_bg.jpg&quot;  如果引入图片类型的文件，不建议这样使用，因为其它很多插">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-14_004826.png">
+<meta property="og:image" content="http://blog.kungge.com/p/vscode-markdown-plugin/content/mpe.2020011104.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202001/mpe.2020011103.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202001/mpe.2020011102.png">
+<meta property="article:published_time" content="2020-01-11T12:22:27.000Z">
+<meta property="article:modified_time" content="2020-05-16T16:31:12.918Z">
+<meta property="article:author" content="wankun">
+<meta property="article:tag" content="markdown">
+<meta property="article:tag" content="编辑器">
+<meta property="article:tag" content="vs code">
+<meta property="article:tag" content="vs code插件">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-14_004826.png">
+
+<link rel="canonical" href="http://blog.kungge.com/p/vscode-markdown-plugin/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>vs code 中使用这些插件让编写 markdown 变得更方便 | 坤哥的博客小站</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">坤哥的博客小站</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个热爱生活的90后</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404.html" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/vscode-markdown-plugin/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
+      <meta itemprop="name" content="wankun">
+      <meta itemprop="description" content="生活一门技术，更是一门艺术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坤哥的博客小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          vs code 中使用这些插件让编写 markdown 变得更方便
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-01-11 20:22:27" itemprop="dateCreated datePublished" datetime="2020-01-11T20:22:27+08:00">2020-01-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-17 00:31:12" itemprop="dateModified" datetime="2020-05-17T00:31:12+08:00">2020-05-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/p/vscode-markdown-plugin/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/vscode-markdown-plugin/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="一、Markdown-Preview-Enhanced"><a href="#一、Markdown-Preview-Enhanced" class="headerlink" title="一、Markdown Preview Enhanced"></a>一、Markdown Preview Enhanced</h2><p>Markdown Preview Enhanced 应该是 vs code 的 markdown 插件中最全也是最强大的一个。</p>
+<p>以下简称 MPE。</p>
+<h3 id="1-1-导入外部文件"><a href="#1-1-导入外部文件" class="headerlink" title="1.1 导入外部文件"></a>1.1 导入外部文件</h3><p>语法 ：<code>@import &quot;你的文件&quot;</code></p>
+<p>如导入一张图片：<code>@import &quot;content/yun_bg.jpg&quot;</code></p>
+<p>如果引入图片类型的文件，不建议这样使用，因为其它很多插件不支持这个语法，建议使用 markdown 通用导入图片的语法：<code>![Alt text](/path/to/img.jpg &quot;Optional title&quot;)</code>，如本图片可使用语法：<code>![mpe.2020011101](content/yun_bg.jpg)</code>。</p>
+<p>还可以在导入图片的时候设置图片的基本信息，语法：<code>@import &quot;test.png&quot; {width=&quot;300px&quot; height=&quot;200px&quot; title=&quot;图片的标题&quot; alt=&quot;我的 alt&quot;}</code></p>
+<p>该语法功能很强大，详细可移步下面的参考文献的 <code>[Markdown Preview Enhanced]-[导入外部文件]</code> 模块。</p>
+<h3 id="1-2-目录列表"><a href="#1-2-目录列表" class="headerlink" title="1.2 目录列表"></a>1.2 目录列表</h3><p>MPE 可支持在 markdown 文件中创建目录（TOC）。</p>
+<p>在需要插入目录的地方使用 <code>[TOC]</code> 即可，但是这种方式只会在预览中显示，而不会修改 markdown 文件本身，不建议这样使用，因为使用其他的插件就不起作用了。</p>
+<p>在 vs code 中使用快捷键【Ctrl+Shit+P】来创建目录，会生成如下一串代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- @import &quot;[TOC]&quot; &#123;cmd&#x3D;&quot;toc&quot; depthFrom&#x3D;1 depthTo&#x3D;6 orderedList&#x3D;false&#125; --&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- code_chunk_output --&gt;</span><br><span class="line"></span><br><span class="line">- [一、Markdown Preview Enhanced](#一-markdown-preview-enhanced)</span><br><span class="line">  - [1.1 导入外部文件](#11-导入外部文件)</span><br><span class="line">  - [1.2 目录列表](#12-目录列表)</span><br><span class="line">  - [1.R 参考文献](#1r-参考文献)</span><br><span class="line"></span><br><span class="line">&lt;!-- &#x2F;code_chunk_output --&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>orderlist 表示是否使用有序列表，若改为 true，则会加上标号，生成目录范例如下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 一、Markdown Preview Enhanced</span><br><span class="line">	1. 1.1 导入外部文件</span><br><span class="line">	2. 1.2 目录列表</span><br><span class="line">	3. R 参考文献&#96;</span><br><span class="line">2. 二、other</span><br></pre></td></tr></table></figure>
+<p>如果标题本身加了序号就没必要设为 true，不然太难看了。</p>
+<ul>
+<li>depthFrom=1 和 depthTo=6 表示<code>[1~6]</code>包含的</li>
+<li>ignoreLink=true 表示在目录中不会被显示成超链接</li>
+<li>若需要排除一个目录则只需要在标题后面添加 <code>{ignore=true}</code> 即可。</li>
+</ul>
+<h3 id="1-3-Code-Chunk"><a href="#1-3-Code-Chunk" class="headerlink" title="1.3 Code Chunk"></a>1.3 Code Chunk</h3><p>MPE 支持渲染代码的运行结果，默认是禁用的，开启可能会造成一些安全问题。</p>
+<h3 id="1-4-文档导出"><a href="#1-4-文档导出" class="headerlink" title="1.4 文档导出"></a>1.4 文档导出</h3><p>预览的界面中右键，就可以看到有多种格式的文档导出。</p>
+<h3 id="1-5-Save-as-Mardkown"><a href="#1-5-Save-as-Mardkown" class="headerlink" title="1.5 Save as Mardkown"></a>1.5 Save as Mardkown</h3><p>MPE 支持编译到 GitHub Flavored Markdown。这么做是为了使导出的 markdown 文件可以包含所有的绘制的图形（为 png 图片），code chunks，以及数学表达式（图片形式）等等以方便于发布到 GitHub。</p>
+<h3 id="1-6-定制与扩展"><a href="#1-6-定制与扩展" class="headerlink" title="1.6 定制与扩展"></a>1.6 定制与扩展</h3><p>MPE 支持很多扩展。</p>
+<h4 id="1-6-1-定制-css"><a href="#1-6-1-定制-css" class="headerlink" title="1.6.1 定制 css"></a>1.6.1 定制 css</h4><p>MPE 支持自定义样式。</p>
+<p>使用快捷键【Ctrl+Shift+P】,然后运行【Markdown Preview Enhanced: Customize Css】，就可以打开【style.css】文件，然后就可以编写自己的样式了。</p>
+<h4 id="1-6-2-扩展-Markdown-Parser"><a href="#1-6-2-扩展-Markdown-Parser" class="headerlink" title="1.6.2 扩展 Markdown Parser"></a>1.6.2 扩展 Markdown Parser</h4><p>运行 Markdown Preview Enhanced: Extend Parser 命令可以打开 parseer.js 文件。</p>
+<p>默认的 parser.js 内容：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  onWillParseMarkdown: <span class="function"><span class="keyword">function</span>(<span class="params">markdown</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>)=&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> resolve(markdown)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">  onDidParseMarkdown: <span class="function"><span class="keyword">function</span>(<span class="params">html</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>)=&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> resolve(html)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以针对 markdown 文件中的内容进行处理，如替换信息，这个功能非常有用，如发布一篇文章需要添加作者和时间信息，就可以在需要展示作者和时间的地方用一个固定的字符串占位，在解析时将其替换即可，如设置字符串为 <code>[ArticlePostInfo]</code>，修改 parser.js ：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  onWillParseMarkdown: <span class="function"><span class="keyword">function</span>(<span class="params">markdown</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>)=&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">var</span> myDate = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">      <span class="keyword">var</span> showDateTime=myDate.toLocaleString();</span><br><span class="line">      markdown = markdown.replace(<span class="string">"[ArticlePostInfo]"</span>,<span class="string">"&lt;div style=\"text-align:right\"&gt;&lt;i&gt; kwan post "</span>+showDateTime+<span class="string">"&lt;/i&gt;&lt;/div&gt;"</span>);</span><br><span class="line">      <span class="keyword">return</span> resolve(markdown);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">  onDidParseMarkdown: <span class="function"><span class="keyword">function</span>(<span class="params">html</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>)=&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> resolve(html)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此次在文章顶部设置这个占位字符串，在解析时就会把该字符串内容解析成处理的信息，如 <code>kwan post 2020/1/12 下午4:13:28</code>，显示效果：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-14_004826.png" alt="20200514004843"></p>
+<p>添加 <code>markdown = markdown.replace(&quot;[RtnDocTop]&quot;,&quot;&lt;button onclick=\&quot;javascript:document.body.scrollTop = 0;document.documentElement.scrollTop = 0;\&quot; id=\&quot;btnRtnTop\&quot;&gt;返回顶部&lt;/button&gt;&quot;);</code> 可实现从底部返回顶部。</p>
+<h4 id="1-6-3-图片助手"><a href="#1-6-3-图片助手" class="headerlink" title="1.6.3 图片助手"></a>1.6.3 图片助手</h4><p>在预览页面中右键点击【Image Helper】，如果是本地上传，使用【Upload】：</p>
+<p><img src="content/mpe.2020011104.png" alt="Alt text"></p>
+<p>经测试本地上传失败，会插入<code>![Uploading mpe.2020011104.png… (k5yacxgq2)]()</code>，插件并没有解析它。</p>
+<p>Link 可以，输入图片地址，按 Enter 就会自动插入标签：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![enter image description here](http:&#x2F;&#x2F;www.kungge.com&#x2F;NewContent&#x2F;img&#x2F;yun_bg.jpg)</span><br></pre></td></tr></table></figure>
+<h4 id="1-7-Markdown-基本要素"><a href="#1-7-Markdown-基本要素" class="headerlink" title="1.7 Markdown 基本要素"></a>1.7 Markdown 基本要素</h4><p>Markdown 基本通用语法在此不作介绍，只是介绍下 MPE 的特性。</p>
+<h4 id="1-7-1-给标题添加-id-或者-class"><a href="#1-7-1-给标题添加-id-或者-class" class="headerlink" title="1.7.1 给标题添加 id 或者 class"></a>1.7.1 给标题添加 id 或者 class</h4><p>给标题添加 id 或者 class，在标题后添加 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;&#123;#id .class1 .class2&#125;&#96;</span><br></pre></td></tr></table></figure>
+
+<p>如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#### 1.7.1 此标题有1个 id &#123;#theId&#125;</span><br><span class="line">#### 1.7.2 此标题有2个 class &#123;.class1 .class2&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-7-2-强调"><a href="#1-7-2-强调" class="headerlink" title="1.7.2 强调"></a>1.7.2 强调</h4><p>文字加上横线删除，使用： <code>~~删除的文字~~</code></p>
+<p><del>被横线删除</del></p>
+<h4 id="1-7-3-超链接"><a href="#1-7-3-超链接" class="headerlink" title="1.7.3 超链接"></a>1.7.3 超链接</h4><p>直接使用链接如 <code>http://www.kungge.com</code>，MPE 会直接渲染成 <code>&lt;a href=&quot;http://www.kungge.com&quot;&gt;</code></p>
+<p><a href="http://www.kungge.com" target="_blank" rel="noopener">http://www.kungge.com</a></p>
+<h4 id="1-7-4-代码块-class"><a href="#1-7-4-代码块-class" class="headerlink" title="1.7.4 代码块 class"></a>1.7.4 代码块 class</h4><p>使用语法：<code>java {.class1 .class2}</code></p>
+<h4 id="1-7-5-代码块显示行号"><a href="#1-7-5-代码块显示行号" class="headerlink" title="1.7.5 代码块显示行号"></a>1.7.5 代码块显示行号</h4><p><code>java .{line-numbers}</code></p>
+<h4 id="1-7-6-高亮代码行数"><a href="#1-7-6-高亮代码行数" class="headerlink" title="1.7.6 高亮代码行数"></a>1.7.6 高亮代码行数</h4><p>使用<code>{heighlight=5}</code> 或 <code>{heighlight=[5,10,16-18]}</code></p>
+<h4 id="1-8-扩展语法"><a href="#1-8-扩展语法" class="headerlink" title="1.8 扩展语法"></a>1.8 扩展语法</h4><h4 id="1-8-1-表格"><a href="#1-8-1-表格" class="headerlink" title="1.8.1 表格"></a>1.8.1 表格</h4><p>合并表格的单元格需要启用：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202001/mpe.2020011103.png" alt="Alt text"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202001/mpe.2020011102.png" alt="Alt text"></p>
+<p>colspan <code>&gt;</code> or empty cell：</p>
+<table>
+<thead>
+<tr>
+<th>col1</th>
+<th>col2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&gt;</td>
+<td>r1c2</td>
+</tr>
+<tr>
+<td>r2c1</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>rowspan  <code>^</code> :</p>
+<table>
+<thead>
+<tr>
+<th>col1</th>
+<th>col2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>r1c1</td>
+<td>r1c2</td>
+</tr>
+<tr>
+<td>^</td>
+<td>r2c2</td>
+</tr>
+</tbody></table>
+<h4 id="1-8-2-Emoji-amp-Font-Awesome"><a href="#1-8-2-Emoji-amp-Font-Awesome" class="headerlink" title="1.8.2 Emoji &amp; Font-Awesome"></a>1.8.2 Emoji &amp; Font-Awesome</h4><blockquote>
+<p>只适用于 markdown-it parser 而不适用于 pandoc parser。 缺省下是启用的。你可以在插件设置里禁用此功能。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">笑脸：:smile:</span><br><span class="line">车：:fa-car:</span><br></pre></td></tr></table></figure>
+<h4 id="1-8-3-上标和小标"><a href="#1-8-3-上标和小标" class="headerlink" title="1.8.3 上标和小标"></a>1.8.3 上标和小标</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">上标：2^n^</span><br><span class="line">下标：H~2~O</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-8-4-脚注"><a href="#1-8-4-脚注" class="headerlink" title="1.8.4 脚注"></a>1.8.4 脚注</h4><p>变化无穷，各有所归[^1]。<br>古之大化[^2]着，乃与无形俱剩。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[^1]: 所归：归属，指不同表现。</span><br><span class="line">[^2]: 化：教化。</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-8-5-标记"><a href="#1-8-5-标记" class="headerlink" title="1.8.5 标记"></a>1.8.5 标记</h4><p>语法：<code>==标记的内容==</code>，如：</p>
+<p>==标记的内容==</p>
+<h2 id="二、Markdown-Shortcuts"><a href="#二、Markdown-Shortcuts" class="headerlink" title="二、Markdown Shortcuts"></a>二、Markdown Shortcuts</h2><p>MPE 很强大，但是在编写 markdown 却有点不方便，比如插入图片，插入超链接等，需要手写，如有快捷键之类或快捷字符那就方便多了，就像在 sublime 中使用插件时插入图片使用 <code>mdi+tab</code>，就会默认插入图片标签：<code>![Alt text](/path/to/img.jpg &quot;Optional title&quot;)</code>，插入超链接时使用 <code>mdl+tab</code>，插入<code>[](link)</code> 即可。</p>
+<p>在 vs code 中也有类似的插件，本次介绍【Markdown Shortcuts】，可以通过快捷键或者鼠标右键来插入需要的标签内容。</p>
+<h2 id="2-1-可操作的标签"><a href="#2-1-可操作的标签" class="headerlink" title="2.1 可操作的标签"></a>2.1 可操作的标签</h2><p>右键默认支持的内容：</p>
+<ul>
+<li>Toggle bold：空白处插入一个粗体标签<code>****</code>，选择文字将文字变成粗体，快捷键【Ctrl+B】</li>
+<li>Toggle code block：空白处插入一个代码块标签 <code>&quot;``````&quot;</code>，选择文字将文字用代码块包含，快捷键【Ctrl+M Ctrl+C】</li>
+<li>Toggle hyperlink：空白处插入会要求输入 alt text 和连接然后会生成一个超链接标签，选择文字后只需要输入连接即可，快捷键【Ctrl+L】</li>
+<li>Toggle inline code：空白处插入一个行内代码块标签 <code>&quot;``&quot;</code>，选择文字会用行内代码标签包含，快捷键【Ctrl+M Ctrl+I】</li>
+<li>Toggle italic：插入一个斜体标签，需要选择文字，快捷键【Ctrl+I】</li>
+<li>Toggle bullet points：空白处插入一个列表项标签 <code>*</code>，选择多行文字会转成列表，快捷键【Ctrl+M Ctrl+B】</li>
+<li>Toggle checkboxes：空白处插入一个多选框标签 <code>- [ ]</code>，选择多行文字会将其变成多个复选框，快捷键【Ctrl+M Ctrl+X】</li>
+<li>Toggle number list：空白处插入一个有序列表项标签 <code>1.</code> ，选择多行文字会转成有序列表，快捷键【Ctrl+M Ctrl+1】</li>
+<li>Add table：空白处插入一个表格标签</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Column A | Column B | Column C</span><br><span class="line">---------|----------|---------</span><br><span class="line"> A1 | B1 | C1</span><br><span class="line"> A2 | B2 | C2</span><br><span class="line"> A3 | B3 | C3</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Add table with header：直接空白处会插入一个带表头的表格标签，选择一段有空格整齐文字时，会自动变为表格</li>
+<li>Toggle image：插入一个图片标签 <code>![altText](content/abc.jpg)</code>，快捷键【Ctrl+Shift+L】</li>
+<li>Toggle citations：插入一个引用标签 <code>&gt;</code></li>
+</ul>
+<p>像<code>行内代码</code>、列表、有序列表可以手写，比较简单，如果是要将文字转成列表就比较方便了。</p>
+<p><strong>table</strong> 和 代码块比较多，有快捷操作会方便很多。</p>
+<ul>
+<li><input disabled="" type="checkbox"> 牛奶</li>
+<li><input disabled="" type="checkbox"> 咖啡</li>
+<li><input disabled="" type="checkbox"> 豆奶</li>
+</ul>
+<h2 id="三、markdownlint"><a href="#三、markdownlint" class="headerlink" title="三、markdownlint"></a>三、markdownlint</h2><p>用于检查 markdown 使用不合理的插件。</p>
+<h2 id="四、Markdown-Theme-Kit"><a href="#四、Markdown-Theme-Kit" class="headerlink" title="四、Markdown Theme Kit"></a>四、Markdown Theme Kit</h2><p>为 vs code 提供主题，目前提供了4种主题：</p>
+<ul>
+<li>Markdown Editor</li>
+<li>Markdown Editor Dark</li>
+<li>Markdown Editor Focus</li>
+<li>Markdown Editor Yellow</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>您的支持是我最大的动力！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="wankun 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="wankun 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>wankun
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://blog.kungge.com/p/vscode-markdown-plugin/" title="vs code 中使用这些插件让编写 markdown 变得更方便">http://blog.kungge.com/p/vscode-markdown-plugin/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/markdown/" rel="tag"><i class="fa fa-tag"></i> markdown</a>
+              <a href="/tags/%E7%BC%96%E8%BE%91%E5%99%A8/" rel="tag"><i class="fa fa-tag"></i> 编辑器</a>
+              <a href="/tags/vs-code/" rel="tag"><i class="fa fa-tag"></i> vs code</a>
+              <a href="/tags/vs-code%E6%8F%92%E4%BB%B6/" rel="tag"><i class="fa fa-tag"></i> vs code插件</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/p/sourcetree-baseuse/" rel="prev" title="git 客户端 sourcetree 基本使用">
+      <i class="fa fa-chevron-left"></i> git 客户端 sourcetree 基本使用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/p/struts2-base/" rel="next" title="Struts2 学习笔记：一文学会基本使用">
+      Struts2 学习笔记：一文学会基本使用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Markdown-Preview-Enhanced"><span class="nav-number">1.</span> <span class="nav-text">一、Markdown Preview Enhanced</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-导入外部文件"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 导入外部文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-目录列表"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 目录列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-Code-Chunk"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 Code Chunk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-文档导出"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 文档导出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-Save-as-Mardkown"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 Save as Mardkown</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-定制与扩展"><span class="nav-number">1.6.</span> <span class="nav-text">1.6 定制与扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-6-1-定制-css"><span class="nav-number">1.6.1.</span> <span class="nav-text">1.6.1 定制 css</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-6-2-扩展-Markdown-Parser"><span class="nav-number">1.6.2.</span> <span class="nav-text">1.6.2 扩展 Markdown Parser</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-6-3-图片助手"><span class="nav-number">1.6.3.</span> <span class="nav-text">1.6.3 图片助手</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-7-Markdown-基本要素"><span class="nav-number">1.6.4.</span> <span class="nav-text">1.7 Markdown 基本要素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-7-1-给标题添加-id-或者-class"><span class="nav-number">1.6.5.</span> <span class="nav-text">1.7.1 给标题添加 id 或者 class</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-7-2-强调"><span class="nav-number">1.6.6.</span> <span class="nav-text">1.7.2 强调</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-7-3-超链接"><span class="nav-number">1.6.7.</span> <span class="nav-text">1.7.3 超链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-7-4-代码块-class"><span class="nav-number">1.6.8.</span> <span class="nav-text">1.7.4 代码块 class</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-7-5-代码块显示行号"><span class="nav-number">1.6.9.</span> <span class="nav-text">1.7.5 代码块显示行号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-7-6-高亮代码行数"><span class="nav-number">1.6.10.</span> <span class="nav-text">1.7.6 高亮代码行数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-8-扩展语法"><span class="nav-number">1.6.11.</span> <span class="nav-text">1.8 扩展语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-8-1-表格"><span class="nav-number">1.6.12.</span> <span class="nav-text">1.8.1 表格</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-8-2-Emoji-amp-Font-Awesome"><span class="nav-number">1.6.13.</span> <span class="nav-text">1.8.2 Emoji &amp; Font-Awesome</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-8-3-上标和小标"><span class="nav-number">1.6.14.</span> <span class="nav-text">1.8.3 上标和小标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-8-4-脚注"><span class="nav-number">1.6.15.</span> <span class="nav-text">1.8.4 脚注</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-8-5-标记"><span class="nav-number">1.6.16.</span> <span class="nav-text">1.8.5 标记</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Markdown-Shortcuts"><span class="nav-number">2.</span> <span class="nav-text">二、Markdown Shortcuts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-可操作的标签"><span class="nav-number">3.</span> <span class="nav-text">2.1 可操作的标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、markdownlint"><span class="nav-number">4.</span> <span class="nav-text">三、markdownlint</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、Markdown-Theme-Kit"><span class="nav-number">5.</span> <span class="nav-text">四、Markdown Theme Kit</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wankun"
+      src="http://img2.kungge.com/content/dog.jpg">
+  <p class="site-author-name" itemprop="name">wankun</p>
+  <div class="site-description" itemprop="description">生活一门技术，更是一门艺术</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">87</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kungge" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kungge" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kunzhongzhong@163.com" title="E-Mail → mailto:kunzhongzhong@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">赣ICP备16000944号-1 </a>
+      <img src="http://img2.kungge.com/content/beian.png" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wankun</span>
+</div>
+
+<!--添加运行时间-->
+<span id="sitetime"></span>
+<script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* 
+      Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+      year - 作为date对象的年份，为4位年份值
+      month - 0-11之间的整数，做为date对象的月份
+      day - 1-31之间的整数，做为date对象的天数
+      hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+      minutes - 0-59之间的整数，做为date对象的分钟数
+      seconds - 0-59之间的整数，做为date对象的秒数
+      microseconds - 0-999之间的整数，做为date对象的毫秒数
+     */
+		var t1 = Date.UTC(2020,03,29,00,51,12);
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML=" 已运行"+/*diffYears+" 年 "+*/diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒";
+	}
+	siteTime();
+</script>
+<!--添加运行时间-->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'WS9yN0bdMnmWCTEGdPtRjty5-gzGzoHsz',
+      appKey     : 'rJRpp7BgWk5zx9WdsdFbPUXQ',
+      placeholder: "Just go go",
+      avatar     : 'monsterid',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
