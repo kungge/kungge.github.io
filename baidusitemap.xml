@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://blog.kungge.com/p/sourcetree-baseuse/</loc>
+    <lastmod>2020-05-19</lastmod>
+  </url>  <url>
+    <loc>http://blog.kungge.com/p/hexo-next-advance/</loc>
+    <lastmod>2020-05-19</lastmod>
+  </url>  <url>
+    <loc>http://blog.kungge.com/p/dotnet-memorystream-file/</loc>
+    <lastmod>2020-05-19</lastmod>
+  </url>  <url>
+    <loc>http://blog.kungge.com/p/nuget-nugetorg-email/</loc>
+    <lastmod>2020-05-19</lastmod>
+  </url>  <url>
     <loc>http://blog.kungge.com/p/postman-webservice/</loc>
     <lastmod>2020-05-19</lastmod>
   </url>  <url>
@@ -28,9 +40,6 @@
     <loc>http://blog.kungge.com/p/idea-maven-problem/</loc>
     <lastmod>2020-05-19</lastmod>
   </url>  <url>
-    <loc>http://blog.kungge.com/p/sourcetree-baseuse/</loc>
-    <lastmod>2020-05-19</lastmod>
-  </url>  <url>
     <loc>http://blog.kungge.com/p/gitlab-install-use/</loc>
     <lastmod>2020-05-19</lastmod>
   </url>  <url>
@@ -52,9 +61,6 @@
     <loc>http://blog.kungge.com/p/dotnet-ftp-connect-problem/</loc>
     <lastmod>2020-05-19</lastmod>
   </url>  <url>
-    <loc>http://blog.kungge.com/p/dotnet-memorystream-file/</loc>
-    <lastmod>2020-05-19</lastmod>
-  </url>  <url>
     <loc>http://blog.kungge.com/p/git-branch/</loc>
     <lastmod>2020-05-19</lastmod>
   </url>  <url>
@@ -71,9 +77,6 @@
     <lastmod>2020-05-18</lastmod>
   </url>  <url>
     <loc>http://blog.kungge.com/p/hexo-next/</loc>
-    <lastmod>2020-05-18</lastmod>
-  </url>  <url>
-    <loc>http://blog.kungge.com/p/hexo-next-advance/</loc>
     <lastmod>2020-05-18</lastmod>
   </url>  <url>
     <loc>http://blog.kungge.com/p/2020-05-17_00/</loc>
@@ -149,9 +152,6 @@
     <lastmod>2020-05-16</lastmod>
   </url>  <url>
     <loc>http://blog.kungge.com/p/cloud-server-use/</loc>
-    <lastmod>2020-05-16</lastmod>
-  </url>  <url>
-    <loc>http://blog.kungge.com/p/nuget-nugetorg-email/</loc>
     <lastmod>2020-05-16</lastmod>
   </url>  <url>
     <loc>http://blog.kungge.com/p/struts2-base/</loc>

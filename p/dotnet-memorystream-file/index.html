@@ -33,12 +33,13 @@
 <meta property="og:description" content="问题描述 文件接入了 ECM 系统，使用工具类根据 ecmId 获取文件，主要代码如下：  1 2 3 4 5   using (MemoryStream stream &#x3D; DownLoadFile(ecmId, out fileName)) {     byte[] bytes3 &#x3D; new byte[stream.Length];     stream.Read(bytes, 0, bytes">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/csharp.2020-03-19_134007.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202005/2020-05-20_000855.png">
 <meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/cs.2020-03-23_152042.png">
 <meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-23_174312.png">
 <meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-23_174938.png">
 <meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-23_175227.png">
 <meta property="article:published_time" content="2020-03-19T06:43:31.000Z">
-<meta property="article:modified_time" content="2020-05-19T10:59:03.260Z">
+<meta property="article:modified_time" content="2020-05-19T16:09:13.568Z">
 <meta property="article:author" content="wankun">
 <meta property="article:tag" content="流操作">
 <meta property="article:tag" content="内存流">
@@ -249,7 +250,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-19 18:59:03" itemprop="dateModified" datetime="2020-05-19T18:59:03+08:00">2020-05-19</time>
+                <time title="修改时间：2020-05-20 00:09:13" itemprop="dateModified" datetime="2020-05-20T00:09:13+08:00">2020-05-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -309,8 +310,7 @@
 <li>DownloadFileByEcmIdV2</li>
 </ol>
 <p>buffer大小为 131072<br>sty2（Encoding.UTF8.GetString(buffer)） 内容出现乱码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">%PDF-1.5</span><br><span class="line">%����</span><br><span class="line">9 0 obj</span><br><span class="line">&lt;&lt;&#x2F;Filter&#x2F;FlateDecode&#x2F;Length 1999&gt;&gt;stream</span><br><span class="line">x��Z͎�6~7���P,����]��A���&#x2F;�.)Q�e�3��h��E�)J$��Ŀ&#123;��&#96;U���Z%~�,�*</span><br><span class="line">*e&#39;#���!�4��Le��u�L���ћ���&#x2F;�x���x���՝�D�-��G�,�t����٧�C��Ok�ͩ&#123;~?�?p)�</span><br><span class="line">ف����u4.�Eǥ��D���$~�K</span><br><span class="line">I��I&lt;�&#123;���P^&lt;����2�8��N	���g�x�,�x��~Ci�eu�(���&#x3D;�[j-��[�-p�����������X�(��t��Z�aJv�����&#39;S�!�%�����9�U2��3��g!�I���*J�J|x����:�9��&amp;#nн�������ν�_pj\�em��J�s.YA%�:�А</span><br><span class="line">exn�P�*���R���N�Y�VR&#123;�l�pi������&#125;��&lt;��w�q8�l5�dG~&#125;t&#x2F;]�����A.��@w�����W�����ܗ^n��W��h���[</span><br></pre></td></tr></table></figure>
-
+<p><img src="http://img2.kungge.com/md-content/2020/202005/2020-05-20_000855.png" alt="20200520000909"></p>
 <p>试了 Encoding.Default.GetString(buffer) 等其它的编码得到的都是乱码。</p>
 <ol start="3">
 <li>DownloadFileByEcmIdV3</li>
