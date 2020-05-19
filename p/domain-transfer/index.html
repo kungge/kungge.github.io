@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/smiley_lock_32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/smiley_lock_16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="gVkA-jeqZSVbPLhHyQnRI8oEBse0D3GaV0B98Yjai_k" />
+  <meta name="baidu-site-verification" content="xSB5shU7SK" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-material.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.kungge.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="这篇文章主要介绍在阿里云备案了的域名转移到华为云进行备案的整个过程记录。  一、什么是变更备案 根据华为云针对网站能够被正确访问需要备案，而备案的域名相关信息必须正确：   1. 主体信息：公司通信地址、变更主体负责人信息等  2. 网站信息：域名、网站负责人、IP信息   针对已经备案了的域名如果符合上面两种情况（分别对应变更备案类型的变更主体和变更网站）的任一种属于变更备案的情况，都需要重新提">
+<meta property="og:type" content="article">
+<meta property="og:title" content="阿里云已备案域名变更为华为云备案操作方法记录">
+<meta property="og:url" content="http://blog.kungge.com/p/domain-transfer/index.html">
+<meta property="og:site_name" content="坤哥的博客小站">
+<meta property="og:description" content="这篇文章主要介绍在阿里云备案了的域名转移到华为云进行备案的整个过程记录。  一、什么是变更备案 根据华为云针对网站能够被正确访问需要备案，而备案的域名相关信息必须正确：   1. 主体信息：公司通信地址、变更主体负责人信息等  2. 网站信息：域名、网站负责人、IP信息   针对已经备案了的域名如果符合上面两种情况（分别对应变更备案类型的变更主体和变更网站）的任一种属于变更备案的情况，都需要重新提">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-28_223740.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-28_214629.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-28_215143.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-28_215153.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-26_233521.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-26_233612.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-28_220945.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-28_221054.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-28_221416.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-28_221538.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-28_221659.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-28_221908.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-28_222014.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-28_222118.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-28_222215.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-28_222440.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-28_222625.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-28_223851.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202004/2020-04-10_205719.png">
+<meta property="article:published_time" content="2020-03-28T13:54:38.000Z">
+<meta property="article:modified_time" content="2020-05-17T04:36:39.846Z">
+<meta property="article:author" content="wankun">
+<meta property="article:tag" content="阿里云">
+<meta property="article:tag" content="华为云">
+<meta property="article:tag" content="备案域名">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-28_223740.png">
+
+<link rel="canonical" href="http://blog.kungge.com/p/domain-transfer/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>阿里云已备案域名变更为华为云备案操作方法记录 | 坤哥的博客小站</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">坤哥的博客小站</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个热爱生活的90后</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404.html" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/domain-transfer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
+      <meta itemprop="name" content="wankun">
+      <meta itemprop="description" content="生活是一门技术，更是一门艺术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坤哥的博客小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          阿里云已备案域名变更为华为云备案操作方法记录
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-28 21:54:38" itemprop="dateCreated datePublished" datetime="2020-03-28T21:54:38+08:00">2020-03-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-17 12:36:39" itemprop="dateModified" datetime="2020-05-17T12:36:39+08:00">2020-05-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">云服务器</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/p/domain-transfer/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/domain-transfer/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>这篇文章主要介绍在阿里云备案了的域名转移到华为云进行备案的整个过程记录。</p>
+<h2 id="一、什么是变更备案"><a href="#一、什么是变更备案" class="headerlink" title="一、什么是变更备案"></a>一、什么是变更备案</h2><p>根据华为云针对网站能够被正确访问需要备案，而备案的域名相关信息必须正确：</p>
+<ol>
+<li>主体信息：公司通信地址、变更主体负责人信息等</li>
+<li>网站信息：域名、网站负责人、IP信息</li>
+</ol>
+<br>
+
+<p>针对已经备案了的域名如果符合上面两种情况（分别对应变更备案类型的变更主体和变更网站）的任一种属于变更备案的情况，都需要重新提交备案审核。</p>
+<p>此次备案主体信息未发生变更，网站信息中的IP变更了（网站从阿里云服务器转移到华为云服务器）。</p>
+<h2 id="二、备案前准备"><a href="#二、备案前准备" class="headerlink" title="二、备案前准备"></a>二、备案前准备</h2><p>后面备案需要输入ICP备案密码，如果不记得的话应先找回备案密码。</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-28_223740.png" alt="2238"></p>
+<p>进入工信部网站：<a href="http://www.beian.miit.gov.cn/" target="_blank" rel="noopener">http://www.beian.miit.gov.cn/</a></p>
+<p>找到右下角【找回备案密码】：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-28_214629.png" alt="2230"></p>
+<p>选择备案所在地，如本次选择江西会跳转到【江西省通信管理局ICP/IP地址/域名信息备案管理系统】：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-28_215143.png" alt="2232"></p>
+<p>提交后密码会发送到手机：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-28_215153.png" alt="2234"></p>
+<p>手机短信里会有备案密码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">工业和信息化部网站备案系统-短信通知:</span><br><span class="line">尊敬的用户XX，您于2020-03-28 21:55:16使用了备案密码找回功能，</span><br><span class="line">您找回的密码是：XXXXX，请慎重保管注册密码！ </span><br><span class="line">--工业和信息化部网站备案系统</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、开始备案"><a href="#三、开始备案" class="headerlink" title="三、开始备案"></a>三、开始备案</h2><p>进入华为云控制台的备案管理，导入备案：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-26_233521.png" alt="2205"></p>
+<p>由于是在阿里云备案的，因此点击【开始备案】：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-26_233612.png" alt="2206"></p>
+<p>备案信息可通过网站也可通过华为云APP提交，华为云官方推荐APP，本次选择后者。</p>
+<p>如果本地没有下载华为云官方APP，可以手机扫描二维码下载。</p>
+<p>打开华为云官方APP，进入控制台，选择网站备案：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-28_220945.png" alt="2210"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-28_221054.png" alt="2211"></p>
+<p>开始备案。</p>
+<h3 id="3-1-主体信息填写"><a href="#3-1-主体信息填写" class="headerlink" title="3.1 主体信息填写"></a>3.1 主体信息填写</h3><p>进入上传资料页面：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-28_221416.png" alt="2214"></p>
+<p>上传完成，验证备案类型：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-28_221538.png" alt="2216"></p>
+<p>进入主体信息：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-28_221659.png" alt="2217"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-28_221908.png" alt="2219"></p>
+<h3 id="3-2-网站信息填写"><a href="#3-2-网站信息填写" class="headerlink" title="3.2 网站信息填写"></a>3.2 网站信息填写</h3><p>下一步进入网站信息：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-28_222014.png" alt="2220"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-28_222118.png" alt="2221"></p>
+<h3 id="3-3-上传资料"><a href="#3-3-上传资料" class="headerlink" title="3.3 上传资料"></a>3.3 上传资料</h3><p>下一步进入上传资料：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-28_222215.png" alt="2222"></p>
+<p>如果属于其描述的情况，还需要上传相关证件，本次不属于。</p>
+<h3 id="3-4-真实性核验"><a href="#3-4-真实性核验" class="headerlink" title="3.4 真实性核验"></a>3.4 真实性核验</h3><p>进入真实性核验：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-28_222440.png" alt="2225"></p>
+<p>下一步：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-28_222625.png" alt="2226"></p>
+<p>输入备案密码，确认：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-28_223851.png" alt="2239"></p>
+<p>后面等待备案审核结果。</p>
+<h2 id="P、常见问题"><a href="#P、常见问题" class="headerlink" title="P、常见问题"></a>P、常见问题</h2><h3 id="P-1-接入商审核驳回"><a href="#P-1-接入商审核驳回" class="headerlink" title="P.1 接入商审核驳回"></a>P.1 接入商审核驳回</h3><p>范例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">订单历史记录</span><br><span class="line">2020-04-02 10:15:47</span><br><span class="line">接入商审核驳回</span><br><span class="line">尊敬的华为云客户您好：</span><br><span class="line">如电话13041XXXX60沟通，现对您的备案做驳回修改意见如下：</span><br><span class="line">1.因管局规定，您备案成功的网站www.kungge.com&#x2F;www.vrgamehome.com必须开放并且下方放置备案号放置工信部链接http:&#x2F;&#x2F;beian.miit.gov.cn&#x2F;。</span><br><span class="line">2.身份证不清晰，需您提供原件的拍照件或者扫描件，对焦拍摄，避免反光，要求清晰看到字体，背景一致，证件四角拍摄上即可。（您可以平行放置，寻找光线比较好的地方拍照，避免反光）</span><br><span class="line">3.真实性核验视频不符合要求（有其他物体出现），需重新拍摄，要求：背景必须为纯白色（没有任何杂物），坐姿或站姿端正，两肩露出上方留白进行清晰拍摄，请知悉。</span><br><span class="line">4.管局规定，个人备案网站具体内容需备注</span><br><span class="line">请保持备案订单中所有电话畅通，以便我司与管局联系。请耐心等待，谢谢！</span><br><span class="line">如有备案咨询请拨打4000-955-988按1转5联系我们，请知悉</span><br></pre></td></tr></table></figure>
+
+<p>里面有4个问题，我们来一个个解决。</p>
+<h4 id="P-1-1-网站开放并且下方放置备案号放置工信部链接"><a href="#P-1-1-网站开放并且下方放置备案号放置工信部链接" class="headerlink" title="P.1.1 网站开放并且下方放置备案号放置工信部链接"></a>P.1.1 网站开放并且下方放置备案号放置工信部链接</h4><p>就是页面上要放一个链接，链接标题是你的备案号，范例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://beian.miit.gov.cn/"</span> <span class="attr">target</span>=<span class="string">"_blank"</span>&gt;</span>赣ICP备16000944号-1<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="P-1-2-身份证不清晰"><a href="#P-1-2-身份证不清晰" class="headerlink" title="P.1.2 身份证不清晰"></a>P.1.2 身份证不清晰</h4><p>重拍身份证上传。</p>
+<h4 id="P-1-3-真实性核验视频不符合要求"><a href="#P-1-3-真实性核验视频不符合要求" class="headerlink" title="P.1.3 真实性核验视频不符合要求"></a>P.1.3 真实性核验视频不符合要求</h4><p>要求：背景必须为纯白色（没有任何杂物），坐姿或站姿端正，两肩露出上方留白进行清晰拍摄。</p>
+<h4 id="P-1-4-个人备案网站具体内容需备注"><a href="#P-1-4-个人备案网站具体内容需备注" class="headerlink" title="P.1.4 个人备案网站具体内容需备注"></a>P.1.4 个人备案网站具体内容需备注</h4><p><img src="http://img2.kungge.com/md-content/2020/202004/2020-04-10_205719.png" alt="2058"></p>
+<p>这应该是默认的备注。</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>您的支持是我最大的动力！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="wankun 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="wankun 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>wankun
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://blog.kungge.com/p/domain-transfer/" title="阿里云已备案域名变更为华为云备案操作方法记录">http://blog.kungge.com/p/domain-transfer/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" rel="tag"><i class="fa fa-tag"></i> 阿里云</a>
+              <a href="/tags/%E5%8D%8E%E4%B8%BA%E4%BA%91/" rel="tag"><i class="fa fa-tag"></i> 华为云</a>
+              <a href="/tags/%E5%A4%87%E6%A1%88%E5%9F%9F%E5%90%8D/" rel="tag"><i class="fa fa-tag"></i> 备案域名</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/p/frp-linux-web/" rel="prev" title="frp 内网穿透实战（二）：linux 连接和 web 访问">
+      <i class="fa fa-chevron-left"></i> frp 内网穿透实战（二）：linux 连接和 web 访问
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/p/hexo-create-github/" rel="next" title="Hexo 实战（一）：搭建开源博客系统 Hexo 并将其部署到 GitHub">
+      Hexo 实战（一）：搭建开源博客系统 Hexo 并将其部署到 GitHub <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、什么是变更备案"><span class="nav-number">1.</span> <span class="nav-text">一、什么是变更备案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、备案前准备"><span class="nav-number">2.</span> <span class="nav-text">二、备案前准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、开始备案"><span class="nav-number">3.</span> <span class="nav-text">三、开始备案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-主体信息填写"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 主体信息填写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-网站信息填写"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 网站信息填写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-上传资料"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 上传资料</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-真实性核验"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 真实性核验</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P、常见问题"><span class="nav-number">4.</span> <span class="nav-text">P、常见问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#P-1-接入商审核驳回"><span class="nav-number">4.1.</span> <span class="nav-text">P.1 接入商审核驳回</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#P-1-1-网站开放并且下方放置备案号放置工信部链接"><span class="nav-number">4.1.1.</span> <span class="nav-text">P.1.1 网站开放并且下方放置备案号放置工信部链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P-1-2-身份证不清晰"><span class="nav-number">4.1.2.</span> <span class="nav-text">P.1.2 身份证不清晰</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P-1-3-真实性核验视频不符合要求"><span class="nav-number">4.1.3.</span> <span class="nav-text">P.1.3 真实性核验视频不符合要求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P-1-4-个人备案网站具体内容需备注"><span class="nav-number">4.1.4.</span> <span class="nav-text">P.1.4 个人备案网站具体内容需备注</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wankun"
+      src="http://img2.kungge.com/content/dog.jpg">
+  <p class="site-author-name" itemprop="name">wankun</p>
+  <div class="site-description" itemprop="description">生活是一门技术，更是一门艺术</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">113</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kungge" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kungge" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kunzhongzhong@163.com" title="E-Mail → mailto:kunzhongzhong@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">赣ICP备16000944号-1 </a>
+      <img src="http://img2.kungge.com/content/beian.png" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wankun</span>
+</div>
+
+<!--添加运行时间-->
+<span id="sitetime"></span>
+<script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* 
+      Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+      year - 作为date对象的年份，为4位年份值
+      month - 0-11之间的整数，做为date对象的月份
+      day - 1-31之间的整数，做为date对象的天数
+      hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+      minutes - 0-59之间的整数，做为date对象的分钟数
+      seconds - 0-59之间的整数，做为date对象的秒数
+      microseconds - 0-999之间的整数，做为date对象的毫秒数
+     */
+		var t1 = Date.UTC(2020,03,29,00,51,12);
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML=" 已运行"+/*diffYears+" 年 "+*/diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒";
+	}
+	siteTime();
+</script>
+<!--添加运行时间-->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'WS9yN0bdMnmWCTEGdPtRjty5-gzGzoHsz',
+      appKey     : 'rJRpp7BgWk5zx9WdsdFbPUXQ',
+      placeholder: "Just go go",
+      avatar     : 'monsterid',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/smiley_lock_32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/smiley_lock_16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="gVkA-jeqZSVbPLhHyQnRI8oEBse0D3GaV0B98Yjai_k" />
+  <meta name="baidu-site-verification" content="xSB5shU7SK" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-material.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.kungge.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="xml 使用 xml 有不少用处，用好了可以很方便的处理数据，下面提供两个运用范例。  将以某字符分隔的字符串转成表 有一批身份证，但是字符串，由英文逗号分隔，像这样 110101197004162031,110101197105101553,110101197108281510,110101197210024537，现在要实现用这些身份证去某个表里查出身份证对应的信息。  可以在条件中使用 in">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sqlserver常用sql整理">
+<meta property="og:url" content="http://blog.kungge.com/p/sqlserver-common-use/index.html">
+<meta property="og:site_name" content="坤哥的博客小站">
+<meta property="og:description" content="xml 使用 xml 有不少用处，用好了可以很方便的处理数据，下面提供两个运用范例。  将以某字符分隔的字符串转成表 有一批身份证，但是字符串，由英文逗号分隔，像这样 110101197004162031,110101197105101553,110101197108281510,110101197210024537，现在要实现用这些身份证去某个表里查出身份证对应的信息。  可以在条件中使用 in">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-18T09:32:49.000Z">
+<meta property="article:modified_time" content="2020-05-19T10:03:57.531Z">
+<meta property="article:author" content="wankun">
+<meta property="article:tag" content="sqlserver">
+<meta property="article:tag" content="sql">
+<meta property="article:tag" content="常用sql">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://blog.kungge.com/p/sqlserver-common-use/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>sqlserver常用sql整理 | 坤哥的博客小站</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">坤哥的博客小站</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个热爱生活的90后</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404.html" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/sqlserver-common-use/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
+      <meta itemprop="name" content="wankun">
+      <meta itemprop="description" content="生活是一门技术，更是一门艺术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坤哥的博客小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          sqlserver常用sql整理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-18 17:32:49" itemprop="dateCreated datePublished" datetime="2020-05-18T17:32:49+08:00">2020-05-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-19 18:03:57" itemprop="dateModified" datetime="2020-05-19T18:03:57+08:00">2020-05-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL-Server/" itemprop="url" rel="index"><span itemprop="name">SQL Server</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/p/sqlserver-common-use/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/sqlserver-common-use/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="xml-使用"><a href="#xml-使用" class="headerlink" title="xml 使用"></a>xml 使用</h2><p>xml 有不少用处，用好了可以很方便的处理数据，下面提供两个运用范例。</p>
+<h3 id="将以某字符分隔的字符串转成表"><a href="#将以某字符分隔的字符串转成表" class="headerlink" title="将以某字符分隔的字符串转成表"></a>将以某字符分隔的字符串转成表</h3><p>有一批身份证，但是字符串，由英文逗号分隔，像这样 <code>110101197004162031,110101197105101553,110101197108281510,110101197210024537</code>，现在要实现用这些身份证去某个表里查出身份证对应的信息。</p>
+<p>可以在条件中使用 in 查询，但是数据量较大时效率比较低。</p>
+<p>可以通过 xml 生成一张临时表，如下 sql 范例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DECLARE</span> @Ids <span class="keyword">NVARCHAR</span>(<span class="keyword">MAX</span>)= <span class="string">'110101197004162031,110101197105101553,110101197108281510,110101197210024537'</span></span><br><span class="line"><span class="keyword">DECLARE</span> @xml_ids <span class="keyword">XML</span>;</span><br><span class="line"><span class="keyword">SELECT</span>  @xml_ids = <span class="keyword">CONVERT</span>(<span class="keyword">XML</span>, <span class="string">'&lt;root&gt;&lt;bid&gt;'</span> + <span class="keyword">REPLACE</span>(@Ids, <span class="string">','</span>, <span class="string">'&lt;/bid&gt;&lt;bid&gt;'</span>) + <span class="string">'&lt;/bid&gt;&lt;/root&gt;'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">IF</span> OBJECT_ID(N<span class="string">'tempdb..#tempId'</span>, N<span class="string">'U'</span>) <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="literal">NULL</span></span><br><span class="line">    <span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="comment">#tempId</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="comment">#tempId</span></span><br><span class="line">    (</span><br><span class="line">      IdentityNo <span class="built_in">VARCHAR</span>(<span class="number">18</span>) PRIMARY <span class="keyword">KEY</span> ,</span><br><span class="line">	  <span class="keyword">Id</span> <span class="built_in">INT</span> <span class="keyword">IDENTITY</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span>  <span class="keyword">INTO</span> <span class="comment">#tempId ( IdentityNo )</span></span><br><span class="line">		<span class="keyword">SELECT</span>  Bid.value(<span class="string">'.'</span>, <span class="string">'varchar(18)'</span>)</span><br><span class="line">		<span class="keyword">FROM</span>    @xml_ids.nodes(<span class="string">'/root/bid'</span>) x (bid)</span><br></pre></td></tr></table></figure>
+
+<p>执行结果：</p>
+<table>
+<thead>
+<tr>
+<th>IdentityNo</th>
+<th>Id</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>110101197004162031</td>
+<td>1</td>
+</tr>
+<tr>
+<td>110101197105101553</td>
+<td>2</td>
+</tr>
+<tr>
+<td>110101197108281510</td>
+<td>3</td>
+</tr>
+<tr>
+<td>110101197210024537</td>
+<td>4</td>
+</tr>
+</tbody></table>
+<h3 id="将表字段多行转成一个字符串"><a href="#将表字段多行转成一个字符串" class="headerlink" title="将表字段多行转成一个字符串"></a>将表字段多行转成一个字符串</h3><p>和上面的【将以某字符分隔的字符串转成表】相反，将表字段多行转成以某字符分隔的字符串。</p>
+<p>语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">STUFF</span>(</span><br><span class="line">       (</span><br><span class="line">           <span class="keyword">SELECT</span> <span class="string">','</span> + t.字段</span><br><span class="line">           <span class="keyword">FROM</span> 表 t</span><br><span class="line">           <span class="keyword">WHERE</span> 条件</span><br><span class="line">           <span class="keyword">FOR</span> <span class="keyword">XML</span> <span class="keyword">PATH</span>(<span class="string">''</span>)</span><br><span class="line">       ),</span><br><span class="line">       <span class="number">1</span>,</span><br><span class="line">       <span class="number">1</span>,</span><br><span class="line">       <span class="string">''</span></span><br><span class="line">            );</span><br></pre></td></tr></table></figure>
+
+<p>如表：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> TOP <span class="number">10</span> t.VbsKey</span><br><span class="line"><span class="keyword">FROM</span> Cooperation.WMXWDictKeyMapping t</span><br><span class="line"><span class="keyword">WHERE</span> t.VbsCode = <span class="string">'BankAccountId'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>转换：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">STUFF</span>(</span><br><span class="line">       (</span><br><span class="line">           <span class="keyword">SELECT</span> TOP <span class="number">10</span> <span class="string">','</span> + t.VbsKey</span><br><span class="line">           <span class="keyword">FROM</span> Cooperation.WMXWDictKeyMapping t</span><br><span class="line">           <span class="keyword">WHERE</span> t.VbsCode = <span class="string">'BankAccountId'</span></span><br><span class="line">           <span class="keyword">FOR</span> <span class="keyword">XML</span> <span class="keyword">PATH</span>(<span class="string">''</span>)</span><br><span class="line">       ),</span><br><span class="line">       <span class="number">1</span>,</span><br><span class="line">       <span class="number">1</span>,</span><br><span class="line">       <span class="string">''</span></span><br><span class="line">            );</span><br></pre></td></tr></table></figure>
+<p>取到的就是 <code>103,104,108,14,109,110,111,113,125,126</code></p>
+<h2 id="日期常用操作"><a href="#日期常用操作" class="headerlink" title="日期常用操作"></a>日期常用操作</h2><h3 id="日期格式化"><a href="#日期格式化" class="headerlink" title="日期格式化"></a>日期格式化</h3><p>常用的日期格式：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CONVERT</span>(<span class="built_in">CHAR</span>(<span class="number">20</span>), <span class="keyword">GETDATE</span>(), <span class="number">20</span>)  <span class="comment">--2019-10-12 10:21:20 </span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CONVERT</span>(<span class="built_in">char</span>(<span class="number">24</span>), <span class="keyword">GETDATE</span>(), <span class="number">21</span>) <span class="comment">--2019-10-12 10:21:20.640 </span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">convert</span>(<span class="built_in">char</span>(<span class="number">10</span>),<span class="keyword">GetDate</span>(),<span class="number">101</span>)  <span class="comment">--mm/dd/yyyy</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">convert</span>(<span class="built_in">char</span>(<span class="number">10</span>),<span class="keyword">GetDate</span>(),<span class="number">102</span>)  <span class="comment">--yyyy.mm.dd</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">convert</span>(<span class="built_in">char</span>(<span class="number">10</span>),<span class="keyword">GetDate</span>(),<span class="number">103</span>)  <span class="comment">--dd/mm/yyyy</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">convert</span>(<span class="built_in">char</span>(<span class="number">10</span>),<span class="keyword">GetDate</span>(),<span class="number">108</span>)  <span class="comment">--hh:mi:ss(时间)</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">convert</span>(<span class="built_in">char</span>(<span class="number">10</span>),<span class="keyword">GetDate</span>(),<span class="number">111</span>)  <span class="comment">--yyyy/mm/dd</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">convert</span>(<span class="built_in">char</span>(<span class="number">10</span>),<span class="keyword">GetDate</span>(),<span class="number">112</span>)  <span class="comment">--yyyymmdd</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">convert</span>(<span class="built_in">char</span>(<span class="number">12</span>),<span class="keyword">GetDate</span>(),<span class="number">114</span>)  <span class="comment">--10:18:31:303</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">convert</span>(<span class="built_in">char</span>(<span class="number">10</span>),<span class="keyword">GetDate</span>(),<span class="number">120</span>)  <span class="comment">--yyyy-mm-dd</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CONVERT</span>(<span class="built_in">varchar</span>(<span class="number">20</span>), <span class="keyword">GETDATE</span>(), <span class="number">20</span>)  <span class="comment">--2019-10-12 10:24:37</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CONVERT</span>(<span class="built_in">varchar</span>(<span class="number">10</span>), <span class="keyword">GETDATE</span>(), <span class="number">23</span>)  <span class="comment">--2019-10-12</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CONVERT</span>(<span class="built_in">varchar</span>(<span class="number">25</span>), <span class="keyword">GETDATE</span>(), <span class="number">25</span>)  <span class="comment">--2019-10-12 10:25:48.613</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CONVERT</span>(<span class="built_in">varchar</span>(<span class="number">10</span>), <span class="keyword">GETDATE</span>(), <span class="number">102</span>) <span class="comment">--2019.10.12</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CONVERT</span>(<span class="built_in">varchar</span>(<span class="number">10</span>), <span class="keyword">GETDATE</span>(), <span class="number">108</span>) <span class="comment">--10:26:19</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CONVERT</span>(<span class="built_in">varchar</span>(<span class="number">10</span>), <span class="keyword">GETDATE</span>(), <span class="number">111</span>)  <span class="comment">--2019/10/12</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CONVERT</span>(<span class="built_in">varchar</span>(<span class="number">8</span>), <span class="keyword">GETDATE</span>(), <span class="number">112</span>)  <span class="comment">--20191012</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CONVERT</span>(<span class="built_in">varchar</span>(<span class="number">12</span>), <span class="keyword">GETDATE</span>(), <span class="number">114</span>) <span class="comment">--10:27:04:917</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CONVERT</span>(<span class="built_in">varchar</span>(<span class="number">20</span>), <span class="keyword">GETDATE</span>(), <span class="number">120</span>) <span class="comment">--2019-10-12 10:27:24</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CONVERT</span>(<span class="built_in">varchar</span>(<span class="number">25</span>), <span class="keyword">GETDATE</span>(), <span class="number">121</span>) <span class="comment">--2019-10-12 10:27:42.680</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="获取日期范围"><a href="#获取日期范围" class="headerlink" title="获取日期范围"></a>获取日期范围</h3><p>在报表统计时，可能会查看任何日期范围的数据，下面的 sql 可通过两个参数的设置来获取任何日期范围：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DECLARE</span> @beforeDay <span class="built_in">INT</span> = <span class="number">7</span>;</span><br><span class="line"><span class="keyword">DECLARE</span> @beforeDaysBaseToday <span class="built_in">INT</span> = <span class="number">-1</span>;</span><br><span class="line"><span class="keyword">DECLARE</span> @baseDate <span class="built_in">DATE</span>;</span><br><span class="line"><span class="keyword">DECLARE</span> @startDate DATETIME;</span><br><span class="line"><span class="keyword">SET</span> @baseDate = <span class="keyword">DATEADD</span>(<span class="keyword">DAY</span>, -@beforeDaysBaseToday, <span class="keyword">GETDATE</span>());</span><br><span class="line"><span class="keyword">SELECT</span> @startDate = <span class="keyword">DATEADD</span>(<span class="keyword">DAY</span>, -@beforeDay, @baseDate);</span><br><span class="line"><span class="keyword">DECLARE</span> @endDate DATETIME;</span><br><span class="line">IF @beforeDay &lt;&gt; 0</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">    <span class="keyword">SET</span> @endDate = <span class="keyword">DATEADD</span>(<span class="keyword">SECOND</span>,@beforeDay<span class="number">-1</span>,<span class="keyword">DATEADD</span>(<span class="keyword">SECOND</span>, -@beforeDay, <span class="keyword">CONVERT</span>(DATETIME, @baseDate)));</span><br><span class="line"><span class="keyword">END</span>;</span><br><span class="line">ELSE</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">    <span class="keyword">IF</span> @beforeDaysBaseToday = <span class="number">0</span></span><br><span class="line">    <span class="keyword">BEGIN</span></span><br><span class="line">        <span class="keyword">SET</span> @endDate = <span class="keyword">DATEADD</span>(<span class="keyword">DAY</span>, -@beforeDay, <span class="keyword">GETDATE</span>());</span><br><span class="line">    <span class="keyword">END</span></span><br><span class="line">  <span class="keyword">ELSE</span></span><br><span class="line">    <span class="keyword">BEGIN</span></span><br><span class="line">    <span class="keyword">SET</span> @endDate =<span class="keyword">DATEADD</span>(<span class="keyword">SECOND</span>,<span class="number">-1</span>,<span class="keyword">DATEADD</span>(<span class="keyword">DAY</span>,<span class="number">1</span>,<span class="keyword">CONVERT</span>(DATETIME, @baseDate)));</span><br><span class="line">  <span class="keyword">END</span>    </span><br><span class="line"><span class="keyword">END</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">GETDATE</span>() <span class="keyword">AS</span> 脚本执行时间,</span><br><span class="line">       @baseDate <span class="keyword">AS</span> 基于的日期,</span><br><span class="line">       @startDate <span class="keyword">AS</span> 统计开始时间,</span><br><span class="line">       @endDate <span class="keyword">AS</span> 统计结束时间;</span><br></pre></td></tr></table></figure>
+
+<p>参数说明：</p>
+<ul>
+<li>beforeDay：多少天前</li>
+<li>beforeDaysBaseToday：基于今天的多少天前</li>
+</ul>
+<br>
+
+<p>startDate 和 endDate 就是最终要使用的开始日期和结束日期。</p>
+<p>范例说明：</p>
+<p>1.如果 beforeDaysBaseToday=0，beforeDays=1 就是昨天1天的数据</p>
+<table>
+<thead>
+<tr>
+<th>脚本执行时间</th>
+<th>基于的日期</th>
+<th>统计开始时间</th>
+<th>统计结束时间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2020-05-19 15:30:51.423</td>
+<td>2020-05-19</td>
+<td>2020-05-18 00:00:00.000</td>
+<td>2020-05-18 23:59:59.000</td>
+</tr>
+</tbody></table>
+<p>2.如果 beforeDaysBaseToday=1 beforeDays=1 就是前天1天的数据（基于昨天的一天前） </p>
+<table>
+<thead>
+<tr>
+<th>脚本执行时间</th>
+<th>基于的日期</th>
+<th>统计开始时间</th>
+<th>统计结束时间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2020-05-19 15:31:40.813</td>
+<td>2020-05-18</td>
+<td>2020-05-17 00:00:00.000</td>
+<td>2020-05-17 23:59:59.000</td>
+</tr>
+</tbody></table>
+<p>3.如果 beforeDaysBaseToday=0，beforeDays=2 就是前2天的数据</p>
+<table>
+<thead>
+<tr>
+<th>脚本执行时间</th>
+<th>基于的日期</th>
+<th>统计开始时间</th>
+<th>统计结束时间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2020-05-19 15:32:27.393</td>
+<td>2020-05-19</td>
+<td>2020-05-17 00:00:00.000</td>
+<td>2020-05-18 23:59:59.000</td>
+</tr>
+</tbody></table>
+<p>4.如果 beforeDaysBaseToday=0，beforeDays=0 就是当天凌晨到当前时间的数据，以此类推</p>
+<table>
+<thead>
+<tr>
+<th>脚本执行时间</th>
+<th>基于的日期</th>
+<th>统计开始时间</th>
+<th>统计结束时间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2020-05-19 15:32:52.020</td>
+<td>2020-05-19</td>
+<td>2020-05-19 00:00:00.000</td>
+<td>2020-05-19 15:32:52.020</td>
+</tr>
+</tbody></table>
+<h2 id="获取表结构信息"><a href="#获取表结构信息" class="headerlink" title="获取表结构信息"></a>获取表结构信息</h2><p>获取表字段信息：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> col.name <span class="keyword">AS</span> 列名,</span><br><span class="line">    typ.name <span class="keyword">AS</span> 数据类型,</span><br><span class="line">    col.max_length <span class="keyword">AS</span> 占用字节数,</span><br><span class="line">    col.precision <span class="keyword">AS</span> 数字长度,</span><br><span class="line">    col.scale <span class="keyword">AS</span> 小数位数,</span><br><span class="line">    col.is_nullable <span class="keyword">AS</span> 是否允许非空,</span><br><span class="line">    col.is_identity <span class="keyword">AS</span> 是否自增,</span><br><span class="line">    <span class="keyword">CASE</span></span><br><span class="line">        <span class="keyword">WHEN</span> <span class="keyword">EXISTS</span></span><br><span class="line">            (</span><br><span class="line">                <span class="keyword">SELECT</span> <span class="number">1</span></span><br><span class="line">                <span class="keyword">FROM</span> sys.indexes idx</span><br><span class="line">                    <span class="keyword">JOIN</span> sys.index_columns idxCol</span><br><span class="line">                        <span class="keyword">ON</span> (idx.object_id = idxCol.object_id)</span><br><span class="line">                <span class="keyword">WHERE</span> idx.object_id = col.object_id</span><br><span class="line">                        <span class="keyword">AND</span> idxCol.index_column_id = col.column_id</span><br><span class="line">                        <span class="keyword">AND</span> idx.is_primary_key = <span class="number">1</span></span><br><span class="line">            ) <span class="keyword">THEN</span></span><br><span class="line">            <span class="number">1</span></span><br><span class="line">        <span class="keyword">ELSE</span></span><br><span class="line">            <span class="number">0</span></span><br><span class="line">    <span class="keyword">END</span> <span class="keyword">AS</span> 是否是主键,</span><br><span class="line">    <span class="keyword">ISNULL</span>(g.[<span class="keyword">value</span>], <span class="string">'-'</span>) <span class="keyword">AS</span> 说明</span><br><span class="line"><span class="keyword">FROM</span> sys.columns <span class="keyword">col</span></span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> sys.types typ</span><br><span class="line">    <span class="keyword">ON</span> (col.system_type_id = typ.system_type_id)</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> sys.extended_properties g</span><br><span class="line">    <span class="keyword">ON</span> (</span><br><span class="line">            col.object_id = g.major_id</span><br><span class="line">            <span class="keyword">AND</span> g.minor_id = col.column_id</span><br><span class="line">        )</span><br><span class="line"><span class="keyword">WHERE</span> col.object_id =</span><br><span class="line">(</span><br><span class="line"><span class="keyword">SELECT</span> object_id <span class="keyword">FROM</span> sys.tables <span class="keyword">WHERE</span> <span class="keyword">name</span> = <span class="string">'FoticFileUpload'</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h2 id="执行sql字符串"><a href="#执行sql字符串" class="headerlink" title="执行sql字符串"></a>执行sql字符串</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DECLARE</span> @<span class="keyword">Sql</span> <span class="keyword">NVARCHAR</span>(<span class="keyword">MAX</span>)=<span class="string">'sqlXX'</span>;EXEC sp_executesql  @Sql;</span><br></pre></td></tr></table></figure>
+
+<p><em>注：sp_executesql，过程需要类型为 ‘ntext/nchar/nvarchar’ 的参数 ‘@statement’。</em></p>
+<p>如果 sql 中有单引号，则需要使用转义符，sqlserver 中使用英文单引号可实现转义。</p>
+<p>范例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DECLARE</span> @<span class="keyword">Sql</span> <span class="keyword">NVARCHAR</span>(<span class="keyword">MAX</span>)=<span class="string">'SELECT * FROM dbo.GoodMan WHERE UserName=''kungge'' '</span>;EXEC sp_executesql @Sql;</span><br></pre></td></tr></table></figure>
+
+<h2 id="改变表结构"><a href="#改变表结构" class="headerlink" title="改变表结构"></a>改变表结构</h2><h3 id="表添加字段"><a href="#表添加字段" class="headerlink" title="表添加字段"></a>表添加字段</h3><p>语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">USE</span> [数据库名]</span><br><span class="line"><span class="keyword">GO</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> 表名 <span class="keyword">ADD</span> 字段名  类型  默认值  是否为空;</span><br><span class="line">EXEC sp_addextendedproperty N'MS_Description', N'字段说明', N'SCHEMA', N'dbo',N'TABLE', N'表名', N'COLUMN', N'字段名';</span><br></pre></td></tr></table></figure>
+
+<p>实例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span>  customer.Blacklist <span class="keyword">ADD</span> ImportOperator <span class="built_in">INT</span> <span class="keyword">DEFAULT</span>((<span class="number">0</span>));</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span>  customer.Blacklist <span class="keyword">ADD</span> ImportTime DATETIME <span class="keyword">DEFAULT</span>((<span class="keyword">GETDATE</span>()));</span><br><span class="line">EXEC sp_addextendedproperty N'MS_Description', N'导入操作者', N'SCHEMA', N'customer',N'TABLE', N'Blacklist', N'COLUMN', N'ImportOperator';</span><br><span class="line">EXEC sp_addextendedproperty N'MS_Description', N'导入时间', N'SCHEMA', N'customer',N'TABLE', N'Blacklist', N'COLUMN', N'ImportTime';</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改字段属性"><a href="#修改字段属性" class="headerlink" title="修改字段属性"></a>修改字段属性</h3><p>语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXEC sp_updateextendedproperty N'MS_Description', N'字段说明', N'SCHEMA', N'架构名',N'TABLE', N'表名', N'COLUMN', N'列名';</span><br></pre></td></tr></table></figure>
+
+<p>范例：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXEC sp_updateextendedproperty N'MS_Description', N'发送标志:外贸(0 未发,1 已发),晋商(0 未发,1 已发,&gt;1 已发&amp;文件Id)', N'SCHEMA', N'lending',N'TABLE', N'Lending', N'COLUMN', N'IsSend';</span><br></pre></td></tr></table></figure>
+
+<h2 id="系统信息"><a href="#系统信息" class="headerlink" title="系统信息"></a>系统信息</h2><h3 id="查看数据库版本"><a href="#查看数据库版本" class="headerlink" title="查看数据库版本"></a>查看数据库版本</h3><p><code>SELECT @@version;</code> </p>
+<p>如 <code>Microsoft SQL Server 2012 (SP1) - 11.0.3128.0 (X64)   Dec 28 2012 20:23:12   Copyright (c) Microsoft Corporation  Enterprise Edition (64-bit) on Windows NT 6.1 &lt;X64&gt; (Build 7601: Service Pack 1) (Hypervisor)</code></p>
+<p><code>Microsoft SQL Server 2016 (RTM) - 13.0.1601.5 (X64)   Apr 29 2016 23:23:58   Copyright (c) Microsoft Corporation  Enterprise Edition (64-bit) on Windows Server 2016 Datacenter 6.3 &lt;X64&gt; (Build 14393: ) (Hypervisor)</code></p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>您的支持是我最大的动力！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="wankun 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="wankun 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>wankun
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://blog.kungge.com/p/sqlserver-common-use/" title="sqlserver常用sql整理">http://blog.kungge.com/p/sqlserver-common-use/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/sqlserver/" rel="tag"><i class="fa fa-tag"></i> sqlserver</a>
+              <a href="/tags/sql/" rel="tag"><i class="fa fa-tag"></i> sql</a>
+              <a href="/tags/%E5%B8%B8%E7%94%A8sql/" rel="tag"><i class="fa fa-tag"></i> 常用sql</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/p/hostwinds-cancel/" rel="prev" title="hostwinds如何取消已开通的vps服务">
+      <i class="fa fa-chevron-left"></i> hostwinds如何取消已开通的vps服务
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#xml-使用"><span class="nav-number">1.</span> <span class="nav-text">xml 使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#将以某字符分隔的字符串转成表"><span class="nav-number">1.1.</span> <span class="nav-text">将以某字符分隔的字符串转成表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将表字段多行转成一个字符串"><span class="nav-number">1.2.</span> <span class="nav-text">将表字段多行转成一个字符串</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日期常用操作"><span class="nav-number">2.</span> <span class="nav-text">日期常用操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#日期格式化"><span class="nav-number">2.1.</span> <span class="nav-text">日期格式化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取日期范围"><span class="nav-number">2.2.</span> <span class="nav-text">获取日期范围</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取表结构信息"><span class="nav-number">3.</span> <span class="nav-text">获取表结构信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行sql字符串"><span class="nav-number">4.</span> <span class="nav-text">执行sql字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#改变表结构"><span class="nav-number">5.</span> <span class="nav-text">改变表结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#表添加字段"><span class="nav-number">5.1.</span> <span class="nav-text">表添加字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改字段属性"><span class="nav-number">5.2.</span> <span class="nav-text">修改字段属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统信息"><span class="nav-number">6.</span> <span class="nav-text">系统信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看数据库版本"><span class="nav-number">6.1.</span> <span class="nav-text">查看数据库版本</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wankun"
+      src="http://img2.kungge.com/content/dog.jpg">
+  <p class="site-author-name" itemprop="name">wankun</p>
+  <div class="site-description" itemprop="description">生活是一门技术，更是一门艺术</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">113</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kungge" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kungge" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kunzhongzhong@163.com" title="E-Mail → mailto:kunzhongzhong@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">赣ICP备16000944号-1 </a>
+      <img src="http://img2.kungge.com/content/beian.png" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wankun</span>
+</div>
+
+<!--添加运行时间-->
+<span id="sitetime"></span>
+<script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* 
+      Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+      year - 作为date对象的年份，为4位年份值
+      month - 0-11之间的整数，做为date对象的月份
+      day - 1-31之间的整数，做为date对象的天数
+      hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+      minutes - 0-59之间的整数，做为date对象的分钟数
+      seconds - 0-59之间的整数，做为date对象的秒数
+      microseconds - 0-999之间的整数，做为date对象的毫秒数
+     */
+		var t1 = Date.UTC(2020,03,29,00,51,12);
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML=" 已运行"+/*diffYears+" 年 "+*/diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒";
+	}
+	siteTime();
+</script>
+<!--添加运行时间-->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'WS9yN0bdMnmWCTEGdPtRjty5-gzGzoHsz',
+      appKey     : 'rJRpp7BgWk5zx9WdsdFbPUXQ',
+      placeholder: "Just go go",
+      avatar     : 'monsterid',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

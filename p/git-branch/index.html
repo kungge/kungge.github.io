@@ -33,7 +33,7 @@
 <meta property="og:description" content="* 查看所有分支：git branch -a  * 查看当前使用的分支：git branch  * 切换分支：git checkout [branchName]  查看分支 先将远程代码下载至本地，范例如下：  1 2 3 4 5 6 7 8   wankun@SH-WYZCY-XYFD MINGW64 &#x2F;d&#x2F;svn&#x2F;Loan&#x2F;branches&#x2F;KUN-Console_Git $ git clon">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-05-13T12:10:29.000Z">
-<meta property="article:modified_time" content="2020-05-13T12:14:10.838Z">
+<meta property="article:modified_time" content="2020-05-19T10:09:27.943Z">
 <meta property="article:author" content="wankun">
 <meta property="article:tag" content="git分支">
 <meta property="article:tag" content="git常用操作">
@@ -218,7 +218,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
       <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活一门技术，更是一门艺术">
+      <meta itemprop="description" content="生活是一门技术，更是一门艺术">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -235,10 +235,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-05-13 20:10:29 / 修改时间：20:14:10" itemprop="dateCreated datePublished" datetime="2020-05-13T20:10:29+08:00">2020-05-13</time>
+              <time title="创建时间：2020-05-13 20:10:29" itemprop="dateCreated datePublished" datetime="2020-05-13T20:10:29+08:00">2020-05-13</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-19 18:09:27" itemprop="dateModified" datetime="2020-05-19T18:09:27+08:00">2020-05-19</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -304,6 +310,9 @@
 
 <p>再次查看分支：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">wankun@SH-WYZCY-XYFD MINGW64 /d/svn/Loan/branches/KUN-Console_Git/Cn.XXX.AssistTask (develop_abc-IR-0028)</span><br><span class="line">$ git branch -a</span><br><span class="line">* develop_abc-IR-0028</span><br><span class="line">  master</span><br><span class="line">  remotes/origin/HEAD -&gt; origin/master</span><br><span class="line">  remotes/origin/develop</span><br><span class="line">  remotes/origin/develop_abc-IR-0028</span><br><span class="line">  remotes/origin/master</span><br><span class="line"></span><br><span class="line">wankun@SH-WYZCY-XYFD MINGW64 /d/svn/Loan/branches/KUN-Console_Git/Cn.XXX.AssistTask (develop_abc-IR-0028)</span><br><span class="line">$ git branch</span><br><span class="line">* develop_abc-IR-0028</span><br><span class="line">  master</span><br></pre></td></tr></table></figure>
+
+<p>如果远程新增或删除了分支，需要先使用命令 <code>git pull</code> 先垃取，在查看，如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">wankun@SH-WYZCY-XYFD MINGW64 /d/svn/Loan/branches/PreLoan_Develop_VBS-IR-0035 (develop_VBS-IR-0)</span><br><span class="line">$ git pull</span><br><span class="line">remote: Counting objects: 586, <span class="keyword">done</span>.</span><br><span class="line">remote: Compressing objects: 100% (202/202), <span class="keyword">done</span>.</span><br><span class="line">remote: Total 586 (delta 399), reused 541 (delta 384)</span><br><span class="line">Receiving objects: 100% (586/586), 669.83 KiB | 1.76 MiB/s, <span class="keyword">done</span>.</span><br><span class="line">Resolving deltas: 100% (399/399), <span class="keyword">done</span>.</span><br><span class="line">From http://10.138.61.72/vbs/service-group/web-site/PreLoan</span><br><span class="line">   a79e2e9..fcf21c0  develop        -&gt; origin/develop</span><br><span class="line"> * [new branch]      develop_CR1188 -&gt; origin/develop_CR1188</span><br><span class="line"> * [new branch]      develop_CR1245 -&gt; origin/develop_CR1245</span><br><span class="line"> * [new branch]      develop_CR1247 -&gt; origin/develop_CR1247</span><br><span class="line">   3b08624..25ea3cb  develop_REQ467 -&gt; origin/develop_REQ467</span><br><span class="line">   b422b49..eeb5dce  master         -&gt; origin/master</span><br><span class="line">Already up to date.</span><br></pre></td></tr></table></figure>
 
 <h2 id="将一个分支同步到另一个分支"><a href="#将一个分支同步到另一个分支" class="headerlink" title="将一个分支同步到另一个分支"></a>将一个分支同步到另一个分支</h2><p>如将分支【develop-abc-IR-0035】的修改同步到分支【develop_abc-IR-0035】，先将分支切换到目标分支【develop_abc-IR-0035】：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout develop_abc-IR-0035</span><br><span class="line">Switched to branch <span class="string">'develop_abc-IR-0035'</span></span><br><span class="line">Your branch is up to date with <span class="string">'origin/develop_abc-IR-0035'</span>.</span><br></pre></td></tr></table></figure>
@@ -447,27 +456,27 @@
     <img class="site-author-image" itemprop="image" alt="wankun"
       src="http://img2.kungge.com/content/dog.jpg">
   <p class="site-author-name" itemprop="name">wankun</p>
-  <div class="site-description" itemprop="description">生活一门技术，更是一门艺术</div>
+  <div class="site-description" itemprop="description">生活是一门技术，更是一门艺术</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-count">68</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">87</span>
+        <span class="site-state-item-count">113</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

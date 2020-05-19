@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/smiley_lock_32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/smiley_lock_16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="gVkA-jeqZSVbPLhHyQnRI8oEBse0D3GaV0B98Yjai_k" />
+  <meta name="baidu-site-verification" content="xSB5shU7SK" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-material.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.kungge.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="一、数据转移 1.1 网站程序转移 包括图片二级网站、健身工具二级网站、后台管理二级网站、微信聊天记录二级网站。  1.2 数据库转移 目前就一个 sql server。  1.3 证书迁移 SSL 证书。  二、域名解析修改 目前坤哥网所有的解析：    将记录类型为 A 的记录值修改为华为云服务器的 IP。  目前【http:&#x2F;&#x2F;www.kungge.com】可以正常访问，【http:&#x2F;&#x2F;ku">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网站从阿里云服务器转移到华为云服务器操作全记录：坤哥网">
+<meta property="og:url" content="http://blog.kungge.com/p/site-cloud-transfer/index.html">
+<meta property="og:site_name" content="坤哥的博客小站">
+<meta property="og:description" content="一、数据转移 1.1 网站程序转移 包括图片二级网站、健身工具二级网站、后台管理二级网站、微信聊天记录二级网站。  1.2 数据库转移 目前就一个 sql server。  1.3 证书迁移 SSL 证书。  二、域名解析修改 目前坤哥网所有的解析：    将记录类型为 A 的记录值修改为华为云服务器的 IP。  目前【http:&#x2F;&#x2F;www.kungge.com】可以正常访问，【http:&#x2F;&#x2F;ku">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-23_000426.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-26_234645.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-26_234833.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-27_000155.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-27_000233.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-26_234000.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-26_234117.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-26_234157.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-26_234237.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-27_000947.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-27_001437.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-27_001742.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-28_210653.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202004/2020-04-12_215356.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202004/2020-04-12_215508.png">
+<meta property="og:image" content="http://img2.kungge.com/md-content/2020/202004/2020-04-12_220045.png">
+<meta property="article:published_time" content="2020-03-22T16:01:34.000Z">
+<meta property="article:modified_time" content="2020-05-16T17:20:06.576Z">
+<meta property="article:author" content="wankun">
+<meta property="article:tag" content="阿里云">
+<meta property="article:tag" content="华为云">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img2.kungge.com/md-content/2020/202003/2020-03-23_000426.png">
+
+<link rel="canonical" href="http://blog.kungge.com/p/site-cloud-transfer/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>网站从阿里云服务器转移到华为云服务器操作全记录：坤哥网 | 坤哥的博客小站</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">坤哥的博客小站</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个热爱生活的90后</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404.html" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/site-cloud-transfer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
+      <meta itemprop="name" content="wankun">
+      <meta itemprop="description" content="生活是一门技术，更是一门艺术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坤哥的博客小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          网站从阿里云服务器转移到华为云服务器操作全记录：坤哥网
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-23 00:01:34" itemprop="dateCreated datePublished" datetime="2020-03-23T00:01:34+08:00">2020-03-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-17 01:20:06" itemprop="dateModified" datetime="2020-05-17T01:20:06+08:00">2020-05-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">云服务器</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/p/site-cloud-transfer/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/site-cloud-transfer/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="一、数据转移"><a href="#一、数据转移" class="headerlink" title="一、数据转移"></a>一、数据转移</h2><h3 id="1-1-网站程序转移"><a href="#1-1-网站程序转移" class="headerlink" title="1.1 网站程序转移"></a>1.1 网站程序转移</h3><p>包括图片二级网站、健身工具二级网站、后台管理二级网站、微信聊天记录二级网站。</p>
+<h3 id="1-2-数据库转移"><a href="#1-2-数据库转移" class="headerlink" title="1.2 数据库转移"></a>1.2 数据库转移</h3><p>目前就一个 sql server。</p>
+<h3 id="1-3-证书迁移"><a href="#1-3-证书迁移" class="headerlink" title="1.3 证书迁移"></a>1.3 证书迁移</h3><p>SSL 证书。</p>
+<h2 id="二、域名解析修改"><a href="#二、域名解析修改" class="headerlink" title="二、域名解析修改"></a>二、域名解析修改</h2><p>目前坤哥网所有的解析：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-23_000426.png" alt="0005"></p>
+<p>将记录类型为 A 的记录值修改为华为云服务器的 IP。</p>
+<p>目前【<a href="http://www.kungge.com】可以正常访问，【http://kungge.com】还是无法正常访问。" target="_blank" rel="noopener">http://www.kungge.com】可以正常访问，【http://kungge.com】还是无法正常访问。</a></p>
+<h2 id="三、域名访问不了排查过程"><a href="#三、域名访问不了排查过程" class="headerlink" title="三、域名访问不了排查过程"></a>三、域名访问不了排查过程</h2><p>过了几天，发现域名访问不了：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-26_234645.png" alt="2346"></p>
+<p>百度坤哥网，已经没有坤哥网的搜索记录了。</p>
+<p>site:<a href="http://www.kungge.com" target="_blank" rel="noopener">www.kungge.com</a> 还是有收录：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-26_234833.png" alt="2348"></p>
+<p>ping <a href="http://www.kungge.com，这是CDN的地址：">www.kungge.com，这是CDN的地址：</a></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-27_000155.png" alt="0002"></p>
+<p>ping kungge.com，解析到了华为服务器：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-27_000233.png" alt="0003"></p>
+<p>为啥会访问不了，到服务器上查看发现网站程序并无异常，哦，想起来了，应该是dns解析的问题。</p>
+<h2 id="四、DNS解析修改"><a href="#四、DNS解析修改" class="headerlink" title="四、DNS解析修改"></a>四、DNS解析修改</h2><p>这一步为探索过程，请直接略过，直接查看【五、将域名从阿里云转入到华为云】。</p>
+<p>本想将网站域名从阿里云转入华为云，但是还是有点麻烦，就直接在阿里云里修改DNS解析。</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-26_234000.png" alt="2353"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-26_234117.png" alt="2354"></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-26_234157.png" alt="2355"></p>
+<p>确认修改完成：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-26_234237.png" alt="2355"></p>
+<p>查询购买的DNS服务是否生效<br>国际域名使用：<a href="http://www.internic.net/whois.html" target="_blank" rel="noopener">http://www.internic.net/whois.html</a><br>国内域名使用：<a href="https://ewhois.cnnic.cn/WelcomeServlet" target="_blank" rel="noopener">https://ewhois.cnnic.cn/WelcomeServlet</a></p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-27_000947.png" alt="0009"></p>
+<p>现在时间时北京时间【2020-03-27 00:10】。</p>
+<p>华为云社区文档解释：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">通常，修改的DNS地址可以很快同步到顶级域服务器在互联网中生效。但是，域名服务商的NS记录的TTL值通常设置为48小时，这样假如某些地区缓存了域名的NS记录，则最长需要48小时才能刷新成新的NS记录。</span><br><span class="line"></span><br><span class="line">具体域名的DNS生效时间请以域名服务商处的说明为准。在等待修改生效的期间内，请勿删除域名在原域名服务商处的解析记录，这样即使域名的新DNS没有生效，仍然可以通过访问原DNS进行解析。</span><br></pre></td></tr></table></figure>
+
+<p>修改了dns地址之后，域名已无法 ping 通：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-27_001437.png" alt="0014"></p>
+<p>先点击下同步：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-27_001742.png" alt="0018"></p>
+<p>一直显示【正在载入…】好几分钟了，去洗个澡回来看看结果。。。</p>
+<p>洗完了，还没完成。。。</p>
+<p>难道要等上一段时间，好吧，后面继续，先睡个觉，明天看看。</p>
+<p>第二天还是【正在载入…】，刷新网页已经退出登录了，应该是已经好了的。</p>
+<p>看来要在华为云中添加公网域名。</p>
+<p>最后发现原因是 <a href="http://www.kungge.com" target="_blank" rel="noopener">www.kungge.com</a> 启用了阿里云的CDN，而 kungge.com 仍然访问的是华为云服务器的 IP，但是80端口安全组中没有开通，开通就可以正常访问了。</p>
+<h2 id="五、将域名从阿里云转入到华为云"><a href="#五、将域名从阿里云转入到华为云" class="headerlink" title="五、将域名从阿里云转入到华为云"></a>五、将域名从阿里云转入到华为云</h2><p>详细参考：<a href="/p/cloud-domain-transfer/">阿里云已备案域名转移到华为云实践</a></p>
+<h2 id="六、验证网站功能是否正常"><a href="#六、验证网站功能是否正常" class="headerlink" title="六、验证网站功能是否正常"></a>六、验证网站功能是否正常</h2><p>浏览器访问网站还是失败。。。</p>
+<p>根据华为云官方文档介绍，网站访问失败的情况：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202003/2020-03-28_210653.png" alt="2107"></p>
+<h2 id="七、华为云备案"><a href="#七、华为云备案" class="headerlink" title="七、华为云备案"></a>七、华为云备案</h2><p>（其实可以不用转移备案也能正常访问）坤哥网由于在阿里云备案过，因此属于变更备案，华为云针对变更备案的类型的解释：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">变更主体：变更主体中的信息，如修改公司通信地址、变更主体负责人信息等。</span><br><span class="line">变更网站：变更网站中的信息，如新增域名、修改网站负责人、变更IP等。</span><br><span class="line"></span><br><span class="line">须知：变更备案期间，已备案的域名可正常使用，需确保网站内容与备案信息相符，新添加的域名应备案成功后才能访问</span><br></pre></td></tr></table></figure>
+<p>s<br>很显然，坤哥网此次属于变更网站中的变更IP。</p>
+<p>详细见【<a href="/p/domain-transfer/">阿里云已备案域名变更为华为云备案操作方法记录</a>】</p>
+<h2 id="八、百度收录问题"><a href="#八、百度收录问题" class="headerlink" title="八、百度收录问题"></a>八、百度收录问题</h2><p>如果网站停止访问几天，百度收录会有问题，会出现百度搜索不到网站的情况，但是仍然显示有收录：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202004/2020-04-12_215356.png" alt="21514"></p>
+<p>百度的解释：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202004/2020-04-12_215508.png" alt="2155"></p>
+<p>谷歌保持了两个搜索记录：</p>
+<p><img src="http://img2.kungge.com/md-content/2020/202004/2020-04-12_220045.png" alt="2201"></p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>您的支持是我最大的动力！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="wankun 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="wankun 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>wankun
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://blog.kungge.com/p/site-cloud-transfer/" title="网站从阿里云服务器转移到华为云服务器操作全记录：坤哥网">http://blog.kungge.com/p/site-cloud-transfer/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" rel="tag"><i class="fa fa-tag"></i> 阿里云</a>
+              <a href="/tags/%E5%8D%8E%E4%B8%BA%E4%BA%91/" rel="tag"><i class="fa fa-tag"></i> 华为云</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/p/sqlserver-attach-problem/" rel="prev" title="sql server 附加的数据库变成只读解决">
+      <i class="fa fa-chevron-left"></i> sql server 附加的数据库变成只读解决
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/p/frp-linux-web/" rel="next" title="frp 内网穿透实战（二）：linux 连接和 web 访问">
+      frp 内网穿透实战（二）：linux 连接和 web 访问 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、数据转移"><span class="nav-number">1.</span> <span class="nav-text">一、数据转移</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-网站程序转移"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 网站程序转移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-数据库转移"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 数据库转移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-证书迁移"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 证书迁移</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、域名解析修改"><span class="nav-number">2.</span> <span class="nav-text">二、域名解析修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、域名访问不了排查过程"><span class="nav-number">3.</span> <span class="nav-text">三、域名访问不了排查过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、DNS解析修改"><span class="nav-number">4.</span> <span class="nav-text">四、DNS解析修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、将域名从阿里云转入到华为云"><span class="nav-number">5.</span> <span class="nav-text">五、将域名从阿里云转入到华为云</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、验证网站功能是否正常"><span class="nav-number">6.</span> <span class="nav-text">六、验证网站功能是否正常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、华为云备案"><span class="nav-number">7.</span> <span class="nav-text">七、华为云备案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、百度收录问题"><span class="nav-number">8.</span> <span class="nav-text">八、百度收录问题</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="wankun"
+      src="http://img2.kungge.com/content/dog.jpg">
+  <p class="site-author-name" itemprop="name">wankun</p>
+  <div class="site-description" itemprop="description">生活是一门技术，更是一门艺术</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">113</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kungge" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kungge" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:kunzhongzhong@163.com" title="E-Mail → mailto:kunzhongzhong@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">赣ICP备16000944号-1 </a>
+      <img src="http://img2.kungge.com/content/beian.png" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wankun</span>
+</div>
+
+<!--添加运行时间-->
+<span id="sitetime"></span>
+<script language=javascript>
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		/* 
+      Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+      year - 作为date对象的年份，为4位年份值
+      month - 0-11之间的整数，做为date对象的月份
+      day - 1-31之间的整数，做为date对象的天数
+      hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+      minutes - 0-59之间的整数，做为date对象的分钟数
+      seconds - 0-59之间的整数，做为date对象的秒数
+      microseconds - 0-999之间的整数，做为date对象的毫秒数
+     */
+		var t1 = Date.UTC(2020,03,29,00,51,12);
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML=" 已运行"+/*diffYears+" 年 "+*/diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒";
+	}
+	siteTime();
+</script>
+<!--添加运行时间-->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'WS9yN0bdMnmWCTEGdPtRjty5-gzGzoHsz',
+      appKey     : 'rJRpp7BgWk5zx9WdsdFbPUXQ',
+      placeholder: "Just go go",
+      avatar     : 'monsterid',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

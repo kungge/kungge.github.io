@@ -25,12 +25,12 @@
     var CONFIG = {"hostname":"blog.kungge.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="生活一门技术，更是一门艺术">
+  <meta name="description" content="生活是一门技术，更是一门艺术">
 <meta property="og:type" content="website">
 <meta property="og:title" content="坤哥的博客小站">
 <meta property="og:url" content="http://blog.kungge.com/page/5/index.html">
 <meta property="og:site_name" content="坤哥的博客小站">
-<meta property="og:description" content="生活一门技术，更是一门艺术">
+<meta property="og:description" content="生活是一门技术，更是一门艺术">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="wankun">
 <meta property="article:tag" content="坤哥博客小站">
@@ -211,12 +211,12 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/struts2-base/">
+    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/gitlab-install-use/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
       <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活一门技术，更是一门艺术">
+      <meta itemprop="description" content="生活是一门技术，更是一门艺术">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -225,7 +225,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/p/struts2-base/" class="post-title-link" itemprop="url">Struts2 学习笔记：一文学会基本使用</a>
+            <a href="/p/gitlab-install-use/" class="post-title-link" itemprop="url">GitLab 实战笔记（一）：centOS 7 上安装 GitLab</a>
         </h2>
 
         <div class="post-meta">
@@ -235,129 +235,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-02-01 11:17:19" itemprop="dateCreated datePublished" datetime="2020-02-01T11:17:19+08:00">2020-02-01</time>
+              <time title="创建时间：2020-03-22 18:27:30" itemprop="dateCreated datePublished" datetime="2020-03-22T18:27:30+08:00">2020-03-22</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-14 00:09:04" itemprop="dateModified" datetime="2020-05-14T00:09:04+08:00">2020-05-14</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">Java框架</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/p/struts2-base/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/p/struts2-base/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          Struts2 是一个 MVC 框架。
-
-Struts1 完全依赖于 Servlet 的 API 但是耦合性太高，被 Struts2 替代了。
-
-Struts2 并不是在 Struts1 基础上设计的，两者没有直接的关系。
-
-一、环境配置
-下载 Struts2 的压缩包，下载地址：https://struts.apache.org/
-
-本次下载的版本是【struts-2.3.37】。
-
-下载完成后，我们打开压缩包：
-
-
-
-1.1 框架中的核心依赖
-将 struts2 空的核心架包【apps/struts2-blank.war】 拷贝出来：
-
-
-
-放到 Tomcat 安装目录 webapps 下
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/p/struts2-base/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/vscode-markdown-plugin/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
-      <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活一门技术，更是一门艺术">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="坤哥的博客小站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/p/vscode-markdown-plugin/" class="post-title-link" itemprop="url">vs code 中使用这些插件让编写 markdown 变得更方便</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-01-11 20:22:27" itemprop="dateCreated datePublished" datetime="2020-01-11T20:22:27+08:00">2020-01-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-17 00:31:12" itemprop="dateModified" datetime="2020-05-17T00:31:12+08:00">2020-05-17</time>
+                <time title="修改时间：2020-05-19 19:19:38" itemprop="dateModified" datetime="2020-05-19T19:19:38+08:00">2020-05-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -367,110 +252,9 @@ Struts2 并不是在 Struts1 基础上设计的，两者没有直接的关系。
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
                 </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/p/vscode-markdown-plugin/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/p/vscode-markdown-plugin/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          一、Markdown Preview Enhanced
-Markdown Preview Enhanced 应该是 vs code 的 markdown 插件中最全也是最强大的一个。
-
-以下简称 MPE。
-
-1.1 导入外部文件
-语法 ：@import "你的文件"
-
-如导入一张图片：@import "content/yun_bg.jpg"
-
-如果引入图片类型的文件，不建议这样使用，因为其它很多插件不支持这个语法，建议使用 markdown 通用导入图片的语法：![Alt text](/path/to/img.jpg "Optional title")，如本图片可使用语法：![mpe.2020
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/p/vscode-markdown-plugin/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/sourcetree-baseuse/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
-      <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活一门技术，更是一门艺术">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="坤哥的博客小站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/p/sourcetree-baseuse/" class="post-title-link" itemprop="url">git 客户端 sourcetree 基本使用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-29 14:41:24" itemprop="dateCreated datePublished" datetime="2019-12-29T14:41:24+08:00">2019-12-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-16 22:41:27" itemprop="dateModified" datetime="2020-05-16T22:41:27+08:00">2020-05-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
+                  ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
                 </span>
             </span>
 
@@ -483,8 +267,8 @@ Markdown Preview Enhanced 应该是 vs code 的 markdown 插件中最全也是�
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/p/sourcetree-baseuse/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/p/sourcetree-baseuse/" itemprop="commentCount"></span>
+    <a title="valine" href="/p/gitlab-install-use/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/gitlab-install-use/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -499,728 +283,12 @@ Markdown Preview Enhanced 应该是 vs code 的 markdown 插件中最全也是�
     <div class="post-body" itemprop="articleBody">
 
       
-          远程代码库下载到本地
-菜单，【文件】->【克隆/新建…】：
+          安装 GitLab 依赖
 
 
 
-输入需要克隆的远程仓库地址、克隆到本地的目录，选择检出的分支，勾选【递归子模块】：
 
 
-
-点击克隆后，就会从远程下载，可显示完整输出：
-
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-
-
-git -c filter.lfs.smudge= -c filter.lfs.required=false -c diff.mnemonicprefix=false -c core.quotepath=false --no-optional-locks clone --branch develop_TR620 --recursi
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/p/sourcetree-baseuse/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/sonar-install-use/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
-      <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活一门技术，更是一门艺术">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="坤哥的博客小站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/p/sonar-install-use/" class="post-title-link" itemprop="url">代码质量管理工具 Sonar 安装与基本使用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-29 12:48:32" itemprop="dateCreated datePublished" datetime="2019-12-29T12:48:32+08:00">2019-12-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-16 22:34:16" itemprop="dateModified" datetime="2020-05-16T22:34:16+08:00">2020-05-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/p/sonar-install-use/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/p/sonar-install-use/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          一、准备工作
-需要安装 jdk。
-
-sonarqube，下载地址：http://www.sonarqube.org/downloads/ ,【Show all versions】选择需要下载的版本，本次下载的版本是 sonarqube-6.2。
-
-sonar-scanner 下载地址：https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/
-
-选择需要下载的版本，本次下载的版本是 sonar-scanner-2.8。
-
-二、sonarqube 安装与配置
-windows 系统运行 bin\windows-x86-64\St
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/p/sonar-install-use/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/sqlserver-json/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
-      <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活一门技术，更是一门艺术">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="坤哥的博客小站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/p/sqlserver-json/" class="post-title-link" itemprop="url">sqlserver 中使用 sql 解析 json 格式数据的实现方案</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-17 00:34:03" itemprop="dateCreated datePublished" datetime="2019-12-17T00:34:03+08:00">2019-12-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-11 22:38:05" itemprop="dateModified" datetime="2020-05-11T22:38:05+08:00">2020-05-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/p/sqlserver-json/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/p/sqlserver-json/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          需求描述
-公司老系统设计接口请求结果放到了一个表里的一个字段中，是一个 json 格式的数据，需要解析里面的某个字段的值，如：
-
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-
-
-{
-  "Content": {
-    "prePactNo": "20191217003209329291",
-    "dealSts": "1",
-    "dealDesc": "自动审批通过"
-  },
-  "IsSuccess": true,
-  "Message": null,
-  "RespCode": "0000",
-  "RespDesc": "通信成功"
-}
-
-
-需要解析出 dealDesc
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/p/sqlserver-json/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/nuget-proget/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
-      <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活一门技术，更是一门艺术">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="坤哥的博客小站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/p/nuget-proget/" class="post-title-link" itemprop="url">NuGet 打包并发布到私仓 ProGet</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-15 15:23:27" itemprop="dateCreated datePublished" datetime="2019-12-15T15:23:27+08:00">2019-12-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-11 23:13:20" itemprop="dateModified" datetime="2020-05-11T23:13:20+08:00">2020-05-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%8C%85%E7%AE%A1%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">包管理</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/p/nuget-proget/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/p/nuget-proget/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          创建包
-使用工具【PackageExplorer.4.4.25】。
-
-打开【NuGetPackageExplorer】如果需要新增一个 package，点击【Create a new package】
-
-右边是一个空白页，右键 【Add Lib Folder】
-
-然后 【Add .Net Folder】：
-
-
-
-选择需要的版本，比如本次建了【net40】和【net45】。
-
-右键点击【Add Existing File…】选择添加 dll 文件。
-
-添加完成后，点击左边的编辑按钮编辑元数据：
-
-
-
-注：如果有依赖需要点击【Edit dependencies】添加依赖。
-
-编辑完成，点击左上角的
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/p/nuget-proget/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/linux-centos-firewall/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
-      <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活一门技术，更是一门艺术">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="坤哥的博客小站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/p/linux-centos-firewall/" class="post-title-link" itemprop="url">linux 学习总结(三)：centOS 7 中防火墙配置</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-08 20:12:23" itemprop="dateCreated datePublished" datetime="2019-12-08T20:12:23+08:00">2019-12-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-12 00:01:10" itemprop="dateModified" datetime="2020-05-12T00:01:10+08:00">2020-05-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/p/linux-centos-firewall/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/p/linux-centos-firewall/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          查看防火墙信息
-查看防火墙状态：
-
-1
-2
-
-
-[root@localhost bin]# firewall-cmd --state
-running
-
-
-查看防火墙策略：
-
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-
-
-[root@localhost bin]# firewall-cmd --list-all
-public (active)
-  target: default
-  icmp-block-inversion: no
-  interfaces: ens33
-  sources: 
-  services: dhcpv6-client ssh
-  ports: 
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/p/linux-centos-firewall/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/linux-centos-commond/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
-      <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活一门技术，更是一门艺术">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="坤哥的博客小站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/p/linux-centos-commond/" class="post-title-link" itemprop="url">linux 学习总结(二)：常用命令</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-08 20:06:52" itemprop="dateCreated datePublished" datetime="2019-12-08T20:06:52+08:00">2019-12-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-11 23:01:54" itemprop="dateModified" datetime="2020-05-11T23:01:54+08:00">2020-05-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/p/linux-centos-commond/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/p/linux-centos-commond/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          帮助相关
- * 查看帮助：man [命令]
- * 退出帮助：q
-
-文件目录相关
-切换目录，使用 cd 命令：
-
- * cd [目录]：切换到某目录
- * cd ..：返回上一级目录
- * cd /：切换到根目录
- * cd ~：切换到加目录
-
-查看当前所在位置：pwd
-
-创建目录：mkdir [目录名]。
-
-删除目录：rmdir [目录名]。
-
-显示目录下的文件列表使用 ls 命令：
-
- * ls
- * ls -a
- * ls -l：简写的方式(ll)
- * ll -h：友好的显示
-
-查看文件内容：
-
- * cat：显示文件的所有内容
- * more：分页显示，空格进入下一页，回车进入下一行
-
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/p/linux-centos-commond/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/linux-centos-network/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
-      <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活一门技术，更是一门艺术">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="坤哥的博客小站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/p/linux-centos-network/" class="post-title-link" itemprop="url">linux 学习总结(一)：网络配置相关</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-08 19:52:25" itemprop="dateCreated datePublished" datetime="2019-12-08T19:52:25+08:00">2019-12-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-11 23:01:44" itemprop="dateModified" datetime="2020-05-11T23:01:44+08:00">2020-05-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/p/linux-centos-network/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/p/linux-centos-network/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          ifconfig 显示网络设备信息，如虚拟机中的一台 CentOS：
 
 1
 2
@@ -1250,15 +318,29 @@ public (active)
 26
 27
 28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
 
 
-[root@localhost ~]# ifconfig
-ens33: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-        inet 192.168.2.57  netmask 255.255.255.0  broadcast 192.168.2.255
-        inet6 fe80::80d2
+[root@localhost ~]# systemctl enable sshd
+[root@localhost ~]# systemctl start sshd
+[root@localhost ~]# yum install postfix
+Loaded plugins: fastestmirror, langpack
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/p/linux-centos-network/#more" rel="contents">
+              <a class="btn" href="/p/gitlab-install-use/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1282,12 +364,12 @@ ens33: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/redis-jedis/">
+    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/nuget-nugetorg-email/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
       <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活一门技术，更是一门艺术">
+      <meta itemprop="description" content="生活是一门技术，更是一门艺术">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1296,7 +378,7 @@ ens33: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/p/redis-jedis/" class="post-title-link" itemprop="url">在 java 中使用 jedis 操作 redis</a>
+            <a href="/p/nuget-nugetorg-email/" class="post-title-link" itemprop="url">nuget.org 温馨邮件提示 github 上出现 API key 暖心</a>
         </h2>
 
         <div class="post-meta">
@@ -1306,14 +388,14 @@ ens33: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-12-08 19:29:32" itemprop="dateCreated datePublished" datetime="2019-12-08T19:29:32+08:00">2019-12-08</time>
+              <time title="创建时间：2020-03-22 14:27:27" itemprop="dateCreated datePublished" datetime="2020-03-22T14:27:27+08:00">2020-03-22</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-11 23:34:19" itemprop="dateModified" datetime="2020-05-11T23:34:19+08:00">2020-05-11</time>
+                <time title="修改时间：2020-05-16 22:08:34" itemprop="dateModified" datetime="2020-05-16T22:08:34+08:00">2020-05-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1321,7 +403,7 @@ ens33: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
                 </span>
             </span>
 
@@ -1334,8 +416,8 @@ ens33: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/p/redis-jedis/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/p/redis-jedis/" itemprop="commentCount"></span>
+    <a title="valine" href="/p/nuget-nugetorg-email/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/nuget-nugetorg-email/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -1350,9 +432,11 @@ ens33: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
     <div class="post-body" itemprop="articleBody">
 
       
-          本次使用的 jedis jar 包是【jedis-2.9.0.jar】，将包添加到项目中。
+          今天收到 nuget.org 邮件，标题【[NuGet Gallery] API key ‘APIKeysCreateKeyName’ revoked due to a potential leak】
 
-java 连接代码：
+
+
+内容如下：
 
 1
 2
@@ -1371,31 +455,1010 @@ java 连接代码：
 15
 16
 17
-18
-19
-20
-21
-22
-23
-24
 
 
-package redisDemo;
-
-import redis.clients.jedis.Jedis;
-
-/**
- * jedis 连接演示
- */
-public class JedisTest {
-
-    public static void main(String[] args) {
-        singleTest();
-    }
-
+Hi kungge,
+This is your friendly NuGet security bot! It appears that an API key 'APIKeysCreateKeyName' assoicated with your account was posted at
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/p/redis-jedis/#more" rel="contents">
+              <a class="btn" href="/p/nuget-nugetorg-email/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/cloud-iis-ssl/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
+      <meta itemprop="name" content="wankun">
+      <meta itemprop="description" content="生活是一门技术，更是一门艺术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坤哥的博客小站">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/p/cloud-iis-ssl/" class="post-title-link" itemprop="url">云服务器 windows IIS SSL证书安装与使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-22 09:51:37" itemprop="dateCreated datePublished" datetime="2020-03-22T09:51:37+08:00">2020-03-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-17 01:12:08" itemprop="dateModified" datetime="2020-05-17T01:12:08+08:00">2020-05-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">云服务器</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/p/cloud-iis-ssl/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/cloud-iis-ssl/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          本次使用的是阿里云里送的免费一年的 SSL 证书。
+
+服务器是阿里云ECS Windows Server 2016 Datacenter，其他版本 windows 服务器类似。
+
+一、证书申请
+阿里云给的免费证书：
+
+
+
+购买之后：
+
+
+
+证书申请：
+
+
+
+
+
+在域名解析中添加记录：
+
+提交后：
+
+
+
+二、证书下载
+证书申请通过后，阿里云站内信会发送【证书签发成功提醒】提醒：
+
+
+
+在控制台的 SSL 证书管理的概览中可看到状态为已签发的证书：
+
+
+
+查看证书详情：
+
+
+
+证书下载：
+
+
+
+下载 IIS 版本：
+
+【3623015_www.kungge.com_iis.zip】里面包含两个文件
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/p/cloud-iis-ssl/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/cloud-windows-process/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
+      <meta itemprop="name" content="wankun">
+      <meta itemprop="description" content="生活是一门技术，更是一门艺术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坤哥的博客小站">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/p/cloud-windows-process/" class="post-title-link" itemprop="url">阿里云 windows 服务器一些进程占用资源过高分析与解决</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 22:58:56" itemprop="dateCreated datePublished" datetime="2020-03-20T22:58:56+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-17 01:02:51" itemprop="dateModified" datetime="2020-05-17T01:02:51+08:00">2020-05-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">云服务器</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/p/cloud-windows-process/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/cloud-windows-process/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          一、IIS
+1.1 IIS 内存占用情况
+服务器是 Windows Server 2016 Datacenter，iis 占用情况：
+
+
+
+
+
+在写这篇文章记录的时候又到了七百多点。
+
+我去占用这么多内存，转到详细看下：
+
+
+
+其实这个 IIS Worker Process 这个进程就是w3wp.exe进程，但是为啥这里只有三百多？？？
+
+iis 部署情况：
+
+
+
+公司的1台测试服务器是 Windows Server 2008 R2 Enterprise，IIS Worker Process 占用资源情况：
+
+
+
+内存占用差不多300M，但是上面部署的网站非常多，大概120个（大部分都是开启的
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/p/cloud-windows-process/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/dotnet-memorystream-file/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
+      <meta itemprop="name" content="wankun">
+      <meta itemprop="description" content="生活是一门技术，更是一门艺术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坤哥的博客小站">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/p/dotnet-memorystream-file/" class="post-title-link" itemprop="url">内存流得到得字节数组保存文件打开失败问题解决记录</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-19 14:43:31" itemprop="dateCreated datePublished" datetime="2020-03-19T14:43:31+08:00">2020-03-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-19 18:59:03" itemprop="dateModified" datetime="2020-05-19T18:59:03+08:00">2020-05-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DotNet/" itemprop="url" rel="index"><span itemprop="name">DotNet</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/p/dotnet-memorystream-file/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/dotnet-memorystream-file/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          问题描述
+文件接入了 ECM 系统，使用工具类根据 ecmId 获取文件，主要代码如下：
+
+1
+2
+3
+4
+5
+
+
+using (MemoryStream stream = DownLoadFile(ecmId, out fileName))
+{
+    byte[] bytes3 = new byte[stream.Length];
+    stream.Read(bytes, 0, bytes.Length);
+}
+
+
+DownLoadFile 方法返回 MemoryStream，然后得到一个字节数组用来保存文件，发现得到字节数组保存文件打开失败：
+
+
+
+问题原因分析
+使用了3个方法，都是
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/p/dotnet-memorystream-file/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/cloud-domain-transfer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
+      <meta itemprop="name" content="wankun">
+      <meta itemprop="description" content="生活是一门技术，更是一门艺术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坤哥的博客小站">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/p/cloud-domain-transfer/" class="post-title-link" itemprop="url">阿里云已备案域名转移到华为云实践</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-18 22:52:42" itemprop="dateCreated datePublished" datetime="2020-03-18T22:52:42+08:00">2020-03-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-17 00:59:24" itemprop="dateModified" datetime="2020-05-17T00:59:24+08:00">2020-05-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">云服务器</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/p/cloud-domain-transfer/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/cloud-domain-transfer/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          本来想转到腾讯云，新用户购买云服务器奈何只买了1核2G的，再买2核4G的则不用新用户价格了，最后转战到华为云。
+
+问了华为云客服，其表示不必将已在阿里云备案的域名转出来，直接解析就可以了。
+
+那就开始操作。
+
+一、创建公网域名
+在华为云控制台【网络->云解析服务 DNS】：
+
+
+
+进入右侧的【域名解析->公网解析】，点击由上角【创建公网域名】：
+
+
+
+输入域名：
+
+
+
+确定即可完成。
+
+二、添加A记录集
+在列表记录中点击【解析】进入解析管理页面，系统默认添加了SOA类型和NS类型的记录集：
+
+
+
+2.1 为域名添加A记录集
+点击由上角【添加记录集】，值输入服务器公网IP：
+
+
+
+2.2 为子域
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/p/cloud-domain-transfer/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/dotnet-ftp-connect-problem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
+      <meta itemprop="name" content="wankun">
+      <meta itemprop="description" content="生活是一门技术，更是一门艺术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坤哥的博客小站">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/p/dotnet-ftp-connect-problem/" class="post-title-link" itemprop="url">一次 .net 操作 ftp 连接数暴增问题解决记录</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-18 19:20:54" itemprop="dateCreated datePublished" datetime="2020-03-18T19:20:54+08:00">2020-03-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-19 19:10:34" itemprop="dateModified" datetime="2020-05-19T19:10:34+08:00">2020-05-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DotNet/" itemprop="url" rel="index"><span itemprop="name">DotNet</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/p/dotnet-ftp-connect-problem/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/dotnet-ftp-connect-problem/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          本次解决的问题是 ftp 操作导致大量的【TIME_WAIT】。
+
+一、问题描述
+这个问题是在生产环境出现的，由于测试环境数据量小，程序很快运行完成，ftp 连接能被快速释放，所以一直没出现这个问题。
+
+运维反馈，在 ftp 服务器监控到大量的连接【TIME_WAIT】，经查是一些 .net 程序导致的，如下前面三个都是部署了 .net 程序的服务器：
+
+
+
+后面的是部署在 docker 容器中的 java 程序，数据还比较正常。
+
+这些程序用的工具类可能是同一个（或者大同小异），所以批量出现了。
+
+二、问题分析与解决
+由于测试环境没有重现这个问题，那么要解决这个问题需要在测试环境重现一下，好
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/p/dotnet-ftp-connect-problem/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/ftp-dir-fail/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
+      <meta itemprop="name" content="wankun">
+      <meta itemprop="description" content="生活是一门技术，更是一门艺术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坤哥的博客小站">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/p/ftp-dir-fail/" class="post-title-link" itemprop="url">连接 ftp 成功但读取目录失败解决记录</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-17 21:53:11" itemprop="dateCreated datePublished" datetime="2020-03-17T21:53:11+08:00">2020-03-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-19 19:19:12" itemprop="dateModified" datetime="2020-05-19T19:19:12+08:00">2020-05-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/FTP/" itemprop="url" rel="index"><span itemprop="name">FTP</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/p/ftp-dir-fail/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/ftp-dir-fail/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          问题描述
+使用 ftp 客户端 FillZilla 连接报错：
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+
+
+状态:	正在连接 106.X.76.36:21...
+状态:	连接建立，等待欢迎消息...
+状态:	不安全的服务器，不支持 FTP over TLS。
+状态:	已登录
+状态:	读取目录列表...
+命令:	PWD
+响应:	257 "/" is current directory.
+命令:	TYPE I
+响应:	200 Type set to I
+命令:	PASV
+响应:	227 Entering Passive Mode (106,X,76,36,238,
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/p/ftp-dir-fail/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/site-kungge-cloud/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
+      <meta itemprop="name" content="wankun">
+      <meta itemprop="description" content="生活是一门技术，更是一门艺术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坤哥的博客小站">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/p/site-kungge-cloud/" class="post-title-link" itemprop="url">坤哥网使用的相关云产品记录</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-16 22:12:20" itemprop="dateCreated datePublished" datetime="2020-03-16T22:12:20+08:00">2020-03-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-17 00:56:09" itemprop="dateModified" datetime="2020-05-17T00:56:09+08:00">2020-05-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">云服务器</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/p/site-kungge-cloud/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/site-kungge-cloud/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          坤哥网2017年到2020年3月部署在阿里云，服务器到期后转战到华为云，3月底到4月11号9点多网站无法访问。
+
+一、坤哥网域名
+坤哥网域名于2015年3月29日注册，早期使用的是虚拟主机部署，后改为正式服务器。
+
+
+
+将这些解析导出：
+
+
+
+还可支持导入：
+
+
+
+操作还是很方便的。
+
+上面的解析会在下面说明。
+
+二、使用阿里云的产品
+2.1 阿里云CDN
+CDN 管理菜单：
+
+
+
+CDN 概览：
+
+
+
+CDN 域名管理：
+
+
+
+2.2 阿里云对象存储
+对象存储管理菜单：
+
+
+
+对象存储概览：
+
+
+
+Bucket 列表：
+
+
+
+点进去可看到【访问域名】和【基础设置】：
+
+
+
+基础设置中开启防盗
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/p/site-kungge-cloud/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/cloud-server-use/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
+      <meta itemprop="name" content="wankun">
+      <meta itemprop="description" content="生活是一门技术，更是一门艺术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坤哥的博客小站">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/p/cloud-server-use/" class="post-title-link" itemprop="url">阿里云和腾讯云服务器 windows server 2016 datacenter 使用记录</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-15 22:06:09" itemprop="dateCreated datePublished" datetime="2020-03-15T22:06:09+08:00">2020-03-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-16 22:59:09" itemprop="dateModified" datetime="2020-05-16T22:59:09+08:00">2020-05-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">云服务器</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/p/cloud-server-use/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/cloud-server-use/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          一、三年前买的阿里云服务器
+1.1 阿里云服务器配置
+使用了阿里云3年了，2020年3月21日 23:59 到期，当初花了四千多买的2核4G的配置，实际如下：
+
+1
+2
+3
+4
+5
+6
+7
+8
+
+
+实例名称：iZsq2g1yt4yml6Z
+实例ID：i-uf679rtwsq2g1yt4yml6	地域：华东 2(华东 2 可用区 A)	付费类型：包年包月
+实例系列：系列 II	实例规格：2 vCPU 4 GiB ( 共享计算型 n1, ecs.n1.medium )	I/O 优化：I/O 优化实例
+网络类型：经典网络	安全组：sg-uf69v9qbmmk0wh3hkwtg
+内网 IP：10.X.
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/p/cloud-server-use/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1419,7 +1482,7 @@ public class JedisTest {
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1480,27 +1543,27 @@ public class JedisTest {
     <img class="site-author-image" itemprop="image" alt="wankun"
       src="http://img2.kungge.com/content/dog.jpg">
   <p class="site-author-name" itemprop="name">wankun</p>
-  <div class="site-description" itemprop="description">生活一门技术，更是一门艺术</div>
+  <div class="site-description" itemprop="description">生活是一门技术，更是一门艺术</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-count">68</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">87</span>
+        <span class="site-state-item-count">113</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

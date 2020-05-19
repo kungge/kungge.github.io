@@ -25,12 +25,12 @@
     var CONFIG = {"hostname":"blog.kungge.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="生活一门技术，更是一门艺术">
+  <meta name="description" content="生活是一门技术，更是一门艺术">
 <meta property="og:type" content="website">
 <meta property="og:title" content="坤哥的博客小站">
 <meta property="og:url" content="http://blog.kungge.com/page/2/index.html">
 <meta property="og:site_name" content="坤哥的博客小站">
-<meta property="og:description" content="生活一门技术，更是一门艺术">
+<meta property="og:description" content="生活是一门技术，更是一门艺术">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="wankun">
 <meta property="article:tag" content="坤哥博客小站">
@@ -211,12 +211,265 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/vscode-snippet-markdown/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
+      <meta itemprop="name" content="wankun">
+      <meta itemprop="description" content="生活是一门技术，更是一门艺术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坤哥的博客小站">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/p/vscode-snippet-markdown/" class="post-title-link" itemprop="url">vs code 添加 markdown 自定义代码片段</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-07 23:28:41" itemprop="dateCreated datePublished" datetime="2020-05-07T23:28:41+08:00">2020-05-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-19 19:18:51" itemprop="dateModified" datetime="2020-05-19T19:18:51+08:00">2020-05-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/%E7%BC%96%E8%BE%91%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">编辑器</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/p/vscode-snippet-markdown/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/vscode-snippet-markdown/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          visual studio code 编辑器支持添加用户自定义代码片段，而且可以根据文件类型来添加，本次以 markdown 为例进行介绍，其它语言类似。
+
+一、如何添加？
+菜单 File -> Preferences -> User Snippets：
+
+
+
+然后选择文件类型，如本次选择 Markdown：
+
+
+
+会打开 markdown.json 配置文件：
+
+
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+
+
+{
+	// Place your snippets for markdown here. Each snippet is defined under a
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/p/vscode-snippet-markdown/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/nas-network-frp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
+      <meta itemprop="name" content="wankun">
+      <meta itemprop="description" content="生活是一门技术，更是一门艺术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坤哥的博客小站">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/p/nas-network-frp/" class="post-title-link" itemprop="url">nas 折腾笔记（十一）：群晖系统的使用之 Frp 内网穿透</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-06 00:02:19" itemprop="dateCreated datePublished" datetime="2020-05-06T00:02:19+08:00">2020-05-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-17 00:32:50" itemprop="dateModified" datetime="2020-05-17T00:32:50+08:00">2020-05-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NAS/" itemprop="url" rel="index"><span itemprop="name">NAS</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/p/nas-network-frp/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/nas-network-frp/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          服务端部署参考我的另一篇文章：frp 内网穿透实战（一）：远程桌面连接 windows
+
+使用命令 wget http://kungge.com/assist/frp_0.31.2_linux_amd64.tar.gz 下载 frp 包，然后将包移动至目录【/usr/local/】下，进入该目录解压，进入解压的目录：
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+
+
+root@Synology:~# mv -f frp_0.31.2_linux_amd64.tar.gz /usr/local/
+root@Synology:~# cd /usr
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/p/nas-network-frp/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/nas-drive/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
       <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活一门技术，更是一门艺术">
+      <meta itemprop="description" content="生活是一门技术，更是一门艺术">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -330,7 +583,7 @@ iPhone 客户端
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
       <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活一门技术，更是一门艺术">
+      <meta itemprop="description" content="生活是一门技术，更是一门艺术">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -452,7 +705,7 @@ iPhone 客户端
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
       <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活一门技术，更是一门艺术">
+      <meta itemprop="description" content="生活是一门技术，更是一门艺术">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -562,7 +815,7 @@ iPhone 客户端
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
       <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活一门技术，更是一门艺术">
+      <meta itemprop="description" content="生活是一门技术，更是一门艺术">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -690,7 +943,7 @@ API Access Tokens 是开发者使用的，这里暂不使用，其
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
       <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活一门技术，更是一门艺术">
+      <meta itemprop="description" content="生活是一门技术，更是一门艺术">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -828,7 +1081,7 @@ Ping 请求找不到主机 kungge.qicp.vip。请检查该名称，然后重试�
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
       <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活一门技术，更是一门艺术">
+      <meta itemprop="description" content="生活是一门技术，更是一门艺术">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -955,7 +1208,7 @@ Photo Station 权限不能通过 File Station 设置：
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
       <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活一门技术，更是一门艺术">
+      <meta itemprop="description" content="生活是一门技术，更是一门艺术">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1081,7 +1334,7 @@ Watch directory 是种子存放目录，Incomplete directory 是保存下载完�
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
       <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活一门技术，更是一门艺术">
+      <meta itemprop="description" content="生活是一门技术，更是一门艺术">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1196,250 +1449,11 @@ K2 路由器的IP为【192.168.1.107】。
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/nas-tool/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
-      <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活一门技术，更是一门艺术">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="坤哥的博客小站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/p/nas-tool/" class="post-title-link" itemprop="url">nas 折腾笔记（三）： 群晖系统的使用之一些常用套件的简介</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-05 09:56:32" itemprop="dateCreated datePublished" datetime="2020-05-05T09:56:32+08:00">2020-05-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-17 00:06:05" itemprop="dateModified" datetime="2020-05-17T00:06:05+08:00">2020-05-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NAS/" itemprop="url" rel="index"><span itemprop="name">NAS</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/p/nas-tool/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/p/nas-tool/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          Photo Station
-Photo Station 对普通用户来说非常有用，可以将手机里的照片自动同步到这里，还可以自动进行分类，非常适合喜欢拍照的用户。
-
-官方介绍：管理照片存储、随时随地共享和访问精选集、收集客户反馈以及执行更多其他操作。
-
-参考详见：nas 折腾笔记（五）： 群晖系统的使用之安装照片管理工具 Photo Station
-
-Audio Station
-支持很多无损格式的音频，对发烧友来说非常方便：
-
-
-
-Video Station
-是一个视频管理的套件，能根据视频文件标题进行分类，可以非常方便的管理用户上传的视频，白群晖用户能获得自动转码的功能，但是黑群晖用户需要半洗白
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/p/nas-tool/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/nas-disk/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
-      <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活一门技术，更是一门艺术">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="坤哥的博客小站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/p/nas-disk/" class="post-title-link" itemprop="url">nas 折腾笔记（二）： 群晖系统使用之硬盘初始化、新增 Basic 存储空间和共享文件夹</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-04 20:27:27" itemprop="dateCreated datePublished" datetime="2020-05-04T20:27:27+08:00">2020-05-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-16 23:16:31" itemprop="dateModified" datetime="2020-05-16T23:16:31+08:00">2020-05-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NAS/" itemprop="url" rel="index"><span itemprop="name">NAS</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/p/nas-disk/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/p/nas-disk/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          登录进入系统，打开【File Station】:
-
-
-
-提示没有可用的共享文件夹：
-
-
-
-点击确定来创建：
-
-
-
-发现只有一个存储空间，而这个对应的是一块16G的SSD硬盘，不要选择这个，后面会创建新的存储空间。
-
-一、存储结构简介
-进入【存储空间管理员】：
-
-
-
-
-
-分成三层：
-
- * HDD/SSD：硬盘
- * 存储池
- * 存储空间
-
-借用网上的一张图片加深理解：
-
-
-
-二、硬盘初始化
-进入硬盘一栏，有两块硬盘如下：
-
-
-
-硬盘2是装DSM系统的SSD，硬盘6是新插入的HDD，未初始化表示没有安装DSM系统，如果只有一块安装了DSM系统的硬盘被拆除了，则无法进入DSM系统，引导系统会搜索
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/p/nas-disk/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1500,27 +1514,27 @@ Video Station
     <img class="site-author-image" itemprop="image" alt="wankun"
       src="http://img2.kungge.com/content/dog.jpg">
   <p class="site-author-name" itemprop="name">wankun</p>
-  <div class="site-description" itemprop="description">生活一门技术，更是一门艺术</div>
+  <div class="site-description" itemprop="description">生活是一门技术，更是一门艺术</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-count">68</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">87</span>
+        <span class="site-state-item-count">113</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
