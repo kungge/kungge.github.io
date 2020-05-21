@@ -211,6 +211,336 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/centos-staticip-problem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
+      <meta itemprop="name" content="wankun">
+      <meta itemprop="description" content="生活是一门技术，更是一门艺术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坤哥的博客小站">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/p/centos-staticip-problem/" class="post-title-link" itemprop="url">一次解决centos7设置固定ip之后无法上外网问题的记录</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-21 22:36:47 / 修改时间：22:50:11" itemprop="dateCreated datePublished" datetime="2020-05-21T22:36:47+08:00">2020-05-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/p/centos-staticip-problem/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/centos-staticip-problem/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          之前使用的是电信的网络，在房间里接了一个路由器，宿主机连接这个路由器，在虚拟机中装了centos，设置了固定ip可以正常上外网，详见：http://blog.kungge.com/p/linux-centos-network/
+
+问题描述
+搬家了，新住的地方使用的长城宽带，和原来一样接了一个二级路由器，宿主机可以正常上网，可以连上虚拟机centos，但是虚拟机centos却连不上外网，有时候能ping通，但是大部分时间都没法ping通。
+
+1
+2
+
+
+[root@localhost dockerTest]# ping baidu.com
+ping: baidu.com: Name or ser
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/p/centos-staticip-problem/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/centos-maven-install/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
+      <meta itemprop="name" content="wankun">
+      <meta itemprop="description" content="生活是一门技术，更是一门艺术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坤哥的博客小站">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/p/centos-maven-install/" class="post-title-link" itemprop="url">centos 7 安装 maven</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-20 23:29:46 / 修改时间：23:49:40" itemprop="dateCreated datePublished" datetime="2020-05-20T23:29:46+08:00">2020-05-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/%E5%8C%85%E7%AE%A1%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">包管理</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/p/centos-maven-install/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/centos-maven-install/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          下载
+官网下载地址：http://maven.apache.org/download.cgi
+
+
+
+复制链接地址：https://mirror.bit.edu.cn/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+
+使用命令下载：wget https://mirror.bit.edu.cn/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+
+安装
+创建 maven 的安装目录，使用命令 mkdir -p /usr/local/ma
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/p/centos-maven-install/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/spring-boot-docker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
+      <meta itemprop="name" content="wankun">
+      <meta itemprop="description" content="生活是一门技术，更是一门艺术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="坤哥的博客小站">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/p/spring-boot-docker/" class="post-title-link" itemprop="url">Spring Boot 实战学习：使用 Docker 部署项目</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-20 22:14:23" itemprop="dateCreated datePublished" datetime="2020-05-20T22:14:23+08:00">2020-05-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-21 23:13:42" itemprop="dateModified" datetime="2020-05-21T23:13:42+08:00">2020-05-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spring-Boot/" itemprop="url" rel="index"><span itemprop="name">Spring Boot</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/p/spring-boot-docker/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/p/spring-boot-docker/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          创建一个简单的 Spring Boot 项目
+添加依赖：
+
+1
+2
+3
+4
+
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+
+
+添加 HelloController 类：
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+
+
+package com.kungge.dockeryes.controller;
+
+import org.springframework.web.bind.
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/p/spring-boot-docker/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/sqlserver-common-use/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -989,379 +1319,11 @@ A项目中的 dll 经反编译【Cn.XX.BLL】发现类【LendingBLL】方法【Q
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/docker-windows/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
-      <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活是一门技术，更是一门艺术">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="坤哥的博客小站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/p/docker-windows/" class="post-title-link" itemprop="url">windows 10 中安装并使用 docker 记录</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-05-13 19:32:41 / 修改时间：19:48:58" itemprop="dateCreated datePublished" datetime="2020-05-13T19:32:41+08:00">2020-05-13</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/p/docker-windows/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/p/docker-windows/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          个人不推荐在 windows 中安装 docker，本文仅仅是为了尝试，日常使用 docker 还是安装在 linux 上的。
-
-一、开启 Hyper-V
-打开【启用或关闭 Windows 功能】窗口，勾选：
-
-
-
-安装完成需要重启才会生效，先不重启，稍后再重启。
-
-二、安装 docker
-下载地址：https://hub.docker.com/editions/community/docker-ce-desktop-windows
-
-下载完成后是一个exe文件【Docker for Windows Installer.exe】，双击安装，安装完成后会出现下面的窗口：
-
-
-
-这时候点击【clo
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/p/docker-windows/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/sqlserver-sql-string/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
-      <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活是一门技术，更是一门艺术">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="坤哥的博客小站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/p/sqlserver-sql-string/" class="post-title-link" itemprop="url">sqlserver 获取字符串获中某个字符的最后一个位置</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-11 19:30:39" itemprop="dateCreated datePublished" datetime="2020-05-11T19:30:39+08:00">2020-05-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-12 11:13:56" itemprop="dateModified" datetime="2020-05-12T11:13:56+08:00">2020-05-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/p/sqlserver-sql-string/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/p/sqlserver-sql-string/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          需求描述
-CHARINDEX 函数取到的位置是从0开始，获取某字符时取到的是第一个位置，如：
-
-1
-2
-
-
-DECLARE @GoodMan VARCHAR(255) = 'GOODMAN/KUNGGE/WAN';
-SELECT @GoodMan AS TheString,CHARINDEX('/',@GoodMan) TheCharIndex
-
-
-TheStringTheCharIndexGOODMAN/KUNGGE/WAN8查了下 sqlserver 的函数库，没有找到截取最后一个字符功能的函数，像 .NET 里的 LastIndexOf(char) 这种。
-
-需求实现
-可以利用 REVE
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/p/sqlserver-sql-string/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.kungge.com/p/hexo-seo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="http://img2.kungge.com/content/dog.jpg">
-      <meta itemprop="name" content="wankun">
-      <meta itemprop="description" content="生活是一门技术，更是一门艺术">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="坤哥的博客小站">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/p/hexo-seo/" class="post-title-link" itemprop="url">Hexo 实战（七）：搜索引擎 SEO Settings 设置百度和谷歌</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-10 21:49:38" itemprop="dateCreated datePublished" datetime="2020-05-10T21:49:38+08:00">2020-05-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-18 20:48:46" itemprop="dateModified" datetime="2020-05-18T20:48:46+08:00">2020-05-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%BC%80%E6%BA%90%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index"><span itemprop="name">开源博客</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%BC%80%E6%BA%90%E5%8D%9A%E5%AE%A2/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/p/hexo-seo/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/p/hexo-seo/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          本次以百度为例，谷歌类似。
-
-添加网站
-进入【百度站长平台】，添加站点
-
-
-
-添加的站点需要验证：
-
-
-
-采用【HTMl标签验证】：
-
-
-
-html 内容就是 content 中的内容。
-
-next 支持 SEO Settings，配置项如下：
-
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-
-
-# ---------------------------------------------------------------
-# SEO Settings
-# ----
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/p/hexo-seo/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1429,20 +1391,20 @@ next 支持 SEO Settings，配置项如下：
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-count">71</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">113</span>
+        <span class="site-state-item-count">115</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
